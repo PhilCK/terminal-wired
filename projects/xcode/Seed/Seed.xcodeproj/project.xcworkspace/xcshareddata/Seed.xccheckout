@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2C8F1599-76F3-408A-93F7-D1E6537AE332</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</key>
+		<string>bitbucket.org:SquidVsShark/seed-game.git</string>
+		<key>756C52544399B4995750BE8F0918978B728F42F7</key>
+		<string>github.com:PhilCK/sdl-wrapper.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>projects/xcode/Seed/Seed.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</key>
+		<string>../../../../..</string>
+		<key>756C52544399B4995750BE8F0918978B728F42F7</key>
+		<string>../../../../../../sdl_wrapper</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:SquidVsShark/seed-game.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>756C52544399B4995750BE8F0918978B728F42F7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>sdl_wrapper</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</string>
+			<key>IDESourceControlWCCName</key>
+			<string>seed_game</string>
+		</dict>
+	</array>
+</dict>
+</plist>
