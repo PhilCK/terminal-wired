@@ -23,7 +23,7 @@ main()
 
   // Setup
   const sdl::window window(1024, 600, false);
-  sdl::ogl_context gl_context(window);
+  const sdl::ogl_context gl_context(window);
   sdl::input input;
   
   // Init
@@ -31,6 +31,9 @@ main()
   
   while(!window.wants_to_quit())
   {
+    // Render Scene
+    {
+    }
     sdl::message_pump();
   }
 
