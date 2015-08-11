@@ -411,7 +411,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Seed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lsoil",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -423,7 +426,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Seed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lsoil",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

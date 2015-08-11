@@ -27,14 +27,15 @@ main()
 
 in vec2 in_ps_texture_coord;
 
-uniform sampler2D diffuse_texture;
+uniform sampler2D diffuse_map;
 
 out vec4 out_frag_color;
 
 void
 main()
 {
-  out_frag_color = vec4(1,1,1,1);
+  vec4 tex_sample = texture(diffuse_map, in_ps_texture_coord);
+  out_frag_color = tex_sample;
 }
 
 [/PIXEL]
