@@ -8,6 +8,10 @@
 #include <string>
 #include <assert.h>
 #include <math/math.hpp>
+#include <bullet_wrapper/world.hpp>
+#include <bullet_wrapper/rigidbody.hpp>
+#include <bullet_wrapper/collider.hpp>
+#include <memory>
 
 
 namespace
@@ -70,6 +74,18 @@ main()
   renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(asset_path + "shaders/basic_fullbright.ogl"));
   assert(fullbright.is_valid());
   
+  // Physics.
+  bullet::world phys_world;
+  
+  auto cube_coll = bullet::create_cube_collider();
+  std::unique_ptr<bullet::rigidbody> cube_rb(new bullet::rigidbody(std::move(cube_coll), 0, 50, 0, 3));
+  
+  auto plane_coll = bullet::create_static_plane_collider();
+  std::unique_ptr<bullet::rigidbody> ground_rb(new bullet::rigidbody(std::move(plane_coll), 0, 0, 0, 0));
+  
+  phys_world.add_rigidbody(std::move(cube_rb));
+  phys_world.add_rigidbody(std::move(ground_rb));
+  
   while(!window.wants_to_quit())
   {
     renderer::clear();
@@ -79,12 +95,17 @@ main()
     const math::mat4 rot     = math::mat4_id();
     const math::mat4 trans   = math::mat4_id();
     const math::mat4 p_world = math::mat4_multiply(p_scale, rot, trans);
-    const math::mat4 c_world = math::mat4_multiply(math::mat4_id(), rot, trans);
+    
+    auto pos = phys_world.get_rigidbody()->get_position();
+    const math::mat4 pos_mat = math::mat4_translate(pos[0], pos[1], pos[2]);
+    const math::mat4 c_world = math::mat4_multiply(pos_mat, rot, trans);
 
     const math::mat4 proj = math::mat4_projection(800, 600, 0.1f, 1000.f, math::half_pi() / 2);
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(c_world, view, proj);
+  
+    phys_world.update_world();
   
     // Render Scene
     {
