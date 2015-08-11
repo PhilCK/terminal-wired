@@ -28,6 +28,10 @@
 		7E0A34031B791E8D000C7B22 /* vertex_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33EA1B791E8D000C7B22 /* vertex_buffer.cpp */; };
 		7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33EC1B791E8D000C7B22 /* vertex_format.cpp */; };
 		7E0A34061B791EFC000C7B22 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E0A34051B791EFC000C7B22 /* OpenGL.framework */; };
+		7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A34091B793FA8000C7B22 /* directory_mac.mm */; };
+		7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340A1B793FA8000C7B22 /* directory_nix.cpp */; };
+		7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */; };
+		7E0A342B1B7941A5000C7B22 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A342A1B7941A5000C7B22 /* assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +79,12 @@
 		7E0A33EC1B791E8D000C7B22 /* vertex_format.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_format.cpp; sourceTree = "<group>"; };
 		7E0A33ED1B791E8D000C7B22 /* vertex_format.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertex_format.hpp; sourceTree = "<group>"; };
 		7E0A34051B791EFC000C7B22 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7E0A34081B793FA8000C7B22 /* directory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = directory.hpp; sourceTree = "<group>"; };
+		7E0A34091B793FA8000C7B22 /* directory_mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = directory_mac.mm; sourceTree = "<group>"; };
+		7E0A340A1B793FA8000C7B22 /* directory_nix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = directory_nix.cpp; sourceTree = "<group>"; };
+		7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = obj_model_loader.cpp; sourceTree = "<group>"; };
+		7E0A340C1B793FA8000C7B22 /* obj_model_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obj_model_loader.hpp; sourceTree = "<group>"; };
+		7E0A342A1B7941A5000C7B22 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +102,7 @@
 		7E0A33901B7919E6000C7B22 = {
 			isa = PBXGroup;
 			children = (
+				7E0A342A1B7941A5000C7B22 /* assets */,
 				7E0A34051B791EFC000C7B22 /* OpenGL.framework */,
 				7E0A339B1B7919E6000C7B22 /* Seed */,
 				7E0A339A1B7919E6000C7B22 /* Products */,
@@ -127,6 +138,7 @@
 		7E0A33BE1B791E7C000C7B22 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				7E0A34071B793FA8000C7B22 /* utils */,
 				7E0A33BF1B791E8C000C7B22 /* sdl_wrapper */,
 				7E0A33D61B791E8D000C7B22 /* simple_renderer */,
 			);
@@ -189,6 +201,19 @@
 			path = ../../../../../../../../usr/local/include/simple_renderer;
 			sourceTree = "<group>";
 		};
+		7E0A34071B793FA8000C7B22 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7E0A34081B793FA8000C7B22 /* directory.hpp */,
+				7E0A34091B793FA8000C7B22 /* directory_mac.mm */,
+				7E0A340A1B793FA8000C7B22 /* directory_nix.cpp */,
+				7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */,
+				7E0A340C1B793FA8000C7B22 /* obj_model_loader.hpp */,
+			);
+			name = utils;
+			path = ../../../../../../../../usr/local/include/utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -246,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E0A342B1B7941A5000C7B22 /* assets in Resources */,
 				7E0A33F01B791E8D000C7B22 /* LICENSE in Resources */,
 				7E0A33EE1B791E8D000C7B22 /* .gitignore in Resources */,
 			);
@@ -259,9 +285,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
+				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
 				7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */,
+				7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */,
 				7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */,
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
+				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
 				7E0A34001B791E8D000C7B22 /* renderer.cpp in Sources */,
 				7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */,
