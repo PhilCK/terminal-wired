@@ -63,15 +63,14 @@ main()
     renderer::clear();
     renderer::reset();
     
+    const math::mat4 scale = math::mat4_scale(10.f, 1.f, 10.f);
+    const math::mat4 rot   = math::mat4_id();
+    const math::mat4 trans = math::mat4_id();
+    const math::mat4 world = math::mat4_multiply(scale, rot, trans);
+
     const math::mat4 proj = math::mat4_projection(800, 600, 0.1f, 1000.f, math::half_pi() / 2);
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
-    
-    const math::mat4 position = math::mat4_id();
-    const math::mat4 scale    = math::mat4_scale(10.f, 1.f, 10.f);
-    const math::mat4 world    = math::mat4_multiply(scale, position);
-    
-    const math::mat4 wv  = math::mat4_multiply(world, view);
-    const math::mat4 wvp = math::mat4_multiply(wv, proj);
+    const math::mat4 wvp = math::mat4_multiply(world, view, proj);
   
     // Render Scene
     {
