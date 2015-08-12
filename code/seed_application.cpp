@@ -117,7 +117,6 @@ main()
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(c_world, view, proj);
   
-  
     phys_world.update_world(dt_timer.split() / 1000.f);
   
     // Render Scene
