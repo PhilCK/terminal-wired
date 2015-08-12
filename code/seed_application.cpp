@@ -14,6 +14,7 @@
 #include <memory>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
+#include <bindings/v_01/as_script_bindings.hpp>
 
 
 namespace
@@ -33,6 +34,9 @@ main()
   // Reg log callbacks before setup.
   sdl::set_error_callback([](const std::string &str){ util::log_info(str);});
   renderer::set_log_callback([](const uint32_t id, const std::string &str){ util::log_info(std::to_string(id) + " " + str); });
+ 
+  // Init Script
+  script_bindings::temp_as_binding_init();
   
   // Setup
   sdl::window window(screen_width, screen_height, false);

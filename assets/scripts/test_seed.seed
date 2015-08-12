@@ -5,3 +5,9 @@ class test_seed
 {
   
 }
+
+
+void main()
+{
+  log();
+}

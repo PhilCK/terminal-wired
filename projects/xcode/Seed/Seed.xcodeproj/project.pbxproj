@@ -29,6 +29,8 @@
 		7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340A1B793FA8000C7B22 /* directory_nix.cpp */; };
 		7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */; };
 		7E0A342B1B7941A5000C7B22 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A342A1B7941A5000C7B22 /* assets */; };
+		7E405B941B7BE134001DA0F5 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E405B931B7BE134001DA0F5 /* libangelscript.a */; };
+		7E405B991B7BE283001DA0F5 /* as_script_bindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405B971B7BE283001DA0F5 /* as_script_bindings.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -84,6 +86,9 @@
 		7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = obj_model_loader.cpp; sourceTree = "<group>"; };
 		7E0A340C1B793FA8000C7B22 /* obj_model_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obj_model_loader.hpp; sourceTree = "<group>"; };
 		7E0A342A1B7941A5000C7B22 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		7E405B931B7BE134001DA0F5 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = ../../../3rdparty/angelscript/lib/osx/libangelscript.a; sourceTree = "<group>"; };
+		7E405B971B7BE283001DA0F5 /* as_script_bindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = as_script_bindings.cpp; sourceTree = "<group>"; };
+		7E405B981B7BE283001DA0F5 /* as_script_bindings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_script_bindings.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -103,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E405B941B7BE134001DA0F5 /* libangelscript.a in Frameworks */,
 				7E0A34061B791EFC000C7B22 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +119,7 @@
 		7E0A33901B7919E6000C7B22 = {
 			isa = PBXGroup;
 			children = (
+				7E405B931B7BE134001DA0F5 /* libangelscript.a */,
 				7E0A342A1B7941A5000C7B22 /* assets */,
 				7E0A34051B791EFC000C7B22 /* OpenGL.framework */,
 				7E0A339B1B7919E6000C7B22 /* Seed */,
@@ -133,6 +140,7 @@
 			children = (
 				7E0A33BE1B791E7C000C7B22 /* External */,
 				7E0A33BC1B791A30000C7B22 /* seed_application.cpp */,
+				7E405B951B7BE283001DA0F5 /* bindings */,
 				7E0A339C1B7919E6000C7B22 /* Supporting Files */,
 			);
 			path = Seed;
@@ -225,6 +233,24 @@
 			);
 			name = utils;
 			path = ../../../../../../../../usr/local/include/utils;
+			sourceTree = "<group>";
+		};
+		7E405B951B7BE283001DA0F5 /* bindings */ = {
+			isa = PBXGroup;
+			children = (
+				7E405B961B7BE283001DA0F5 /* v_01 */,
+			);
+			name = bindings;
+			path = ../../../../code/bindings;
+			sourceTree = "<group>";
+		};
+		7E405B961B7BE283001DA0F5 /* v_01 */ = {
+			isa = PBXGroup;
+			children = (
+				7E405B971B7BE283001DA0F5 /* as_script_bindings.cpp */,
+				7E405B981B7BE283001DA0F5 /* as_script_bindings.hpp */,
+			);
+			path = v_01;
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -325,6 +351,7 @@
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,
 				7E0A33FC1B791E8D000C7B22 /* draw_call.cpp in Sources */,
 				7E0A34021B791E8D000C7B22 /* texture.cpp in Sources */,
+				7E405B991B7BE283001DA0F5 /* as_script_bindings.cpp in Sources */,
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
 				7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */,
@@ -383,6 +410,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/include,
+					/Users/PhilCK/Developer/seed_game/code/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -427,6 +456,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/include,
+					/Users/PhilCK/Developer/seed_game/code/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -448,6 +479,10 @@
 				);
 				INFOPLIST_FILE = Seed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/lib/osx,
+				);
 				OTHER_LDFLAGS = (
 					"-lSDL2",
 					"-lsoil",
@@ -473,6 +508,10 @@
 				);
 				INFOPLIST_FILE = Seed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/lib/osx,
+				);
 				OTHER_LDFLAGS = (
 					"-lSDL2",
 					"-lsoil",
