@@ -20,11 +20,6 @@ namespace
 {
   const uint32_t screen_width = 1024;
   const uint32_t screen_height = 600;
-
-  void debug_log(const std::string &log_msg)
-  {
-    std::cout << log_msg << std::endl;
-  }
 }
 
 
