@@ -1,0 +1,14 @@
+#ifndef AS_SCRIPT_BINDINGS_INCLUDED_EA508600_F9E1_408D_8E51_53E7700576C6
+#define AS_SCRIPT_BINDINGS_INCLUDED_EA508600_F9E1_408D_8E51_53E7700576C6
+
+
+namespace script_bindings {
+
+
+
+
+
+} // namespace
+
+
+#endif // include guard
