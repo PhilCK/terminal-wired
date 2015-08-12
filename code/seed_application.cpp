@@ -105,18 +105,28 @@ main()
     auto pos = phys_world.get_rigidbody()->get_position();
     const math::mat4 pos_mat = math::mat4_translate(pos[0], pos[1], pos[2]);
     
+    const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
     const math::mat4 c_world = math::mat4_multiply(pos_mat, rot, trans);
 
     const math::mat4 proj = math::mat4_projection(screen_width, screen_height, 0.1f, 1000.f, math::half_pi() / 2);
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
-    const math::mat4 wvp2 = math::mat4_multiply(c_world, view, proj);
+    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
   
   
     phys_world.update_world(dt_timer.split() / 1000.f);
   
     // Render Scene
     {
+      if(input.is_key_down(SDLK_w))
+      {
+        phys_world.get_rigidbody()->apply_force(0, 0, 20.f);
+      }
+      if(input.is_key_down(SDLK_s))
+      {
+        phys_world.get_rigidbody()->apply_force(0, 0, -20.f);
+      }
+    
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", dev_texture1);
