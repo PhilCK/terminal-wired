@@ -26,6 +26,7 @@ namespace
 int
 main()
 {
+  // Platform logging.
   util::set_log_types(util::log_msg_types::errors | util::log_msg_types::warnings | util::log_msg_types::info);
   util::set_log_outputs(util::log_out::console | util::log_out::buffer);
 
@@ -94,6 +95,8 @@ main()
   
   while(!window.wants_to_quit())
   {
+    const float delta_time = dt_timer.split() / 1000.f;
+  
     renderer::clear();
     renderer::reset();
     
@@ -106,7 +109,6 @@ main()
     const math::mat4 pos_mat = math::mat4_translate(pos[0], pos[1], pos[2]);
     
     const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
-    const math::mat4 c_world = math::mat4_multiply(pos_mat, rot, trans);
 
     const math::mat4 proj = math::mat4_projection(screen_width, screen_height, 0.1f, 1000.f, math::half_pi() / 2);
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
@@ -114,7 +116,7 @@ main()
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
   
   
-    phys_world.update_world(dt_timer.split() / 1000.f);
+    phys_world.update_world(delta_time);
   
     // Render Scene
     {
@@ -140,7 +142,6 @@ main()
     
     window.flip_buffer();
     sdl::message_pump();
-    
   }
 
   return 0;
