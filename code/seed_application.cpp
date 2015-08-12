@@ -38,7 +38,8 @@ main()
   sdl::window window(screen_width, screen_height, false);
   const sdl::ogl_context gl_context(window);
   sdl::input input;
-
+  input.set_mouse_hold(true);
+  
   // Init
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
@@ -81,8 +82,11 @@ main()
   // Physics.
   bullet::world phys_world;
   
-  auto cube_coll = bullet::create_cube_collider();
-  std::unique_ptr<bullet::rigidbody> cube_rb(new bullet::rigidbody(std::move(cube_coll), 0, 50, 0, 3));
+  auto cube_coll = bullet::create_capsule_collider();
+  std::unique_ptr<bullet::rigidbody> cube_rb(new bullet::rigidbody(std::move(cube_coll),
+                                                                   0, 50, 0,
+                                                                   0.1,
+                                                                   bullet::axis::y_axis));
   
   auto plane_coll = bullet::create_static_plane_collider();
   std::unique_ptr<bullet::rigidbody> ground_rb(new bullet::rigidbody(std::move(plane_coll), 0, 0, 0, 0));
@@ -106,7 +110,7 @@ main()
     const math::mat4 p_world = math::mat4_multiply(p_scale, rot, trans);
     
     auto pos = phys_world.get_rigidbody()->get_position();
-    const math::mat4 pos_mat = math::mat4_translate(pos[0], pos[1], pos[2]);
+    const math::mat4 pos_mat = math::mat4_translate(pos.at(0), pos.at(1), pos.at(2));
     
     const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
 
@@ -122,11 +126,15 @@ main()
     {
       if(input.is_key_down(SDLK_w))
       {
-        phys_world.get_rigidbody()->apply_force(0, 0, 20.f);
+        phys_world.get_rigidbody()->apply_local_force(0, 0, 1.f);
       }
       if(input.is_key_down(SDLK_s))
       {
-        phys_world.get_rigidbody()->apply_force(0, 0, -20.f);
+        phys_world.get_rigidbody()->apply_local_force(0, 0, -1.f);
+      }
+      if(input.get_mouse_delta_x() != 0)
+      {
+        phys_world.get_rigidbody()->apply_local_torque(0, input.get_mouse_delta_x() * 0.1, 0);
       }
     
       renderer::reset();
