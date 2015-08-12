@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7E0A33BD1B791A30000C7B22 /* seed_application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33BC1B791A30000C7B22 /* seed_application.cpp */; };
-		7E0A33EE1B791E8D000C7B22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A33C01B791E8C000C7B22 /* .gitignore */; };
 		7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33C11B791E8C000C7B22 /* input.cpp */; };
-		7E0A33F01B791E8D000C7B22 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A33C31B791E8C000C7B22 /* LICENSE */; };
 		7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33C41B791E8C000C7B22 /* message_pump.cpp */; };
 		7E0A33F21B791E8D000C7B22 /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33C61B791E8C000C7B22 /* mixer.cpp */; };
 		7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33C81B791E8C000C7B22 /* ogl_context.cpp */; };
-		7E0A33F41B791E8D000C7B22 /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33CA1B791E8C000C7B22 /* Readme.md */; };
 		7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33CB1B791E8C000C7B22 /* sdl_common.cpp */; };
 		7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33D41B791E8D000C7B22 /* window.cpp */; };
 		7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A33D71B791E8D000C7B22 /* common.cpp */; };
@@ -43,17 +40,14 @@
 		7E0A33991B7919E6000C7B22 /* Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0A339D1B7919E6000C7B22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E0A33BC1B791A30000C7B22 /* seed_application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seed_application.cpp; path = ../../../../code/seed_application.cpp; sourceTree = "<group>"; };
-		7E0A33C01B791E8C000C7B22 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7E0A33C11B791E8C000C7B22 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		7E0A33C21B791E8C000C7B22 /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
-		7E0A33C31B791E8C000C7B22 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7E0A33C41B791E8C000C7B22 /* message_pump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = message_pump.cpp; sourceTree = "<group>"; };
 		7E0A33C51B791E8C000C7B22 /* message_pump.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = message_pump.hpp; sourceTree = "<group>"; };
 		7E0A33C61B791E8C000C7B22 /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
 		7E0A33C71B791E8C000C7B22 /* mixer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mixer.hpp; sourceTree = "<group>"; };
 		7E0A33C81B791E8C000C7B22 /* ogl_context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ogl_context.cpp; sourceTree = "<group>"; };
 		7E0A33C91B791E8C000C7B22 /* ogl_context.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ogl_context.hpp; sourceTree = "<group>"; };
-		7E0A33CA1B791E8C000C7B22 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		7E0A33CB1B791E8C000C7B22 /* sdl_common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sdl_common.cpp; sourceTree = "<group>"; };
 		7E0A33CC1B791E8C000C7B22 /* sdl_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sdl_common.hpp; sourceTree = "<group>"; };
 		7E0A33CD1B791E8C000C7B22 /* sdl_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sdl_fwd.hpp; sourceTree = "<group>"; };
@@ -166,17 +160,14 @@
 		7E0A33BF1B791E8C000C7B22 /* sdl_wrapper */ = {
 			isa = PBXGroup;
 			children = (
-				7E0A33C01B791E8C000C7B22 /* .gitignore */,
 				7E0A33C11B791E8C000C7B22 /* input.cpp */,
 				7E0A33C21B791E8C000C7B22 /* input.hpp */,
-				7E0A33C31B791E8C000C7B22 /* LICENSE */,
 				7E0A33C41B791E8C000C7B22 /* message_pump.cpp */,
 				7E0A33C51B791E8C000C7B22 /* message_pump.hpp */,
 				7E0A33C61B791E8C000C7B22 /* mixer.cpp */,
 				7E0A33C71B791E8C000C7B22 /* mixer.hpp */,
 				7E0A33C81B791E8C000C7B22 /* ogl_context.cpp */,
 				7E0A33C91B791E8C000C7B22 /* ogl_context.hpp */,
-				7E0A33CA1B791E8C000C7B22 /* Readme.md */,
 				7E0A33CB1B791E8C000C7B22 /* sdl_common.cpp */,
 				7E0A33CC1B791E8C000C7B22 /* sdl_common.hpp */,
 				7E0A33CD1B791E8C000C7B22 /* sdl_fwd.hpp */,
@@ -310,8 +301,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E0A342B1B7941A5000C7B22 /* assets in Resources */,
-				7E0A33F01B791E8D000C7B22 /* LICENSE in Resources */,
-				7E0A33EE1B791E8D000C7B22 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +322,6 @@
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
 				7E0A34001B791E8D000C7B22 /* renderer.cpp in Sources */,
 				7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */,
-				7E0A33F41B791E8D000C7B22 /* Readme.md in Sources */,
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,
 				7E0A33FC1B791E8D000C7B22 /* draw_call.cpp in Sources */,
 				7E0A34021B791E8D000C7B22 /* texture.cpp in Sources */,
