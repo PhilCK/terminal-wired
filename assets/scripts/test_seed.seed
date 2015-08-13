@@ -1,13 +1,44 @@
 
 
 
-class test_seed
-{
-  
-}
+// class ThrowableLight : SeedObject
+// {
 
+
+// public void
+// on_start()
+// {
+
+// }
+
+
+// public void
+// on_collision(const SeedObject object)
+// {
+//   cube.physics.set_gravity(false);
+//   cube.physics.set_collision(false);
+//   cube.texture.set_emit(true);
+//   cube.texture.set_color(Color::WHITE);
+//   cube.geometry.set_size(3);
+//   cube.geometry.set_shape(Geom::CUBE);
+// }
+
+// private object cube;
+
+// };
+
+
+class Test
+{
+  void huh()
+  {
+    log::info("Hi");
+  } 
+}
 
 void main()
 {
-  log();
+  ///*dev::log::*/info("doop");
+  ///*dev::log::*/warning("doop");
+  ///*dev::log::*/error("doop");
 }

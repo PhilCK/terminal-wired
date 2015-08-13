@@ -5,6 +5,7 @@
 #include <angelscript.h>
 #include <utils/directory.hpp>
 #include <utils/logging.hpp>
+#include <add_ons/scriptstdstring/scriptstdstring.h>
 
 
 void MessageCallback(const asSMessageInfo *msg, void *param)
@@ -36,31 +37,35 @@ void LoadScriptFile(const std::string &filename, std::string &script)
 }
 
 
-void test_log()
-{
-  util::log_info("foo");
-}
-
-
 namespace script_bindings {
 
 
 void
 temp_as_binding_init()
 {
-  asIScriptEngine *engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
-  engine->SetMessageCallback(asFUNCTION(MessageCallback), 0, asCALL_CDECL);
+  int r = 0;
+  asIScriptEngine *e = asCreateScriptEngine(ANGELSCRIPT_VERSION);
+  e->SetMessageCallback(asFUNCTION(MessageCallback), 0, asCALL_CDECL);
   
-  engine->RegisterGlobalFunction("void log()", asFUNCTION(test_log), asCALL_CDECL);
+  RegisterStdString(e);
+
+  // Dev functions
+  r = e->SetDefaultNamespace("log");
+  r = e->RegisterGlobalFunction("void info(const ::string &in)",    asFUNCTION(util::log_info),    asCALL_CDECL); assert(r >= 0);
+  r = e->RegisterGlobalFunction("void warning(const ::string &in)", asFUNCTION(util::log_warning), asCALL_CDECL); assert(r >= 0);
+  r = e->RegisterGlobalFunction("void error(const ::string &in)",   asFUNCTION(util::log_error),   asCALL_CDECL); assert(r >= 0);
+  
+  
+  // API
   
   // Create a new script module
-  asIScriptModule *mod = engine->GetModule("module", asGM_ALWAYS_CREATE);
+  asIScriptModule *mod = e->GetModule("user-program", asGM_ALWAYS_CREATE);
   // Load and add the script sections to the module
   std::string script;
   LoadScriptFile(util::get_resource_path() + "assets/scripts/test_seed.seed", script);
   mod->AddScriptSection("script.as", script.c_str());
   // Build the module
-  int r = mod->Build();
+  r = mod->Build();
   if( r < 0 )
   {
     // The build failed. The message stream will have received  
@@ -70,13 +75,33 @@ temp_as_binding_init()
   // Get a script context instance. Usually you'll want to reuse a previously
   // created instance to avoid the overhead of allocating the instance with
   // each call.
-  asIScriptContext *ctx = engine->CreateContext();
+  asIScriptContext *ctx = e->CreateContext();
   // Obtain the function from the module. This should preferrably  
   // be cached if the same function is called multiple times.
-  asIScriptFunction *func = engine->GetModule("module")->GetFunctionByDecl("void main()");
+  asIScriptFunction *func = e->GetModule("user-program")->GetFunctionByDecl("void main()");
   // Prepare() must be called to allow the context to prepare the stack
   ctx->Prepare(func);
   // Set the function arguments
+  r = ctx->Execute();
+  
+  //asIScriptModule *module = engine->GetModule("MyModule");
+  asIObjectType *type = e->GetObjectTypeById(mod->GetTypeIdByDecl("Test"));
+  // Get the factory function from the object type
+  asIScriptFunction *factory = type->GetFactoryByDecl("Test @Test()");
+  // Prepare the context to call the factory function
+  ctx->Prepare(factory);
+  // Execute the call
+  ctx->Execute();
+  asIScriptObject *obj = *(asIScriptObject**)ctx->GetAddressOfReturnValue();
+  obj->AddRef();
+
+  asIScriptFunction *func2 = type->GetMethodByDecl("void huh()");
+  // Prepare the context for calling the method
+  ctx->Prepare(func2);
+  // Set the object pointer
+  ctx->SetObject(obj);
+  // Execute the call
+  //ctx->Execute();
 
   r = ctx->Execute();
   if( r == asEXECUTION_FINISHED )

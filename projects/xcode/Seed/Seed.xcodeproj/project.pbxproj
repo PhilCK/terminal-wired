@@ -31,6 +31,10 @@
 		7E0A342B1B7941A5000C7B22 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A342A1B7941A5000C7B22 /* assets */; };
 		7E405B941B7BE134001DA0F5 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E405B931B7BE134001DA0F5 /* libangelscript.a */; };
 		7E405B991B7BE283001DA0F5 /* as_script_bindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405B971B7BE283001DA0F5 /* as_script_bindings.cpp */; };
+		7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */; };
+		7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BAC1B7C7C8B001DA0F5 /* scriptstdstring.cpp */; };
+		7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BAE1B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp */; };
+		7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BB41B7C827F001DA0F5 /* as_helper.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -89,6 +93,14 @@
 		7E405B931B7BE134001DA0F5 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = ../../../3rdparty/angelscript/lib/osx/libangelscript.a; sourceTree = "<group>"; };
 		7E405B971B7BE283001DA0F5 /* as_script_bindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = as_script_bindings.cpp; sourceTree = "<group>"; };
 		7E405B981B7BE283001DA0F5 /* as_script_bindings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_script_bindings.hpp; sourceTree = "<group>"; };
+		7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
+		7E405BAA1B7C7C8B001DA0F5 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
+		7E405BAC1B7C7C8B001DA0F5 /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring.cpp; sourceTree = "<group>"; };
+		7E405BAD1B7C7C8B001DA0F5 /* scriptstdstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptstdstring.h; sourceTree = "<group>"; };
+		7E405BAE1B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
+		7E405BAF1B7C7C8B001DA0F5 /* angelscript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = angelscript.h; path = ../../../../3rdparty/angelscript/include/angelscript.h; sourceTree = "<group>"; };
+		7E405BB41B7C827F001DA0F5 /* as_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = as_helper.cpp; sourceTree = "<group>"; };
+		7E405BB51B7C827F001DA0F5 /* as_helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_helper.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -138,6 +150,7 @@
 		7E0A339B1B7919E6000C7B22 /* Seed */ = {
 			isa = PBXGroup;
 			children = (
+				7E405BA51B7C7C73001DA0F5 /* 3rdparty */,
 				7E0A33BE1B791E7C000C7B22 /* External */,
 				7E0A33BC1B791A30000C7B22 /* seed_application.cpp */,
 				7E405B951B7BE283001DA0F5 /* bindings */,
@@ -157,6 +170,7 @@
 		7E0A33BE1B791E7C000C7B22 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				7E405BB31B7C827F001DA0F5 /* as_helper */,
 				7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */,
 				7E0A34071B793FA8000C7B22 /* utils */,
 				7E0A33BF1B791E8C000C7B22 /* sdl_wrapper */,
@@ -253,6 +267,62 @@
 			path = v_01;
 			sourceTree = "<group>";
 		};
+		7E405BA51B7C7C73001DA0F5 /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BA61B7C7C7D001DA0F5 /* angelscript */,
+			);
+			name = 3rdparty;
+			sourceTree = "<group>";
+		};
+		7E405BA61B7C7C7D001DA0F5 /* angelscript */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BA71B7C7C8B001DA0F5 /* add_ons */,
+				7E405BAF1B7C7C8B001DA0F5 /* angelscript.h */,
+			);
+			name = angelscript;
+			sourceTree = "<group>";
+		};
+		7E405BA71B7C7C8B001DA0F5 /* add_ons */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BA81B7C7C8B001DA0F5 /* scriptarray */,
+				7E405BAB1B7C7C8B001DA0F5 /* scriptstdstring */,
+			);
+			name = add_ons;
+			path = ../../../../3rdparty/angelscript/include/add_ons;
+			sourceTree = "<group>";
+		};
+		7E405BA81B7C7C8B001DA0F5 /* scriptarray */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */,
+				7E405BAA1B7C7C8B001DA0F5 /* scriptarray.h */,
+			);
+			path = scriptarray;
+			sourceTree = "<group>";
+		};
+		7E405BAB1B7C7C8B001DA0F5 /* scriptstdstring */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BAC1B7C7C8B001DA0F5 /* scriptstdstring.cpp */,
+				7E405BAD1B7C7C8B001DA0F5 /* scriptstdstring.h */,
+				7E405BAE1B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp */,
+			);
+			path = scriptstdstring;
+			sourceTree = "<group>";
+		};
+		7E405BB31B7C827F001DA0F5 /* as_helper */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BB41B7C827F001DA0F5 /* as_helper.cpp */,
+				7E405BB51B7C827F001DA0F5 /* as_helper.hpp */,
+			);
+			name = as_helper;
+			path = ../../../../../as_helper;
+			sourceTree = "<group>";
+		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,7 +412,11 @@
 				7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */,
 				7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */,
 				7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */,
+				7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */,
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
+				7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */,
+				7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */,
+				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,

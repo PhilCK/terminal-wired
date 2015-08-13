@@ -16,6 +16,8 @@
 		<string>https://github.com/PhilCK/utilities.git</string>
 		<key>8ECEF76D8600BC57A6FF2501556760B8781A92ED</key>
 		<string>https://github.com/PhilCK/simple-bullet.git</string>
+		<key>DC74ADEE174F0C590A1FED806095416C3C6BC8CC</key>
+		<string>https://github.com/PhilCK/as-helper.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>projects/xcode/Seed/Seed.xcodeproj</string>
@@ -27,6 +29,8 @@
 		<string>../../../../../../utils</string>
 		<key>8ECEF76D8600BC57A6FF2501556760B8781A92ED</key>
 		<string>../../../../../../bullet_wrapper</string>
+		<key>DC74ADEE174F0C590A1FED806095416C3C6BC8CC</key>
+		<string>../../../../../../as_helper</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>bitbucket.org:SquidVsShark/seed-game.git</string>
@@ -36,6 +40,14 @@
 	<string>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC74ADEE174F0C590A1FED806095416C3C6BC8CC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>as_helper</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
