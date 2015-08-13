@@ -36,6 +36,17 @@
 		7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BAE1B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp */; };
 		7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BB41B7C827F001DA0F5 /* as_helper.cpp */; };
 		7E405BBE1B7D12BE001DA0F5 /* as_component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BBC1B7D12BE001DA0F5 /* as_component.cpp */; };
+		7E405BDF1B7D1A91001DA0F5 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BC41B7D1A91001DA0F5 /* camera.cpp */; };
+		7E405BE01B7D1A91001DA0F5 /* camera_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BC61B7D1A91001DA0F5 /* camera_component_controller.cpp */; };
+		7E405BE11B7D1A91001DA0F5 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BC91B7D1A91001DA0F5 /* material.cpp */; };
+		7E405BE21B7D1A91001DA0F5 /* material_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCB1B7D1A91001DA0F5 /* material_component_controller.cpp */; };
+		7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCE1B7D1A91001DA0F5 /* mesh_renderer.cpp */; };
+		7E405BE41B7D1A91001DA0F5 /* mesh_renderer_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD01B7D1A91001DA0F5 /* mesh_renderer_component_controller.cpp */; };
+		7E405BE51B7D1A91001DA0F5 /* rigid_body_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD31B7D1A91001DA0F5 /* rigid_body_component_controller.cpp */; };
+		7E405BE61B7D1A91001DA0F5 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD61B7D1A91001DA0F5 /* script.cpp */; };
+		7E405BE71B7D1A91001DA0F5 /* script_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD81B7D1A91001DA0F5 /* script_component_controller.cpp */; };
+		7E405BE81B7D1A91001DA0F5 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDB1B7D1A91001DA0F5 /* transform.cpp */; };
+		7E405BE91B7D1A91001DA0F5 /* transform_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDD1B7D1A91001DA0F5 /* transform_component_controller.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -104,6 +115,29 @@
 		7E405BB51B7C827F001DA0F5 /* as_helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_helper.hpp; sourceTree = "<group>"; };
 		7E405BBC1B7D12BE001DA0F5 /* as_component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = as_component.cpp; sourceTree = "<group>"; };
 		7E405BBD1B7D12BE001DA0F5 /* as_component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_component.hpp; sourceTree = "<group>"; };
+		7E405BC11B7D1801001DA0F5 /* entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
+		7E405BC41B7D1A91001DA0F5 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		7E405BC51B7D1A91001DA0F5 /* camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		7E405BC61B7D1A91001DA0F5 /* camera_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BC71B7D1A91001DA0F5 /* camera_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = camera_component_controller.hpp; sourceTree = "<group>"; };
+		7E405BC91B7D1A91001DA0F5 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		7E405BCA1B7D1A91001DA0F5 /* material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
+		7E405BCB1B7D1A91001DA0F5 /* material_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BCC1B7D1A91001DA0F5 /* material_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = material_component_controller.hpp; sourceTree = "<group>"; };
+		7E405BCE1B7D1A91001DA0F5 /* mesh_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer.cpp; sourceTree = "<group>"; };
+		7E405BCF1B7D1A91001DA0F5 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
+		7E405BD01B7D1A91001DA0F5 /* mesh_renderer_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BD11B7D1A91001DA0F5 /* mesh_renderer_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer_component_controller.hpp; sourceTree = "<group>"; };
+		7E405BD31B7D1A91001DA0F5 /* rigid_body_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BD41B7D1A91001DA0F5 /* rigid_body_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_component_controller.hpp; sourceTree = "<group>"; };
+		7E405BD61B7D1A91001DA0F5 /* script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
+		7E405BD71B7D1A91001DA0F5 /* script.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script.hpp; sourceTree = "<group>"; };
+		7E405BD81B7D1A91001DA0F5 /* script_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BD91B7D1A91001DA0F5 /* script_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script_component_controller.hpp; sourceTree = "<group>"; };
+		7E405BDB1B7D1A91001DA0F5 /* transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
+		7E405BDC1B7D1A91001DA0F5 /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
+		7E405BDD1B7D1A91001DA0F5 /* transform_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform_component_controller.cpp; sourceTree = "<group>"; };
+		7E405BDE1B7D1A91001DA0F5 /* transform_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform_component_controller.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -153,6 +187,8 @@
 		7E0A339B1B7919E6000C7B22 /* Seed */ = {
 			isa = PBXGroup;
 			children = (
+				7E405BC21B7D1A91001DA0F5 /* components */,
+				7E405BBF1B7D1801001DA0F5 /* core */,
 				7E405BA51B7C7C73001DA0F5 /* 3rdparty */,
 				7E0A33BE1B791E7C000C7B22 /* External */,
 				7E0A33BC1B791A30000C7B22 /* seed_application.cpp */,
@@ -328,6 +364,101 @@
 			path = ../../../../../as_helper;
 			sourceTree = "<group>";
 		};
+		7E405BBF1B7D1801001DA0F5 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BC01B7D1801001DA0F5 /* entity */,
+			);
+			name = core;
+			path = ../../../../code/core;
+			sourceTree = "<group>";
+		};
+		7E405BC01B7D1801001DA0F5 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BC11B7D1801001DA0F5 /* entity.hpp */,
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		7E405BC21B7D1A91001DA0F5 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BC31B7D1A91001DA0F5 /* camera */,
+				7E405BC81B7D1A91001DA0F5 /* material */,
+				7E405BCD1B7D1A91001DA0F5 /* mesh_renderer */,
+				7E405BD21B7D1A91001DA0F5 /* rigid_body */,
+				7E405BD51B7D1A91001DA0F5 /* script */,
+				7E405BDA1B7D1A91001DA0F5 /* transform */,
+			);
+			name = components;
+			path = ../../../../code/components;
+			sourceTree = "<group>";
+		};
+		7E405BC31B7D1A91001DA0F5 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BC41B7D1A91001DA0F5 /* camera.cpp */,
+				7E405BC51B7D1A91001DA0F5 /* camera.hpp */,
+				7E405BC61B7D1A91001DA0F5 /* camera_component_controller.cpp */,
+				7E405BC71B7D1A91001DA0F5 /* camera_component_controller.hpp */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
+		7E405BC81B7D1A91001DA0F5 /* material */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BC91B7D1A91001DA0F5 /* material.cpp */,
+				7E405BCA1B7D1A91001DA0F5 /* material.hpp */,
+				7E405BCB1B7D1A91001DA0F5 /* material_component_controller.cpp */,
+				7E405BCC1B7D1A91001DA0F5 /* material_component_controller.hpp */,
+			);
+			path = material;
+			sourceTree = "<group>";
+		};
+		7E405BCD1B7D1A91001DA0F5 /* mesh_renderer */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BCE1B7D1A91001DA0F5 /* mesh_renderer.cpp */,
+				7E405BCF1B7D1A91001DA0F5 /* mesh_renderer.hpp */,
+				7E405BD01B7D1A91001DA0F5 /* mesh_renderer_component_controller.cpp */,
+				7E405BD11B7D1A91001DA0F5 /* mesh_renderer_component_controller.hpp */,
+			);
+			path = mesh_renderer;
+			sourceTree = "<group>";
+		};
+		7E405BD21B7D1A91001DA0F5 /* rigid_body */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BD31B7D1A91001DA0F5 /* rigid_body_component_controller.cpp */,
+				7E405BD41B7D1A91001DA0F5 /* rigid_body_component_controller.hpp */,
+			);
+			path = rigid_body;
+			sourceTree = "<group>";
+		};
+		7E405BD51B7D1A91001DA0F5 /* script */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BD61B7D1A91001DA0F5 /* script.cpp */,
+				7E405BD71B7D1A91001DA0F5 /* script.hpp */,
+				7E405BD81B7D1A91001DA0F5 /* script_component_controller.cpp */,
+				7E405BD91B7D1A91001DA0F5 /* script_component_controller.hpp */,
+			);
+			path = script;
+			sourceTree = "<group>";
+		};
+		7E405BDA1B7D1A91001DA0F5 /* transform */ = {
+			isa = PBXGroup;
+			children = (
+				7E405BDB1B7D1A91001DA0F5 /* transform.cpp */,
+				7E405BDC1B7D1A91001DA0F5 /* transform.hpp */,
+				7E405BDD1B7D1A91001DA0F5 /* transform_component_controller.cpp */,
+				7E405BDE1B7D1A91001DA0F5 /* transform_component_controller.hpp */,
+			);
+			path = transform;
+			sourceTree = "<group>";
+		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,8 +545,10 @@
 			files = (
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
 				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
+				7E405BE71B7D1A91001DA0F5 /* script_component_controller.cpp in Sources */,
 				7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */,
 				7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */,
+				7E405BDF1B7D1A91001DA0F5 /* camera.cpp in Sources */,
 				7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */,
 				7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */,
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
@@ -424,23 +557,32 @@
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
+				7E405BE51B7D1A91001DA0F5 /* rigid_body_component_controller.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
 				7E0A34001B791E8D000C7B22 /* renderer.cpp in Sources */,
 				7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */,
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,
+				7E405BE41B7D1A91001DA0F5 /* mesh_renderer_component_controller.cpp in Sources */,
+				7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */,
+				7E405BE01B7D1A91001DA0F5 /* camera_component_controller.cpp in Sources */,
 				7E0A33FC1B791E8D000C7B22 /* draw_call.cpp in Sources */,
 				7E0A34021B791E8D000C7B22 /* texture.cpp in Sources */,
+				7E405BE91B7D1A91001DA0F5 /* transform_component_controller.cpp in Sources */,
 				7E405B991B7BE283001DA0F5 /* as_script_bindings.cpp in Sources */,
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
+				7E405BE21B7D1A91001DA0F5 /* material_component_controller.cpp in Sources */,
 				7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */,
 				7E0A33FF1B791E8D000C7B22 /* rasterizer.cpp in Sources */,
 				7E0A34031B791E8D000C7B22 /* vertex_buffer.cpp in Sources */,
 				7E0A34011B791E8D000C7B22 /* shader.cpp in Sources */,
 				7E0A33BD1B791A30000C7B22 /* seed_application.cpp in Sources */,
+				7E405BE81B7D1A91001DA0F5 /* transform.cpp in Sources */,
 				7E0A33F21B791E8D000C7B22 /* mixer.cpp in Sources */,
 				7E0A33FE1B791E8D000C7B22 /* index_buffer.cpp in Sources */,
+				7E405BE11B7D1A91001DA0F5 /* material.cpp in Sources */,
 				7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */,
+				7E405BE61B7D1A91001DA0F5 /* script.cpp in Sources */,
 				7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */,
 				7E405BBE1B7D12BE001DA0F5 /* as_component.cpp in Sources */,
 			);
@@ -550,7 +692,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -579,7 +723,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

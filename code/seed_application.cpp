@@ -15,12 +15,18 @@
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
 #include <bindings/v_01/as_script_bindings.hpp>
+#include <core/entity/entity.hpp>
+#include <components/camera/camera_component_controller.hpp>
 
 
 namespace
 {
   const uint32_t screen_width = 1024;
   const uint32_t screen_height = 600;
+  
+  const core::entity ground_entity {1,1};
+  const core::entity player_entity {2,2};
+  const core::entity camera_entity {3,3};
 }
 
 
@@ -98,6 +104,11 @@ main()
   phys_world.add_rigidbody(std::move(cube_rb));
   phys_world.add_rigidbody(std::move(ground_rb));
   
+  // Components
+  {
+    comp::camera_controller::add_camera(camera_entity);
+  }
+  
   util::timer dt_timer;
   dt_timer.start();
   
@@ -118,10 +129,13 @@ main()
     
     const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
 
+    auto current_camera = comp::camera_controller::get_camera(camera_entity);
+    
+    const auto proj2 = current_camera.get_proj_matrix();
     const math::mat4 proj = math::mat4_projection(screen_width, screen_height, 0.1f, 1000.f, math::half_pi() / 2);
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
-    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
+    const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj2);
+    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj2);
   
   
     phys_world.update_world(delta_time);
