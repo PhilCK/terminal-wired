@@ -55,8 +55,8 @@ temp_as_binding_init()
   r = e->RegisterGlobalFunction("void warning(const ::string &in)", asFUNCTION(util::log_warning), asCALL_CDECL); assert(r >= 0);
   r = e->RegisterGlobalFunction("void error(const ::string &in)",   asFUNCTION(util::log_error),   asCALL_CDECL); assert(r >= 0);
   
-  
   // API
+  
   
   // Create a new script module
   asIScriptModule *mod = e->GetModule("user-program", asGM_ALWAYS_CREATE);
