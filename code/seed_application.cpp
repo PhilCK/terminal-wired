@@ -71,16 +71,6 @@ main()
   const renderer::texture dev_texture2(image2, width, height);
   assert(dev_texture2.is_valid());
   SOIL_free_image_data(image2);
-  
-  const util::obj_model model = util::load_obj(asset_path + "models/unit_plane.obj");
-  const util::gl_mesh mesh = util::convert_to_open_gl_mesh(model.meshes.front());
-  const renderer::vertex_buffer plane_mesh(mesh.mesh_data);
-  assert(plane_mesh.is_valid());
-
-  const util::obj_model cube_model = util::load_obj(asset_path + "models/unit_cube.obj");
-  const util::gl_mesh cmesh = util::convert_to_open_gl_mesh(cube_model.meshes.front());
-  const renderer::vertex_buffer cube_mesh(cmesh.mesh_data);
-  assert(cube_mesh.is_valid());
 
   const renderer::vertex_format vert_fmt({
     renderer::attr_format_desc{"in_vs_position",      renderer::attr_type::FLOAT3},
@@ -117,15 +107,20 @@ main()
   
   // Ground
   {
-    
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
     comp::transform_controller::set_transform(ground_entity, ground_transform);
+    
+    comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
+    comp::mesh_controller::set_mesh(ground_entity, std::move(ground_mesh));
   }
   
   // Player
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     comp::transform_controller::set_transform(player_entity, player_transform);
+    
+    comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+    comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
   }
   
   util::timer dt_timer;
@@ -173,12 +168,12 @@ main()
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", dev_texture1);
-      renderer::draw(fullbright, vert_fmt, plane_mesh);
+      renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(ground_entity).vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", dev_texture2);
-      renderer::draw(fullbright, vert_fmt, cube_mesh);
+      renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(player_entity).vertex_info);
     }
     
     window.flip_buffer();

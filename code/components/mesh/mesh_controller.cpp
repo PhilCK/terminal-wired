@@ -24,16 +24,16 @@ set_mesh(const core::entity set_mesh, mesh mesh_data)
 {
   if(meshes.count(set_mesh))
   {
-    meshes.at(set_mesh) = mesh_data;
+    meshes.at(set_mesh) = std::move(mesh_data);
   }
   else
   {
-    meshes.emplace(std::pair<core::entity, comp::mesh>(set_mesh, mesh_data));
+    meshes.emplace(std::pair<core::entity, comp::mesh>(set_mesh, std::move(mesh_data)));
   }
 }
 
 
-mesh
+mesh&
 get_mesh(const core::entity get_mesh)
 {
   return meshes.at(get_mesh);

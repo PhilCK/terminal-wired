@@ -12,7 +12,7 @@ namespace mesh_controller {
 
 void      add_mesh(const core::entity add_mesh);
 void      set_mesh(const core::entity set_mesh, mesh mesh_data);
-mesh      get_mesh(const core::entity get_mesh);
+mesh&     get_mesh(const core::entity get_mesh);
 
 
 
