@@ -32,7 +32,7 @@ class Test
 {
   void huh()
   {
-    log::info("Hi");
+    dev::log::info("Hi");
   } 
 }
 

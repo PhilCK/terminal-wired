@@ -50,7 +50,8 @@ temp_as_binding_init()
   RegisterStdString(e);
 
   // Dev functions
-  r = e->SetDefaultNamespace("log");
+  r = e->SetDefaultNamespace("dev");
+  r = e->SetDefaultNamespace("dev::log");
   r = e->RegisterGlobalFunction("void info(const ::string &in)",    asFUNCTION(util::log_info),    asCALL_CDECL); assert(r >= 0);
   r = e->RegisterGlobalFunction("void warning(const ::string &in)", asFUNCTION(util::log_warning), asCALL_CDECL); assert(r >= 0);
   r = e->RegisterGlobalFunction("void error(const ::string &in)",   asFUNCTION(util::log_error),   asCALL_CDECL); assert(r >= 0);

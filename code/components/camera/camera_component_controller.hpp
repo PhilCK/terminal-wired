@@ -10,8 +10,9 @@ namespace comp {
 namespace camera_controller {
 
 
-bool    add_camera(const core::entity add_camera);
-camera  get_camera(const core::entity get_camera);
+bool      add_camera(const core::entity add_camera);
+void      set_camera(const core::entity set_camera_entity, const camera new_camera);
+camera    get_camera(const core::entity get_camera);
 
 
 } // namespace

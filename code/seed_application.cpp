@@ -17,6 +17,7 @@
 #include <bindings/v_01/as_script_bindings.hpp>
 #include <core/entity/entity.hpp>
 #include <components/camera/camera_component_controller.hpp>
+#include <components/transform/transform_component_controller.hpp>
 
 
 namespace
@@ -104,9 +105,24 @@ main()
   phys_world.add_rigidbody(std::move(cube_rb));
   phys_world.add_rigidbody(std::move(ground_rb));
   
-  // Components
+  // Camera
   {
-    comp::camera_controller::add_camera(camera_entity);
+    math::transform cam_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
+    comp::transform_controller::set_transform(camera_entity, cam_transform);
+    comp::camera set_camera(screen_width, screen_height, 0.1f, 1000.f, math::quart_tau() / 2);
+    comp::camera_controller::set_camera(camera_entity, set_camera);
+  }
+  
+  // Ground
+  {
+    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
+    comp::transform_controller::set_transform(ground_entity, ground_transform);
+  }
+  
+  // Player
+  {
+    math::transform player_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
+    comp::transform_controller::set_transform(player_entity, player_transform);
   }
   
   util::timer dt_timer;
@@ -118,25 +134,21 @@ main()
   
     renderer::clear();
     renderer::reset();
-    
-    const math::mat4 p_scale = math::mat4_scale(10.f, 1.f, 10.f);
-    const math::mat4 rot     = math::mat4_id();
-    const math::mat4 trans   = math::mat4_id();
-    const math::mat4 p_world = math::mat4_multiply(p_scale, rot, trans);
+
+    math::transform plane_transform = comp::transform_controller::get_transform(ground_entity);
+    const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     
     auto pos = phys_world.get_rigidbody()->get_position();
     const math::mat4 pos_mat = math::mat4_translate(pos.at(0), pos.at(1), pos.at(2));
     
     const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
-
+    
     auto current_camera = comp::camera_controller::get_camera(camera_entity);
     
-    const auto proj2 = current_camera.get_proj_matrix();
-    const math::mat4 proj = math::mat4_projection(screen_width, screen_height, 0.1f, 1000.f, math::half_pi() / 2);
+    const auto proj = current_camera.get_proj_matrix();
     const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj2);
-    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj2);
-  
+    const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
+    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
   
     phys_world.update_world(delta_time);
   

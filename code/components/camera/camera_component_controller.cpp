@@ -23,6 +23,21 @@ add_camera(const core::entity add_camera)
 }
 
 
+void
+set_camera(const core::entity set_camera_entity, const camera new_camera)
+{
+  if(cameras.count(set_camera_entity))
+  {
+    cameras.at(set_camera_entity) = new_camera;
+  }
+  else
+  {
+    cameras.emplace(std::pair<core::entity, comp::camera>(set_camera_entity, new_camera));
+  }
+  
+}
+
+
 camera
 get_camera(const core::entity get_camera)
 {

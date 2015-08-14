@@ -190,7 +190,7 @@
 				7E405BC21B7D1A91001DA0F5 /* components */,
 				7E405BBF1B7D1801001DA0F5 /* core */,
 				7E405BA51B7C7C73001DA0F5 /* 3rdparty */,
-				7E0A33BE1B791E7C000C7B22 /* External */,
+				7E0A33BE1B791E7C000C7B22 /* external */,
 				7E0A33BC1B791A30000C7B22 /* seed_application.cpp */,
 				7E405B951B7BE283001DA0F5 /* bindings */,
 				7E0A339C1B7919E6000C7B22 /* Supporting Files */,
@@ -206,7 +206,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7E0A33BE1B791E7C000C7B22 /* External */ = {
+		7E0A33BE1B791E7C000C7B22 /* external */ = {
 			isa = PBXGroup;
 			children = (
 				7E405BB31B7C827F001DA0F5 /* as_helper */,
@@ -215,7 +215,7 @@
 				7E0A33BF1B791E8C000C7B22 /* sdl_wrapper */,
 				7E0A33D61B791E8D000C7B22 /* simple_renderer */,
 			);
-			name = External;
+			name = external;
 			sourceTree = "<group>";
 		};
 		7E0A33BF1B791E8C000C7B22 /* sdl_wrapper */ = {
