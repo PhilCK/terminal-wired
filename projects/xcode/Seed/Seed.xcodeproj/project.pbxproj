@@ -47,6 +47,8 @@
 		7E405BE71B7D1A91001DA0F5 /* script_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD81B7D1A91001DA0F5 /* script_component_controller.cpp */; };
 		7E405BE81B7D1A91001DA0F5 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDB1B7D1A91001DA0F5 /* transform.cpp */; };
 		7E405BE91B7D1A91001DA0F5 /* transform_component_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDD1B7D1A91001DA0F5 /* transform_component_controller.cpp */; };
+		7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A21B7E18A4003BE24E /* mesh.cpp */; };
+		7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -138,6 +140,10 @@
 		7E405BDC1B7D1A91001DA0F5 /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
 		7E405BDD1B7D1A91001DA0F5 /* transform_component_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform_component_controller.cpp; sourceTree = "<group>"; };
 		7E405BDE1B7D1A91001DA0F5 /* transform_component_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform_component_controller.hpp; sourceTree = "<group>"; };
+		7E87C5A21B7E18A4003BE24E /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		7E87C5A31B7E18A4003BE24E /* mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_controller.cpp; sourceTree = "<group>"; };
+		7E87C5A51B7E18A4003BE24E /* mesh_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_controller.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -384,6 +390,7 @@
 		7E405BC21B7D1A91001DA0F5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5A11B7E18A4003BE24E /* mesh */,
 				7E405BC31B7D1A91001DA0F5 /* camera */,
 				7E405BC81B7D1A91001DA0F5 /* material */,
 				7E405BCD1B7D1A91001DA0F5 /* mesh_renderer */,
@@ -457,6 +464,17 @@
 				7E405BDE1B7D1A91001DA0F5 /* transform_component_controller.hpp */,
 			);
 			path = transform;
+			sourceTree = "<group>";
+		};
+		7E87C5A11B7E18A4003BE24E /* mesh */ = {
+			isa = PBXGroup;
+			children = (
+				7E87C5A21B7E18A4003BE24E /* mesh.cpp */,
+				7E87C5A31B7E18A4003BE24E /* mesh.hpp */,
+				7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */,
+				7E87C5A51B7E18A4003BE24E /* mesh_controller.hpp */,
+			);
+			path = mesh;
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -543,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */,
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
 				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
 				7E405BE71B7D1A91001DA0F5 /* script_component_controller.cpp in Sources */,
@@ -559,6 +578,7 @@
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7E405BE51B7D1A91001DA0F5 /* rigid_body_component_controller.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
+				7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */,
 				7E0A34001B791E8D000C7B22 /* renderer.cpp in Sources */,
 				7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */,
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,

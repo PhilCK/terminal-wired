@@ -18,6 +18,8 @@
 #include <core/entity/entity.hpp>
 #include <components/camera/camera_component_controller.hpp>
 #include <components/transform/transform_component_controller.hpp>
+#include <components/mesh/mesh_controller.hpp>
+#include <components/mesh_renderer/mesh_renderer_component_controller.hpp>
 
 
 namespace
@@ -107,7 +109,7 @@ main()
   
   // Camera
   {
-    math::transform cam_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
+    math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
     comp::transform_controller::set_transform(camera_entity, cam_transform);
     comp::camera set_camera(screen_width, screen_height, 0.1f, 1000.f, math::quart_tau() / 2);
     comp::camera_controller::set_camera(camera_entity, set_camera);
@@ -115,13 +117,14 @@ main()
   
   // Ground
   {
+    
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
     comp::transform_controller::set_transform(ground_entity, ground_transform);
   }
   
   // Player
   {
-    math::transform player_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
+    math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     comp::transform_controller::set_transform(player_entity, player_transform);
   }
   
@@ -138,15 +141,15 @@ main()
     math::transform plane_transform = comp::transform_controller::get_transform(ground_entity);
     const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     
-    auto pos = phys_world.get_rigidbody()->get_position();
-    const math::mat4 pos_mat = math::mat4_translate(pos.at(0), pos.at(1), pos.at(2));
-    
     const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
     
-    auto current_camera = comp::camera_controller::get_camera(camera_entity);
-    
+    const auto current_camera = comp::camera_controller::get_camera(camera_entity);
     const auto proj = current_camera.get_proj_matrix();
-    const math::mat4 view = math::mat4_lookat(math::vec3_init(0, 4, 7), math::vec3_zero(), math::vec3_init(0, 1, 0));
+    
+    const auto cam_transform = comp::transform_controller::get_transform(camera_entity);
+    const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    
+    
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
   

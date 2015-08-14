@@ -16,7 +16,7 @@ camera::camera(const uint32_t width, const uint32_t height,
 
 
 math::mat4
-camera::get_proj_matrix()
+camera::get_proj_matrix() const
 {
   return math::mat4_projection(static_cast<float>(m_dimentions >> 16),
                                static_cast<float>(m_dimentions & 0xFFFF),

@@ -16,7 +16,7 @@ public:
                            const float near_plane, const float far_plane,
                            const float fov_radians);
 
-  math::mat4        get_proj_matrix();
+  math::mat4        get_proj_matrix() const;
   
 private:
 
