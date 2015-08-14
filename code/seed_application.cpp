@@ -20,6 +20,7 @@
 #include <components/transform/transform_component_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_component_controller.hpp>
+#include <components/material/material_component_controller.hpp>
 
 
 namespace
@@ -48,7 +49,7 @@ main()
   script_bindings::temp_as_binding_init();
   
   // Setup
-  sdl::window window(screen_width, screen_height, false);
+  sdl::window window(screen_width, screen_height, false, "Wired");
   const sdl::ogl_context gl_context(window);
   sdl::input input;
   input.set_mouse_hold(true);
@@ -59,19 +60,6 @@ main()
   
   const std::string asset_path = util::get_resource_path() + "assets/";
   
-  const std::string dev_texture_name = asset_path + "/textures/dev_grid_green_512.png";
-  int32_t width, height;
-  uint8_t* image1 = SOIL_load_image(dev_texture_name.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
-  const renderer::texture dev_texture1(image1, width, height);
-  assert(dev_texture1.is_valid());
-  SOIL_free_image_data(image1);
-
-  const std::string dev_texture_name2 = asset_path + "/textures/dev_grid_red_512.png";
-  uint8_t* image2 = SOIL_load_image(dev_texture_name2.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
-  const renderer::texture dev_texture2(image2, width, height);
-  assert(dev_texture2.is_valid());
-  SOIL_free_image_data(image2);
-
   const renderer::vertex_format vert_fmt({
     renderer::attr_format_desc{"in_vs_position",      renderer::attr_type::FLOAT3},
     renderer::attr_format_desc{"in_vs_texture_coord", renderer::attr_type::FLOAT2},
@@ -112,6 +100,9 @@ main()
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
     comp::mesh_controller::set_mesh(ground_entity, std::move(ground_mesh));
+    
+    comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
+    comp::material_controller::set(ground_entity, std::move(ground_mat));
   }
   
   // Player
@@ -121,6 +112,9 @@ main()
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
+    
+    comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
+    comp::material_controller::set(player_entity, std::move(ground_mat));
   }
   
   util::timer dt_timer;
@@ -167,12 +161,12 @@ main()
     
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
-      fullbright.set_texture("diffuse_map", dev_texture1);
+      fullbright.set_texture("diffuse_map", comp::material_controller::get(ground_entity).map01);
       renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(ground_entity).vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
-      fullbright.set_texture("diffuse_map", dev_texture2);
+      fullbright.set_texture("diffuse_map", comp::material_controller::get(player_entity).map01);
       renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(player_entity).vertex_info);
     }
     
