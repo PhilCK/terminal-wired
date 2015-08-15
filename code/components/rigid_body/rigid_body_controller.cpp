@@ -29,9 +29,16 @@ set(const core::entity set_rigid_body, bullet::rigidbody new_rigid_body)
 }
 
 
+bullet::rigidbody*
+test()
+{
+  return world.get_rigidbody();
+}
+
+
 
 void
-update(const float dt)
+update_world(const float dt)
 {
   world.update_world(dt);
 }

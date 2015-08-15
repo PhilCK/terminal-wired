@@ -21,13 +21,14 @@
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
 #include <components/material/material_controller.hpp>
+#include <components/rigid_body/rigid_body_controller.hpp>
 
 
 namespace
 {
   const uint32_t screen_width = 1024;
   const uint32_t screen_height = 600;
-  
+
   const core::entity ground_entity {1,1};
   const core::entity player_entity {2,2};
   const core::entity camera_entity {3,3};
@@ -71,7 +72,7 @@ main()
   assert(fullbright.is_valid());
   
   // Physics.
-  bullet::world phys_world;
+  //bullet::world phys_world;
   
   auto cube_coll = bullet::create_capsule_collider();
   std::unique_ptr<bullet::rigidbody> cube_rb(new bullet::rigidbody(std::move(cube_coll),
@@ -82,8 +83,8 @@ main()
   auto plane_coll = bullet::create_static_plane_collider();
   std::unique_ptr<bullet::rigidbody> ground_rb(new bullet::rigidbody(std::move(plane_coll), 0, 0, 0, 0));
   
-  phys_world.add_rigidbody(std::move(cube_rb));
-  phys_world.add_rigidbody(std::move(ground_rb));
+  //phys_world.add_rigidbody(std::move(cube_rb));
+  //phys_world.add_rigidbody(std::move(ground_rb));
   
   // Camera
   {
@@ -95,23 +96,32 @@ main()
   
   // Ground
   {
-    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
+    const math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
     comp::transform_controller::set_transform(ground_entity, ground_transform);
+    
+    auto plane_coll = bullet::create_static_plane_collider();
+    bullet::rigidbody rb(std::move(plane_coll), 0, 0, 0, 0);
+    comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
     comp::mesh_controller::set_mesh(ground_entity, std::move(ground_mesh));
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
     comp::material_controller::set(ground_entity, std::move(ground_mat));
+    
+    auto static_plane = bullet::create_static_plane_collider();
+    bullet::rigidbody new_rigid_body(std::move(static_plane), 0, 0, 0, 0);
+    comp::rigid_body_controller::set(ground_entity, std::move(new_rigid_body));
   }
   
   // Player
   {
-    math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
+    const math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     comp::transform_controller::set_transform(player_entity, player_transform);
     
     auto coll = bullet::create_capsule_collider();
-    bullet::rigidbody(std::move(coll), 0, 50, 0, 0.1, bullet::axis::y_axis);
+    bullet::rigidbody rb(std::move(coll), 0, 50, 0, 0.1, bullet::axis::y_axis);
+    comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
@@ -133,7 +143,8 @@ main()
     math::transform plane_transform = comp::transform_controller::get_transform(ground_entity);
     const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     
-    const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
+    //const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
+    const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
     
     const auto current_camera = comp::camera_controller::get_camera(camera_entity);
     const auto proj = current_camera.get_proj_matrix();
@@ -141,25 +152,25 @@ main()
     const auto cam_transform = comp::transform_controller::get_transform(camera_entity);
     const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
     
-    
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
-  
-    phys_world.update_world(delta_time);
+    
+    comp::rigid_body_controller::update_world(delta_time);
+    //phys_world.update_world(delta_time);
   
     // Render Scene
     {
       if(input.is_key_down(SDLK_w))
       {
-        phys_world.get_rigidbody()->apply_local_force(0, 0, 1.f);
+        comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
       }
       if(input.is_key_down(SDLK_s))
       {
-        phys_world.get_rigidbody()->apply_local_force(0, 0, -1.f);
+        comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
       }
       if(input.get_mouse_delta_x() != 0)
       {
-        phys_world.get_rigidbody()->apply_local_torque(0, input.get_mouse_delta_x() * 0.1, 0);
+        comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * 0.1, 0);
       }
     
       renderer::reset();
