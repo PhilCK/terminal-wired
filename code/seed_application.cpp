@@ -7,11 +7,11 @@
 #include <iostream>
 #include <string>
 #include <assert.h>
+#include <memory>
 #include <math/math.hpp>
 #include <bullet_wrapper/world.hpp>
 #include <bullet_wrapper/rigidbody.hpp>
 #include <bullet_wrapper/collider.hpp>
-#include <memory>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
 #include <bindings/v_01/as_script_bindings.hpp>
@@ -50,7 +50,7 @@ main()
   script_bindings::temp_as_binding_init();
   
   // Setup
-  sdl::window window(screen_width, screen_height, false, "Wired");
+  sdl::window window(screen_width, screen_height, false, "do while");
   const sdl::ogl_context gl_context(window);
   sdl::input input;
   input.set_mouse_hold(true);
@@ -70,21 +70,6 @@ main()
   
   renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(asset_path + "shaders/basic_fullbright.ogl"));
   assert(fullbright.is_valid());
-  
-  // Physics.
-  //bullet::world phys_world;
-  
-  auto cube_coll = bullet::create_capsule_collider();
-  std::unique_ptr<bullet::rigidbody> cube_rb(new bullet::rigidbody(std::move(cube_coll),
-                                                                   0, 50, 0,
-                                                                   0.1,
-                                                                   bullet::axis::y_axis));
-  
-  auto plane_coll = bullet::create_static_plane_collider();
-  std::unique_ptr<bullet::rigidbody> ground_rb(new bullet::rigidbody(std::move(plane_coll), 0, 0, 0, 0));
-  
-  //phys_world.add_rigidbody(std::move(cube_rb));
-  //phys_world.add_rigidbody(std::move(ground_rb));
   
   // Camera
   {
@@ -143,7 +128,6 @@ main()
     math::transform plane_transform = comp::transform_controller::get_transform(ground_entity);
     const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     
-    //const math::mat4 world_rb = math::mat4_init_with_array(phys_world.get_rigidbody()->get_world_matrix());
     const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
     
     const auto current_camera = comp::camera_controller::get_camera(camera_entity);
@@ -156,7 +140,6 @@ main()
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
     
     comp::rigid_body_controller::update_world(delta_time);
-    //phys_world.update_world(delta_time);
   
     // Render Scene
     {
