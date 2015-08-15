@@ -1,4 +1,4 @@
-#include "material_component_controller.hpp"
+#include "material_controller.hpp"
 #include <map>
 
 

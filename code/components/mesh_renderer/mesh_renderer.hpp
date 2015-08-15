@@ -1,0 +1,11 @@
+#ifndef MESH_RENDERER_INCLUDED_2450C828_AD66_445D_B9F4_51C98347C667
+#define MESH_RENDERER_INCLUDED_2450C828_AD66_445D_B9F4_51C98347C667
+
+
+namespace comp {
+
+
+} // namespace
+
+
+#endif // include guard

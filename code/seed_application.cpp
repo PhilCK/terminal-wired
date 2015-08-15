@@ -16,11 +16,11 @@
 #include <utils/logging.hpp>
 #include <bindings/v_01/as_script_bindings.hpp>
 #include <core/entity/entity.hpp>
-#include <components/camera/camera_component_controller.hpp>
-#include <components/transform/transform_component_controller.hpp>
+#include <components/camera/camera_controller.hpp>
+#include <components/transform/transform_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
-#include <components/mesh_renderer/mesh_renderer_component_controller.hpp>
-#include <components/material/material_component_controller.hpp>
+#include <components/mesh_renderer/mesh_renderer_controller.hpp>
+#include <components/material/material_controller.hpp>
 
 
 namespace
@@ -109,6 +109,9 @@ main()
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     comp::transform_controller::set_transform(player_entity, player_transform);
+    
+    auto coll = bullet::create_capsule_collider();
+    bullet::rigidbody(std::move(coll), 0, 50, 0, 0.1, bullet::axis::y_axis);
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
