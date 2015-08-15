@@ -12,7 +12,7 @@ class rigid_body
 {
 public:
 
-  bullet_wrapper::rigid_body internal_rb;
+  bullet::rigidbody internal_rb;
 
 }; // class
 

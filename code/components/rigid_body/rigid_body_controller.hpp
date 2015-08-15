@@ -11,7 +11,7 @@ namespace rigid_body_controller {
 
 
 void      add(const core::entity add_rigid_body);
-void      set(const core::entity set_rigid_body);
+void      set(const core::entity set_rigid_body, bullet::rigidbody new_rigid_body);
 
 
 } // namespace
