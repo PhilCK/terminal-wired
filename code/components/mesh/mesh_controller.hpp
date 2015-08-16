@@ -3,7 +3,15 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/entity/component_interface.hpp>
 #include "mesh.hpp"
+
+
+//namespace component {
+//
+//bool
+//
+//}
 
 
 namespace comp {

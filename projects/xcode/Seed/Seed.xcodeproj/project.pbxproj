@@ -50,6 +50,7 @@
 		7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A21B7E18A4003BE24E /* mesh.cpp */; };
 		7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */; };
 		7E87C5AA1B7E5F5D003BE24E /* rigid_body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A81B7E5F5D003BE24E /* rigid_body.cpp */; };
+		7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -147,6 +148,9 @@
 		7E87C5A51B7E18A4003BE24E /* mesh_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_controller.hpp; sourceTree = "<group>"; };
 		7E87C5A81B7E5F5D003BE24E /* rigid_body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body.cpp; sourceTree = "<group>"; };
 		7E87C5A91B7E5F5D003BE24E /* rigid_body.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body.hpp; sourceTree = "<group>"; };
+		7E87C5AB1B80FD3D003BE24E /* component_interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = component_interface.hpp; sourceTree = "<group>"; };
+		7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_buffer_resource.cpp; sourceTree = "<group>"; };
+		7E87C5AE1B810B88003BE24E /* vertex_buffer_resource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertex_buffer_resource.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 		7E0A33D61B791E8D000C7B22 /* simple_renderer */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5AC1B810B88003BE24E /* ogl */,
 				7E0A33D71B791E8D000C7B22 /* common.cpp */,
 				7E0A33D81B791E8D000C7B22 /* common.hpp */,
 				7E0A33D91B791E8D000C7B22 /* draw_call.cpp */,
@@ -385,6 +390,7 @@
 		7E405BC01B7D1801001DA0F5 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5AB1B80FD3D003BE24E /* component_interface.hpp */,
 				7E405BC11B7D1801001DA0F5 /* entity.hpp */,
 			);
 			path = entity;
@@ -480,6 +486,16 @@
 				7E87C5A51B7E18A4003BE24E /* mesh_controller.hpp */,
 			);
 			path = mesh;
+			sourceTree = "<group>";
+		};
+		7E87C5AC1B810B88003BE24E /* ogl */ = {
+			isa = PBXGroup;
+			children = (
+				7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */,
+				7E87C5AE1B810B88003BE24E /* vertex_buffer_resource.hpp */,
+			);
+			name = ogl;
+			path = "../../../../Users/PhilCK/Developer/simple-renderer/renderer/ogl";
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -597,6 +613,7 @@
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
 				7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */,
+				7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */,
 				7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */,
 				7E0A33FF1B791E8D000C7B22 /* rasterizer.cpp in Sources */,
 				7E0A34031B791E8D000C7B22 /* vertex_buffer.cpp in Sources */,

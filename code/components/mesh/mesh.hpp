@@ -13,20 +13,6 @@ class mesh
 {
 public:
 
-  mesh() {}
-
-  mesh(mesh && other)
-  {
-    this->vertex_info = std::move(other.vertex_info);
-  }
-  
-  mesh& operator=(mesh &&other)
-  {
-    this->vertex_info = std::move(other.vertex_info);
-    
-    return *this;
-  }
-
   renderer::vertex_buffer vertex_info;
 }; // class
 

@@ -89,7 +89,8 @@ main()
     comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
-    comp::mesh_controller::set_mesh(ground_entity, std::move(ground_mesh));
+    //comp::mesh_controller::set_mesh(ground_entity, std::move(ground_mesh));
+    component::set<comp::mesh>(ground_entity, ground_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
     comp::material_controller::set(ground_entity, std::move(ground_mat));
@@ -109,7 +110,8 @@ main()
     comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
-    comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
+    //comp::mesh_controller::set_mesh(player_entity, std::move(player_mesh));
+    component::set<comp::mesh>(player_entity, player_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
     comp::material_controller::set(player_entity, std::move(ground_mat));
@@ -159,12 +161,17 @@ main()
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", comp::material_controller::get(ground_entity).map01);
-      renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(ground_entity).vertex_info);
+      //renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(ground_entity).vertex_info);
+      comp::mesh mesh;
+      component::get<comp::mesh>(ground_entity, mesh);
+      renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", comp::material_controller::get(player_entity).map01);
-      renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(player_entity).vertex_info);
+      //renderer::draw(fullbright, vert_fmt, comp::mesh_controller::get_mesh(player_entity).vertex_info);
+      component::get<comp::mesh>(player_entity, mesh);
+      renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
     }
     
     window.flip_buffer();

@@ -14,6 +14,8 @@
 		<string>bitbucket.org:SquidVsShark/seed-game.git</string>
 		<key>4D199BF4933C31EBC0B29A665521A3A1FD95E45E</key>
 		<string>https://github.com/PhilCK/utilities.git</string>
+		<key>712182715FC12E4609A09C9047E02B1E55D41D01</key>
+		<string>https://github.com/PhilCK/simple-renderer.git</string>
 		<key>8ECEF76D8600BC57A6FF2501556760B8781A92ED</key>
 		<string>https://github.com/PhilCK/simple-bullet.git</string>
 		<key>DC74ADEE174F0C590A1FED806095416C3C6BC8CC</key>
@@ -27,6 +29,8 @@
 		<string>../../../../..</string>
 		<key>4D199BF4933C31EBC0B29A665521A3A1FD95E45E</key>
 		<string>../../../../../../utils</string>
+		<key>712182715FC12E4609A09C9047E02B1E55D41D01</key>
+		<string>../../../../../../simple-renderer</string>
 		<key>8ECEF76D8600BC57A6FF2501556760B8781A92ED</key>
 		<string>../../../../../../bullet_wrapper</string>
 		<key>DC74ADEE174F0C590A1FED806095416C3C6BC8CC</key>
@@ -63,6 +67,14 @@
 			<string>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</string>
 			<key>IDESourceControlWCCName</key>
 			<string>seed_game</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>712182715FC12E4609A09C9047E02B1E55D41D01</string>
+			<key>IDESourceControlWCCName</key>
+			<string>simple-renderer</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
