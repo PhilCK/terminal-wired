@@ -12,9 +12,11 @@ class camera
 {
 public:
 
-  explicit          camera(const uint32_t width, const uint32_t height,
-                           const float near_plane, const float far_plane,
-                           const float fov_radians);
+  explicit          camera(const uint32_t width    = 640,
+                           const uint32_t height   = 480,
+                           const float near_plane  = 0.1f,
+                           const float far_plane   = 100.f,
+                           const float fov_radians = math::quart_tau());
 
   math::mat4        get_proj_matrix() const;
   
