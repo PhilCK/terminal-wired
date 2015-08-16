@@ -4,25 +4,25 @@
 
 namespace
 {
-  std::map<core::entity, math::transform> transforms;
+  std::map<Core::Entity, math::transform> transforms;
 }
 
 
-namespace component {
+namespace Component {
 
 
 template<>
 bool
-add<math::transform>(const core::entity e)
+add<math::transform>(const Core::Entity e)
 {
-  transforms.emplace(std::pair<core::entity, math::transform>(e, math::transform()));
+  transforms.emplace(std::pair<Core::Entity, math::transform>(e, math::transform()));
   
   return true;
 }
 
 template<>
 bool
-get<math::transform>(const core::entity e, math::transform &get_mesh)
+get<math::transform>(const Core::Entity e, math::transform &get_mesh)
 {
   get_mesh = transforms.at(e);
   
@@ -32,7 +32,7 @@ get<math::transform>(const core::entity e, math::transform &get_mesh)
 
 template<>
 bool
-set<math::transform>(const core::entity e, const math::transform &set)
+set<math::transform>(const Core::Entity e, const math::transform &set)
 {
   if(transforms.count(e))
   {
@@ -40,7 +40,7 @@ set<math::transform>(const core::entity e, const math::transform &set)
   }
   else
   {
-    transforms.emplace(std::pair<core::entity, math::transform>(e, set));
+    transforms.emplace(std::pair<Core::Entity, math::transform>(e, set));
   }
   
   return true;

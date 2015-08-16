@@ -7,17 +7,17 @@
 #include "mesh.hpp"
 
 
-namespace component {
+namespace Component {
 
 template<>
-bool add<comp::mesh>(const core::entity e);
+bool add<comp::mesh>(const Core::Entity e);
 
 template<>
-bool get<comp::mesh>(const core::entity e, comp::mesh &get_mesh);
+bool get<comp::mesh>(const Core::Entity e, comp::mesh &get_mesh);
 
 
 template<>
-bool set<comp::mesh>(const core::entity e, const comp::mesh &set);
+bool set<comp::mesh>(const Core::Entity e, const comp::mesh &set);
 
 
 } // namespace

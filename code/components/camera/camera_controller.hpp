@@ -3,19 +3,25 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/entity/component_interface.hpp>
 #include "camera.hpp"
 
 
-namespace comp {
-namespace camera_controller {
+namespace Component {
 
 
-bool      add_camera(const core::entity add_camera);
-void      set_camera(const core::entity set_camera_entity, const camera new_camera);
-camera    get_camera(const core::entity get_camera);
+template<>
+bool add<comp::camera>(const Core::Entity e);
 
 
-} // namespace
+template<>
+bool get<comp::camera>(const Core::Entity e, comp::camera &get_mesh);
+
+
+template<>
+bool set<comp::camera>(const Core::Entity e, const comp::camera &set);
+
+
 } // namespace
 
 

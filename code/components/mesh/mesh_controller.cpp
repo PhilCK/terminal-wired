@@ -4,17 +4,17 @@
 
 namespace
 {
-  std::map<core::entity, comp::mesh> meshes;
+  std::map<Core::Entity, comp::mesh> meshes;
 }
 
 
-namespace component {
+namespace Component {
 
 template<>
 bool
-add<comp::mesh>(const core::entity e)
+add<comp::mesh>(const Core::Entity e)
 {
-  meshes.emplace(std::pair<core::entity, comp::mesh>(e, comp::mesh()));
+  meshes.emplace(std::pair<Core::Entity, comp::mesh>(e, comp::mesh()));
   
   return true;
 }
@@ -22,7 +22,7 @@ add<comp::mesh>(const core::entity e)
 
 template<>
 bool
-get<comp::mesh>(const core::entity e, comp::mesh &get_mesh)
+get<comp::mesh>(const Core::Entity e, comp::mesh &get_mesh)
 {
   get_mesh = meshes.at(e);
   
@@ -32,7 +32,7 @@ get<comp::mesh>(const core::entity e, comp::mesh &get_mesh)
 
 template<>
 bool
-set<comp::mesh>(const core::entity e, const comp::mesh &set)
+set<comp::mesh>(const Core::Entity e, const comp::mesh &set)
 {
   if(meshes.count(e))
   {
@@ -40,7 +40,7 @@ set<comp::mesh>(const core::entity e, const comp::mesh &set)
   }
   else
   {
-    meshes.emplace(std::pair<core::entity, comp::mesh>(e, std::move(set)));
+    meshes.emplace(std::pair<Core::Entity, comp::mesh>(e, std::move(set)));
   }
   
   return true;

@@ -16,22 +16,22 @@
 #include <core/entity/entity.hpp>
 
 
-namespace component {
+namespace Component {
 
 
 //! Add component to the entity.
 template<typename T>
-bool add(const core::entity e);
+bool add(const Core::Entity e);
 
 
 //! Set the value of an entity.
 template<typename T>
-bool set(const core::entity e, const T &component);
+bool set(const Core::Entity e, const T &component);
 
 
 //! Get the data of the component.
 template<typename T>
-bool get(const core::entity e, T &component);
+bool get(const Core::Entity e, T &component);
 
 
 } // namespace

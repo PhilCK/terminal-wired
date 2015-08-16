@@ -5,7 +5,7 @@
 
 namespace
 {
-  std::map<core::entity, bullet::rigidbody> rigidbodies;
+  std::map<Core::Entity, bullet::rigidbody> rigidbodies;
   bullet::world world;
 }
 
@@ -15,16 +15,16 @@ namespace rigid_body_controller {
 
 
 void
-add(const core::entity add_rigid_body)
+add(const Core::Entity add_rigid_body)
 {
   
 }
 
 
 void
-set(const core::entity set_rigid_body, bullet::rigidbody new_rigid_body)
+set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body)
 {
-  //rigidbodies.emplace(std::pair<core::entity, bullet::rigidbody>(set_rigid_body, std::move(new_rigid_body)));
+  //rigidbodies.emplace(std::pair<Core::Entity, bullet::rigidbody>(set_rigid_body, std::move(new_rigid_body)));
   world.add_rigidbody(std::make_unique<bullet::rigidbody>(std::move(new_rigid_body)));
 }
 

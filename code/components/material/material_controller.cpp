@@ -4,7 +4,7 @@
 
 namespace
 {
-  std::map<core::entity, comp::material> materials;
+  std::map<Core::Entity, comp::material> materials;
 }
 
 
@@ -13,14 +13,14 @@ namespace material_controller {
 
 
 void
-add(const core::entity add_material)
+add(const Core::Entity add_material)
 {
-  materials.emplace(std::pair<core::entity, comp::material>(add_material, comp::material()));
+  materials.emplace(std::pair<Core::Entity, comp::material>(add_material, comp::material()));
 }
 
 
 void
-set(const core::entity set_material, comp::material add_material)
+set(const Core::Entity set_material, comp::material add_material)
 {
   if(materials.count(set_material))
   {
@@ -28,13 +28,13 @@ set(const core::entity set_material, comp::material add_material)
   }
   else
   {
-    materials.emplace(std::pair<core::entity, comp::material>(set_material, std::move(add_material)));
+    materials.emplace(std::pair<Core::Entity, comp::material>(set_material, std::move(add_material)));
   }
 }
 
 
 material&
-get(const core::entity get_material)
+get(const Core::Entity get_material)
 {
   return materials.at(get_material);
 }

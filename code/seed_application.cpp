@@ -29,9 +29,9 @@ namespace
   const uint32_t screen_width = 1024;
   const uint32_t screen_height = 600;
 
-  const core::entity ground_entity {1,1};
-  const core::entity player_entity {2,2};
-  const core::entity camera_entity {3,3};
+  const Core::Entity ground_entity {1,1};
+  const Core::Entity player_entity {2,2};
+  const Core::Entity camera_entity {3,3};
 }
 
 
@@ -74,22 +74,22 @@ main()
   // Camera
   {
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
-    component::set<math::transform>(camera_entity, cam_transform);
+    Component::set(camera_entity, cam_transform);
     comp::camera set_camera(screen_width, screen_height, 0.1f, 1000.f, math::quart_tau() / 2);
-    comp::camera_controller::set_camera(camera_entity, set_camera);
+    Component::set(camera_entity, set_camera);
   }
   
   // Ground
   {
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
-    component::set<math::transform>(ground_entity, ground_transform);
+    Component::set<math::transform>(ground_entity, ground_transform);
     
     auto plane_coll = bullet::create_static_plane_collider();
     bullet::rigidbody rb(std::move(plane_coll), 0, 0, 0, 0);
     comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
-    component::set<comp::mesh>(ground_entity, ground_mesh);
+    Component::set<comp::mesh>(ground_entity, ground_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
     comp::material_controller::set(ground_entity, std::move(ground_mat));
@@ -102,14 +102,14 @@ main()
   // Player
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
-    component::set(player_entity, player_transform);
+    Component::set(player_entity, player_transform);
     
     auto coll = bullet::create_capsule_collider();
     bullet::rigidbody rb(std::move(coll), 0, 50, 0, 0.1, bullet::axis::y_axis);
     comp::rigid_body_controller::set(ground_entity, std::move(rb));
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
-    component::set<comp::mesh>(player_entity, player_mesh);
+    Component::set<comp::mesh>(player_entity, player_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
     comp::material_controller::set(player_entity, std::move(ground_mat));
@@ -126,16 +126,17 @@ main()
     renderer::reset();
 
     math::transform plane_transform;
-    component::get<math::transform>(ground_entity, plane_transform);
-    const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
+    Component::get<math::transform>(ground_entity, plane_transform);
     
+    const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
     
-    const auto current_camera = comp::camera_controller::get_camera(camera_entity);
+    comp::camera current_camera(800, 500, 0.1, 1000.0, 0.1); // Dummy values.
+    Component::get(camera_entity, current_camera);
     const auto proj = current_camera.get_proj_matrix();
     
     math::transform cam_transform;
-    component::get<math::transform>(camera_entity, cam_transform);
+    Component::get<math::transform>(camera_entity, cam_transform);
   
 
     const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
@@ -163,13 +164,13 @@ main()
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", comp::material_controller::get(ground_entity).map01);
       comp::mesh mesh;
-      component::get<comp::mesh>(ground_entity, mesh);
+      Component::get<comp::mesh>(ground_entity, mesh);
       renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
       fullbright.set_texture("diffuse_map", comp::material_controller::get(player_entity).map01);
-      component::get<comp::mesh>(player_entity, mesh);
+      Component::get<comp::mesh>(player_entity, mesh);
       renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
     }
     

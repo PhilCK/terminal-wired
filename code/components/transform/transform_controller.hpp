@@ -7,17 +7,17 @@
 #include <math/math.hpp>
 
 
-namespace component {
+namespace Component {
 
 template<>
-bool add<math::transform>(const core::entity e);
+bool add<math::transform>(const Core::Entity e);
 
 template<>
-bool get<math::transform>(const core::entity e, math::transform &get_mesh);
+bool get<math::transform>(const Core::Entity e, math::transform &get_mesh);
 
 
 template<>
-bool set<math::transform>(const core::entity e, const math::transform &set);
+bool set<math::transform>(const Core::Entity e, const math::transform &set);
 
 
 } // namespace

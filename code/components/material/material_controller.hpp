@@ -10,9 +10,9 @@ namespace comp {
 namespace material_controller {
 
 
-void        add(const core::entity add_material);
-void        set(const core::entity set_material, comp::material add_material);
-material&   get(const core::entity get_material);
+void        add(const Core::Entity add_material);
+void        set(const Core::Entity set_material, comp::material add_material);
+material&   get(const Core::Entity get_material);
 
 
 } // namespace
