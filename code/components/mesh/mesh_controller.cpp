@@ -8,29 +8,6 @@ namespace
 }
 
 
-namespace comp {
-namespace mesh_controller {
-
-
-//void
-//set_mesh(const core::entity set_mesh, mesh mesh_data)
-//{
-//
-//}
-//
-//
-//mesh&
-//get_mesh(const core::entity get_mesh)
-//{
-//  return meshes.at(get_mesh);
-//}
-
-
-} // namespace
-} // namespace
-
-
-
 namespace component {
 
 template<>
@@ -55,7 +32,7 @@ get<comp::mesh>(const core::entity e, comp::mesh &get_mesh)
 
 template<>
 bool
-set<comp::mesh>(const core::entity e, comp::mesh &set)
+set<comp::mesh>(const core::entity e, const comp::mesh &set)
 {
   if(meshes.count(e))
   {

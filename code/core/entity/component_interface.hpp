@@ -26,7 +26,7 @@ bool add(const core::entity e);
 
 //! Set the value of an entity.
 template<typename T>
-bool set(const core::entity e, T &component);
+bool set(const core::entity e, const T &component);
 
 
 //! Get the data of the component.

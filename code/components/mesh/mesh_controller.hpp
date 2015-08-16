@@ -7,24 +7,19 @@
 #include "mesh.hpp"
 
 
-//namespace component {
-//
-//bool
-//
-//}
+namespace component {
+
+template<>
+bool add<comp::mesh>(const core::entity e);
+
+template<>
+bool get<comp::mesh>(const core::entity e, comp::mesh &get_mesh);
 
 
-namespace comp {
-namespace mesh_controller {
+template<>
+bool set<comp::mesh>(const core::entity e, const comp::mesh &set);
 
 
-void      add_mesh(const core::entity add_mesh);
-void      set_mesh(const core::entity set_mesh, mesh mesh_data);
-mesh&     get_mesh(const core::entity get_mesh);
-
-
-
-} // namespace
 } // namespace
 
 

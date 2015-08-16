@@ -3,19 +3,23 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/entity/component_interface.hpp>
 #include <math/math.hpp>
 
 
-namespace comp {
-namespace transform_controller {
+namespace component {
+
+template<>
+bool add<math::transform>(const core::entity e);
+
+template<>
+bool get<math::transform>(const core::entity e, math::transform &get_mesh);
 
 
-bool              add_transform(const core::entity add_transform);
-math::transform   get_transform(const core::entity get_transform);
-void              set_transform(const core::entity set_transform, const math::transform &new_transform);
+template<>
+bool set<math::transform>(const core::entity e, const math::transform &set);
 
 
-} // namespace
 } // namespace
 
 

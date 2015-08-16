@@ -8,39 +8,43 @@ namespace
 }
 
 
-namespace comp {
-namespace transform_controller {
+namespace component {
 
 
+template<>
 bool
-add_transform(const core::entity add_transform)
+add<math::transform>(const core::entity e)
 {
-  transforms.emplace(std::pair<core::entity, math::transform>(add_transform, math::transform()));
+  transforms.emplace(std::pair<core::entity, math::transform>(e, math::transform()));
+  
+  return true;
+}
+
+template<>
+bool
+get<math::transform>(const core::entity e, math::transform &get_mesh)
+{
+  get_mesh = transforms.at(e);
   
   return true;
 }
 
 
-math::transform
-get_transform(const core::entity get_transform)
+template<>
+bool
+set<math::transform>(const core::entity e, const math::transform &set)
 {
-  return transforms.at(get_transform);
-}
-
-
-void
-set_transform(const core::entity set_transform, const math::transform &new_transform)
-{
-  if(transforms.count(set_transform))
+  if(transforms.count(e))
   {
     
   }
   else
   {
-    transforms.emplace(std::pair<core::entity, math::transform>(set_transform, new_transform));
+    transforms.emplace(std::pair<core::entity, math::transform>(e, set));
   }
+  
+  return true;
 }
 
 
-} // namespace
 } // namespace
