@@ -3,19 +3,25 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/entity/component_interface.hpp>
 #include "material.hpp"
 
 
-namespace comp {
-namespace material_controller {
+namespace Component {
 
 
-void        add(const Core::Entity add_material);
-void        set(const Core::Entity set_material, comp::material add_material);
-material&   get(const Core::Entity get_material);
+template<>
+bool add<comp::material>(const Core::Entity e);
 
 
-} // namespace
+template<>
+bool set<comp::material>(const Core::Entity e, const comp::material &component);
+
+
+template<>
+bool get<comp::material>(const Core::Entity e, comp::material &component);
+
+
 } // namespace
 
 

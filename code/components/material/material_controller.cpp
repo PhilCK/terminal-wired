@@ -8,37 +8,44 @@ namespace
 }
 
 
-namespace comp {
-namespace material_controller {
+namespace Component {
 
 
-void
-add(const Core::Entity add_material)
+template<>
+bool
+add<comp::material>(const Core::Entity e)
 {
-  materials.emplace(std::pair<Core::Entity, comp::material>(add_material, comp::material()));
+  materials.emplace(std::pair<Core::Entity, comp::material>(e, comp::material()));
+  
+  return true;
 }
 
 
-void
-set(const Core::Entity set_material, comp::material add_material)
+template<>
+bool
+set<comp::material>(const Core::Entity e, const comp::material &component)
 {
-  if(materials.count(set_material))
+  if(materials.count(e))
   {
-    materials.at(set_material) = std::move(add_material);
+    materials.at(e) = component;
   }
   else
   {
-    materials.emplace(std::pair<Core::Entity, comp::material>(set_material, std::move(add_material)));
+    materials.emplace(std::pair<Core::Entity, comp::material>(e, component));
   }
+  
+  return true;
 }
 
 
-material&
-get(const Core::Entity get_material)
+template<>
+bool
+get<comp::material>(const Core::Entity e, comp::material &component)
 {
-  return materials.at(get_material);
+  component = materials.at(e);
+  
+  return true;
 }
 
 
-} // namespace
 } // namespace

@@ -6,7 +6,7 @@
 #include <string>
 
 
-namespace system {
+namespace sys {
 namespace window {
 
 
@@ -19,6 +19,12 @@ bool              set_fullscreen(const bool set);
 
 std::string       get_title();
 bool              set_title(const std::string &str);
+
+bool              is_open();
+
+bool              initialize(const uint32_t width, const uint32_t height, const bool is_fullscreen, const std::string &title);
+void              de_initialize();
+void              think();
 
 
 } // namespace

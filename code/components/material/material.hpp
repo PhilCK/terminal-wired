@@ -13,18 +13,6 @@ class material
 {
 public:
 
-  material() {}
-
-  material(material &&other) {
-    this->map01 = std::move(other.map01);
-  }
-  
-  material& operator=(material &&other)
-  {
-    this->map01 = std::move(other.map01);
-    
-    return *this;
-  }
 
   renderer::texture map01;
 

@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <systems/window/window.hpp>
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <SOIL/SOIL.h>
@@ -26,9 +27,6 @@
 
 namespace
 {
-  const uint32_t screen_width = 1024;
-  const uint32_t screen_height = 600;
-
   const Core::Entity ground_entity {1,1};
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
@@ -50,8 +48,7 @@ main()
   script_bindings::temp_as_binding_init();
   
   // Setup
-  sdl::window window(screen_width, screen_height, false, "do while");
-  const sdl::ogl_context gl_context(window);
+  sys::window::initialize(1280, 600, false, "Wired");
   sdl::input input;
   input.set_mouse_hold(true);
   
@@ -75,7 +72,7 @@ main()
   {
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
     Component::set(camera_entity, cam_transform);
-    comp::camera set_camera(screen_width, screen_height, 0.1f, 1000.f, math::quart_tau() / 2);
+    comp::camera set_camera(sys::window::get_width(), sys::window::get_height(), 0.1f, 1000.f, math::quart_tau() / 2);
     Component::set(camera_entity, set_camera);
   }
   
@@ -92,7 +89,8 @@ main()
     Component::set<comp::mesh>(ground_entity, ground_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
-    comp::material_controller::set(ground_entity, std::move(ground_mat));
+    //comp::material_controller::set(ground_entity, std::move(ground_mat));
+    Component::set(ground_entity, ground_mat);
     
     auto static_plane = bullet::create_static_plane_collider();
     bullet::rigidbody new_rigid_body(std::move(static_plane), 0, 0, 0, 0);
@@ -112,13 +110,15 @@ main()
     Component::set<comp::mesh>(player_entity, player_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
-    comp::material_controller::set(player_entity, std::move(ground_mat));
+    //comp::material_controller::set(player_entity, std::move(ground_mat));
+    Component::set(player_entity, ground_mat);
   }
   
   util::timer dt_timer;
   dt_timer.start();
   
-  while(!window.wants_to_quit())
+  //while(!window.wants_to_quit())
+  while(sys::window::is_open())
   {
     const float delta_time = dt_timer.split() / 1000.f;
   
@@ -161,20 +161,27 @@ main()
     
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
-      fullbright.set_texture("diffuse_map", comp::material_controller::get(ground_entity).map01);
+      
+      comp::material ground_mat;
+      Component::get<comp::material>(ground_entity, ground_mat);
+      
+      fullbright.set_texture("diffuse_map", ground_mat.map01);
       comp::mesh mesh;
       Component::get<comp::mesh>(ground_entity, mesh);
       renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
-      fullbright.set_texture("diffuse_map", comp::material_controller::get(player_entity).map01);
+      
+      comp::material player_mat;
+      Component::get<comp::material>(player_entity, player_mat);
+      
+      fullbright.set_texture("diffuse_map", player_mat.map01);
       Component::get<comp::mesh>(player_entity, mesh);
       renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
     }
     
-    window.flip_buffer();
-    sdl::message_pump();
+    sys::window::think();
   }
 
   return 0;

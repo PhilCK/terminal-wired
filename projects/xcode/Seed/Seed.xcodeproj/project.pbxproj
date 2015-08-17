@@ -52,6 +52,7 @@
 		7E87C5AA1B7E5F5D003BE24E /* rigid_body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A81B7E5F5D003BE24E /* rigid_body.cpp */; };
 		7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */; };
 		7E87C5B51B81360F003BE24E /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5B31B81360F003BE24E /* window.cpp */; };
+		7E87C5B81B81BA65003BE24E /* texture_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5B61B81BA65003BE24E /* texture_resource.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -154,6 +155,8 @@
 		7E87C5AE1B810B88003BE24E /* vertex_buffer_resource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertex_buffer_resource.hpp; sourceTree = "<group>"; };
 		7E87C5B31B81360F003BE24E /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
 		7E87C5B41B81360F003BE24E /* window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
+		7E87C5B61B81BA65003BE24E /* texture_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_resource.cpp; sourceTree = "<group>"; };
+		7E87C5B71B81BA65003BE24E /* texture_resource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture_resource.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 		7E87C5AC1B810B88003BE24E /* ogl */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5B61B81BA65003BE24E /* texture_resource.cpp */,
+				7E87C5B71B81BA65003BE24E /* texture_resource.hpp */,
 				7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */,
 				7E87C5AE1B810B88003BE24E /* vertex_buffer_resource.hpp */,
 			);
@@ -626,6 +631,7 @@
 				7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */,
 				7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */,
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
+				7E87C5B81B81BA65003BE24E /* texture_resource.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7E405BE51B7D1A91001DA0F5 /* rigid_body_controller.cpp in Sources */,
