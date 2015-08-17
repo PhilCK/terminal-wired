@@ -56,6 +56,7 @@
 		7E87C5C01B826404003BE24E /* event_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BA1B826404003BE24E /* event_controller.cpp */; };
 		7E87C5C11B826404003BE24E /* event_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BC1B826404003BE24E /* event_data.cpp */; };
 		7E87C5C21B826404003BE24E /* event_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BE1B826404003BE24E /* event_manager.cpp */; };
+		7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B8276A9003BE24E /* memory_controller.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -166,6 +167,9 @@
 		7E87C5BD1B826404003BE24E /* event_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_data.hpp; sourceTree = "<group>"; };
 		7E87C5BE1B826404003BE24E /* event_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_manager.cpp; sourceTree = "<group>"; };
 		7E87C5BF1B826404003BE24E /* event_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_manager.hpp; sourceTree = "<group>"; };
+		7E87C5C41B8276A9003BE24E /* memory_chunk.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_chunk.hpp; sourceTree = "<group>"; };
+		7E87C5C51B8276A9003BE24E /* memory_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_controller.cpp; sourceTree = "<group>"; };
+		7E87C5C61B8276A9003BE24E /* memory_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_controller.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -397,6 +401,7 @@
 		7E405BBF1B7D1801001DA0F5 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5C31B8276A9003BE24E /* memory */,
 				7E87C5B91B826404003BE24E /* event */,
 				7E405BC01B7D1801001DA0F5 /* entity */,
 			);
@@ -557,6 +562,16 @@
 			path = event;
 			sourceTree = "<group>";
 		};
+		7E87C5C31B8276A9003BE24E /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				7E87C5C41B8276A9003BE24E /* memory_chunk.hpp */,
+				7E87C5C51B8276A9003BE24E /* memory_controller.cpp */,
+				7E87C5C61B8276A9003BE24E /* memory_controller.hpp */,
+			);
+			path = memory;
+			sourceTree = "<group>";
+		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +706,7 @@
 				7E405BE61B7D1A91001DA0F5 /* script.cpp in Sources */,
 				7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */,
 				7E405BBE1B7D12BE001DA0F5 /* as_component.cpp in Sources */,
+				7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */,
 				7E87C5C21B826404003BE24E /* event_manager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
