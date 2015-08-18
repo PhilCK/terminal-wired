@@ -1,11 +1,19 @@
 
-class Program : APIDev::Object
+class Program : APIDev::Origin
 {
 
   // Called when the object has been thrown.
   void
   on_thrown()
   {
+    // m_cube.set_name("Jango");
+    // m_cube.geometry.get_type(APIDev::Geometry::GetCube());
+    // m_cube.geometry.set_size(0.5, 0.5, 0.5);
+    // m_cube.material.set_color(APIDev::Material::Color::Green());
+    // m_cube.material.set_emissive(true);
+    // m_cube.physics.set_mass(10);
+    // m_cube.physics.is_solid(false);
+
     dev::log::info("Thrown");
   }
 
@@ -32,5 +40,8 @@ class Program : APIDev::Object
   {
     dev::log::info("Destroy");
   }
+
+
+  //APIDev::Object m_cube;
 
 };

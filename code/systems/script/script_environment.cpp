@@ -98,7 +98,7 @@ test_hook()
     // Base class for callbacks
     namespace APIDev
     {
-      class Object
+      class Origin
       {
         void on_thrown()    {}
         void on_contact()   {}
@@ -127,8 +127,33 @@ test_hook()
   as_context = as_engine->CreateContext();
   
   
-  struct Script_interaction
+  class Script_interaction
   {
+  public:
+  
+    Script_interaction(asIScriptModule *module, const std::string &type)
+    {
+      assert(module); // Can't be null.
+      
+      asIScriptEngine *engine = module->GetEngine();
+
+      this->type = engine->GetObjectTypeById(module->GetTypeIdByDecl(type.c_str()));
+      
+      const std::string factory_decl = type + " @" + type + "()";
+      asIScriptFunction *function = this->type->GetFactoryByDecl(factory_decl.c_str());
+      
+      as_context->Prepare(function);
+      as_context->Execute();
+      
+      this->instance = *(asIScriptObject**)as_context->GetAddressOfReturnValue();
+      this->instance->AddRef();
+      
+      this->thrown  = this->type->GetMethodByDecl("void on_thrown()");
+      this->contact = this->type->GetMethodByDecl("void on_contact()");
+      this->cycle   = this->type->GetMethodByDecl("void on_cycle()");
+      this->destroy = this->type->GetMethodByDecl("void on_destroy()");
+    }
+  
     ~Script_interaction()
     {
       if(instance)
@@ -137,53 +162,93 @@ test_hook()
         instance = nullptr;
       }
     }
-  
-    asIObjectType     *type = nullptr;
-    asIScriptObject   *instance = nullptr;
-    asIScriptFunction *thrown = nullptr;
-    asIScriptFunction *contact = nullptr;
-    asIScriptFunction *cycle = nullptr;
-    asIScriptFunction *destroy = nullptr;
     
+    
+    void call_on_start()
+    {
+      call_method(thrown);
+    }
+    
+    
+    void call_on_contact()
+    {
+      call_method(contact);
+    }
+
+
+    void call_on_cycle()
+    {
+      call_method(cycle);
+    }
+    
+    void call_on_destroy()
+    {
+      call_method(destroy);
+    }
+    
+  private:
+  
+    void call_method(asIScriptFunction *func)
+    {
+      as_context->Prepare(func);
+      as_context->SetObject(this->instance);
+      int r = as_context->Execute();
+      assert(r >= 0);
+    }
+    
+  private:
+  
+    asIObjectType     *type     = nullptr;
+    asIScriptObject   *instance = nullptr;
+    asIScriptFunction *thrown   = nullptr;
+    asIScriptFunction *contact  = nullptr;
+    asIScriptFunction *cycle    = nullptr;
+    asIScriptFunction *destroy  = nullptr;
   }; // class
 
-  Script_interaction script_class;
+  Script_interaction script_class(as_module, "Program");
 
   // Find the type.
-  script_class.type = as_engine->GetObjectTypeById(as_module->GetTypeIdByDecl("Program"));
-  
-  // Get the factory function from the object type.
-  asIScriptFunction *function = script_class.type->GetFactoryByDecl("Program @Program()");
-  
-  // Prepare the context to call the factory function.
-  as_context->Prepare(function);
-  as_context->Execute();
-  // create the obj.
-  script_class.instance = *(asIScriptObject**)as_context->GetAddressOfReturnValue();
-  script_class.instance->AddRef();
 
-  script_class.thrown  = script_class.type->GetMethodByDecl("void on_thrown()");
-  script_class.contact = script_class.type->GetMethodByDecl("void on_contact()");
-  script_class.cycle   = script_class.type->GetMethodByDecl("void on_cycle()");
-  script_class.destroy = script_class.type->GetMethodByDecl("void on_destroy()");
+  
+//  script_class.type = as_engine->GetObjectTypeById(as_module->GetTypeIdByDecl("Program"));
+//  
+//  // Get the factory function from the object type.
+//  asIScriptFunction *function = script_class.type->GetFactoryByDecl("Program @Program()");
+//  
+//  // Prepare the context to call the factory function.
+//  as_context->Prepare(function);
+//  as_context->Execute();
+//  // create the obj.
+//  script_class.instance = *(asIScriptObject**)as_context->GetAddressOfReturnValue();
+//  script_class.instance->AddRef();
+//
+//  script_class.thrown  = script_class.type->GetMethodByDecl("void on_thrown()");
+//  script_class.contact = script_class.type->GetMethodByDecl("void on_contact()");
+//  script_class.cycle   = script_class.type->GetMethodByDecl("void on_cycle()");
+//  script_class.destroy = script_class.type->GetMethodByDecl("void on_destroy()");
   
   // Prepare the context for calling the method
-  as_context->Prepare(script_class.thrown);
-  as_context->SetObject(script_class.instance);
- r = as_context->Execute();
- 
-  as_context->Prepare(script_class.contact);
-  as_context->SetObject(script_class.instance);
-   r = as_context->Execute();
-  
-  as_context->Prepare(script_class.cycle);
-  as_context->SetObject(script_class.instance);
-   r = as_context->Execute();
-  
-  as_context->Prepare(script_class.destroy);
-  as_context->SetObject(script_class.instance);
-  r = as_context->Execute();
-  
+//  as_context->Prepare(script_class.thrown);
+//  as_context->SetObject(script_class.instance);
+// r = as_context->Execute();
+// 
+//  as_context->Prepare(script_class.contact);
+//  as_context->SetObject(script_class.instance);
+//   r = as_context->Execute();
+//  
+//  as_context->Prepare(script_class.cycle);
+//  as_context->SetObject(script_class.instance);
+//   r = as_context->Execute();
+//  
+//  as_context->Prepare(script_class.destroy);
+//  as_context->SetObject(script_class.instance);
+//  r = as_context->Execute();
+
+  script_class.call_on_start();
+  script_class.call_on_contact();
+  script_class.call_on_cycle();
+  script_class.call_on_destroy();
   
   if( r == asEXECUTION_FINISHED )
   {
