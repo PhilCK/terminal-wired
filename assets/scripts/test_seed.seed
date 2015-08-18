@@ -1,44 +1,36 @@
 
-
-
-// class ThrowableLight : SeedObject
-// {
-
-
-// public void
-// on_start()
-// {
-
-// }
-
-
-// public void
-// on_collision(const SeedObject object)
-// {
-//   cube.physics.set_gravity(false);
-//   cube.physics.set_collision(false);
-//   cube.texture.set_emit(true);
-//   cube.texture.set_color(Color::WHITE);
-//   cube.geometry.set_size(3);
-//   cube.geometry.set_shape(Geom::CUBE);
-// }
-
-// private object cube;
-
-// };
-
-
-class Test
+class Program : APIDev::Object
 {
-  void huh()
+
+  // Called when the object has been thrown.
+  void
+  on_thrown()
   {
-    dev::log::info("Hi");
-  } 
-}
+    dev::log::info("Thrown");
+  }
 
-void main()
-{
-  ///*dev::log::*/info("doop");
-  ///*dev::log::*/warning("doop");
-  ///*dev::log::*/error("doop");
-}
+
+  // Called when the object has come in contact with another object.
+  void
+  on_contact()
+  {
+    dev::log::info("Contact");
+  }
+
+
+  //Called every now and then.
+  void
+  on_cycle()
+  {
+    dev::log::info("Thinking");
+  }
+
+
+  // Called when the object should be destroyed.
+  void
+  on_destroy()
+  {
+    dev::log::info("Destroy");
+  }
+
+};
