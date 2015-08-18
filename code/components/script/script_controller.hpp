@@ -4,7 +4,18 @@
 
 #include <core/entity/entity.hpp>
 #include <core/entity/component_interface.hpp>
-#include "script.hpp"
+#include <components/script/script.hpp>
+#include <string>
+
+
+namespace Script_utils {
+
+
+comp::Script generate_script_data(const std::string &filename);
+void update();
+
+} // namespace
+
 
 
 namespace Component {

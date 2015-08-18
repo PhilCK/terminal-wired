@@ -23,6 +23,7 @@
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
 #include <components/material/material_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
+#include <systems/script/script_environment.hpp>
 
 
 namespace
@@ -43,9 +44,7 @@ main()
   // Reg log callbacks before setup.
   sdl::set_error_callback([](const std::string &str){ util::log_info(str);});
   renderer::set_log_callback([](const uint32_t id, const std::string &str){ util::log_info(std::to_string(id) + " " + str); });
- 
-  // Init Script
-  script_bindings::temp_as_binding_init();
+
   
   // Setup
   sys::window::initialize(1280, 600, false, "Wired");
@@ -55,6 +54,11 @@ main()
   // Init
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
+  
+  assert(sys::script_env::initialize());
+  script_bindings_v01::bind_api(sys::script_env::get_as_engine());
+  
+  sys::script_env::test_hook();
   
   const std::string asset_path = util::get_resource_path() + "assets/";
   

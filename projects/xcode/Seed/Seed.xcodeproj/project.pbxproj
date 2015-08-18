@@ -57,6 +57,7 @@
 		7E87C5C11B826404003BE24E /* event_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BC1B826404003BE24E /* event_data.cpp */; };
 		7E87C5C21B826404003BE24E /* event_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BE1B826404003BE24E /* event_manager.cpp */; };
 		7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B8276A9003BE24E /* memory_controller.cpp */; };
+		7E87C5CB1B830AAA003BE24E /* script_environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C91B830AAA003BE24E /* script_environment.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -170,6 +171,9 @@
 		7E87C5C41B8276A9003BE24E /* memory_chunk.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_chunk.hpp; sourceTree = "<group>"; };
 		7E87C5C51B8276A9003BE24E /* memory_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_controller.cpp; sourceTree = "<group>"; };
 		7E87C5C61B8276A9003BE24E /* memory_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_controller.hpp; sourceTree = "<group>"; };
+		7E87C5C91B830AAA003BE24E /* script_environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script_environment.cpp; sourceTree = "<group>"; };
+		7E87C5CA1B830AAA003BE24E /* script_environment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script_environment.hpp; sourceTree = "<group>"; };
+		7E87C5CC1B8312F7003BE24E /* string_helpers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = string_helpers.hpp; path = ../../../../Users/PhilCK/Developer/utils/string_helpers.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 		7E0A34071B793FA8000C7B22 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5CC1B8312F7003BE24E /* string_helpers.hpp */,
 				7EC21F2A1B7B2CF80020994C /* logging.cpp */,
 				7EC21F2B1B7B2CF80020994C /* logging.hpp */,
 				7EC21F271B7B12680020994C /* timer.cpp */,
@@ -534,6 +539,7 @@
 		7E87C5B11B81360F003BE24E /* systems */ = {
 			isa = PBXGroup;
 			children = (
+				7E87C5C81B830AAA003BE24E /* script */,
 				7E87C5B21B81360F003BE24E /* window */,
 			);
 			name = systems;
@@ -570,6 +576,15 @@
 				7E87C5C61B8276A9003BE24E /* memory_controller.hpp */,
 			);
 			path = memory;
+			sourceTree = "<group>";
+		};
+		7E87C5C81B830AAA003BE24E /* script */ = {
+			isa = PBXGroup;
+			children = (
+				7E87C5C91B830AAA003BE24E /* script_environment.cpp */,
+				7E87C5CA1B830AAA003BE24E /* script_environment.hpp */,
+			);
+			path = script;
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -687,6 +702,7 @@
 				7E405BE91B7D1A91001DA0F5 /* transform_controller.cpp in Sources */,
 				7E405B991B7BE283001DA0F5 /* as_script_bindings.cpp in Sources */,
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,
+				7E87C5CB1B830AAA003BE24E /* script_environment.cpp in Sources */,
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
 				7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */,
 				7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */,

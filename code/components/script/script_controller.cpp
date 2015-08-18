@@ -8,6 +8,25 @@ namespace
 }
 
 
+namespace Script_utils
+{
+
+comp::Script
+generate_script_data(const std::string &filename)
+{
+  return comp::Script();
+}
+
+
+void update()
+{
+  
+}
+
+
+} // ns
+
+
 namespace Component {
 
 

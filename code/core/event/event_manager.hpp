@@ -10,6 +10,9 @@ class Event_manager
 {
 public:
 
+  explicit          Event_manager();
+
+
 
 private:
 
