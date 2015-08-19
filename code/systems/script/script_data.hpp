@@ -12,6 +12,7 @@ namespace Script {
 
 class Script_data
 {
+public:
 
   explicit                  Script_data(asIScriptContext *context,
                                         asIScriptModule *module,

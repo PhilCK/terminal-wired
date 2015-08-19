@@ -22,7 +22,7 @@ public:
   
   void            update();
   
-  uint32_t        add_script(const std::string &name, const std::string &script);
+  uint32_t        instance_script(const std::string &name, const std::string &script);
   bool            remove_script();
   
 private:

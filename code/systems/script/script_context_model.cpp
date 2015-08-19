@@ -45,10 +45,9 @@ Script_context_model::update()
 
 
 uint32_t
-Script_context_model::add_script(const std::string &name, const std::string &script)
+Script_context_model::instance_script(const std::string &name, const std::string &script)
 {
-  
-
+  m_scripts.emplace_back(Script_data(nullptr, nullptr, ""));
   return 0;
 }
 
