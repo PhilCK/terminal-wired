@@ -6,6 +6,7 @@ class Program : APIDev::Origin
   void
   on_thrown()
   {
+    m_cube.set_name("Doopy Doo");
     // m_cube.set_name("Jango");
     // m_cube.geometry.get_type(APIDev::Geometry::GetCube());
     // m_cube.geometry.set_size(0.5, 0.5, 0.5);
@@ -42,6 +43,5 @@ class Program : APIDev::Origin
   }
 
 
-  //APIDev::Object m_cube;
-
+  APIDev::Object m_cube;
 };

@@ -5,6 +5,9 @@
 #include <angelscript.h>
 #include <utils/directory.hpp>
 #include <utils/logging.hpp>
+#include <bindings/v_01/object_wrappers/geometry.hpp>
+#include <bindings/v_01/object_wrappers/material.hpp>
+#include <bindings/v_01/object_wrappers/object.hpp>
 //#include <utils/string_helpers.hpp>
 #include <add_ons/scriptstdstring/scriptstdstring.h>
 
@@ -27,7 +30,17 @@ bind_api(asIScriptEngine *e)
   r = e->RegisterGlobalFunction("void warning(const ::string &in)", asFUNCTION(util::log_warning), asCALL_CDECL); assert(r >= 0);
   r = e->RegisterGlobalFunction("void error(const ::string &in)",   asFUNCTION(util::log_error),   asCALL_CDECL); assert(r >= 0);
   
+  r = e->SetDefaultNamespace("APIDev");
+  r = e->RegisterObjectType("Material", sizeof(Obj_wrapper::Material), asOBJ_VALUE); assert(r >= 0);
+  r = e->RegisterObjectBehaviour("Material", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(Obj_wrapper::mat_ctor), asCALL_CDECL_OBJLAST); assert(r >= 0);
+  r = e->RegisterObjectBehaviour("Material", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(Obj_wrapper::mat_dtor), asCALL_CDECL_OBJLAST); assert(r >= 0);
   
+  r = e->RegisterObjectType("Geometry", sizeof(Obj_wrapper::Geometry), asOBJ_VALUE | asOBJ_POD); assert(r >= 0);
+  r = e->RegisterObjectType("Object",   sizeof(Obj_wrapper::Object),   asOBJ_VALUE); assert(r >= 0);
+  r = e->RegisterObjectBehaviour("Object", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(Obj_wrapper::obj_ctor), asCALL_CDECL_OBJLAST); assert(r >= 0);
+  r = e->RegisterObjectBehaviour("Object", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(Obj_wrapper::obj_dtor), asCALL_CDECL_OBJLAST); assert(r >= 0);
+  r = e->RegisterObjectMethod("Object", "void set_name(string& in)", asMETHOD(Obj_wrapper::Object, set_name), asCALL_THISCALL); assert(r >= 0);
+  r = e->RegisterObjectMethod("Object", "string get_name() const", asMETHOD(Obj_wrapper::Object, get_name), asCALL_THISCALL); assert(r >= 0);
 }
 
 
