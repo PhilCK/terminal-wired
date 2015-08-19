@@ -70,23 +70,7 @@ initialize()
   }
   
   RegisterStdString(as_engine);
-
-
-  return true;
-}
-
-
-asIScriptEngine*
-get_as_engine()
-{
-  return as_engine;
-}
-
-
-
-void
-test_hook()
-{
+  
   // Create module and context, this might move off somewhere else, as it will need rebuilding from time to time.
   as_module = as_engine->GetModule("user-programs", asGM_ALWAYS_CREATE);
   
@@ -104,13 +88,31 @@ test_hook()
         void on_contact()   {}
         void on_cycle()     {}
         void on_destroy()   {}
+        
+        void self() {} // Todo return self obj
       }
     }
   )";
   
+  int r = as_module->AddScriptSection("Baseclass", base_class.c_str()); assert(r >= 0);
+
+  return true;
+}
+
+
+asIScriptEngine*
+get_as_engine()
+{
+  return as_engine;
+}
+
+
+
+void
+test_hook()
+{
   // Load and add the script sections to the module
   const std::string script = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
-  as_module->AddScriptSection("Baseclass", base_class.c_str());
   as_module->AddScriptSection("script.as", script.c_str());
   
   // Build the module

@@ -30,9 +30,9 @@ private:
 }; // class
 
 
-void mat_ctor(void *mem); //! Used by Angelscript.
-void mat_dtor(void *mem); //! Used by Angelscript.
-void mat_cctor(void *mem, const Material &other);; //! Used by Angelscript.
+void mat_ctor(void *mem);                           //! Used by Angelscript.
+void mat_dtor(void *mem);                           //! Used by Angelscript.
+void mat_cctor(void *mem, const Material &other);;  //! Used by Angelscript.
 
 
 } // ns
