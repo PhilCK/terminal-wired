@@ -25,10 +25,10 @@ public:
   inline std::string    get_name() const                  { return m_name;      }
   
   inline void           set_geometry(const Geometry &geo) { m_geometry = geo;   }
-  inline Geometry       get_geometry() const              { return m_geometry;  }
+  inline Geometry&      get_geometry()                    { return m_geometry;  }
   
   inline void           set_material(const Material &mat) { m_material = mat;   }
-  inline Material       get_material() const              { return m_material;  }
+  inline Material&      get_material()                    { return m_material;  }
   
 private:
 

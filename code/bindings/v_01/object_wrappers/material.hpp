@@ -13,10 +13,6 @@ enum class Color
 }; // enum
 
 
-void mat_ctor(void *mem); //! Used by Angelscript.
-void mat_dtor(void *mem); //! Used by Angelscript.
-
-
 class Material
 {
 public:
@@ -32,6 +28,11 @@ private:
   Color               m_color;
 
 }; // class
+
+
+void mat_ctor(void *mem); //! Used by Angelscript.
+void mat_dtor(void *mem); //! Used by Angelscript.
+void mat_cctor(void *mem, const Material &other);; //! Used by Angelscript.
 
 
 } // ns

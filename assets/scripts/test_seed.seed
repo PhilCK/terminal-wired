@@ -6,6 +6,9 @@ class Program : APIDev::Origin
   void
   on_thrown()
   {
+    int color = APIDev::Color::GREEN;
+    m_cube.get_material().set_color(color);
+
     m_cube.set_name("Doopy Doo");
     // m_cube.set_name("Jango");
     // m_cube.geometry.get_type(APIDev::Geometry::GetCube());
