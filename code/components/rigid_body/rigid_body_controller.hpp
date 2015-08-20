@@ -3,6 +3,7 @@
 
 
 #include <core/entity/entity.hpp>
+#include <bullet_wrapper/world.hpp>
 #include "rigid_body.hpp"
 
 
@@ -12,6 +13,7 @@ namespace rigid_body_controller {
 
 void      add(const Core::Entity add_rigid_body);
 void      set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body);
+bullet::world &get_world();
 void      update_world(const float dt);
 
 bullet::rigidbody* test();

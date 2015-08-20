@@ -110,8 +110,8 @@ main()
     Component::set(player_entity, player_transform);
     
     auto coll = bullet::create_capsule_collider();
-    bullet::rigidbody rb(std::move(coll), 0, 50, 0, 0.1, bullet::axis::y_axis);
-    comp::rigid_body_controller::set(ground_entity, std::move(rb));
+    bullet::rigidbody rb(std::move(coll), -2, 2, 0, 0.1, bullet::axis::y_axis);
+    comp::rigid_body_controller::set(player_entity, std::move(rb));
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(player_entity, player_mesh);
@@ -175,7 +175,7 @@ main()
       fullbright.set_texture("diffuse_map", ground_mat.map01);
       comp::mesh mesh;
       Component::get<comp::mesh>(ground_entity, mesh);
-      renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
+      //renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
       
       renderer::reset();
       fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
@@ -190,6 +190,28 @@ main()
     
     // Debug lines
     {
+      {
+        btVector3 Start(0,2,0);
+        btVector3 End(5,2,0);
+        btVector3 Normal;
+        
+        btCollisionWorld::AllHitsRayResultCallback RayCallback(Start, End);
+        
+        Sys::Debug_line_renderer::add_line({Start.x(), Start.y(), Start.z()}, {End.x(),End.y(),End.z()}, {1,0,1});
+
+        // Perform raycast
+        comp::rigid_body_controller::get_world().get_world()->rayTest(Start, End, RayCallback);
+
+        if(RayCallback.hasHit())
+        {
+          auto cb = RayCallback.m_collisionObject;
+          //End = RayCallback.m_hitPointWorld;
+          //Normal = RayCallback.m_hitNormalWorld;
+        }
+
+        // Do some clever stuff here
+      }
+    
       comp::camera current_camera;
       Component::get(camera_entity, current_camera);
       const auto proj = current_camera.get_proj_matrix();
