@@ -24,6 +24,7 @@
 #include <components/material/material_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <systems/script/script_environment.hpp>
+#include <systems/debug_line_renderer/debug_line_renderer.hpp>
 
 
 namespace
@@ -54,6 +55,8 @@ main()
   // Init
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
+  
+  Sys::Debug_line_renderer::initialize();
   
   assert(sys::script_env::initialize());
   script_bindings_v01::bind_api(sys::script_env::get_as_engine());
@@ -183,6 +186,24 @@ main()
       fullbright.set_texture("diffuse_map", player_mat.map01);
       Component::get<comp::mesh>(player_entity, mesh);
       renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
+    }
+    
+    // Debug lines
+    {
+      comp::camera current_camera;
+      Component::get(camera_entity, current_camera);
+      const auto proj = current_camera.get_proj_matrix();
+    
+      math::transform cam_transform;
+      Component::get<math::transform>(camera_entity, cam_transform);
+    
+      const math::mat4 world = math::mat4_id();
+      const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+      
+      const math::mat4 wvp = math::mat4_multiply(world, view, proj);
+      auto wvp_data = math::mat4_to_array(wvp);
+    
+      Sys::Debug_line_renderer::render(wvp_data);
     }
     
     sys::window::think();
