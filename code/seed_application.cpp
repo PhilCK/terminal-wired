@@ -50,7 +50,6 @@ main()
   sdl::set_error_callback([](const std::string &str){ util::log_info(str);});
   renderer::set_log_callback([](const uint32_t id, const std::string &str){ util::log_info(std::to_string(id) + " " + str); });
 
-  
   // Setup
   sys::window::initialize(1280, 600, false, "Wired");
   sdl::input input;

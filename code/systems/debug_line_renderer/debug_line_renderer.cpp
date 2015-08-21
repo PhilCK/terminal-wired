@@ -103,8 +103,6 @@ add_line(std::array<float, 3> from, std::array<float,3> to, std::array<float,3> 
 void
 render(std::array<float, 16> &wvp_mat)
 {
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-  
   for(auto &line : lines_to_render)
   {
     line_shader.set_raw_data("start_position",  &line.from[0],  sizeof(line.from));
