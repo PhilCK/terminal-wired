@@ -138,7 +138,7 @@ main()
     const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
     const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
     const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-    
+    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, math::vec3_init(0,0,-1));
     
     comp::camera current_camera;
     Component::get(camera_entity, current_camera);
@@ -146,12 +146,12 @@ main()
     
     math::transform player_transform;
     Component::get(player_entity, player_transform);
-    //const math::vec3 fwd_vec = math::quat_rotate_point(player_t, <#const math::vec3 point#>)
     
     math::transform cam_transform;
     Component::get<math::transform>(camera_entity, cam_transform);
     
-    const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::vec3_init(0, 1, 0));
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
     
@@ -220,6 +220,10 @@ main()
         // Do some clever stuff here
       }
     
+        const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, math::vec3_init(0,0,-1));
+    
       comp::camera current_camera;
       Component::get(camera_entity, current_camera);
       const auto proj = current_camera.get_proj_matrix();
@@ -228,7 +232,8 @@ main()
       Component::get<math::transform>(camera_entity, cam_transform);
     
       const math::mat4 world = math::mat4_id();
-      const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+      //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::vec3_init(0, 1, 0));
       
       const math::mat4 wvp = math::mat4_multiply(world, view, proj);
       auto wvp_data = math::mat4_to_array(wvp);
