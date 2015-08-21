@@ -32,6 +32,10 @@ namespace
   const Core::Entity ground_entity {1,1};
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
+  
+  const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);
+  const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f);
+  const math::vec3 world_right = math::vec3_init(1.f, 0.f, 0.f);
 }
 
 
@@ -85,7 +89,7 @@ main()
   
   // Ground
   {
-    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
+    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 0, 10), math::quat());
     Component::set<math::transform>(ground_entity, ground_transform);
     
     auto plane_coll = bullet::create_static_plane_collider();
@@ -110,7 +114,7 @@ main()
     Component::set(player_entity, player_transform);
     
     auto coll = bullet::create_capsule_collider();
-    bullet::rigidbody rb(std::move(coll), -2, 2, 0, 0.1, bullet::axis::y_axis);
+    bullet::rigidbody rb(std::move(coll), 0, 4, 0, 0.1, bullet::axis::y_axis);
     comp::rigid_body_controller::set(player_entity, std::move(rb));
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
@@ -135,10 +139,10 @@ main()
     math::transform plane_transform;
     Component::get<math::transform>(ground_entity, plane_transform);
     
-    const math::mat4 p_world = math::transform_get_world_matrix(plane_transform);
-    const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+    const math::mat4 p_world      = math::transform_get_world_matrix(plane_transform);
+    const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
     const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, math::vec3_init(0,0,-1));
+    const math::vec3 fwd          = math::quat_rotate_point(from_rb.rotation, world_fwd);
     
     comp::camera current_camera;
     Component::get(camera_entity, current_camera);
@@ -151,7 +155,7 @@ main()
     Component::get<math::transform>(camera_entity, cam_transform);
     
     //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::vec3_init(0, 1, 0));
+    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::quat_rotate_point(from_rb.rotation, world_up));
     const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
     const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
     
@@ -161,15 +165,23 @@ main()
     {
       if(input.is_key_down(SDLK_w))
       {
-        comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
+        comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
       }
       if(input.is_key_down(SDLK_s))
       {
-        comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
+        comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
+      }
+      if(input.is_key_down(SDLK_a))
+      {
+        comp::rigid_body_controller::test()->apply_local_force(-1.f, 0, 0);
+      }
+      if(input.is_key_down(SDLK_d))
+      {
+        comp::rigid_body_controller::test()->apply_local_force(1.f, 0, 0);
       }
       if(input.get_mouse_delta_x() != 0)
       {
-        comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * 0.1, 0);
+        comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * -0.1, 0);
       }
     
       renderer::reset();
@@ -220,9 +232,10 @@ main()
         // Do some clever stuff here
       }
     
-        const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
-    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, math::vec3_init(0,0,-1));
+      const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+      const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+      const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
+      const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
     
       comp::camera current_camera;
       Component::get(camera_entity, current_camera);
@@ -233,7 +246,7 @@ main()
     
       const math::mat4 world = math::mat4_id();
       //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::vec3_init(0, 1, 0));
+      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
       
       const math::mat4 wvp = math::mat4_multiply(world, view, proj);
       auto wvp_data = math::mat4_to_array(wvp);
