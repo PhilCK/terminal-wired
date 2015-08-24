@@ -56,7 +56,7 @@ main()
   
   while(sys::window::is_open())
   {
-    const float delta_time = dt_timer.split() / 1000.f;
+    const float delta_time = dt_timer.split() * 0.001f;
 
     update_frame(delta_time);
     render_frame();
