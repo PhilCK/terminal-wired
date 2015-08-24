@@ -1,14 +1,10 @@
-#include <SDL2/SDL.h>
 #include <systems/window/window.hpp>
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <SOIL/SOIL.h>
 #include <utils/directory.hpp>
-#include <utils/obj_model_loader.hpp>
-#include <iostream>
 #include <string>
 #include <assert.h>
-#include <memory>
 #include <math/math.hpp>
 #include <bullet_wrapper/world.hpp>
 #include <bullet_wrapper/rigidbody.hpp>
@@ -90,7 +86,6 @@ main()
     Component::set<comp::mesh>(ground_entity, ground_mesh);
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
-    //comp::material_controller::set(ground_entity, std::move(ground_mat));
     Component::set(ground_entity, ground_mat);
     
     auto static_plane = bullet::create_static_plane_collider();
