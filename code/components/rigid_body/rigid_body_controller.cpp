@@ -1,5 +1,9 @@
 #include "rigid_body_controller.hpp"
 #include <bullet_wrapper/world.hpp>
+#include <bullet_wrapper/rigidbody.hpp>
+#include <math/mat/mat4.hpp>
+#include <math/transform/transform.hpp>
+#include <components/transform/transform_controller.hpp>
 #include <LinearMath/btIDebugDraw.h>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <utils/logging.hpp>
@@ -8,7 +12,7 @@
 
 namespace
 {
-  std::map<Core::Entity, bullet::rigidbody> rigidbodies;
+  std::map<Core::Entity, bullet::rigidbody*> rigidbodies;
   bullet::world world;
   
   class Debug_draw : public btIDebugDraw
@@ -75,26 +79,18 @@ add(const Core::Entity add_rigid_body)
 void
 set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body)
 {
-  //rigidbodies.emplace(std::pair<Core::Entity, bullet::rigidbody>(set_rigid_body, std::move(new_rigid_body)));
-  world.add_rigidbody(std::make_unique<bullet::rigidbody>(std::move(new_rigid_body)));
+  auto rb = std::make_unique<bullet::rigidbody>(std::move(new_rigid_body));
+
+  rigidbodies.emplace(std::pair<Core::Entity, bullet::rigidbody*>(set_rigid_body, rb.get()));
   
-  if(set_rigid_body.type_id == 2)
-  {
-    //world.get_rigidbody()->get_resource()->setGravity(btVector3(0,0,0));
-  }
+  world.add_rigidbody(std::move(rb));
+  
   
   if(!is_set)
   {
     world.get_world()->setDebugDrawer(&debug_draw);
     is_set = true;
   }
-}
-
-
-bullet::rigidbody*
-test()
-{
-  return world.get_rigidbody();
 }
 
 
@@ -110,6 +106,15 @@ update_world(const float dt)
 {
   world.update_world(dt);
   world.get_world()->debugDrawWorld();
+  
+  // Update transforms
+  for(const auto &ent : rigidbodies)
+  {
+    const math::mat4 world_rb     = math::mat4_init_with_array(ent.second->get_world_matrix());
+    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    Component::set<math::transform>(ent.first, from_rb);
+  }
+
 }
 
 

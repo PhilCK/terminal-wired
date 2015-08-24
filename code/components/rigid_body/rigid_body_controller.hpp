@@ -16,8 +16,6 @@ void      set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_bod
 bullet::world &get_world();
 void      update_world(const float dt);
 
-bullet::rigidbody* test();
-
 
 } // namespace
 } // namespace
