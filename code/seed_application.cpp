@@ -29,40 +29,154 @@ namespace
   const Core::Entity ground_entity {1,1};
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
+  const Core::Entity throw_entity  {4,4};
   
   const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);
   const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f);
   const math::vec3 world_right = math::vec3_init(1.f, 0.f, 0.f);
+  
+  sdl::input input;
 }
+
+
+void init_systems();
+void init_entities();
+void update_frame(const float dt);
+void render_frame();
 
 
 int
 main()
 {
-  // Platform logging.
-  util::set_log_types(util::log_msg_types::errors | util::log_msg_types::warnings | util::log_msg_types::info);
-  util::set_log_outputs(util::log_out::console | util::log_out::buffer);
+  init_systems();
+  init_entities();
+  
+  util::timer dt_timer;
+  dt_timer.start();
+  
+  while(sys::window::is_open())
+  {
+    const float delta_time = dt_timer.split() / 1000.f;
 
-  // Reg log callbacks before setup.
-  sdl::set_error_callback([](const std::string &str){ util::log_info(str);});
-  renderer::set_log_callback([](const uint32_t id, const std::string &str){ util::log_info(std::to_string(id) + " " + str); });
+    update_frame(delta_time);
+    render_frame();
+    // Render
+  }
 
-  // Setup
-  sys::window::initialize(1280, 600, false, "Wired");
-  sdl::input input;
-  input.set_mouse_hold(true);
+  return 0;
+}
+
+
+void
+update_frame(const float dt)
+{
+  if(input.is_key_down(SDLK_w))
+  {
+    comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
+  }
+  if(input.is_key_down(SDLK_s))
+  {
+    comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
+  }
+  if(input.is_key_down(SDLK_a))
+  {
+    comp::rigid_body_controller::test()->apply_local_force(-1.f, 0, 0);
+  }
+  if(input.is_key_down(SDLK_d))
+  {
+    comp::rigid_body_controller::test()->apply_local_force(1.f, 0, 0);
+  }
+  if(input.get_mouse_delta_x() != 0)
+  {
+    comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * -0.1, 0);
+  }
+
+  comp::rigid_body_controller::update_world(dt);
+  sys::window::think();
   
-  // Init
-  renderer::initialize();
-  renderer::clear_color(0.2f, 0.3f, 0.3f);
+  // ray test
+  {
+    btVector3 Start(0,2,0);
+    btVector3 End(5,2,0);
+    btVector3 Normal;
+    
+    btCollisionWorld::AllHitsRayResultCallback RayCallback(Start, End);
+    
+    Sys::Debug_line_renderer::add_line({Start.x(), Start.y(), Start.z()}, {End.x(),End.y(),End.z()}, {1,0,1});
+
+    // Perform raycast
+    comp::rigid_body_controller::get_world().get_world()->rayTest(Start, End, RayCallback);
+
+    if(RayCallback.hasHit())
+    {
+      auto cb = RayCallback.m_collisionObject;
+      //End = RayCallback.m_hitPointWorld;
+      //Normal = RayCallback.m_hitNormalWorld;
+    }
+
+    // Do some clever stuff here
+  }
+}
+
+
+void
+render_frame()
+{
+  renderer::clear();
+  renderer::reset();
   
-  Sys::Debug_line_renderer::initialize();
+  const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+  const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+  Component::set<math::transform>(player_entity, from_rb);
   
-  assert(sys::script_env::initialize());
-  script_bindings_v01::bind_api(sys::script_env::get_as_engine());
+  const math::vec3 fwd          = math::quat_rotate_point(from_rb.rotation, world_fwd);
   
-  sys::script_env::test_hook();
+  comp::camera current_camera;
+  Component::get(camera_entity, current_camera);
+  const auto proj = current_camera.get_proj_matrix();
   
+  math::transform cam_transform;
+  Component::get<math::transform>(camera_entity, cam_transform);
+  
+  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::quat_rotate_point(from_rb.rotation, world_up));
+  const math::mat4 view_proj = math::mat4_multiply(view, proj);
+
+  // Render Scene
+  {
+    Sys::Mesh_renderer::render(ground_entity, view_proj);
+    Sys::Mesh_renderer::render(player_entity, view_proj);
+  }
+  
+  // Debug lines
+  {
+    const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
+    const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
+  
+    comp::camera current_camera;
+    Component::get(camera_entity, current_camera);
+    const auto proj = current_camera.get_proj_matrix();
+    
+    math::transform cam_transform;
+    Component::get<math::transform>(camera_entity, cam_transform);
+  
+    const math::mat4 world = math::mat4_id();
+    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
+    
+    const math::mat4 wvp = math::mat4_multiply(world, view, proj);
+    auto wvp_data = math::mat4_to_array(wvp);
+  
+    Sys::Debug_line_renderer::render(wvp_data);
+  }
+}
+
+
+void
+init_entities()
+{
   const std::string asset_path = util::get_resource_path() + "assets/";
 
   // Camera
@@ -109,116 +223,32 @@ main()
     //comp::material_controller::set(player_entity, std::move(ground_mat));
     Component::set(player_entity, ground_mat);
   }
+}
+
+
+void
+init_systems()
+{
+  // Platform logging.
+  util::set_log_types(util::log_msg_types::errors | util::log_msg_types::warnings | util::log_msg_types::info);
+  util::set_log_outputs(util::log_out::console | util::log_out::buffer);
+
+  // Reg log callbacks before setup.
+  sdl::set_error_callback([](const std::string &str){ util::log_info(str);});
+  renderer::set_log_callback([](const uint32_t id, const std::string &str){ util::log_info(std::to_string(id) + " " + str); });
+
+  // Setup
+  sys::window::initialize(1280, 600, false, "Wired");
+  input.set_mouse_hold(true);
   
-  util::timer dt_timer;
-  dt_timer.start();
+  // Init
+  renderer::initialize();
+  renderer::clear_color(0.2f, 0.3f, 0.3f);
   
-  while(sys::window::is_open())
-  {
-    const float delta_time = dt_timer.split() / 1000.f;
-    // Update
-    {
-      if(input.is_key_down(SDLK_w))
-      {
-        comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
-      }
-      if(input.is_key_down(SDLK_s))
-      {
-        comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
-      }
-      if(input.is_key_down(SDLK_a))
-      {
-        comp::rigid_body_controller::test()->apply_local_force(-1.f, 0, 0);
-      }
-      if(input.is_key_down(SDLK_d))
-      {
-        comp::rigid_body_controller::test()->apply_local_force(1.f, 0, 0);
-      }
-      if(input.get_mouse_delta_x() != 0)
-      {
-        comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * -0.1, 0);
-      }
-    
-      comp::rigid_body_controller::update_world(delta_time);
-      sys::window::think();
-      
-      // ray test
-      {
-        btVector3 Start(0,2,0);
-        btVector3 End(5,2,0);
-        btVector3 Normal;
-        
-        btCollisionWorld::AllHitsRayResultCallback RayCallback(Start, End);
-        
-        Sys::Debug_line_renderer::add_line({Start.x(), Start.y(), Start.z()}, {End.x(),End.y(),End.z()}, {1,0,1});
-
-        // Perform raycast
-        comp::rigid_body_controller::get_world().get_world()->rayTest(Start, End, RayCallback);
-
-        if(RayCallback.hasHit())
-        {
-          auto cb = RayCallback.m_collisionObject;
-          //End = RayCallback.m_hitPointWorld;
-          //Normal = RayCallback.m_hitNormalWorld;
-        }
-
-        // Do some clever stuff here
-      }
-    }
+  Sys::Debug_line_renderer::initialize();
   
-    // Render
-    {
-      renderer::clear();
-      renderer::reset();
-      
-      const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
-      const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-      Component::set<math::transform>(player_entity, from_rb);
-      
-      const math::vec3 fwd          = math::quat_rotate_point(from_rb.rotation, world_fwd);
-      
-      comp::camera current_camera;
-      Component::get(camera_entity, current_camera);
-      const auto proj = current_camera.get_proj_matrix();
-      
-      math::transform cam_transform;
-      Component::get<math::transform>(camera_entity, cam_transform);
-      
-      //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::quat_rotate_point(from_rb.rotation, world_up));
-      const math::mat4 view_proj = math::mat4_multiply(view, proj);
-    
-      // Render Scene
-      {
-        Sys::Mesh_renderer::render(ground_entity, view_proj);
-        Sys::Mesh_renderer::render(player_entity, view_proj);
-      }
-      
-      // Debug lines
-      {
-        const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
-        const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-        const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
-        const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
-      
-        comp::camera current_camera;
-        Component::get(camera_entity, current_camera);
-        const auto proj = current_camera.get_proj_matrix();
-        
-        math::transform cam_transform;
-        Component::get<math::transform>(camera_entity, cam_transform);
-      
-        const math::mat4 world = math::mat4_id();
-        //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-        const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
-        
-        const math::mat4 wvp = math::mat4_multiply(world, view, proj);
-        auto wvp_data = math::mat4_to_array(wvp);
-      
-        Sys::Debug_line_renderer::render(wvp_data);
-      }
-    }
-  }
-
-  return 0;
+  assert(sys::script_env::initialize());
+  script_bindings_v01::bind_api(sys::script_env::get_as_engine());
+  
+  sys::script_env::test_hook();
 }
