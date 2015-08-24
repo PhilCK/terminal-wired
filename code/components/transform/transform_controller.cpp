@@ -36,7 +36,7 @@ set<math::transform>(const Core::Entity e, const math::transform &set)
 {
   if(transforms.count(e))
   {
-    
+    transforms.at(e) = set;
   }
   else
   {

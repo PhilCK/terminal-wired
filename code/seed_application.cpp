@@ -25,6 +25,7 @@
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <systems/script/script_environment.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
+#include <systems/mesh_renderer/mesh_renderer.hpp>
 
 
 namespace
@@ -67,17 +68,7 @@ main()
   sys::script_env::test_hook();
   
   const std::string asset_path = util::get_resource_path() + "assets/";
-  
-  const renderer::vertex_format vert_fmt({
-    renderer::attr_format_desc{"in_vs_position",      renderer::attr_type::FLOAT3},
-    renderer::attr_format_desc{"in_vs_texture_coord", renderer::attr_type::FLOAT2},
-    renderer::attr_format_desc{"in_vs_normal",        renderer::attr_type::FLOAT3},
-  });
-  assert(vert_fmt.is_valid());
-  
-  renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(asset_path + "shaders/basic_fullbright.ogl"));
-  assert(fullbright.is_valid());
-  
+
   // Camera
   {
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
@@ -127,40 +118,10 @@ main()
   util::timer dt_timer;
   dt_timer.start();
   
-  //while(!window.wants_to_quit())
   while(sys::window::is_open())
   {
     const float delta_time = dt_timer.split() / 1000.f;
-  
-    renderer::clear();
-    renderer::reset();
-
-    math::transform plane_transform;
-    Component::get<math::transform>(ground_entity, plane_transform);
-    
-    const math::mat4 p_world      = math::transform_get_world_matrix(plane_transform);
-    const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
-    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-    const math::vec3 fwd          = math::quat_rotate_point(from_rb.rotation, world_fwd);
-    
-    comp::camera current_camera;
-    Component::get(camera_entity, current_camera);
-    const auto proj = current_camera.get_proj_matrix();
-    
-    math::transform player_transform;
-    Component::get(player_entity, player_transform);
-    
-    math::transform cam_transform;
-    Component::get<math::transform>(camera_entity, cam_transform);
-    
-    //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::quat_rotate_point(from_rb.rotation, world_up));
-    const math::mat4 wvp1 = math::mat4_multiply(p_world, view, proj);
-    const math::mat4 wvp2 = math::mat4_multiply(world_rb, view, proj);
-    
-    comp::rigid_body_controller::update_world(delta_time);
-  
-    // Render Scene
+    // Update
     {
       if(input.is_key_down(SDLK_w))
       {
@@ -183,32 +144,10 @@ main()
         comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * -0.1, 0);
       }
     
-      renderer::reset();
-      fullbright.set_raw_data("wvp", math::mat4_get_data(wvp1), 16 * sizeof(float));
+      comp::rigid_body_controller::update_world(delta_time);
+      sys::window::think();
       
-      comp::material ground_mat;
-      Component::get<comp::material>(ground_entity, ground_mat);
-      
-      fullbright.set_texture("diffuse_map", ground_mat.map01);
-      comp::mesh mesh;
-      Component::get<comp::mesh>(ground_entity, mesh);
-      renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
-      
-      renderer::reset();
-      
-      
-      fullbright.set_raw_data("wvp", math::mat4_get_data(wvp2), 16 * sizeof(float));
-      
-      comp::material player_mat;
-      Component::get<comp::material>(player_entity, player_mat);
-      
-      fullbright.set_texture("diffuse_map", player_mat.map01);
-      Component::get<comp::mesh>(player_entity, mesh);
-      renderer::draw(fullbright, vert_fmt, mesh.vertex_info);
-    }
-    
-    // Debug lines
-    {
+      // ray test
       {
         btVector3 Start(0,2,0);
         btVector3 End(5,2,0);
@@ -230,30 +169,60 @@ main()
 
         // Do some clever stuff here
       }
-    
-      const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+    }
+  
+    // Render
+    {
+      renderer::clear();
+      renderer::reset();
+      
+      const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
       const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-      const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
-      const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
-    
+      Component::set<math::transform>(player_entity, from_rb);
+      
+      const math::vec3 fwd          = math::quat_rotate_point(from_rb.rotation, world_fwd);
+      
       comp::camera current_camera;
       Component::get(camera_entity, current_camera);
       const auto proj = current_camera.get_proj_matrix();
       
       math::transform cam_transform;
       Component::get<math::transform>(camera_entity, cam_transform);
-    
-      const math::mat4 world = math::mat4_id();
-      //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
       
-      const math::mat4 wvp = math::mat4_multiply(world, view, proj);
-      auto wvp_data = math::mat4_to_array(wvp);
+      //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+      const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), math::quat_rotate_point(from_rb.rotation, world_up));
+      const math::mat4 view_proj = math::mat4_multiply(view, proj);
     
-      Sys::Debug_line_renderer::render(wvp_data);
+      // Render Scene
+      {
+        Sys::Mesh_renderer::render(ground_entity, view_proj);
+        Sys::Mesh_renderer::render(player_entity, view_proj);
+      }
+      
+      // Debug lines
+      {
+        const math::mat4 world_rb = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
+        const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+        const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
+        const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
+      
+        comp::camera current_camera;
+        Component::get(camera_entity, current_camera);
+        const auto proj = current_camera.get_proj_matrix();
+        
+        math::transform cam_transform;
+        Component::get<math::transform>(camera_entity, cam_transform);
+      
+        const math::mat4 world = math::mat4_id();
+        //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+        const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
+        
+        const math::mat4 wvp = math::mat4_multiply(world, view, proj);
+        auto wvp_data = math::mat4_to_array(wvp);
+      
+        Sys::Debug_line_renderer::render(wvp_data);
+      }
     }
-    
-    sys::window::think();
   }
 
   return 0;
