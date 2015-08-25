@@ -15,6 +15,45 @@
 
 namespace
 {
+  std::map<Core::Entity, bullet::rigidbody*> map_rigid_bodies;
+  
+  std::unique_ptr<bullet::rigidbody>
+  create_rb(const Rigidbody::Rigidbody_data &data)
+  {
+    std::unique_ptr<btCollisionShape> collider;
+  
+    switch(data.collider.type)
+    {
+    case(Rigidbody::Collider_type::box):
+      collider = bullet::create_cube_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::capsule):
+        collider = bullet::create_capsule_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::sphere):
+        assert(false); // this is a cube.
+        collider = bullet::create_cube_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::static_plane):
+        collider = bullet::create_static_plane_collider();
+    break;
+    
+    default:
+      assert(false); // Unkown type.
+      util::log_error("Unkown collider type");
+      collider = bullet::create_cube_collider();
+    }
+    
+    return std::make_unique<bullet::rigidbody>(std::move(collider), 0, 0, 0, data.mass);
+  } // create_rb
+}
+
+
+namespace
+{
   std::map<Core::Entity, bullet::rigidbody*> rigidbodies;
   
   class Debug_draw : public btIDebugDraw
@@ -122,50 +161,24 @@ update_world(const float dt)
     
     Component::set<math::transform>(ent.first, from_rb);
   }
-}
-
-
-} // namespace
-} // namespace
-
-
-namespace
-{
-  std::map<Core::Entity, bullet::rigidbody*> map_rigid_bodies;
   
-  std::unique_ptr<bullet::rigidbody>
-  create_rb(const Rigidbody::Rigidbody_data &data)
+  for(const auto &ent : map_rigid_bodies)
   {
-    std::unique_ptr<btCollisionShape> collider;
-  
-    switch(data.collider.type)
-    {
-    case(Rigidbody::Collider_type::box):
-      collider = bullet::create_cube_collider();
-    break;
+    // Need to preserve scale
+    math::transform old_transform;
+    Component::get<math::transform>(ent.first, old_transform);
     
-    case(Rigidbody::Collider_type::capsule):
-        collider = bullet::create_capsule_collider();
-    break;
+    const math::mat4 world_rb     = math::mat4_init_with_array(ent.second->get_world_matrix());
+    math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    from_rb.scale = old_transform.scale;
     
-    case(Rigidbody::Collider_type::sphere):
-        assert(false); // this is a cube.
-        collider = bullet::create_cube_collider();
-    break;
-    
-    case(Rigidbody::Collider_type::static_plane):
-        collider = bullet::create_static_plane_collider();
-    break;
-    
-    default:
-      assert(false); // Unkown type.
-      util::log_error("Unkown collider type");
-      collider = bullet::create_cube_collider();
-    }
-    
-    return std::make_unique<bullet::rigidbody>(std::move(collider), 0, 0, 0, data.mass);
-  } // create_rb
+    Component::set<math::transform>(ent.first, from_rb);
+  }
 }
+
+
+} // namespace
+} // namespace
 
 
 namespace Component {

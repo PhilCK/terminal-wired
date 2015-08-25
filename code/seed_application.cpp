@@ -256,8 +256,11 @@ init_entities()
     
     auto coll = bullet::create_capsule_collider();
     
-    bullet::rigidbody rb(std::move(coll), 0, 4, 0, 0.1, bullet::axis::y_axis);
-    comp::rigid_body_controller::set(throw_entity, std::move(rb));
+    Rigidbody::Rigidbody_data rb_data;
+    rb_data.mass = 0.1f;
+    rb_data.collider.type = Rigidbody::Collider_type::capsule;
+    
+    Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
     
     comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(throw_entity, mesh);
