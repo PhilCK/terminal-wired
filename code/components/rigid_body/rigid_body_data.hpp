@@ -14,8 +14,13 @@ enum class Collider_type : uint8_t
   box,
   capsule,
   sphere,
+  static_plane,
 };
 
+struct Collider_args
+{
+  float arg_1, arg_2, arg_3, arg_4;
+};
 
 struct Box_collider
 {
@@ -32,6 +37,10 @@ struct Sphere_collider
   float radius, arg2_not_used, arg3_not_used;
 };
 
+struct Static_plane_collider
+{
+  float normal_x, normal_y, normal_z, offset;
+};
 
 struct Collider
 {
@@ -39,9 +48,11 @@ struct Collider
 
   union
   {
-    Box_collider      box_collider_args = {0.5f, 0.5f, 0.5f};
-    Capsule_collider  capsule_collider_args;
-    Sphere_collider   sphere_collider_args;
+    Box_collider              box_collider_args = {0.5f, 0.5f, 0.5f};
+    Capsule_collider          capsule_collider_args;
+    Sphere_collider           sphere_collider_args;
+    Static_plane_collider     static_plane_collider_args;
+    Collider_args             args;
   };
 };
 
@@ -52,6 +63,12 @@ struct Rigidbody_data
   float                   mass      = 1.f;
   Collider                collider;
 }; // class
+
+
+
+void          applyForce(const Core::Entity entity);
+void          applyTorque(const Core::Entity entity);
+
 
 
 } // ns

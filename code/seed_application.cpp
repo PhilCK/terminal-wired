@@ -146,8 +146,8 @@ render_frame()
   math::transform cam_transform;
   Component::get<math::transform>(camera_entity, cam_transform);
   
-  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-  const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
+  const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
   const math::mat4 view_proj = math::mat4_multiply(view, proj);
 
   // Render Scene
@@ -172,8 +172,8 @@ render_frame()
     Component::get<math::transform>(camera_entity, cam_transform);
   
     const math::mat4 world = math::mat4_id();
-    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
+    const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    //const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
     
     const math::mat4 wvp = math::mat4_multiply(world, view, proj);
     auto wvp_data = math::mat4_to_array(wvp);
@@ -201,9 +201,19 @@ init_entities()
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 0, 10), math::quat());
     Component::set<math::transform>(ground_entity, ground_transform);
     
-    auto plane_coll = bullet::create_static_plane_collider();
-    bullet::rigidbody rb(std::move(plane_coll), 0, 0, 0, 0);
-    comp::rigid_body_controller::set(ground_entity, std::move(rb));
+//    auto plane_coll = bullet::create_static_plane_collider();
+//    bullet::rigidbody rb(std::move(plane_coll), 0, 0, 0, 0);
+//    comp::rigid_body_controller::set(ground_entity, std::move(rb));
+    
+    Rigidbody::Rigidbody_data rb_data;
+    
+    rb_data.collider.type = Rigidbody::Collider_type::static_plane;
+    rb_data.collider.static_plane_collider_args.normal_x = 0;
+    rb_data.collider.static_plane_collider_args.normal_y = 0;
+    rb_data.collider.static_plane_collider_args.normal_z = 0;
+    rb_data.collider.static_plane_collider_args.offset   = 0;
+    
+    Component::set<Rigidbody::Rigidbody_data>(ground_entity, rb_data);
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
     Component::set<comp::mesh>(ground_entity, ground_mesh);
@@ -221,9 +231,15 @@ init_entities()
     math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     Component::set(player_entity, player_transform);
     
-    auto coll = bullet::create_capsule_collider();
-    bullet::rigidbody rb(std::move(coll), 0, 4, 0, 0.1, bullet::axis::y_axis);
-    comp::rigid_body_controller::set(player_entity, std::move(rb));
+//    auto coll = bullet::create_capsule_collider();
+//    bullet::rigidbody rb(std::move(coll), 0, 4, 0, 0.1, bullet::axis::y_axis);
+//    comp::rigid_body_controller::set(player_entity, std::move(rb));
+
+    Rigidbody::Rigidbody_data rb_data;
+    rb_data.mass = 0.1f;
+    rb_data.collider.type = Rigidbody::Collider_type::capsule;
+    
+    Component::set<Rigidbody::Rigidbody_data>(player_entity, rb_data);
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(player_entity, player_mesh);

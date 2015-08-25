@@ -5,7 +5,7 @@
 #include <core/entity/entity.hpp>
 #include <core/entity/component_interface.hpp>
 #include <bullet_wrapper/world.hpp>
-#include <systems/physics_world/rigid_body_data.hpp>
+#include <components/rigid_body/rigid_body_data.hpp>
 
 
 namespace comp {
@@ -24,8 +24,10 @@ void      update_world(const float dt);
 
 namespace Component {
 
+
 template<>
 bool add<Rigidbody::Rigidbody_data>(const Core::Entity e);
+
 
 template<>
 bool get<Rigidbody::Rigidbody_data>(const Core::Entity e, Rigidbody::Rigidbody_data &get);
@@ -33,6 +35,7 @@ bool get<Rigidbody::Rigidbody_data>(const Core::Entity e, Rigidbody::Rigidbody_d
 
 template<>
 bool set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_data &set);
+
 
 
 } // ns

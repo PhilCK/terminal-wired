@@ -1,6 +1,7 @@
 #include "rigid_body_controller.hpp"
 #include <bullet_wrapper/world.hpp>
 #include <bullet_wrapper/rigidbody.hpp>
+#include <bullet_wrapper/collider.hpp>
 #include <math/mat/mat4.hpp>
 #include <math/transform/transform.hpp>
 #include <components/transform/transform_controller.hpp>
@@ -15,7 +16,6 @@
 namespace
 {
   std::map<Core::Entity, bullet::rigidbody*> rigidbodies;
-  bullet::world world;
   
   class Debug_draw : public btIDebugDraw
   {
@@ -85,12 +85,12 @@ set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body)
 
   rigidbodies.emplace(std::pair<Core::Entity, bullet::rigidbody*>(set_rigid_body, rb.get()));
   
-  world.add_rigidbody(std::move(rb));
+  Physics_world::detail::get_world().add_rigidbody(std::move(rb));
   
   
   if(!is_set)
   {
-    world.get_world()->setDebugDrawer(&debug_draw);
+    Physics_world::detail::get_world().get_world()->setDebugDrawer(&debug_draw);
     is_set = true;
   }
 }
@@ -99,26 +99,29 @@ set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body)
 bullet::world&
 get_world()
 {
-  volatile Rigidbody::Rigidbody_data data;
-  
-  return world;
+  return Physics_world::detail::get_world();
 }
 
 
 void
 update_world(const float dt)
 {
-  world.update_world(dt);
-  world.get_world()->debugDrawWorld();
+  Physics_world::detail::get_world().update_world(dt);
+  Physics_world::detail::get_world().get_world()->debugDrawWorld();
   
   // Update transforms
   for(const auto &ent : rigidbodies)
   {
+    // Need to preserve scale
+    math::transform old_transform;
+    Component::get<math::transform>(ent.first, old_transform);
+    
     const math::mat4 world_rb     = math::mat4_init_with_array(ent.second->get_world_matrix());
-    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
+    from_rb.scale = old_transform.scale;
+    
     Component::set<math::transform>(ent.first, from_rb);
   }
-
 }
 
 
@@ -128,26 +131,60 @@ update_world(const float dt)
 
 namespace
 {
-  std::map<Core::Entity, uint32_t> m_rigidbody_ids;
+  std::map<Core::Entity, bullet::rigidbody*> map_rigid_bodies;
+  
+  std::unique_ptr<bullet::rigidbody>
+  create_rb(const Rigidbody::Rigidbody_data &data)
+  {
+    std::unique_ptr<btCollisionShape> collider;
+  
+    switch(data.collider.type)
+    {
+    case(Rigidbody::Collider_type::box):
+      collider = bullet::create_cube_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::capsule):
+        collider = bullet::create_capsule_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::sphere):
+        assert(false); // this is a cube.
+        collider = bullet::create_cube_collider();
+    break;
+    
+    case(Rigidbody::Collider_type::static_plane):
+        collider = bullet::create_static_plane_collider();
+    break;
+    
+    default:
+      assert(false); // Unkown type.
+      util::log_error("Unkown collider type");
+      collider = bullet::create_cube_collider();
+    }
+    
+    return std::make_unique<bullet::rigidbody>(std::move(collider), 0, 0, 0, data.mass);
+  } // create_rb
 }
 
 
 namespace Component {
+
 
 template<>
 bool
 add<Rigidbody::Rigidbody_data>(const Core::Entity e)
 {
   Rigidbody::Rigidbody_data data;
+  data.mass = 0;
   
-  const uint32_t id = 0;//Physics_world::add_rigid_body(data);
+  auto rb = create_rb(data);
+  //auto rb_ptr = std::make_unique<bullet::rigidbody>(rb);
   
-  if(!!id)
-  {
-    m_rigidbody_ids.insert(std::pair<Core::Entity, uint32_t>());
-  }
-
-  return !!id;
+  map_rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody*>(e, rb.get()));
+  Physics_world::detail::get_world().add_rigidbody(std::move(rb));
+  
+  return true;
 }
 
 
@@ -163,7 +200,13 @@ template<>
 bool
 set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_data &set)
 {
-  return false;
+  auto rb = create_rb(set);
+  //auto rb_ptr = std::make_unique<bullet::rigidbody>(rb);
+  
+  map_rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody*>(e, rb.get()));
+  Physics_world::detail::get_world().add_rigidbody(std::move(rb));
+  
+  return true;
 }
 
 

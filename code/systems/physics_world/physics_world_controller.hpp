@@ -3,24 +3,24 @@
 
 
 #include <array>
-#include "Rigid_body_data.hpp"
+#include <bullet_wrapper/world.hpp>
 
 
 namespace Physics_world {
 
 
-//uint32_t                    add_rigid_body(const Rigidbody::Rigidbody_data &data);
-//uint32_t                    remove_rigid_body(uint32_t);
-//Rigidbody::Rigidbody_data   get_rigid_body_data(uint32_t);
-//bool                        update_rigid_body_data(uint32_t id, uint32_t data);
-
+void                        update_world(const float dt);
 std::array<float, 3>        get_gravity();
 void                        set_gravity(const std::array<float, 3> &set_gravity);
 
 
+/*
+  Anything in the detail namespace is not part of the
+  public interface.
+*/
 namespace detail {
 
-int                         get_world();
+bullet::world&              get_world(); //! Gets the underlying world resource.
 
 } // ns
 

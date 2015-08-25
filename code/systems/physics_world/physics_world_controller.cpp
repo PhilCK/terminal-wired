@@ -3,24 +3,11 @@
 
 namespace
 {
-  
+  bullet::world phy_world;
 }
 
 
 namespace Physics_world {
-
-
-uint32_t
-add_rigid_body(const Rigidbody::Rigidbody_data &data)
-{
-  // Build collider
-  
-  // Build rigid_body
-  
-  // Add to world
-
-  return 0;
-}
 
 
 std::array<float, 3>
@@ -34,6 +21,17 @@ void
 set_gravity(const std::array<float, 3> &set_gravity)
 {
   
+}
+
+
+namespace detail {
+
+bullet::world&
+get_world()
+{
+  return phy_world;
+}
+
 }
 
 
