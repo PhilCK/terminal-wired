@@ -9,6 +9,8 @@
 #include <utils/logging.hpp>
 #include <map>
 
+#include <systems/physics_world/physics_world_controller.hpp>
+
 
 namespace
 {
@@ -97,6 +99,8 @@ set(const Core::Entity set_rigid_body, bullet::rigidbody new_rigid_body)
 bullet::world&
 get_world()
 {
+  volatile Rigidbody::Rigidbody_data data;
+  
   return world;
 }
 
@@ -120,3 +124,47 @@ update_world(const float dt)
 
 } // namespace
 } // namespace
+
+
+namespace
+{
+  std::map<Core::Entity, uint32_t> m_rigidbody_ids;
+}
+
+
+namespace Component {
+
+template<>
+bool
+add<Rigidbody::Rigidbody_data>(const Core::Entity e)
+{
+  Rigidbody::Rigidbody_data data;
+  
+  const uint32_t id = 0;//Physics_world::add_rigid_body(data);
+  
+  if(!!id)
+  {
+    m_rigidbody_ids.insert(std::pair<Core::Entity, uint32_t>());
+  }
+
+  return !!id;
+}
+
+
+template<>
+bool
+get<Rigidbody::Rigidbody_data>(const Core::Entity e, Rigidbody::Rigidbody_data &get)
+{
+  return false;
+}
+
+
+template<>
+bool
+set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_data &set)
+{
+  return false;
+}
+
+
+} // ns

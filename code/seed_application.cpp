@@ -72,6 +72,7 @@ update_frame(const float dt)
 {
   if(input.is_key_down(SDLK_w))
   {
+    
     //comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
   }
   if(input.is_key_down(SDLK_s))
