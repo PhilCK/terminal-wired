@@ -22,6 +22,7 @@
 #include <systems/script/script_environment.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
+#include <systems/physics_world/physics_world_controller.hpp>
 
 
 namespace
@@ -72,24 +73,22 @@ update_frame(const float dt)
 {
   if(input.is_key_down(SDLK_w))
   {
-    
-    //comp::rigid_body_controller::test()->apply_local_force(0, 0, -1.f);
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
   }
   if(input.is_key_down(SDLK_s))
   {
-    //comp::rigid_body_controller::test()->apply_local_force(0, 0, 1.f);
-  }
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));  }
   if(input.is_key_down(SDLK_a))
   {
-    //comp::rigid_body_controller::test()->apply_local_force(-1.f, 0, 0);
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(-1, 0, 0));
   }
   if(input.is_key_down(SDLK_d))
   {
-    //comp::rigid_body_controller::test()->apply_local_force(1.f, 0, 0);
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(1, 0, 0));
   }
   if(input.get_mouse_delta_x() != 0)
   {
-    //comp::rigid_body_controller::test()->apply_local_torque(0, input.get_mouse_delta_x() * -0.1, 0);
+    Rigidbody::apply_local_torque(player_entity, math::vec3_init(0, input.get_mouse_delta_x() * 0.1f, 0));
   }
   if(input.is_key_down(SDLK_SPACE))
   {
@@ -97,30 +96,31 @@ update_frame(const float dt)
   }
 
   comp::rigid_body_controller::update_world(dt);
+  Sys::Physics_world::update_world(dt);
   sys::window::think();
   
-  // ray test
-  {
-    btVector3 Start(0,2,0);
-    btVector3 End(5,2,0);
-    btVector3 Normal;
-    
-    btCollisionWorld::AllHitsRayResultCallback RayCallback(Start, End);
-    
-    Sys::Debug_line_renderer::add_line({Start.x(), Start.y(), Start.z()}, {End.x(),End.y(),End.z()}, {1,0,1});
-
-    // Perform raycast
-    comp::rigid_body_controller::get_world().get_world()->rayTest(Start, End, RayCallback);
-
-    if(RayCallback.hasHit())
-    {
-      auto cb = RayCallback.m_collisionObject;
-      //End = RayCallback.m_hitPointWorld;
-      //Normal = RayCallback.m_hitNormalWorld;
-    }
-
-    // Do some clever stuff here
-  }
+//  // ray test
+//  {
+//    btVector3 Start(0,2,0);
+//    btVector3 End(5,2,0);
+//    btVector3 Normal;
+//    
+//    btCollisionWorld::AllHitsRayResultCallback RayCallback(Start, End);
+//    
+//    Sys::Debug_line_renderer::add_line({Start.x(), Start.y(), Start.z()}, {End.x(),End.y(),End.z()}, {1,0,1});
+//
+//    // Perform raycast
+//    comp::rigid_body_controller::get_world().get_world()->rayTest(Start, End, RayCallback);
+//
+//    if(RayCallback.hasHit())
+//    {
+//      auto cb = RayCallback.m_collisionObject;
+//      //End = RayCallback.m_hitPointWorld;
+//      //Normal = RayCallback.m_hitNormalWorld;
+//    }
+//
+//    // Do some clever stuff here
+//  }
 }
 
 
@@ -129,10 +129,6 @@ render_frame()
 {
   renderer::clear();
   renderer::reset();
-//  
-//  const math::mat4 world_rb     = math::mat4_init_with_array(comp::rigid_body_controller::test()->get_world_matrix());
-//  const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-//  Component::set<math::transform>(player_entity, from_rb);
 
   math::transform trans;
   assert(Component::get(player_entity, trans));
@@ -201,12 +197,8 @@ init_entities()
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 0, 10), math::quat());
     Component::set<math::transform>(ground_entity, ground_transform);
     
-//    auto plane_coll = bullet::create_static_plane_collider();
-//    bullet::rigidbody rb(std::move(plane_coll), 0, 0, 0, 0);
-//    comp::rigid_body_controller::set(ground_entity, std::move(rb));
-    
     Rigidbody::Rigidbody_data rb_data;
-    
+    rb_data.mass = 0;
     rb_data.collider.type = Rigidbody::Collider_type::static_plane;
     rb_data.collider.static_plane_collider_args.normal_x = 0;
     rb_data.collider.static_plane_collider_args.normal_y = 0;
@@ -220,21 +212,13 @@ init_entities()
     
     comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
     Component::set(ground_entity, ground_mat);
-    
-    auto static_plane = bullet::create_static_plane_collider();
-    bullet::rigidbody new_rigid_body(std::move(static_plane), 0, 0, 0, 0);
-    comp::rigid_body_controller::set(ground_entity, std::move(new_rigid_body));
   }
   
   // Player
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
     Component::set(player_entity, player_transform);
-    
-//    auto coll = bullet::create_capsule_collider();
-//    bullet::rigidbody rb(std::move(coll), 0, 4, 0, 0.1, bullet::axis::y_axis);
-//    comp::rigid_body_controller::set(player_entity, std::move(rb));
-
+  
     Rigidbody::Rigidbody_data rb_data;
     rb_data.mass = 0.1f;
     rb_data.collider.type = Rigidbody::Collider_type::capsule;
@@ -251,7 +235,7 @@ init_entities()
   
   // Throwable
   {
-    math::transform trans = math::transform_init(math::vec3_init(7, 1, 0), math::vec3_one(), math::quat());
+    math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
     Component::set(throw_entity, trans);
     
     auto coll = bullet::create_capsule_collider();
@@ -292,9 +276,11 @@ init_systems()
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
   Sys::Debug_line_renderer::initialize();
+  Sys::Physics_world::initialize();
   
   assert(sys::script_env::initialize());
   script_bindings_v01::bind_api(sys::script_env::get_as_engine());
+  
   
   sys::script_env::test_hook();
 }

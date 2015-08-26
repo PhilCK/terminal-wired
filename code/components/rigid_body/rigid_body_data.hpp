@@ -65,28 +65,7 @@ struct Rigidbody_data
 }; // class
 
 
-
-void          applyForce(const Core::Entity entity);
-void          applyTorque(const Core::Entity entity);
-
-
-
 } // ns
-
-
-namespace comp {
-
-
-class rigid_body
-{
-public:
-
-  bullet::rigidbody internal_rb;
-
-}; // class
-
-
-} // namespace
 
 
 #endif // include guard

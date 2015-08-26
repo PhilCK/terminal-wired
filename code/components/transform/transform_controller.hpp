@@ -9,8 +9,10 @@
 
 namespace Component {
 
+
 template<>
 bool add<math::transform>(const Core::Entity e);
+
 
 template<>
 bool get<math::transform>(const Core::Entity e, math::transform &get_mesh);

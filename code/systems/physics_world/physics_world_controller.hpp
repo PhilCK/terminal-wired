@@ -6,9 +6,11 @@
 #include <bullet_wrapper/world.hpp>
 
 
+namespace Sys {
 namespace Physics_world {
 
 
+void                        initialize();
 void                        update_world(const float dt);
 std::array<float, 3>        get_gravity();
 void                        set_gravity(const std::array<float, 3> &set_gravity);
@@ -24,7 +26,7 @@ bullet::world&              get_world(); //! Gets the underlying world resource.
 
 } // ns
 
-
+} // ns
 } // ns
 
 
