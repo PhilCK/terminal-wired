@@ -92,7 +92,15 @@ update_frame(const float dt)
   }
   if(input.is_key_down(SDLK_SPACE))
   {
-    Rigidbody::apply_local_force(throw_entity, math::vec3_init(0, 10, 0));
+    // Get player entity fwd vec.
+    math::transform player_transform;
+    assert(Component::get(player_entity, player_transform));
+    
+    const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
+    const auto throw_dir = math::vec3_add(player_fwd, math::vec3_init(0, 1, 0));
+    const auto throw_scale = math::vec3_scale(throw_dir, 1000.f * dt);
+    
+    Rigidbody::apply_local_force(throw_entity, throw_scale);
   }
 
   comp::rigid_body_controller::update_world(dt);

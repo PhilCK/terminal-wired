@@ -51,7 +51,7 @@ namespace
     const float y = math::vec3_get_y(transform.position);
     const float z = math::vec3_get_z(transform.position);
     
-    return std::make_unique<bullet::rigidbody>(std::move(collider), x, y, z, data.mass);
+    return std::make_unique<bullet::rigidbody>(std::move(collider), x, y, z, data.mass, bullet::axis::y_axis);
   } // create_rb
 }
 
