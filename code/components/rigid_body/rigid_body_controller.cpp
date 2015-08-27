@@ -65,7 +65,7 @@ apply_local_force(const Core::Entity e, const math::vec3 dir)
   assert(map_rigid_bodies.count(e));
   
   auto rb = map_rigid_bodies.at(e);
-  rb->apply_local_force(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
+  rb->apply_local_force(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir));
 }
 
 
@@ -75,7 +75,7 @@ apply_world_force(const Core::Entity e, const math::vec3 dir)
   assert(map_rigid_bodies.count(e));
   
   auto rb = map_rigid_bodies.at(e);
-  rb->apply_world_force(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
+  rb->apply_world_force(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir));
 }
 
 
@@ -85,7 +85,7 @@ apply_local_torque(const Core::Entity e, const math::vec3 dir)
   assert(map_rigid_bodies.count(e));
   
   auto rb = map_rigid_bodies.at(e);
-  rb->apply_local_torque(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
+  rb->apply_local_torque(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir));
 }
 
 
@@ -105,8 +105,12 @@ update_world(const float dt)
     math::transform old_transform;
     Component::get<math::transform>(ent.first, old_transform);
     
-    const math::mat4 world_rb     = math::mat4_init_with_array(ent.second->get_world_matrix());
-    math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
+    const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
+    const math::mat4 rot_mat  = math::mat4_rotate_around_axis(math::vec3_init(0, -1, 0), math::half_tau());
+    const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
+    
+    //math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
+    math::transform from_rb = math::transform_init_from_world_matrix(corrected_mat);
     from_rb.scale = old_transform.scale;
     
     Component::set<math::transform>(ent.first, from_rb);

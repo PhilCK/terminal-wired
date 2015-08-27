@@ -141,7 +141,7 @@ render_frame()
   math::transform trans;
   assert(Component::get(player_entity, trans));
   
-  const math::vec3 fwd          = math::quat_rotate_point(trans.rotation, world_fwd);
+  const math::vec3 fwd = math::quat_rotate_point(trans.rotation, world_fwd);
   
   comp::camera current_camera;
   Component::get(camera_entity, current_camera);
@@ -150,8 +150,8 @@ render_frame()
   math::transform cam_transform;
   Component::get<math::transform>(camera_entity, cam_transform);
   
-  const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-  //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
+  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
   const math::mat4 view_proj = math::mat4_multiply(view, proj);
 
   // Render Scene
