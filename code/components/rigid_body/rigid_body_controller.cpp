@@ -65,7 +65,17 @@ apply_local_force(const Core::Entity e, const math::vec3 dir)
   assert(map_rigid_bodies.count(e));
   
   auto rb = map_rigid_bodies.at(e);
-  rb->apply_local_force(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir));
+  rb->apply_local_force(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
+}
+
+
+void
+apply_world_force(const Core::Entity e, const math::vec3 dir)
+{
+  assert(map_rigid_bodies.count(e));
+  
+  auto rb = map_rigid_bodies.at(e);
+  rb->apply_world_force(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
 }
 
 
@@ -75,7 +85,7 @@ apply_local_torque(const Core::Entity e, const math::vec3 dir)
   assert(map_rigid_bodies.count(e));
   
   auto rb = map_rigid_bodies.at(e);
-  rb->apply_local_torque(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir));
+  rb->apply_local_torque(math::vec3_get_x(dir), math::vec3_get_y(dir), -math::vec3_get_z(dir));
 }
 
 

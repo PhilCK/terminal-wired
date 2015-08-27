@@ -24,6 +24,7 @@ namespace Rigidbody {
 
 
 void        apply_local_force(const Core::Entity e, const math::vec3 dir);
+void        apply_world_force(const Core::Entity e, const math::vec3 dir);
 void        apply_local_torque(const Core::Entity e, const math::vec3 rot);
 
 

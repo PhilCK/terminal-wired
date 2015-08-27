@@ -98,9 +98,9 @@ update_frame(const float dt)
     
     const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
     const auto throw_dir = math::vec3_add(player_fwd, math::vec3_init(0, 1, 0));
-    const auto throw_scale = math::vec3_scale(throw_dir, 1000.f * dt);
+    const auto throw_scale = math::vec3_scale(throw_dir, 100.f * dt);
     
-    Rigidbody::apply_local_force(throw_entity, throw_scale);
+    Rigidbody::apply_world_force(throw_entity, throw_scale);
   }
 
   comp::rigid_body_controller::update_world(dt);
