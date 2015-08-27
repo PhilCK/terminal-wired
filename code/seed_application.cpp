@@ -32,9 +32,9 @@ namespace
   const Core::Entity camera_entity {3,3};
   const Core::Entity throw_entity  {4,4};
   
-  const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);
-  const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f);
-  const math::vec3 world_right = math::vec3_init(1.f, 0.f, 0.f);
+  const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);  // use common
+  const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f); // use common
+  const math::vec3 world_right = math::vec3_init(1.f, 0.f, 0.f);  // use common
   
   sdl::input input;
 }
@@ -92,7 +92,7 @@ update_frame(const float dt)
   }
   if(input.is_key_down(SDLK_SPACE))
   {
-  
+    Rigidbody::apply_local_force(throw_entity, math::vec3_init(0, 10, 0));
   }
 
   comp::rigid_body_controller::update_world(dt);

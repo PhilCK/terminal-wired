@@ -86,13 +86,6 @@ namespace comp {
 namespace rigid_body_controller {
 
 
-bullet::world&
-get_world()
-{
-  return Sys::Physics_world::detail::get_world();
-}
-
-
 void
 update_world(const float dt)
 {
@@ -102,12 +95,9 @@ update_world(const float dt)
     math::transform old_transform;
     Component::get<math::transform>(ent.first, old_transform);
     
-    math::transform from_rb;
+    const math::mat4 world_rb     = math::mat4_init_with_array(ent.second->get_world_matrix());
+    math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
     from_rb.scale = old_transform.scale;
-    const auto quat = ent.second->get_rotation_quat();
-    from_rb.rotation = math::quat_init(quat.at(0), quat.at(1), quat.at(2), quat.at(3));
-    const auto pos = ent.second->get_position();
-    from_rb.position = math::vec3_init(pos.at(0), pos.at(1), pos.at(2));
     
     Component::set<math::transform>(ent.first, from_rb);
   }

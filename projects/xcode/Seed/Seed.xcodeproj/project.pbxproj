@@ -208,6 +208,7 @@
 		7EC21F2B1B7B2CF80020994C /* logging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = logging.hpp; path = ../../../../Users/PhilCK/Developer/utils/logging.hpp; sourceTree = "<group>"; };
 		7EE146741B8C9116008B4748 /* rigid_body_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_data.cpp; sourceTree = "<group>"; };
 		7EE146751B8C9116008B4748 /* rigid_body_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_data.hpp; sourceTree = "<group>"; };
+		7EE48C551B8EF2C400BEA256 /* world_axis.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world_axis.hpp; sourceTree = "<group>"; };
 		7EEBA0AC1B85B1E50088162A /* debug_line_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug_line_renderer.cpp; sourceTree = "<group>"; };
 		7EEBA0AD1B85B1E50088162A /* debug_line_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = debug_line_renderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +247,7 @@
 		7E0A339B1B7919E6000C7B22 /* Seed Code */ = {
 			isa = PBXGroup;
 			children = (
+				7EE48C541B8EF2C400BEA256 /* common */,
 				7E87C5B11B81360F003BE24E /* systems */,
 				7E405BC21B7D1A91001DA0F5 /* components */,
 				7E405BBF1B7D1801001DA0F5 /* core */,
@@ -665,6 +667,15 @@
 			name = bullet_wrapper;
 			path = /usr/local/include/bullet_wrapper;
 			sourceTree = "<absolute>";
+		};
+		7EE48C541B8EF2C400BEA256 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				7EE48C551B8EF2C400BEA256 /* world_axis.hpp */,
+			);
+			name = common;
+			path = ../../../../code/common;
+			sourceTree = "<group>";
 		};
 		7EEBA0AB1B85B1E50088162A /* debug_line_renderer */ = {
 			isa = PBXGroup;
