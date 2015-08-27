@@ -246,11 +246,11 @@ init_entities()
     math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
     Component::set(throw_entity, trans);
     
-    auto coll = bullet::create_capsule_collider();
+    //auto coll = bullet::create_capsule_collider();
     
     Rigidbody::Rigidbody_data rb_data;
     rb_data.mass = 0.1f;
-    rb_data.collider.type = Rigidbody::Collider_type::capsule;
+    rb_data.collider.type = Rigidbody::Collider_type::box;
     
     Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
     
