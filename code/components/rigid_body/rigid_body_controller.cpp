@@ -89,6 +89,16 @@ apply_local_torque(const Core::Entity e, const math::vec3 dir)
 }
 
 
+void
+set_transform(const Core::Entity e, const math::transform &trans)
+{
+  assert(map_rigid_bodies.count(e));
+  
+  auto rb = map_rigid_bodies.at(e);
+  rb->set_position(math::vec3_get_x(trans.position), math::vec3_get_y(trans.position), math::vec3_get_z(trans.position));
+}
+
+
 } // ns
 
 

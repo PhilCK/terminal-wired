@@ -7,6 +7,7 @@
 #include <bullet_wrapper/world.hpp>
 #include <components/rigid_body/rigid_body_data.hpp>
 #include <math/vec/vec3.hpp>
+#include <math/transform/transform.hpp>
 
 
 namespace comp {
@@ -26,6 +27,7 @@ namespace Rigidbody {
 void        apply_local_force(const Core::Entity e, const math::vec3 dir);
 void        apply_world_force(const Core::Entity e, const math::vec3 dir);
 void        apply_local_torque(const Core::Entity e, const math::vec3 rot);
+void        set_transform(const Core::Entity e, const math::transform &trans);
 
 
 } // ns

@@ -99,9 +99,14 @@ update_frame(const float dt)
     assert(Component::get(player_entity, player_transform));
     
     const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
-    const auto throw_dir = math::vec3_add(player_fwd, math::vec3_init(0, 1, 0));
-    const auto throw_scale = math::vec3_scale(throw_dir, 100.f * dt);
+    const auto throw_dir = math::vec3_add(player_fwd, math::vec3_init(0, 0.7, 0));
+    const auto throw_scale = math::vec3_scale(throw_dir, 30000.f * dt);
     
+    math::transform throw_transform;
+    throw_transform.rotation = player_transform.rotation;
+    throw_transform.position = math::vec3_add(player_transform.position, player_fwd);
+    
+    Rigidbody::set_transform(throw_entity, throw_transform);
     Rigidbody::apply_world_force(throw_entity, throw_scale);
   }
   
@@ -265,7 +270,7 @@ init_entities()
     //auto coll = bullet::create_capsule_collider();
     
     Rigidbody::Rigidbody_data rb_data;
-    rb_data.mass = 0.1f;
+    rb_data.mass = 3.f;
     rb_data.collider.type = Rigidbody::Collider_type::box;
     
     Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
@@ -280,7 +285,7 @@ init_entities()
   
   // Fwd Entity
   {
-    math::transform trans = math::transform_init(math::vec3_init(0, 0, 0), math::vec3_init(0.25f, 0.25f, 0.25f), math::quat());
+    math::transform trans = math::transform_init(math::vec3_init(0, 0, 0), math::vec3_init(0.05f, 0.05f, 0.05f), math::quat());
     Component::set(fwd_entity, trans);
     
     comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
