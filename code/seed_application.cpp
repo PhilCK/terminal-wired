@@ -179,8 +179,8 @@ render_frame()
   {
     Sys::Mesh_renderer::render(ground_entity, view_proj);
     Sys::Mesh_renderer::render(player_entity, view_proj);
-    Sys::Mesh_renderer::render(throw_entity, view_proj);
-    Sys::Mesh_renderer::render(fwd_entity, view_proj);
+    Sys::Mesh_renderer::render(throw_entity,  view_proj);
+    Sys::Mesh_renderer::render(fwd_entity,    view_proj);
   }
   
   // Debug lines
