@@ -73,6 +73,7 @@ update_world(const float dt)
 {
   Sys::Physics_world::detail::get_world().update_world(dt);
   Sys::Physics_world::detail::get_world().get_world()->debugDrawWorld();
+  Sys::Physics_world::detail::get_world().check_collisions();
 }
 
 
