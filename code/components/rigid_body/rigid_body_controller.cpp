@@ -105,13 +105,26 @@ update_world(const float dt)
     math::transform old_transform;
     Component::get<math::transform>(ent.first, old_transform);
     
-    const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
-    const math::mat4 rot_mat  = math::mat4_rotate_around_axis(math::vec3_init(0, -1, 0), math::half_tau());
-    const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
+    //const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
+    //const math::mat4 rot_mat  = math::mat4_id();// math::mat4_rotate_around_axis(math::vec3_init(0, 0, 1), math::half_tau());
+    //const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
+    
+    const auto quat_data        = ent.second->get_rotation_quat();
+    const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
+    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(rb_quat);
+    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
+    const math::quat rb_quat2   = math::quat_init_with_mat3(rot_mat_tr);
+    
+    const auto pos_data = ent.second->get_position();
+    const math::vec3 rb_pos = math::vec3_init_with_array(&pos_data[0]);
     
     //math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
-    math::transform from_rb = math::transform_init_from_world_matrix(corrected_mat);
-    from_rb.scale = old_transform.scale;
+    //math::transform from_rb = math::transform_init_from_world_matrix(corrected_mat);
+    
+    math::transform from_rb;
+    from_rb.rotation = rb_quat2;
+    from_rb.position = rb_pos;
+    from_rb.scale    = old_transform.scale;
     
     Component::set<math::transform>(ent.first, from_rb);
   }

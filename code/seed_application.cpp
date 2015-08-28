@@ -31,10 +31,11 @@ namespace
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
   const Core::Entity throw_entity  {4,4};
+  const Core::Entity fwd_entity    {5,5};
   
   const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);  // use common
   const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f); // use common
-  const math::vec3 world_right = math::vec3_init(1.f, 0.f, 0.f);  // use common
+  const math::vec3 world_left  = math::vec3_init(1.f, 0.f, 0.f);  // use common
   
   sdl::input input;
 }
@@ -77,7 +78,8 @@ update_frame(const float dt)
   }
   if(input.is_key_down(SDLK_s))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));  }
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
+  }
   if(input.is_key_down(SDLK_a))
   {
     Rigidbody::apply_local_force(player_entity, math::vec3_init(-1, 0, 0));
@@ -101,6 +103,20 @@ update_frame(const float dt)
     const auto throw_scale = math::vec3_scale(throw_dir, 100.f * dt);
     
     Rigidbody::apply_world_force(throw_entity, throw_scale);
+  }
+  
+  // Move fwd entity
+  {
+    math::transform player_transform;
+    assert(Component::get(player_entity, player_transform));
+
+    const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
+
+    math::transform trans;
+    assert(Component::get(fwd_entity, trans));
+
+    trans.position = math::vec3_add(player_transform.position, player_fwd);
+    assert(Component::set(fwd_entity, trans));
   }
 
   comp::rigid_body_controller::update_world(dt);
@@ -159,14 +175,13 @@ render_frame()
     Sys::Mesh_renderer::render(ground_entity, view_proj);
     Sys::Mesh_renderer::render(player_entity, view_proj);
     Sys::Mesh_renderer::render(throw_entity, view_proj);
+    Sys::Mesh_renderer::render(fwd_entity, view_proj);
   }
   
   // Debug lines
   {
-    const math::mat4 world_rb = math::transform_get_world_matrix(trans);
-    const math::transform from_rb = math::transform_init_from_world_matrix(world_rb);
-    const math::vec3 fwd = math::quat_rotate_point(from_rb.rotation, world_fwd);
-    const math::vec3 up = math::quat_rotate_point(from_rb.rotation, world_up);
+    const math::vec3 fwd = math::quat_rotate_point(trans.rotation, world_fwd);
+    const math::vec3 up  = math::quat_rotate_point(trans.rotation, world_up);
   
     comp::camera current_camera;
     Component::get(camera_entity, current_camera);
@@ -176,8 +191,9 @@ render_frame()
     Component::get<math::transform>(camera_entity, cam_transform);
   
     const math::mat4 world = math::mat4_id();
-    const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    //const math::mat4 view = math::mat4_lookat(from_rb.position, math::vec3_add(from_rb.position, fwd), up);
+    
+    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
     
     const math::mat4 wvp = math::mat4_multiply(world, view, proj);
     auto wvp_data = math::mat4_to_array(wvp);
@@ -224,7 +240,7 @@ init_entities()
   
   // Player
   {
-    math::transform player_transform = math::transform_init(math::vec3_init(0, 20, 0), math::vec3_one(), math::quat());
+    math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
     Component::set(player_entity, player_transform);
   
     Rigidbody::Rigidbody_data rb_data;
@@ -260,6 +276,19 @@ init_entities()
     comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_orange_512.png");
     //comp::material_controller::set(player_entity, std::move(ground_mat));
     Component::set(throw_entity, mat);
+  }
+  
+  // Fwd Entity
+  {
+    math::transform trans = math::transform_init(math::vec3_init(0, 0, 0), math::vec3_init(0.25f, 0.25f, 0.25f), math::quat());
+    Component::set(fwd_entity, trans);
+    
+    comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+    Component::set<comp::mesh>(fwd_entity, mesh);
+    
+    comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_blue_512.png");
+    //comp::material_controller::set(player_entity, std::move(ground_mat));
+    Component::set(fwd_entity, mat);
   }
 }
 
