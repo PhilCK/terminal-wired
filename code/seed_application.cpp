@@ -23,6 +23,7 @@
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
+#include <core/schedular/schedular.hpp>
 #include <common/world_axis.hpp>
 
 
@@ -43,6 +44,7 @@ namespace
 
 
 void init_systems();
+void de_init_systems();
 void init_entities();
 void update_frame(const float dt);
 void render_frame();
@@ -73,6 +75,8 @@ main()
 void
 update_frame(const float dt)
 {
+  Core::Schedular::think();
+
   if(input.is_key_down(SDLK_w))
   {
     Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
@@ -315,6 +319,8 @@ init_systems()
   input.set_mouse_hold(true);
   
   // Init
+  Core::Schedular::initialize();
+  
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
@@ -326,4 +332,11 @@ init_systems()
   
   
   sys::script_env::test_hook();
+}
+
+
+void
+de_init_systems()
+{
+  Core::Schedular::de_initialize();
 }
