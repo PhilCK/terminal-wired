@@ -9,9 +9,9 @@ namespace common {
 namespace world_axis {
 
 
-const std::array<float, 3> up   = { 0.f, 1.f, 0.f  };
-const std::array<float, 3> fwd  = { 0.f, 0.f, -1.f };
-const std::array<float, 3> left = { 1.f, 0.f, 0.f  };
+const std::array<float, 3> up   = { +0.f, +1.f, +0.f };
+const std::array<float, 3> fwd  = { +0.f, +0.f, -1.f };
+const std::array<float, 3> left = { +1.f, +0.f, +0.f };
 
 
 } // ns

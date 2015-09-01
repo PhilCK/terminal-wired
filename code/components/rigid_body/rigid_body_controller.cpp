@@ -15,9 +15,9 @@
 
 namespace
 {
-  std::map<Core::Entity, bullet::rigidbody> rigid_bodies;
+  std::map<Core::Entity, bullet::rigidbody*> rigid_bodies;
   
-  bullet::rigidbody
+  bullet::rigidbody*
   create_rigid_body(const Rigidbody::Rigidbody_data &data, const math::transform &transform)
   {
     std::unique_ptr<btCollisionShape> collider;
@@ -51,7 +51,8 @@ namespace
     const float y = math::vec3_get_y(transform.position);
     const float z = math::vec3_get_z(transform.position);
     
-    return bullet::rigidbody(std::move(collider), x, y, z, data.mass, bullet::axis::y_axis);
+    auto ptr = new bullet::rigidbody(std::move(collider), x, y, z, data.mass, bullet::axis::y_axis);
+    return ptr;
   } // create_rb
   
 }
@@ -66,7 +67,7 @@ apply_local_force(const Core::Entity e, const math::vec3 dir)
   assert(rigid_bodies.count(e));
   
   auto rb = rigid_bodies.at(e);
-  rb.apply_local_force(btVector3(math::vec3_get_x(dir),
+  rb->apply_local_force(btVector3(math::vec3_get_x(dir),
                                   math::vec3_get_y(dir),
                                   math::vec3_get_z(dir)));
 }
@@ -78,7 +79,7 @@ apply_world_force(const Core::Entity e, const math::vec3 dir)
   assert(rigid_bodies.count(e));
   
   auto rb = rigid_bodies.at(e);
-  rb.apply_world_force(btVector3(math::vec3_get_x(dir),
+  rb->apply_world_force(btVector3(math::vec3_get_x(dir),
                                   math::vec3_get_y(dir),
                                   math::vec3_get_z(dir)));
 }
@@ -90,7 +91,7 @@ apply_local_torque(const Core::Entity e, const math::vec3 dir)
   assert(rigid_bodies.count(e));
   
   auto rb = rigid_bodies.at(e);
-  rb.apply_local_torque(btVector3(math::vec3_get_x(dir),
+  rb->apply_local_torque(btVector3(math::vec3_get_x(dir),
                                    math::vec3_get_y(dir),
                                    math::vec3_get_z(dir)));
 }
@@ -112,7 +113,7 @@ set_transform(const Core::Entity e, const math::transform &trans)
                                             math::quat_get_w(trans.rotation)));
   
   auto rb = rigid_bodies.at(e);
-  rb.set_transform(update_transform);
+  rb->set_transform(update_transform);
 }
 
 
@@ -166,13 +167,13 @@ update_world(const float dt)
     //const math::mat4 rot_mat  = math::mat4_id();// math::mat4_rotate_around_axis(math::vec3_init(0, 0, 1), math::half_tau());
     //const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
     
-    const auto quat_data        = ent.second.get_rotation_quat();
+    const auto quat_data        = ent.second->get_rotation_quat();
     const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
     const math::mat3 rot_mat    = math::quat_get_rotation_matrix(rb_quat);
     const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
     const math::quat rb_quat2   = math::quat_init_with_mat3(rot_mat_tr);
     
-    const auto pos_data = ent.second.get_position();
+    const auto pos_data = ent.second->get_position();
     const math::vec3 rb_pos = math::vec3_init_with_array(&pos_data[0]);
     
     //math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
@@ -207,8 +208,15 @@ add<Rigidbody::Rigidbody_data>(const Core::Entity e)
 
   auto rb = create_rigid_body(data, trans);
   
-  rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody>(e, rb));
-  Sys::Physics_world::detail::get_world().add_rigidbody(rb);
+  uint32_t i = (Core::entity_as_uint(e));
+  
+  uint32_t* ptr = nullptr;
+  ptr = (uint32_t*)i;
+  
+  //rb.set_user_pointer(ptr);
+  
+  rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody*>(e, rb));
+  Sys::Physics_world::detail::get_world().add_rigidbody(*rb);
   
   return true;
 }
@@ -230,10 +238,16 @@ set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_
   assert(Component::get(e, trans));
 
   auto rb = create_rigid_body(set, trans);
-  //auto rb_ptr = std::make_unique<bullet::rigidbody>(rb);
   
-  rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody>(e, rb));
-  Sys::Physics_world::detail::get_world().add_rigidbody(rb);
+  uint32_t i = (Core::entity_as_uint(e));
+  
+  uint32_t* ptr = nullptr;
+  ptr = (uint32_t*)i;
+  
+  //rb.set_user_pointer(ptr);
+  
+  rigid_bodies.insert(std::pair<Core::Entity, bullet::rigidbody*>(e, rb));
+  Sys::Physics_world::detail::get_world().add_rigidbody(*rb);
   
   return true;
 }

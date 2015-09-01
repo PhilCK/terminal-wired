@@ -15,6 +15,9 @@ struct Entity
 };
 
 
+inline uint32_t entity_as_uint(const Core::Entity e) { return (e.type_id) | e.instance_id << 24; }
+
+
 //! This is to allow dummy entities.
 inline Entity invalid_entity() { return Entity{0,0}; }
   
@@ -25,6 +28,7 @@ inline bool operator==(const Entity left, const Entity right)
 }
 
 
+// TODO: This is broken. maybe use as_uint for the comparision?
 inline bool operator<(const Entity left, const Entity right)
 {
   return ((left.type_id < right.type_id) && (left.instance_id < right.instance_id));

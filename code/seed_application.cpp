@@ -23,6 +23,7 @@
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
+#include <common/world_axis.hpp>
 
 
 namespace
@@ -33,9 +34,9 @@ namespace
   const Core::Entity throw_entity  {4,4};
   const Core::Entity fwd_entity    {5,5};
   
-  const math::vec3 world_up    = math::vec3_init(0.f, 1.f, 0.f);  // use common
-  const math::vec3 world_fwd   = math::vec3_init(0.f, 0.f, -1.f); // use common
-  const math::vec3 world_left  = math::vec3_init(1.f, 0.f, 0.f);  // use common
+  const math::vec3 world_up    = math::vec3_init_with_array(common::world_axis::up);
+  const math::vec3 world_fwd   = math::vec3_init_with_array(common::world_axis::fwd);
+  const math::vec3 world_left  = math::vec3_init_with_array(common::world_axis::left);
   
   sdl::input input;
 }
