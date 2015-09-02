@@ -1,17 +1,5 @@
-#include <systems/window/window.hpp>
-#include <sdl_wrapper/sdl_lazy_include.hpp>
-#include <simple_renderer/lazy_include.hpp>
-#include <SOIL/SOIL.h>
-#include <utils/directory.hpp>
-#include <string>
-#include <assert.h>
-#include <math/math.hpp>
-#include <bullet_wrapper/world.hpp>
-#include <bullet_wrapper/rigidbody.hpp>
-#include <bullet_wrapper/collider.hpp>
-#include <utils/timer.hpp>
-#include <utils/logging.hpp>
-#include <bindings/v_01/as_script_bindings.hpp>
+#include <core/schedular/schedular.hpp>
+#include <core/event/event.hpp>
 #include <core/entity/entity.hpp>
 #include <components/camera/camera_controller.hpp>
 #include <components/transform/transform_controller.hpp>
@@ -19,12 +7,24 @@
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
 #include <components/material/material_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
+#include <systems/window/window.hpp>
 #include <systems/script/script_environment.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
-#include <core/schedular/schedular.hpp>
 #include <common/world_axis.hpp>
+#include <bindings/v_01/as_script_bindings.hpp>
+#include <utils/directory.hpp>
+#include <utils/timer.hpp>
+#include <utils/logging.hpp>
+#include <math/math.hpp>
+#include <simple_renderer/lazy_include.hpp>
+#include <bullet_wrapper/world.hpp>
+#include <bullet_wrapper/rigidbody.hpp>
+#include <bullet_wrapper/collider.hpp>
+#include <sdl_wrapper/sdl_lazy_include.hpp>
+#include <assert.h>
+#include <string>
 
 
 namespace
@@ -40,6 +40,11 @@ namespace
   const math::vec3 world_left  = math::vec3_init_with_array(common::world_axis::left);
   
   sdl::input input;
+  
+  bool evt_test(const uint32_t id, const void* data)
+  {
+    return true;
+  }
 }
 
 
@@ -75,6 +80,7 @@ main()
 void
 update_frame(const float dt)
 {
+  Core::Event::deliver_events();
   Core::Schedular::think();
 
   if(input.is_key_down(SDLK_w))
@@ -320,6 +326,10 @@ init_systems()
   
   // Init
   Core::Schedular::initialize();
+  Core::Event::initialize();
+  
+  Core::Event::add_callback(123, evt_test);
+  Core::Event::deliver_events();
   
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);

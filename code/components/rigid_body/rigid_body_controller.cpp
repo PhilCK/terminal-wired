@@ -209,10 +209,10 @@ add<Rigidbody::Rigidbody_data>(const Core::Entity e)
 
   auto rb = create_rigid_body(data, trans);
   
-  uint32_t i = (Core::entity_as_uint(e));
+  uint32_t id = (Core::entity_as_uint(e));
   
-  uint32_t* ptr = nullptr;
-  ptr = (uint32_t*)i;
+  std::size_t* ptr = nullptr;
+  ptr = (std::size_t*)id;
   
   rb.set_user_pointer(ptr);
   

@@ -45,12 +45,12 @@ bool        de_initialize();
 
 void        think();
 
-void        add(Schedule &schedule_owner,
+void        add_callback(Schedule &schedule_owner,
                 const Schedule_task task_type,
                 Schedule_callback callback,
                 void *user_data);
 
-void        remove(const uint32_t id);
+void        remove_callback(const uint32_t id);
 
 
 } // Schedular ns

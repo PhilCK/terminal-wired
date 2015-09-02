@@ -1,7 +1,9 @@
 #include <systems/physics_world/physics_world_controller.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
+#include <core/event/event.hpp>
 #include <utils/logging.hpp>
 #include <string>
+#include <new>
 
 
 namespace
@@ -73,7 +75,26 @@ update_world(const float dt)
 {
   Sys::Physics_world::detail::get_world().update_world(dt);
   Sys::Physics_world::detail::get_world().get_world()->debugDrawWorld();
-  Sys::Physics_world::detail::get_world().check_collisions();
+  
+  const auto collisions = Sys::Physics_world::detail::get_world().check_collisions();
+  
+  for(const auto &coll : collisions)
+  {
+    // Convert user pointers to entities.
+    const std::size_t enta_id = (std::size_t)coll.usr_ptr_a;
+    const Core::Entity ent_a = Core::uint_as_entity(static_cast<uint32_t>(enta_id));
+
+    const std::size_t entb_id = (std::size_t)coll.usr_ptr_b;
+    const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
+    
+    // Get some data from the event queue.
+    void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event));
+    assert(data_loc);
+    
+    // Create event data.
+    const Collision_event * evt = new(data_loc) Collision_event{ent_a, ent_b};
+    assert(evt);
+  }
 }
 
 

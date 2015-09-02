@@ -16,7 +16,10 @@ struct Entity
 
 
 //! Converts an entity type into a uint32_t type.
-inline uint32_t entity_as_uint(const Core::Entity e) { return (e.type_id) | e.instance_id << 24; }
+inline uint32_t entity_as_uint(const Core::Entity e) { return (e.type_id << 24) | e.instance_id; }
+
+//! Converts a uint to an entity
+inline Entity uint_as_entity(const uint32_t to_e) { return Entity{(to_e >> 24), (to_e >> 0 & 0xFFFF)}; }
 
 //! This is to allow dummy entities.
 inline Entity invalid_entity() { return Entity{0,0}; }
