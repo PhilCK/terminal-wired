@@ -67,12 +67,16 @@ add_event_to_queue(const uint32_t event_id, const uint32_t size_of_data)
 void
 deliver_events()
 {
+  uint32_t mem_offset = 0;
+  
   for(const auto &evt : queued_events)
   {
     for(const auto &cb : event_listeners[evt.first])
     {
-      cb(evt.first, nullptr);
+      cb(evt.first, &event_buffer[mem_offset]);
     }
+    
+    mem_offset += evt.second;
   }
   
   buffer_ptr = 0; 

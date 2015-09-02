@@ -43,6 +43,13 @@ namespace
   
   bool evt_test(const uint32_t id, const void* data)
   {
+    const auto collision_data = static_cast<const Sys::Physics_world::Collision_event*>(data);
+    
+    if(collision_data->entity_a == throw_entity)
+    {
+
+    }
+  
     return true;
   }
 }
@@ -222,6 +229,9 @@ render_frame()
 void
 init_entities()
 {
+  // Hook up collision event for test.
+  Core::Event::add_callback(123, evt_test);
+
   const std::string asset_path = util::get_resource_path() + "assets/";
 
   // Camera
@@ -327,9 +337,6 @@ init_systems()
   // Init
   Core::Schedular::initialize();
   Core::Event::initialize();
-  
-  Core::Event::add_callback(123, evt_test);
-  Core::Event::deliver_events();
   
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
