@@ -48,6 +48,8 @@
 		7E405BE81B7D1A91001DA0F5 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDB1B7D1A91001DA0F5 /* transform.cpp */; };
 		7E405BE91B7D1A91001DA0F5 /* transform_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BDD1B7D1A91001DA0F5 /* transform_controller.cpp */; };
 		7E5B116E1B8997C200614422 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E5B116C1B8997C200614422 /* mesh_renderer.cpp */; };
+		7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E61D0F61B9818EB00AE90BD /* time.cpp */; };
+		7E61D0FB1B981ADF00AE90BD /* core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E61D0F91B981ADF00AE90BD /* core.cpp */; };
 		7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A21B7E18A4003BE24E /* mesh.cpp */; };
 		7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */; };
 		7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5AD1B810B88003BE24E /* vertex_buffer_resource.cpp */; };
@@ -159,6 +161,10 @@
 		7E405BDE1B7D1A91001DA0F5 /* transform_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform_controller.hpp; sourceTree = "<group>"; };
 		7E5B116C1B8997C200614422 /* mesh_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer.cpp; sourceTree = "<group>"; };
 		7E5B116D1B8997C200614422 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
+		7E61D0F61B9818EB00AE90BD /* time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
+		7E61D0F71B9818EB00AE90BD /* time.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
+		7E61D0F91B981ADF00AE90BD /* core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = core.cpp; sourceTree = "<group>"; };
+		7E61D0FA1B981ADF00AE90BD /* core.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = core.hpp; sourceTree = "<group>"; };
 		7E87C5A21B7E18A4003BE24E /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		7E87C5A31B7E18A4003BE24E /* mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		7E87C5A41B7E18A4003BE24E /* mesh_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_controller.cpp; sourceTree = "<group>"; };
@@ -434,6 +440,9 @@
 		7E405BBF1B7D1801001DA0F5 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				7E61D0F91B981ADF00AE90BD /* core.cpp */,
+				7E61D0FA1B981ADF00AE90BD /* core.hpp */,
+				7E61D0F51B9818EB00AE90BD /* time */,
 				7EE730241B95D59E005AA837 /* schedular */,
 				7E87C5C31B8276A9003BE24E /* memory */,
 				7E87C5B91B826404003BE24E /* event */,
@@ -540,6 +549,15 @@
 				7E5B116D1B8997C200614422 /* mesh_renderer.hpp */,
 			);
 			path = mesh_renderer;
+			sourceTree = "<group>";
+		};
+		7E61D0F51B9818EB00AE90BD /* time */ = {
+			isa = PBXGroup;
+			children = (
+				7E61D0F61B9818EB00AE90BD /* time.cpp */,
+				7E61D0F71B9818EB00AE90BD /* time.hpp */,
+			);
+			path = time;
 			sourceTree = "<group>";
 		};
 		7E87C5A11B7E18A4003BE24E /* mesh */ = {
@@ -766,6 +784,7 @@
 			files = (
 				7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */,
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
+				7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */,
 				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
 				7E405BE71B7D1A91001DA0F5 /* script_controller.cpp in Sources */,
 				7E87C5DC1B84F8B8003BE24E /* script_context_model.cpp in Sources */,
@@ -783,6 +802,7 @@
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
 				7E87C5B81B81BA65003BE24E /* texture_resource.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
+				7E61D0FB1B981ADF00AE90BD /* core.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7E405BE51B7D1A91001DA0F5 /* rigid_body_controller.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,

@@ -31,21 +31,21 @@ namespace Component {
 
 
 template<>
-bool add<comp::Script>(const Core::Entity e)
+bool add<Script::Script_data>(const Core::Entity e)
 {
   return true;
 }
 
 
 template<>
-bool set<comp::Script>(const Core::Entity e, const comp::Script &component)
+bool set<Script::Script_data>(const Core::Entity e, const Script::Script_data &component)
 {
   return true;
 }
 
 
 template<>
-bool get<comp::Script>(const Core::Entity e, comp::Script &component)
+bool get<Script::Script_data>(const Core::Entity e, Script::Script_data &component)
 {
   return true;
 }

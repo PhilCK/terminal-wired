@@ -14,7 +14,24 @@ namespace Script_utils {
 comp::Script generate_script_data(const std::string &filename);
 void update();
 
+
 } // namespace
+
+
+namespace Script {
+
+
+struct Script_data
+{
+};
+
+
+void        call_start_hook(const Core::Entity e);
+void        call_update_hook(const Core::Entity e);
+void        call_contact_hook(const Core::Entity e);
+
+
+}
 
 
 
@@ -22,15 +39,15 @@ namespace Component {
 
 
 template<>
-bool add<comp::Script>(const Core::Entity e);
+bool add<Script::Script_data>(const Core::Entity e);
 
 
 template<>
-bool set<comp::Script>(const Core::Entity e, const comp::Script &component);
+bool set<Script::Script_data>(const Core::Entity e, const Script::Script_data &component);
 
 
 template<>
-bool get<comp::Script>(const Core::Entity e, comp::Script &component);
+bool get<Script::Script_data>(const Core::Entity e, Script::Script_data &component);
 
 
 } // namespace

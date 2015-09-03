@@ -8,9 +8,9 @@
 
 namespace
 {
-  asIScriptEngine *as_engine = nullptr;
+  asIScriptEngine *as_engine   = nullptr;
   asIScriptContext *as_context = nullptr;
-  asIScriptModule *as_module = nullptr;
+  asIScriptModule *as_module   = nullptr;
   
   void as_message_callback(const asSMessageInfo *msg, void *param)
   {

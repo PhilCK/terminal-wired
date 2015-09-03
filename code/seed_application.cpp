@@ -1,6 +1,7 @@
 #include <core/schedular/schedular.hpp>
 #include <core/event/event.hpp>
 #include <core/entity/entity.hpp>
+#include <components/script/script_controller.hpp>
 #include <components/camera/camera_controller.hpp>
 #include <components/transform/transform_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
@@ -290,6 +291,8 @@ init_entities()
     
     //auto coll = bullet::create_capsule_collider();
     
+    Component::add<Script::Script_data>(throw_entity);
+    
     Rigidbody::Rigidbody_data rb_data;
     rb_data.mass = 3.f;
     rb_data.collider.type = Rigidbody::Collider_type::box;
@@ -346,7 +349,6 @@ init_systems()
   
   assert(sys::script_env::initialize());
   script_bindings_v01::bind_api(sys::script_env::get_as_engine());
-  
   
   sys::script_env::test_hook();
 }
