@@ -1,6 +1,7 @@
 #include <core/schedular/schedular.hpp>
 #include <core/event/event.hpp>
 #include <core/entity/entity.hpp>
+#include <common/world_axis.hpp>
 #include <components/script/script_controller.hpp>
 #include <components/camera/camera_controller.hpp>
 #include <components/transform/transform_controller.hpp>
@@ -9,12 +10,9 @@
 #include <components/material/material_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <systems/window/window.hpp>
-#include <systems/script/script_environment.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
-#include <common/world_axis.hpp>
-#include <bindings/v_01/as_script_bindings.hpp>
 #include <utils/directory.hpp>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
@@ -347,10 +345,7 @@ init_systems()
   Sys::Debug_line_renderer::initialize();
   Sys::Physics_world::initialize();
   
-  assert(sys::script_env::initialize());
-  script_bindings_v01::bind_api(sys::script_env::get_as_engine());
-  
-  sys::script_env::test_hook();
+
 }
 
 
