@@ -29,7 +29,7 @@ template<>
 bool
 add<Script::Script_data>(const Core::Entity e)
 {
-  scripts.emplace(std::pair<Core::Entity, Script::Script_data>(e, Script::Script_data()));
+  scripts.emplace(std::pair<Core::Entity, Script::Script_data>(e, Script::Script_data(e)));
 
   return true;
 }

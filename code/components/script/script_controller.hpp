@@ -26,18 +26,22 @@ namespace Script {
   struct Script_data
   {
     Script_data()
+    {}
+  
+    Script_data(Core::Entity id)
     {
       chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
+      
       ch.eval(code);
       
-      struct object
-      {
-        
-      }; //
+      ch.add(Sys::Script_engine::get_module());
+      chaiscript::ChaiScript::State some_state = ch.get_state();
       
+      ch.set_state(some_state);
+      ch.eval("GLOBAL self = object();");
       
-      
-      
+      ch.eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
+
       const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
       ch.eval(instance);
       
@@ -55,8 +59,6 @@ namespace Script {
     
     std::string code =
     R"(
-      var self = Object();
-    
       class Test_program
       {
         def Test_program()
@@ -72,6 +74,7 @@ namespace Script {
         def on_update()
         {
           log_info("on info");
+          self.get_material().set_color();
         }
       }
     )";

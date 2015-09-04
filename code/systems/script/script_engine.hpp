@@ -11,6 +11,7 @@ namespace Script_engine {
 
 void          initialize();
 chaiscript::ChaiScript& get_chai();
+chaiscript::ModulePtr get_module();
 
 
 } // ns

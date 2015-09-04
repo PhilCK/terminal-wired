@@ -24,6 +24,7 @@
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <assert.h>
 #include <string>
+#include <bindings/v_01/chai_bindings_01.hpp>
 
 #include <chaiscript/chaiscript.hpp>
 
@@ -356,10 +357,7 @@ init_systems()
   Sys::Physics_world::initialize();
   
   Sys::Script_engine::initialize();
-  
-  /*
-      BINDING A SCRIPT OBJECT.
-  */
+  Chai_bindings::initialize(Sys::Script_engine::get_module());
 }
 
 

@@ -64,6 +64,7 @@
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
 		7EC21F291B7B12680020994C /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F271B7B12680020994C /* timer.cpp */; };
 		7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F2A1B7B2CF80020994C /* logging.cpp */; };
+		7EDFF6F31B9A11BE000033BE /* chai_bindings_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EDFF6F11B9A11BE000033BE /* chai_bindings_01.cpp */; };
 		7EE146761B8C9116008B4748 /* rigid_body_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE146741B8C9116008B4748 /* rigid_body_data.cpp */; };
 		7EE730271B95D59E005AA837 /* schedular.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE730251B95D59E005AA837 /* schedular.cpp */; };
 		7EEBA0AE1B85B1E50088162A /* debug_line_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EEBA0AC1B85B1E50088162A /* debug_line_renderer.cpp */; };
@@ -191,6 +192,8 @@
 		7EC21F281B7B12680020994C /* timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timer.hpp; path = ../../../../Users/PhilCK/Developer/utils/timer.hpp; sourceTree = "<group>"; };
 		7EC21F2A1B7B2CF80020994C /* logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = logging.cpp; path = ../../../../Users/PhilCK/Developer/utils/logging.cpp; sourceTree = "<group>"; };
 		7EC21F2B1B7B2CF80020994C /* logging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = logging.hpp; path = ../../../../Users/PhilCK/Developer/utils/logging.hpp; sourceTree = "<group>"; };
+		7EDFF6F11B9A11BE000033BE /* chai_bindings_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chai_bindings_01.cpp; sourceTree = "<group>"; };
+		7EDFF6F21B9A11BE000033BE /* chai_bindings_01.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = chai_bindings_01.hpp; sourceTree = "<group>"; };
 		7EE146741B8C9116008B4748 /* rigid_body_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_data.cpp; sourceTree = "<group>"; };
 		7EE146751B8C9116008B4748 /* rigid_body_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_data.hpp; sourceTree = "<group>"; };
 		7EE48C551B8EF2C400BEA256 /* world_axis.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world_axis.hpp; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 		7E405B961B7BE283001DA0F5 /* v_01 */ = {
 			isa = PBXGroup;
 			children = (
+				7EDFF6F11B9A11BE000033BE /* chai_bindings_01.cpp */,
+				7EDFF6F21B9A11BE000033BE /* chai_bindings_01.hpp */,
 			);
 			path = v_01;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
 				7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */,
 				7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */,
+				7EDFF6F31B9A11BE000033BE /* chai_bindings_01.cpp in Sources */,
 				7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */,
 				7E87C5B51B81360F003BE24E /* window.cpp in Sources */,
 				7E5B116E1B8997C200614422 /* mesh_renderer.cpp in Sources */,
