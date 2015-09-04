@@ -30,6 +30,14 @@ namespace Script {
       chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
       ch.eval(code);
       
+      struct object
+      {
+        
+      }; //
+      
+      
+      
+      
       const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
       ch.eval(instance);
       
@@ -44,8 +52,11 @@ namespace Script {
     std::function<void()> m_on_start;
     std::function<void()> m_on_update;
     
+    
     std::string code =
     R"(
+      var self = Object();
+    
       class Test_program
       {
         def Test_program()

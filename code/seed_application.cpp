@@ -124,8 +124,8 @@ update_frame(const float dt)
     math::transform player_transform;
     assert(Component::get(player_entity, player_transform));
     
-    const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
-    const auto throw_dir = math::vec3_add(player_fwd, math::vec3_init(0, 0.7, 0));
+    const auto player_fwd  = math::quat_rotate_point(player_transform.rotation, world_fwd);
+    const auto throw_dir   = math::vec3_add(player_fwd, math::vec3_init(0, 0.7, 0));
     const auto throw_scale = math::vec3_scale(throw_dir, 30000.f * dt);
     
     math::transform throw_transform;
@@ -356,6 +356,10 @@ init_systems()
   Sys::Physics_world::initialize();
   
   Sys::Script_engine::initialize();
+  
+  /*
+      BINDING A SCRIPT OBJECT.
+  */
 }
 
 
