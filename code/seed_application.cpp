@@ -25,6 +25,8 @@
 #include <assert.h>
 #include <string>
 
+#include <chaiscript/chaiscript.hpp>
+
 
 namespace
 {
@@ -59,6 +61,13 @@ void de_init_systems();
 void init_entities();
 void update_frame(const float dt);
 void render_frame();
+
+
+
+namespace test
+{
+
+} // class
 
 
 int
@@ -125,6 +134,8 @@ update_frame(const float dt)
     
     Rigidbody::set_transform(throw_entity, throw_transform);
     Rigidbody::apply_world_force(throw_entity, throw_scale);
+    
+    Script::on_throw(throw_entity);
   }
   
   // Move fwd entity
@@ -288,7 +299,6 @@ init_entities()
     Component::set(throw_entity, trans);
     
     //auto coll = bullet::create_capsule_collider();
-    
     Component::add<Script::Script_data>(throw_entity);
     
     Rigidbody::Rigidbody_data rb_data;
@@ -345,7 +355,7 @@ init_systems()
   Sys::Debug_line_renderer::initialize();
   Sys::Physics_world::initialize();
   
-
+  Sys::Script_engine::initialize();
 }
 
 

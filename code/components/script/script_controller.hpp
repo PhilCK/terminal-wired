@@ -5,14 +5,16 @@
 #include <core/entity/entity.hpp>
 #include <core/entity/component_interface.hpp>
 #include <components/script/script.hpp>
+#include <systems/script/script_engine.hpp>
 #include <string>
+#include <functional>
 
 
 namespace Script_utils {
 
 
-comp::Script generate_script_data(const std::string &filename);
-void update();
+//comp::Script generate_script_data(const std::string &filename);
+//void update();
 
 
 } // namespace
@@ -21,17 +23,51 @@ void update();
 namespace Script {
 
 
-struct Script_data
-{
-};
+  struct Script_data
+  {
+    Script_data()
+    {
+      chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
+      ch.eval(code);
+      
+      const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
+      ch.eval(instance);
+      
+      m_on_start  = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_start(); }");
+      m_on_update = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_update(); }");
+    }
+  
+    void call_start_hook(const Core::Entity e) { m_on_start(); }
+    void call_update_hook(const Core::Entity e) { m_on_update(); }
+    void call_contact_hook(const Core::Entity e);
+    
+    std::function<void()> m_on_start;
+    std::function<void()> m_on_update;
+    
+    std::string code =
+    R"(
+      class Test_program
+      {
+        def Test_program()
+        {
+          log_info("test ctor");
+        }
+        
+        def on_start()
+        {
+          log_info("on start");
+        }
+        
+        def on_update()
+        {
+          log_info("on info");
+        }
+      }
+    )";
+  };
 
 
-void        call_start_hook(const Core::Entity e);
-void        call_update_hook(const Core::Entity e);
-void        call_contact_hook(const Core::Entity e);
-
-
-}
+} // ns
 
 
 

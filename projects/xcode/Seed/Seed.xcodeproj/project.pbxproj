@@ -57,6 +57,8 @@
 		7E87C5C11B826404003BE24E /* event_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BC1B826404003BE24E /* event_data.cpp */; };
 		7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B8276A9003BE24E /* memory_controller.cpp */; };
 		7E8E897A1B8BADCC007F416E /* physics_world_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89781B8BADCC007F416E /* physics_world_controller.cpp */; };
+		7EA289CB1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so in Resources */ = {isa = PBXBuildFile; fileRef = 7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */; };
+		7EA289CE1B989CA100C70810 /* script_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA289CC1B989CA100C70810 /* script_engine.cpp */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
 		7EC21F261B7A74FD0020994C /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F241B7A74FD0020994C /* collider.cpp */; };
@@ -174,6 +176,9 @@
 		7E87C5CC1B8312F7003BE24E /* string_helpers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = string_helpers.hpp; path = ../../../../Users/PhilCK/Developer/utils/string_helpers.hpp; sourceTree = "<group>"; };
 		7E8E89781B8BADCC007F416E /* physics_world_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physics_world_controller.cpp; sourceTree = "<group>"; };
 		7E8E89791B8BADCC007F416E /* physics_world_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = physics_world_controller.hpp; sourceTree = "<group>"; };
+		7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = "libchaiscript_stdlib-5.7.1.so"; path = "../../../3rdparty/chaiscript/lib/osx/libchaiscript_stdlib-5.7.1.so"; sourceTree = "<group>"; };
+		7EA289CC1B989CA100C70810 /* script_engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script_engine.cpp; sourceTree = "<group>"; };
+		7EA289CD1B989CA100C70810 /* script_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script_engine.hpp; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigidbody.cpp; sourceTree = "<group>"; };
@@ -212,6 +217,7 @@
 		7E0A33901B7919E6000C7B22 = {
 			isa = PBXGroup;
 			children = (
+				7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */,
 				7E0A342A1B7941A5000C7B22 /* assets */,
 				7E0A339B1B7919E6000C7B22 /* Seed Code */,
 				7E87C5B01B812FC5003BE24E /* Frameworks */,
@@ -609,6 +615,8 @@
 		7E87C5C81B830AAA003BE24E /* script */ = {
 			isa = PBXGroup;
 			children = (
+				7EA289CC1B989CA100C70810 /* script_engine.cpp */,
+				7EA289CD1B989CA100C70810 /* script_engine.hpp */,
 			);
 			path = script;
 			sourceTree = "<group>";
@@ -724,6 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E0A342B1B7941A5000C7B22 /* assets in Resources */,
+				7EA289CB1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +763,7 @@
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7E61D0FB1B981ADF00AE90BD /* core.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
+				7EA289CE1B989CA100C70810 /* script_engine.cpp in Sources */,
 				7E405BE51B7D1A91001DA0F5 /* rigid_body_controller.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
 				7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */,
@@ -837,6 +847,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/include,
+					/Users/PhilCK/Developer/seed_game/3rdparty/chaiscript/include,
 					/Users/PhilCK/Developer/seed_game/code/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
@@ -883,6 +894,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 					/Users/PhilCK/Developer/seed_game/3rdparty/angelscript/include,
+					/Users/PhilCK/Developer/seed_game/3rdparty/chaiscript/include,
 					/Users/PhilCK/Developer/seed_game/code/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
