@@ -1,50 +1,22 @@
-
-class Program : APIDev::Origin
+class Test
 {
 
-  // Called when the object has been thrown.
-  void
-  on_thrown()
+  def Test()
   {
-    int color = APIDev::Color::GREEN;
-    m_cube.get_material().set_color(color);
-
-    m_cube.set_name("Doopy Doo");
-    // m_cube.set_name("Jango");
-    // m_cube.geometry.get_type(APIDev::Geometry::GetCube());
-    // m_cube.geometry.set_size(0.5, 0.5, 0.5);
-    // m_cube.material.set_color(APIDev::Material::Color::Green());
-    // m_cube.material.set_emissive(true);
-    // m_cube.physics.set_mass(10);
-    // m_cube.physics.is_solid(false);
-
-    dev::log::info("Thrown");
+    log_info("test ctor");
   }
 
 
-  // Called when the object has come in contact with another object.
-  void
-  on_contact()
+  def on_start()
   {
-    dev::log::info("Contact");
+    log_info("on start");
   }
 
 
-  //Called every now and then.
-  void
-  on_cycle()
+  def on_update()
   {
-    dev::log::info("Thinking");
+    log_info("on info");
+    _self.get_transform_api().set_scale(0.4, 0.4, 0.4);
   }
 
-
-  // Called when the object should be destroyed.
-  void
-  on_destroy()
-  {
-    dev::log::info("Destroy");
-  }
-
-
-  APIDev::Object m_cube;
-};
+}

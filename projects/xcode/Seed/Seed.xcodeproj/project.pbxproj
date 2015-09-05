@@ -29,6 +29,7 @@
 		7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340A1B793FA8000C7B22 /* directory_nix.cpp */; };
 		7E0A340F1B793FA8000C7B22 /* obj_model_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */; };
 		7E0A342B1B7941A5000C7B22 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7E0A342A1B7941A5000C7B22 /* assets */; };
+		7E0D5FF61B9ADBBE00EBE6E8 /* meta_objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D5FF41B9ADBBE00EBE6E8 /* meta_objects.cpp */; };
 		7E405B941B7BE134001DA0F5 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E405B931B7BE134001DA0F5 /* libangelscript.a */; };
 		7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */; };
 		7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BAC1B7C7C8B001DA0F5 /* scriptstdstring.cpp */; };
@@ -118,6 +119,8 @@
 		7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = obj_model_loader.cpp; sourceTree = "<group>"; };
 		7E0A340C1B793FA8000C7B22 /* obj_model_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obj_model_loader.hpp; sourceTree = "<group>"; };
 		7E0A342A1B7941A5000C7B22 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		7E0D5FF41B9ADBBE00EBE6E8 /* meta_objects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meta_objects.cpp; sourceTree = "<group>"; };
+		7E0D5FF51B9ADBBE00EBE6E8 /* meta_objects.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = meta_objects.hpp; sourceTree = "<group>"; };
 		7E405B931B7BE134001DA0F5 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = ../../../3rdparty/angelscript/lib/osx/libangelscript.a; sourceTree = "<group>"; };
 		7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		7E405BAA1B7C7C8B001DA0F5 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 		7E405B961B7BE283001DA0F5 /* v_01 */ = {
 			isa = PBXGroup;
 			children = (
+				7E0D5FF41B9ADBBE00EBE6E8 /* meta_objects.cpp */,
+				7E0D5FF51B9ADBBE00EBE6E8 /* meta_objects.hpp */,
 				7EDFF6F11B9A11BE000033BE /* chai_bindings_01.cpp */,
 				7EDFF6F21B9A11BE000033BE /* chai_bindings_01.hpp */,
 			);
@@ -797,6 +802,7 @@
 				7E0A33BD1B791A30000C7B22 /* seed_application.cpp in Sources */,
 				7E405BE81B7D1A91001DA0F5 /* transform.cpp in Sources */,
 				7E0A33F21B791E8D000C7B22 /* mixer.cpp in Sources */,
+				7E0D5FF61B9ADBBE00EBE6E8 /* meta_objects.cpp in Sources */,
 				7E0A33FE1B791E8D000C7B22 /* index_buffer.cpp in Sources */,
 				7EEBA0AE1B85B1E50088162A /* debug_line_renderer.cpp in Sources */,
 				7E405BE11B7D1A91001DA0F5 /* material.cpp in Sources */,

@@ -25,28 +25,36 @@ namespace Script {
 
   struct Script_data
   {
+    std::unique_ptr<chaiscript::ChaiScript> ch;
+    
+    // Make a chaiscript pool so we can pull chaiscript instances out.
+    // And replace them.
+  
     Script_data()
     {}
   
     Script_data(Core::Entity id)
     {
-      chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
+      ch.reset(new chaiscript::ChaiScript);
+    
+      //chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
       
-      ch.eval(code);
+      ch->eval(code);
       
-      ch.add(Sys::Script_engine::get_module());
-      chaiscript::ChaiScript::State some_state = ch.get_state();
+      ch->add(Sys::Script_engine::get_module());
+      chaiscript::ChaiScript::State some_state = ch->get_state();
       
-      ch.set_state(some_state);
-      ch.eval("GLOBAL self = object();");
+      ch->set_state(some_state);
+      ch->eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
+      ch->eval("GLOBAL self = object();");
       
-      ch.eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
+      ch->eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
 
       const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
-      ch.eval(instance);
+      ch->eval(instance);
       
-      m_on_start  = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_start(); }");
-      m_on_update = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_update(); }");
+      m_on_start  = ch->eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_start(); }");
+      m_on_update = ch->eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_update(); }");
     }
   
     void call_start_hook(const Core::Entity e) { m_on_start(); }
@@ -75,6 +83,7 @@ namespace Script {
         {
           log_info("on info");
           self.get_material().set_color();
+          _self.get_transform_api().set_scale(0.4, 0.4, 0.4);
         }
       }
     )";
