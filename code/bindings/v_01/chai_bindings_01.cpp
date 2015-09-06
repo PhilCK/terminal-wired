@@ -85,15 +85,6 @@ initialize(chaiscript::ModulePtr mod)
 {
   namespace chai_s = ::chaiscript;
   namespace Meta = ::Meta_object;
-
-  mod->add(chai_s::user_type<generic_object>(), "object");
-  mod->add(chai_s::constructor<generic_object()>(), "object");
-  mod->add(chai_s::fun(&generic_object::set_id), "set_id");
-  mod->add(chai_s::fun(&generic_object::get_material), "get_material");
-  
-  mod->add(chai_s::user_type<material_object>(), "material");
-  mod->add(chai_s::constructor<material_object()>(), "material");
-  mod->add(chai_s::fun(&material_object::set_color), "set_color");
   
   // Meta object hooks
   mod->add(chai_s::user_type<Meta::Generic>(),              "Seed_object");
@@ -113,6 +104,7 @@ initialize(chaiscript::ModulePtr mod)
   mod->add(chai_s::fun(&Meta::Physics::set_mass),     "set_mass");
   mod->add(chai_s::fun(&Meta::Physics::is_solid),     "is_solid");
   mod->add(chai_s::fun(&Meta::Physics::set_solid),    "set_solid");
+  mod->add(chai_s::fun(&Meta::Physics::apply_force),  "apply_force");
   
   mod->add(chai_s::user_type<Meta::Material>(),        "Material_api"); // todo do we need this?
   mod->add(chai_s::constructor<Meta::Material()>(),    "Material_api"); // todo do we need this?

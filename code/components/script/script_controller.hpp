@@ -49,9 +49,7 @@ namespace Script {
       
       ch.set_state(some_state);
       ch.eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
-      ch.eval("GLOBAL self = object();");
-      
-      ch.eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
+
 
       const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
       ch.eval(instance);

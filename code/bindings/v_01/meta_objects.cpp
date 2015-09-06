@@ -44,6 +44,13 @@ Physics::is_solid() const
 }
 
 
+void
+Physics::apply_force(const float x, const float y, const float z)
+{
+  Rigidbody::apply_world_force(m_owner.get_entity_id(), math::vec3_init(x, y, z));
+}
+
+
 Material::Material()
 {
 }
