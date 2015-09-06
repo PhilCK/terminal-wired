@@ -9,6 +9,7 @@
 namespace Script {
 
 
+void      reset(const Core::Entity e);
 void      on_throw(const Core::Entity e);
 void      on_collision(const Core::Entity e);
 

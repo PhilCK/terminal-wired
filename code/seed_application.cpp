@@ -136,6 +136,7 @@ update_frame(const float dt)
     Rigidbody::set_transform(throw_entity, throw_transform);
     Rigidbody::apply_world_force(throw_entity, throw_scale);
     
+    Script::reset(throw_entity);
     Script::on_throw(throw_entity);
   }
   

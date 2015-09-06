@@ -39,5 +39,35 @@ get_module()
 }
 
 
+namespace
+{
+  std::map<uint32_t, std::unique_ptr<chaiscript::ChaiScript>> chai_instances;
+  uint32_t chai_instance = 0;
+}
+
+
+uint32_t
+add_chai_instance()
+{
+  chai_instances.emplace(std::pair<uint32_t, std::unique_ptr<chaiscript::ChaiScript> >(++chai_instance, std::unique_ptr<chaiscript::ChaiScript>(new chaiscript::ChaiScript({util::get_resource_path()}))));
+  
+  return chai_instance;
+}
+
+
+chaiscript::ChaiScript&
+get_chai(const uint32_t i)
+{
+  return *chai_instances[i];
+}
+
+
+void
+remove_instance(const uint32_t id)
+{
+  chai_instances.erase(id);
+}
+
+
 } // ns
 } // ns

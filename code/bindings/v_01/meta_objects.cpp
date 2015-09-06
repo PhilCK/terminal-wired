@@ -1,14 +1,15 @@
 #include <bindings/v_01/meta_objects.hpp>
 #include <components/transform/transform_controller.hpp>
+#include <components/rigid_body/rigid_body_controller.hpp>
 #include <utils/logging.hpp>
 #include <assert.h>
 
 
-namespace Meta_object
-{
+namespace Meta_object {
 
 
-Physics::Physics()
+Physics::Physics(const Generic &owner)
+: m_owner(owner)
 {
 }
 
@@ -16,7 +17,7 @@ Physics::Physics()
 void
 Physics::set_mass(const float new_mass)
 {
-  util::log_error("not yet impl");
+  Rigidbody::set_mass(m_owner.get_entity_id(), new_mass);
 }
 
 
@@ -31,7 +32,7 @@ Physics::get_mass() const
 void
 Physics::set_solid(const bool set_solid)
 {
-  util::log_error("not yet impl");
+  Rigidbody::set_trigger(m_owner.get_entity_id(), !set_solid);
 }
 
 
@@ -251,7 +252,6 @@ Transform::get_scale_z() const
 }
 
 
-
 Mesh::Mesh()
 {
 }
@@ -260,6 +260,7 @@ Mesh::Mesh()
 Generic::Generic(const uint32_t entity_id)
 : m_entity(Core::uint_as_entity(entity_id))
 , m_transform(*this)
+, m_physics(*this)
 {
 }
 

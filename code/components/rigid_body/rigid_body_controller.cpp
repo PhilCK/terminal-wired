@@ -113,10 +113,29 @@ set_transform(const Core::Entity e, const math::transform &trans)
                                             math::quat_get_z(trans.rotation),
                                             math::quat_get_w(trans.rotation)));
   
-  auto rb = rigid_bodies.at(e);
+  auto &rb = rigid_bodies.at(e);
   rb.set_transform(update_transform);
 }
 
+
+void
+set_mass(const Core::Entity e, const float mass)
+{
+  assert(rigid_bodies.count(e));
+  
+  auto &rb = rigid_bodies.at(e);
+  rb.set_mass(mass);
+}
+
+
+void
+set_trigger(const Core::Entity e, const bool set_trigger)
+{
+  assert(rigid_bodies.count(e));
+  
+  auto &rb = rigid_bodies.at(e);
+  rb.set_trigger(set_trigger);
+}
 
 } // ns
 

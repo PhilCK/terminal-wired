@@ -1,9 +1,29 @@
-class Test
+class Test_program
 {
+  def method_callback(object)
+  {
+    log_info("callback_success");
+  }
 
-  def Test()
+
+  def foo(obj)
+  {
+    log_info("ello");
+    obj();
+  }  
+
+  def Test_program()
   {
     log_info("test ctor");
+    //_self.test_callback(Test_program::method_callback)
+
+    //this.foo(this.method_callback);
+
+    this.foo(
+      fun() {
+        log_info("I am callback");
+      }
+    );
   }
 
 
@@ -13,10 +33,11 @@ class Test
   }
 
 
+
+
   def on_update()
   {
     log_info("on info");
-    _self.get_transform_api().set_scale(0.4, 0.4, 0.4);
+    _self.get_transform_api().set_scale(0.2, 0.4, 1.4);
   }
-
 }

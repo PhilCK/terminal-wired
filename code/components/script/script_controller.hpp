@@ -6,8 +6,10 @@
 #include <core/entity/component_interface.hpp>
 #include <components/script/script.hpp>
 #include <systems/script/script_engine.hpp>
+#include <utils/directory.hpp>
 #include <string>
 #include <functional>
+#include <stdint.h>
 
 
 namespace Script_utils {
@@ -25,8 +27,7 @@ namespace Script {
 
   struct Script_data
   {
-    std::unique_ptr<chaiscript::ChaiScript> ch;
-    
+    uint32_t ch_id = 0;
     // Make a chaiscript pool so we can pull chaiscript instances out.
     // And replace them.
   
@@ -35,26 +36,33 @@ namespace Script {
   
     Script_data(Core::Entity id)
     {
-      ch.reset(new chaiscript::ChaiScript);
+      //ch.reset(new chaiscript::ChaiScript);
     
-      //chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai();
+      ch_id = Sys::Script_engine::add_chai_instance();
+      chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
       
-      ch->eval(code);
+      //ch.eval(code);
+      ch.eval_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
       
-      ch->add(Sys::Script_engine::get_module());
-      chaiscript::ChaiScript::State some_state = ch->get_state();
+      ch.add(Sys::Script_engine::get_module());
+      chaiscript::ChaiScript::State some_state = ch.get_state();
       
-      ch->set_state(some_state);
-      ch->eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
-      ch->eval("GLOBAL self = object();");
+      ch.set_state(some_state);
+      ch.eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
+      ch.eval("GLOBAL self = object();");
       
-      ch->eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
+      ch.eval("self.set_id(" + std::to_string(Core::entity_as_uint(id)) + ");");
 
       const std::string instance = std::string("auto ") + "moop" + " = Test_program();";
-      ch->eval(instance);
+      ch.eval(instance);
       
-      m_on_start  = ch->eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_start(); }");
-      m_on_update = ch->eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_update(); }");
+      m_on_start  = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_start(); }");
+      m_on_update = ch.eval<std::function<void()> >(std::string("fun() {") + "moop" + ".on_update(); }");
+    }
+    
+    ~Script_data()
+    {
+
     }
   
     void call_start_hook(const Core::Entity e) { m_on_start(); }

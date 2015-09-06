@@ -14,6 +14,11 @@ chaiscript::ChaiScript& get_chai();
 chaiscript::ModulePtr get_module();
 
 
+uint32_t                  add_chai_instance();
+chaiscript::ChaiScript&   get_chai(const uint32_t i);
+void                      remove_instance(const uint32_t id);
+
+
 } // ns
 } // ns
 

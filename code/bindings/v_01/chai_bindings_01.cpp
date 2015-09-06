@@ -105,9 +105,10 @@ initialize(chaiscript::ModulePtr mod)
   mod->add(chai_s::fun(&Meta::Generic::get_material),       "get_material_api");
   mod->add(chai_s::fun(&Meta::Generic::get_transform),      "get_transform_api");
   
+  mod->add(chai_s::fun(&Meta::Generic::test_callback),      "test_callback");
   
-  mod->add(chai_s::user_type<Meta_object::Physics>(), "Physics_api"); // todo do we need this?
-  mod->add(chai_s::constructor<Meta::Physics()>(),    "Physics_api"); // todo do we need this?
+//  mod->add(chai_s::user_type<Meta_object::Physics>(), "Physics_api"); // todo do we need this?
+//  mod->add(chai_s::constructor<Meta::Physics()>(),    "Physics_api"); // todo do we need this?
   mod->add(chai_s::fun(&Meta::Physics::get_mass),     "get_mass");
   mod->add(chai_s::fun(&Meta::Physics::set_mass),     "set_mass");
   mod->add(chai_s::fun(&Meta::Physics::is_solid),     "is_solid");

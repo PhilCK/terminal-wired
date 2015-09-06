@@ -14,6 +14,12 @@ namespace Script
 {
 
 void
+reset(const Core::Entity e)
+{
+  scripts[e] = Script::Script_data(e);
+}
+
+void
 on_throw(const Core::Entity e)
 {
   scripts[e].m_on_update();

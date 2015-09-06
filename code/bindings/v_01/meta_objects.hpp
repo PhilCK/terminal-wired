@@ -4,6 +4,7 @@
 
 #include <core/entity/entity.hpp>
 #include <string>
+#include <functional>
 
 
 namespace Meta_object {
@@ -20,11 +21,15 @@ class Physics
 {
 public:
 
-  explicit        Physics();
+  explicit        Physics(const Generic &owner);
   void            set_mass(const float new_mass);
   float           get_mass() const;
   void            set_solid(const bool solid);
   bool            is_solid() const;
+  
+private:
+
+  const Generic &m_owner;
 
 }; // class
 
@@ -86,6 +91,12 @@ public:
   void        add_child(Generic &generic);
   void        remove_child(Generic &generic);
   
+  void test_callback(const std::function<void(Generic &)> &cb)
+  {
+    m_test_callback = cb;
+    m_test_callback(*this);
+  }
+  
   inline void        set_name(const std::string &str)   { m_name = str;  }
   inline std::string get_name() const                   { return m_name; }
   
@@ -104,6 +115,8 @@ private:
   Physics       m_physics;
   Material      m_mat;
   Mesh          m_mesh;
+  
+  std::function<void(Generic &)> m_test_callback;
 
 }; // class
 
