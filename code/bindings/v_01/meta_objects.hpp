@@ -27,6 +27,7 @@ public:
   void            set_solid(const bool solid);
   bool            is_solid() const;
   void            apply_force(const float x, const float y, const float z);
+  void            set_collision_callback(const std::function<void(Generic &)> &cb);
   
 private:
 
@@ -79,7 +80,7 @@ class Mesh
 {
 public:
 
-  explicit            Mesh();
+  explicit        Mesh();
   
 private:
 
@@ -91,14 +92,11 @@ class Generic
 public:
 
   explicit            Generic(const uint32_t id = 0);
-  void                add_child(Generic &generic);
-  void                remove_child(Generic &generic);
   
-  void test_callback(const std::function<void(Generic &)> &cb)
-  {
-    m_test_callback = cb;
-    m_test_callback(*this);
-  }
+  void                set_update_callback(const std::function<void()> &cb);
+  void                on_update() const;
+  void                set_thrown_callback(const std::function<void()> &cb);
+  void                on_thrown() const;
   
   inline void         set_name(const std::string &str)   { m_name = str;  }
   inline std::string  get_name() const                   { return m_name; }
@@ -119,7 +117,8 @@ private:
   Material            m_mat;
   Mesh                m_mesh;
   
-  std::function<void(Generic &)> m_test_callback;
+  std::function<void()> m_update_callback;
+  std::function<void()> m_thrown_callback;
 
 }; // class
 

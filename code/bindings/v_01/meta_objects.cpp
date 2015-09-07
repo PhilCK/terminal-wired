@@ -51,6 +51,13 @@ Physics::apply_force(const float x, const float y, const float z)
 }
 
 
+void
+Physics::set_collision_callback(const std::function<void(Generic &)> &cb)
+{
+  util::log_error("collision callback not yet impl");
+}
+
+
 Material::Material()
 {
 }
@@ -269,6 +276,40 @@ Generic::Generic(const uint32_t entity_id)
 , m_transform(*this)
 , m_physics(*this)
 {
+}
+
+
+void
+Generic::set_update_callback(const std::function<void()> &cb)
+{
+  m_update_callback = cb;
+}
+
+
+void
+Generic::on_update() const
+{
+  if(m_update_callback)
+  {
+    m_update_callback();
+  }
+}
+
+
+void
+Generic::set_thrown_callback(const std::function<void()> &cb)
+{
+  m_thrown_callback = cb;
+}
+
+
+void
+Generic::on_thrown() const
+{
+  if(m_thrown_callback)
+  {
+    m_thrown_callback();
+  }
 }
 
 

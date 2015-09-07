@@ -22,7 +22,7 @@ reset(const Core::Entity e)
 void
 on_throw(const Core::Entity e)
 {
-  scripts[e].m_on_update();
+  scripts[e].call_thrown_hook();
 }
 
 }
