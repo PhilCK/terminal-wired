@@ -242,7 +242,7 @@ void
 init_entities()
 {
   // Hook up collision event for test.
-  Core::Event::add_callback(123, evt_test);
+  Core::Event::add_callback(123, Script::collision_callback);
 
   const std::string asset_path = util::get_resource_path() + "assets/";
 

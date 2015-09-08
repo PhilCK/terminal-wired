@@ -9,9 +9,9 @@ namespace Sys {
 namespace Script_engine {
 
 
-void          initialize();
+void                    initialize();
 chaiscript::ChaiScript& get_chai();
-chaiscript::ModulePtr get_module();
+chaiscript::ModulePtr   get_module();
 
 
 uint32_t                  add_chai_instance();

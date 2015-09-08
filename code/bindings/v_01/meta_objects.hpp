@@ -27,11 +27,13 @@ public:
   void            set_solid(const bool solid);
   bool            is_solid() const;
   void            apply_force(const float x, const float y, const float z);
-  void            set_collision_callback(const std::function<void(Generic &)> &cb);
+  void            set_collision_callback(const std::function<void(const Generic &)> &cb);
+  void            on_collision(const Generic &gen);
   
 private:
 
-  const Generic &m_owner;
+  const Generic   &m_owner;
+  std::function<void(const Generic &)> m_collision_callback;
 
 }; // class
 

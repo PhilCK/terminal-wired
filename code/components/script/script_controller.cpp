@@ -1,4 +1,5 @@
 #include <systems/script/script_engine.hpp>
+#include <systems/physics_world/physics_world_controller.hpp>
 #include "script_controller.hpp"
 #include "script.hpp"
 #include <map>
@@ -12,6 +13,23 @@ namespace
 
 namespace Script
 {
+
+
+bool collision_callback(const uint32_t id, const void* data)
+{
+  const auto collision_data = static_cast<const Sys::Physics_world::Collision_event*>(data);
+  
+  // Do we have collision_data a?
+  Script_data script;
+  if(Component::get(collision_data->entity_a, script))
+  {
+    script.call_contact_hook(collision_data->entity_b);
+  }
+  
+
+  return true;
+}
+
 
 void
 reset(const Core::Entity e)

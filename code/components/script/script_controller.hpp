@@ -26,11 +26,12 @@ namespace Script_utils {
 namespace Script {
 
 
+  bool collision_callback(const uint32_t id, const void* data);
+
+
   struct Script_data
   {
     uint32_t ch_id = 0;
-    // Make a chaiscript pool so we can pull chaiscript instances out.
-    // And replace them.
   
     Script_data()
     {}
@@ -40,11 +41,7 @@ namespace Script {
       ch_id = Sys::Script_engine::add_chai_instance();
       chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
       
-      //ch.eval(code);
-      
-      // Phil mem leak, decide how this is going to get implimented.
       m_generic.reset(new Meta_object::Generic(Core::entity_as_uint(id)));
-      m_generic->set_name("foofy");
       
       ch.add(Sys::Script_engine::get_module());
       chaiscript::ChaiScript::State some_state = ch.get_state();
@@ -52,7 +49,6 @@ namespace Script {
       ch.set_state(some_state);
       
       ch.add_global(chaiscript::var(m_generic), "seed");
-      //ch.eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
       ch.eval_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
     }
     
@@ -63,17 +59,27 @@ namespace Script {
   
     void call_thrown_hook()
     {
-      chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
-      ch.eval("seed.on_thrown();");
+      if(m_generic)
+      {
+        m_generic->on_thrown();
+      }
     }
     
     void call_update_hook()
     {
-      chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
-      ch.eval("seed.on_update();");
+      
     }
     
-    void call_contact_hook(const Core::Entity e);
+    void call_contact_hook(const Core::Entity e)
+    {
+      if(m_generic)
+      {
+        // Need to build an entity.
+        Meta_object::Generic foo(0);
+        foo.set_name("unkown object");
+        m_generic->get_physics().on_collision(foo);
+      }
+    }
     
     std::shared_ptr<Meta_object::Generic> m_generic;
   };

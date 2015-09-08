@@ -52,9 +52,19 @@ Physics::apply_force(const float x, const float y, const float z)
 
 
 void
-Physics::set_collision_callback(const std::function<void(Generic &)> &cb)
+Physics::set_collision_callback(const std::function<void(const Generic &)> &cb)
 {
-  util::log_error("collision callback not yet impl");
+  m_collision_callback = cb;
+}
+
+
+void
+Physics::on_collision(const Meta_object::Generic &gen)
+{
+  if(m_collision_callback)
+  {
+    m_collision_callback(gen);
+  }
 }
 
 
@@ -199,11 +209,15 @@ Transform::set_scale(const float x, const float y, const float z)
 {
   const Core::Entity e = m_owner.get_entity_id();
   math::transform trans;
+  Rigidbody::Rigidbody_data rb_data;
   
-  if(Component::get(e, trans))
+  
+  if(Component::get(e, trans) && Component::get(e, rb_data))
   {
     trans.scale = math::vec3_init(x, y, z);
     assert(Component::set(e, trans));
+    
+    // TODO need to set physics stuff as well.
   }
   else
   {
