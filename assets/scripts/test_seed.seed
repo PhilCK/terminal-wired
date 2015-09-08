@@ -1,43 +1,52 @@
 class Test_program
 {
-  def method_callback(object)
-  {
-    log_info("callback_success");
-  }
-
-
-  def foo(obj)
-  {
-    log_info("ello");
-    obj();
-  }  
-
   def Test_program()
-  {
-    log_info("test ctor");
-    //_self.test_callback(Test_program::method_callback)
-
-    //this.foo(this.method_callback);
-
-    this.foo(
-      fun() {
-        log_info("I am callback");
-      }
+  { 
+    // Set the collision callback 
+    seed.get_physics_api().set_collision_callback(
+      fun[this](obj) { this.on_collision(obj); }
     );
+
+    // Set the update callback.
+    seed.set_update_callback(
+      fun[this]() { this.on_update(); }
+    );
+
+    // Set the on_thrown callback.
+    seed.set_thrown_callback(
+      fun[this]() { this.on_thrown(); }
+    );
+
+    log_info(seed.get_name() + " handler was created.");
   }
 
 
-  def on_start()
+  def on_thrown()
   {
-    log_info("on start");
+    log_info(seed.get_name() + " was thrown.");
+    seed.get_transform_api().set_scale(0.2, 0.2, 0.2);
+    //seed.get_physics_api().set_solid(false);
+    //seed.get_physics_api().set_mass(0);
+    //seed.get_physics_api().apply_force(0, 100, 0);    
   }
-
-
 
 
   def on_update()
   {
-    log_info("on info");
-    _self.get_transform_api().set_scale(0.2, 0.4, 1.4);
+
+  }
+
+
+  def on_message(str_msg)
+  {
+
+  }
+
+
+  def on_collision(other_object)
+  {
+
   }
 }
+
+auto test = Test_program();

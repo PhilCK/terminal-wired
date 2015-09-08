@@ -6,6 +6,7 @@
 #include <core/entity/component_interface.hpp>
 #include <components/script/script.hpp>
 #include <systems/script/script_engine.hpp>
+#include <bindings/v_01/meta_objects.hpp>
 #include <utils/directory.hpp>
 #include <string>
 #include <functional>
@@ -41,12 +42,17 @@ namespace Script {
       
       //ch.eval(code);
       
+      // Phil mem leak, decide how this is going to get implimented.
+      m_generic.reset(new Meta_object::Generic(Core::entity_as_uint(id)));
+      m_generic->set_name("foofy");
+      
       ch.add(Sys::Script_engine::get_module());
       chaiscript::ChaiScript::State some_state = ch.get_state();
       
       ch.set_state(some_state);
       
-      ch.eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
+      ch.add_global(chaiscript::var(m_generic), "seed");
+      //ch.eval("GLOBAL _self = Seed_object(" + std::to_string(Core::entity_as_uint(id)) + ")");
       ch.eval_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
     }
     
@@ -58,18 +64,18 @@ namespace Script {
     void call_thrown_hook()
     {
       chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
-      ch.eval("_self.on_thrown();");
+      ch.eval("seed.on_thrown();");
     }
     
     void call_update_hook()
     {
       chaiscript::ChaiScript &ch = Sys::Script_engine::get_chai(ch_id);
-      ch.eval("_self.on_update();");
+      ch.eval("seed.on_update();");
     }
     
     void call_contact_hook(const Core::Entity e);
     
-    std::function<void()> m_on_start;
+    std::shared_ptr<Meta_object::Generic> m_generic;
   };
 
 

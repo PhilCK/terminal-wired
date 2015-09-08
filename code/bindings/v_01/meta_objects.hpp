@@ -110,7 +110,7 @@ public:
   
 private:
 
-  std::string         m_name = "";
+  std::string         m_name = "Seed";
   Core::Entity        m_entity = Core::invalid_entity();
   Transform           m_transform;
   Physics             m_physics;
