@@ -13,9 +13,11 @@
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
+#include <systems/script/script_controller.hpp>
 #include <utils/directory.hpp>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
+#include <utils/string_helpers.hpp>
 #include <math/math.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <bullet_wrapper/world.hpp>
@@ -24,7 +26,6 @@
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <assert.h>
 #include <string>
-#include <bindings/v_01/chai_bindings_01.hpp>
 
 #include <chaiscript/chaiscript.hpp>
 
@@ -135,9 +136,6 @@ update_frame(const float dt)
     
     Rigidbody::set_transform(throw_entity, throw_transform);
     Rigidbody::apply_world_force(throw_entity, throw_scale);
-    
-    Script::reset(throw_entity);
-    Script::on_throw(throw_entity);
   }
   
   // Move fwd entity
@@ -241,10 +239,10 @@ render_frame()
 void
 init_entities()
 {
-  Component::Script_component foo;
+//  Component::Script_component foo(util::get_resource_path() + "assets/scripts/test_program.seed");
 
   // Hook up collision event for test.
-  Core::Event::add_callback(123, Script::collision_callback);
+  //Core::Event::add_callback(123, Script::collision_callback);
 
   const std::string asset_path = util::get_resource_path() + "assets/";
 
@@ -281,6 +279,7 @@ init_entities()
   // Player
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
+    
     Component::set(player_entity, player_transform);
   
     Rigidbody::Rigidbody_data rb_data;
@@ -301,9 +300,10 @@ init_entities()
   {
     math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
     Component::set(throw_entity, trans);
-    
-    //auto coll = bullet::create_capsule_collider();
-    Component::add<Script::Script_data>(throw_entity);
+
+    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
+    Component::Script_component throw_program(code);
+    Component::set(throw_entity, throw_program);
     
     Rigidbody::Rigidbody_data rb_data;
     rb_data.mass = 3.f;
@@ -357,10 +357,8 @@ init_systems()
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
   Sys::Debug_line_renderer::initialize();
-  Sys::Physics_world::initialize();
-  
-  Sys::Script_engine::initialize();
-  Chai_bindings::initialize(Sys::Script_engine::get_module());
+  Sys::Physics_world::initialize();  
+  Sys::Script::initialize();
 }
 
 

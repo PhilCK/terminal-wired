@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2C8F1599-76F3-408A-93F7-D1E6537AE332</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Seed</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</key>
@@ -22,7 +22,7 @@
 		<string>https://github.com/PhilCK/as-helper.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>projects/xcode/Seed/Seed.xcodeproj</string>
+	<string>projects/xcode/Seed/Seed.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>45C5BFE3E8EC8A8263DD902BC3A2D38F797DCE74</key>
