@@ -12,6 +12,7 @@ namespace
 
 
 namespace Script_detail {
+namespace Chai_instances {
 
 
 void
@@ -37,7 +38,7 @@ Chai_instance
 get_instance()
 {
   assert(!m_available_chai.empty());
-    
+  
   // Are there available instances.
   if(m_available_chai.empty())
   {
@@ -59,7 +60,7 @@ return_instance(Chai_instance &instance)
   if(instance.get() == nullptr)
   {
     assert(instance.get());
-    util::log_error("Returning a null chai instance.");
+    util::log_error("Chai_instance - Returning a null chai instance.");
     return false;
   }
   
@@ -73,9 +74,9 @@ return_instance(Chai_instance &instance)
     }
   }
   
-  if(found)
+  if(!found)
   {
-    util::log_error("Returning an instance that we don't have.");
+    util::log_error("Chai_instance - Returning an instance that we don't have.");
     return false;
   }
   #endif
@@ -84,7 +85,7 @@ return_instance(Chai_instance &instance)
   
   // Null the instance.
   Chai_instance null_instance(nullptr);
-  instance = std::move(null_instance);
+  instance.flush();
   
   return true;
 }
@@ -137,4 +138,5 @@ Chai_instance::operator=(Chai_instance&& other)
 }
 
 
+} // ns
 } // ns

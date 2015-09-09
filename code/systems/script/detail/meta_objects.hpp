@@ -112,8 +112,9 @@ public:
   
 private:
 
-  std::string         m_name = "Seed";
-  Core::Entity        m_entity = Core::invalid_entity();
+  std::string         m_name        = "Seed";
+  Core::Entity        m_entity      = Core::invalid_entity();
+  uint32_t            m_script_id   = 0;
   Transform           m_transform;
   Physics             m_physics;
   Material            m_mat;

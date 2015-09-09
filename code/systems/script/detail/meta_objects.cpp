@@ -1,4 +1,4 @@
-#include <bindings/v_01/meta_objects.hpp>
+#include <systems/script/detail/meta_objects.hpp>
 #include <components/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <utils/logging.hpp>

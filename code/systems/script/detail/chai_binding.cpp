@@ -1,90 +1,30 @@
-#include <bindings/v_01/chai_bindings_01.hpp>
-#include <bindings/v_01/meta_objects.hpp>
-#include <core/entity/entity.hpp>
-#include <components/material/material_controller.hpp>
-#include <utils/directory.hpp>
+#include <systems/script/detail/chai_binding.hpp>
+#include <systems/script/detail/meta_objects.hpp>
+#include <utils/logging.hpp>
 
 
 namespace
 {
-  class physics_object
-  {
-    explicit
-    physics_object()
-    {
-    }
-    
-    
-    void
-    set_size()
-    {
-    }
-    
-    void
-    set_mass()
-    {
-    }
-    
-    Core::Entity entity;
-  };
-
-  class material_object
-  {
-  public:
-  
-    explicit
-    material_object()
-    {
-    }
-    
-    void
-    set_color()
-    {
-      comp::material mat = comp::create_new(util::get_resource_path() + "assets/textures/dev_grid_green_512.png");
-      Component::set(entity, mat);
-    }
-  
-    Core::Entity entity;
-  
-  }; // class
-
-  class generic_object
-  {
-  public:
-  
-    explicit
-    generic_object()
-    : material()
-    {
-    }
-    
-    void set_id(const uint32_t id)
-    {
-      entity = Core::uint_as_entity(id);
-      material.entity = entity;
-    }
-    
-    material_object
-    get_material() { return material; }
-    
-    
-  private:
-  
-    Core::Entity entity;
-    material_object material;
-  
-  }; //class
+  chaiscript::ModulePtr chai_binding_module(new chaiscript::Module());
 }
 
 
-namespace Chai_bindings {
+namespace Script_detail {
+namespace Chai_binding {
 
 
 void
-initialize(chaiscript::ModulePtr mod)
+initialize()
 {
-  namespace chai_s = ::chaiscript;
-  namespace Meta = ::Meta_object;
+  // Short hand to keep it neat.
+  namespace chai_s  = ::chaiscript;
+  namespace Meta    = ::Meta_object;
+  auto mod          = chai_binding_module;
+  
+  // Utils
+  mod->add(chaiscript::fun(&util::log_error),   "log_error");
+  mod->add(chaiscript::fun(&util::log_warning), "log_warning");
+  mod->add(chaiscript::fun(&util::log_info),    "log_info");
   
   // Meta object hooks
   mod->add(chai_s::user_type<Meta::Generic>(),                    "Seed_object");
@@ -126,4 +66,13 @@ initialize(chaiscript::ModulePtr mod)
 }
 
 
+
+chaiscript::ModulePtr
+get_binding_module()
+{
+  return chai_binding_module;
+}
+
+
+} // ns
 } // ns
