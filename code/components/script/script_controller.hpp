@@ -13,6 +13,7 @@
 #include <stdint.h>
 
 
+
 namespace Script_utils {
 
 
@@ -26,16 +27,22 @@ namespace Script_utils {
 namespace Script {
 
 
+  void call_update_hook();
+  
+  void call_thrown_hook();
+  void call_collision_hook();
+
+
   bool collision_callback(const uint32_t id, const void* data);
 
 
   struct Script_data
   {
     uint32_t ch_id = 0;
-  
+    
     Script_data()
     {}
-  
+    
     Script_data(Core::Entity id)
     {
       ch_id = Sys::Script_engine::add_chai_instance();
@@ -90,6 +97,24 @@ namespace Script {
 
 
 namespace Component {
+
+
+class Script_component
+{
+public:
+
+  void          schedule_update_hook();
+  void          schedule_thrown_hook();
+  void          schedule_collision_hook();
+  
+  inline bool   is_valid() const { return m_program_id > 0; }
+  
+private:
+
+  uint32_t m_program_id = 0;
+
+}; // class
+
 
 
 template<>

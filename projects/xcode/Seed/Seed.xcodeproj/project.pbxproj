@@ -68,6 +68,8 @@
 		7EDFF6F31B9A11BE000033BE /* chai_bindings_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EDFF6F11B9A11BE000033BE /* chai_bindings_01.cpp */; };
 		7EE146761B8C9116008B4748 /* rigid_body_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE146741B8C9116008B4748 /* rigid_body_data.cpp */; };
 		7EE730271B95D59E005AA837 /* schedular.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE730251B95D59E005AA837 /* schedular.cpp */; };
+		7EE8880D1BA065DB0073A100 /* chai_instances.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8880B1BA065DB0073A100 /* chai_instances.cpp */; };
+		7EE888101BA066330073A100 /* script_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8880E1BA066320073A100 /* script_manager.cpp */; };
 		7EEBA0AE1B85B1E50088162A /* debug_line_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EEBA0AC1B85B1E50088162A /* debug_line_renderer.cpp */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +205,11 @@
 		7EE730221B95D1B9005AA837 /* collision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = collision.hpp; path = ../../../../Users/PhilCK/Developer/bullet_wrapper/collision.hpp; sourceTree = "<group>"; };
 		7EE730251B95D59E005AA837 /* schedular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schedular.cpp; sourceTree = "<group>"; };
 		7EE730261B95D59E005AA837 /* schedular.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = schedular.hpp; sourceTree = "<group>"; };
+		7EE8880B1BA065DB0073A100 /* chai_instances.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chai_instances.cpp; sourceTree = "<group>"; };
+		7EE8880C1BA065DB0073A100 /* chai_instances.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = chai_instances.hpp; sourceTree = "<group>"; };
+		7EE8880E1BA066320073A100 /* script_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script_manager.cpp; sourceTree = "<group>"; };
+		7EE8880F1BA066320073A100 /* script_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script_manager.hpp; sourceTree = "<group>"; };
+		7EE888111BA068770073A100 /* script_fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = script_fwd.hpp; sourceTree = "<group>"; };
 		7EEBA0AC1B85B1E50088162A /* debug_line_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debug_line_renderer.cpp; sourceTree = "<group>"; };
 		7EEBA0AD1B85B1E50088162A /* debug_line_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = debug_line_renderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -625,6 +632,9 @@
 		7E87C5C81B830AAA003BE24E /* script */ = {
 			isa = PBXGroup;
 			children = (
+				7EE8880A1BA065DB0073A100 /* detail */,
+				7EE8880E1BA066320073A100 /* script_manager.cpp */,
+				7EE8880F1BA066320073A100 /* script_manager.hpp */,
 				7EA289CC1B989CA100C70810 /* script_engine.cpp */,
 				7EA289CD1B989CA100C70810 /* script_engine.hpp */,
 			);
@@ -673,6 +683,16 @@
 				7EE730261B95D59E005AA837 /* schedular.hpp */,
 			);
 			path = schedular;
+			sourceTree = "<group>";
+		};
+		7EE8880A1BA065DB0073A100 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				7EE888111BA068770073A100 /* script_fwd.hpp */,
+				7EE8880B1BA065DB0073A100 /* chai_instances.cpp */,
+				7EE8880C1BA065DB0073A100 /* chai_instances.hpp */,
+			);
+			path = detail;
 			sourceTree = "<group>";
 		};
 		7EEBA0AB1B85B1E50088162A /* debug_line_renderer */ = {
@@ -789,6 +809,7 @@
 				7E405BE91B7D1A91001DA0F5 /* transform_controller.cpp in Sources */,
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,
 				7EC21F231B7A6E4C0020994C /* world.cpp in Sources */,
+				7EE888101BA066330073A100 /* script_manager.cpp in Sources */,
 				7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */,
 				7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */,
 				7EDFF6F31B9A11BE000033BE /* chai_bindings_01.cpp in Sources */,
@@ -807,6 +828,7 @@
 				7EEBA0AE1B85B1E50088162A /* debug_line_renderer.cpp in Sources */,
 				7E405BE11B7D1A91001DA0F5 /* material.cpp in Sources */,
 				7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */,
+				7EE8880D1BA065DB0073A100 /* chai_instances.cpp in Sources */,
 				7E405BE61B7D1A91001DA0F5 /* script.cpp in Sources */,
 				7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */,
 				7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */,

@@ -45,7 +45,7 @@ class Test_program
 
   def on_collision(other_object)
   {
-
+    log_info("I collided with something");
   }
 }
 

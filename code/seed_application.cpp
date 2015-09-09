@@ -241,6 +241,8 @@ render_frame()
 void
 init_entities()
 {
+  Component::Script_component foo;
+
   // Hook up collision event for test.
   Core::Event::add_callback(123, Script::collision_callback);
 

@@ -61,6 +61,7 @@ Physics::set_collision_callback(const std::function<void(const Generic &)> &cb)
 void
 Physics::on_collision(const Meta_object::Generic &gen)
 {
+  // Remove this branch, these callbacks can be queud else where.
   if(m_collision_callback)
   {
     m_collision_callback(gen);
@@ -303,6 +304,7 @@ Generic::set_update_callback(const std::function<void()> &cb)
 void
 Generic::on_update() const
 {
+  // Remove this branch, these callbacks can be queud else where.
   if(m_update_callback)
   {
     m_update_callback();
@@ -320,6 +322,7 @@ Generic::set_thrown_callback(const std::function<void()> &cb)
 void
 Generic::on_thrown() const
 {
+  // Remove this branch, these callbacks can be queud else where.
   if(m_thrown_callback)
   {
     m_thrown_callback();
