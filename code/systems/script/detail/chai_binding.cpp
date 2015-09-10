@@ -36,9 +36,7 @@ initialize()
   mod->add(chai_s::fun(&Meta::Generic::get_material),             "get_material_api");
   mod->add(chai_s::fun(&Meta::Generic::get_transform),            "get_transform_api");
   mod->add(chai_s::fun(&Meta::Generic::set_update_callback),      "set_update_callback");
-  mod->add(chai_s::fun(&Meta::Generic::on_update),                "on_update"); // need to hide this better I think.
   mod->add(chai_s::fun(&Meta::Generic::set_thrown_callback),      "set_thrown_callback");
-  mod->add(chai_s::fun(&Meta::Generic::on_thrown),                "on_thrown");
   
   mod->add(chai_s::fun(&Meta::Physics::get_mass),                 "get_mass");
   mod->add(chai_s::fun(&Meta::Physics::set_mass),                 "set_mass");

@@ -1,4 +1,5 @@
 #include <systems/script/detail/meta_objects.hpp>
+#include <systems/script/script_manager.hpp>
 #include <components/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <utils/logging.hpp>
@@ -54,17 +55,9 @@ Physics::apply_force(const float x, const float y, const float z)
 void
 Physics::set_collision_callback(const std::function<void(const Generic &)> &cb)
 {
-  m_collision_callback = cb;
-}
-
-
-void
-Physics::on_collision(const Meta_object::Generic &gen)
-{
-  // Remove this branch, these callbacks can be queud else where.
-  if(m_collision_callback)
+  if(m_owner.get_script_mgr())
   {
-    m_collision_callback(gen);
+    m_owner.get_script_mgr()->set_collision_callback(m_owner.get_entity_id(), cb);
   }
 }
 
@@ -286,8 +279,9 @@ Mesh::Mesh()
 }
 
 
-Generic::Generic(const uint32_t entity_id)
+Generic::Generic(const uint32_t entity_id, Sys::Script::Script_manager *mgr)
 : m_entity(Core::uint_as_entity(entity_id))
+, m_script_mgr(mgr)
 , m_transform(*this)
 , m_physics(*this)
 {
@@ -295,37 +289,21 @@ Generic::Generic(const uint32_t entity_id)
 
 
 void
-Generic::set_update_callback(const std::function<void()> &cb)
+Generic::set_update_callback(const Update_callback &cb)
 {
-  m_update_callback = cb;
-}
-
-
-void
-Generic::on_update() const
-{
-  // Remove this branch, these callbacks can be queud else where.
-  if(m_update_callback)
+  if(m_script_mgr)
   {
-    m_update_callback();
+    m_script_mgr->set_update_callback(m_entity, cb);
   }
 }
 
 
 void
-Generic::set_thrown_callback(const std::function<void()> &cb)
+Generic::set_thrown_callback(const Thrown_callback &cb)
 {
-  m_thrown_callback = cb;
-}
-
-
-void
-Generic::on_thrown() const
-{
-  // Remove this branch, these callbacks can be queud else where.
-  if(m_thrown_callback)
+  if(m_script_mgr)
   {
-    m_thrown_callback();
+    m_script_mgr->set_thrown_callback(m_entity, cb);
   }
 }
 

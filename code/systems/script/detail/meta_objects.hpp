@@ -3,18 +3,11 @@
 
 
 #include <core/entity/entity.hpp>
+#include <systems/script/detail/script_fwd.hpp>
 #include <string>
-#include <functional>
 
 
 namespace Meta_object {
-
-
-class Generic;
-class Physics;
-class Material;
-class Mesh;
-class Transform;
 
 
 class Physics
@@ -27,8 +20,7 @@ public:
   void            set_solid(const bool solid);
   bool            is_solid() const;
   void            apply_force(const float x, const float y, const float z);
-  void            set_collision_callback(const std::function<void(const Generic &)> &cb);
-  void            on_collision(const Generic &gen);
+  void            set_collision_callback(const Collision_callback &cb);
   
 private:
 
@@ -93,12 +85,10 @@ class Generic
 {
 public:
 
-  explicit            Generic(const uint32_t id = 0);
+  explicit            Generic(const uint32_t id = 0, Sys::Script::Script_manager *mgr = nullptr);
   
-  void                set_update_callback(const std::function<void()> &cb);
-  void                on_update() const;
-  void                set_thrown_callback(const std::function<void()> &cb);
-  void                on_thrown() const;
+  void                set_update_callback(const Update_callback &cb);
+  void                set_thrown_callback(const Thrown_callback &cb);
   
   inline void         set_name(const std::string &str)   { m_name = str;  }
   inline std::string  get_name() const                   { return m_name; }
@@ -108,17 +98,20 @@ public:
   inline Material&    get_material()    { return m_mat;        }
   inline Mesh&        get_mesh()        { return m_mesh;       }
   
+  // Internal API do not expose.
+  
   inline Core::Entity get_entity_id() const { return m_entity; }
+  inline Sys::Script::Script_manager* get_script_mgr() const { return m_script_mgr; }
   
 private:
 
-  std::string         m_name        = "Seed";
-  Core::Entity        m_entity      = Core::invalid_entity();
-  uint32_t            m_script_id   = 0;
-  Transform           m_transform;
-  Physics             m_physics;
-  Material            m_mat;
-  Mesh                m_mesh;
+  std::string                  m_name        = "Seed";
+  Core::Entity                 m_entity      = Core::invalid_entity();
+  Sys::Script::Script_manager *m_script_mgr  = nullptr;
+  Transform                    m_transform;
+  Physics                      m_physics;
+  Material                     m_mat;
+  Mesh                         m_mesh;
   
   std::function<void()> m_update_callback;
   std::function<void()> m_thrown_callback;

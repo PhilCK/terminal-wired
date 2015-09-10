@@ -50,7 +50,7 @@ namespace
     
     if(collision_data->entity_a == throw_entity)
     {
-
+      
     }
   
     return true;
@@ -357,7 +357,7 @@ init_systems()
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
   Sys::Debug_line_renderer::initialize();
-  Sys::Physics_world::initialize();  
+  Sys::Physics_world::initialize();
   Sys::Script::initialize();
 }
 
