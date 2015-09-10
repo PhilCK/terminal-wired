@@ -1,14 +1,7 @@
+#include <components/script/script_controller.hpp>
 #include <systems/script/script_manager.hpp>
-#include "script_controller.hpp"
-#include "script.hpp"
+#include <systems/script/script_controller.hpp>
 #include <map>
-
-
-
-namespace
-{
-  Sys::Script::Script_manager script_mgr;
-}
 
 
 namespace Component {
@@ -18,7 +11,7 @@ template<>
 bool
 add<Script_component>(const Core::Entity e)
 {
-  return script_mgr.add_script(e, "");
+  return Sys::Script::get_current_script_mgr().add_script(e, "");
 }
 
 
@@ -26,7 +19,7 @@ template<>
 bool
 set<Script_component>(const Core::Entity e, const Script_component &component)
 {
-  return script_mgr.add_script(e, component.get_code());
+  return Sys::Script::get_current_script_mgr().add_script(e, component.get_code());
 }
 
 

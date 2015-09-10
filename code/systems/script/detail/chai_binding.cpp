@@ -32,6 +32,7 @@ initialize()
   mod->add(chai_s::constructor<Meta::Generic(uint32_t)>(),        "Seed_object");
   mod->add(chai_s::fun(&Meta::Generic::get_name),                 "get_name");
   mod->add(chai_s::fun(&Meta::Generic::set_name),                 "set_name");
+  mod->add(chai_s::fun(&Meta::Generic::get_id),                   "get_id");
   mod->add(chai_s::fun(&Meta::Generic::get_physics),              "get_physics_api");
   mod->add(chai_s::fun(&Meta::Generic::get_material),             "get_material_api");
   mod->add(chai_s::fun(&Meta::Generic::get_transform),            "get_transform_api");

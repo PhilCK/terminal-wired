@@ -12,7 +12,7 @@ namespace Script {
 
 void                          initialize();
 Sys::Script::Script_manager&  get_current_script_mgr();
-bool                          event_callback(const uint32_t id, void *data);
+bool                          event_callback(const uint32_t id, const void *data);
 
 
 } // ns

@@ -7,6 +7,11 @@
 #include <systems/script/detail/meta_objects.hpp>
 
 
+namespace
+{
+}
+
+
 namespace Sys {
 namespace Script {
 
@@ -24,7 +29,7 @@ Script_manager::~Script_manager()
 bool
 Script_manager::add_script(const Core::Entity entity, const std::string &code)
 {
-  auto ch_instance = Script_detail::Chai_instances::get_instance();
+  static auto ch_instance = Script_detail::Chai_instances::get_instance();
   
   assert(ch_instance.is_valid());
   if(!ch_instance.is_valid())
@@ -33,11 +38,14 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
     return false;
   }
   
+  auto obj = Meta_object::Generic(Core::entity_as_uint(entity), this
+    );
+  obj.set_name("foofy");
+  
   m_objects.insert(
     std::pair<Core::Entity, Meta_object::Generic>(
       entity,
-      Meta_object::Generic(Core::entity_as_uint(entity)
-    )
+      obj
   ));
   
   namespace chai_s = chaiscript;
@@ -70,11 +78,17 @@ Script_manager::think()
   {
     m_thrown_callbacks[e]();
   }
+  m_thrown_queue.clear();
   
   for(const auto e : m_collision_queue)
   {
-    m_collision_callbacks[e](Meta_object::Generic(0, nullptr));
+    if(m_objects.count(e) && m_collision_callbacks.count(e))
+    {
+      const auto obj = Meta_object::Generic(0, nullptr);
+      m_collision_callbacks[e](obj);
+    }
   }
+  m_collision_queue.clear();
   
   for(const auto &cb : m_update_callbacks)
   {
@@ -86,6 +100,7 @@ Script_manager::think()
 void
 Script_manager::schedule_collision_callback(const Core::Entity entity)
 {
+  m_collision_queue.emplace_back(entity);
 }
 
 
@@ -101,6 +116,7 @@ Script_manager::set_thrown_callback(const Core::Entity e, const Meta_object::Thr
   if(m_objects.count(e))
   {
     m_thrown_callbacks[e] = cb;
+    m_thrown_queue.push_back(e);
   }
   else
   {

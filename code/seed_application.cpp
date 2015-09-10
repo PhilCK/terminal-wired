@@ -26,6 +26,7 @@
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <assert.h>
 #include <string>
+#include <systems/script/script_manager.hpp>
 
 #include <chaiscript/chaiscript.hpp>
 
@@ -99,6 +100,8 @@ update_frame(const float dt)
 {
   Core::Event::deliver_events();
   Core::Schedular::think();
+  
+  Sys::Script::get_current_script_mgr().think();
 
   if(input.is_key_down(SDLK_w))
   {

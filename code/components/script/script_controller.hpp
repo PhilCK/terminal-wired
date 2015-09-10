@@ -5,7 +5,6 @@
 #include <core/entity/entity.hpp>
 #include <core/entity/component_interface.hpp>
 #include <components/script/script.hpp>
-#include <systems/script/detail/meta_objects.hpp>
 #include <utils/directory.hpp>
 #include <string>
 #include <functional>

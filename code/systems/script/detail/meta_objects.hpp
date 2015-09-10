@@ -92,6 +92,7 @@ public:
   
   inline void         set_name(const std::string &str)   { m_name = str;  }
   inline std::string  get_name() const                   { return m_name; }
+  inline std::string  get_id() const                     { return std::to_string(Core::entity_as_uint(m_entity)); }
   
   inline Transform&   get_transform()   { return m_transform;  }
   inline Physics&     get_physics()     { return m_physics;    }
