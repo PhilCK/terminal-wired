@@ -47,7 +47,7 @@ private:
   
 private:
 
-  std::map<Core::Entity, Meta_object::Generic>  m_objects;
+  std::map<Core::Entity, std::unique_ptr<Meta_object::Generic> >  m_objects;
   std::map<Core::Entity, Meta_object::Collision_callback>                   m_collision_callbacks;
   std::map<Core::Entity, Meta_object::Update_callback>                   m_update_callbacks;
   std::map<Core::Entity, Meta_object::Thrown_callback>

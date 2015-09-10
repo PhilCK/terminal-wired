@@ -46,7 +46,7 @@ class Transform
 {
 public:
 
-  explicit        Transform(const Generic &owner);
+  explicit        Transform(Generic &owner);
 
   void            set_position(const float x, const float y, const float z);
   float           get_x() const;
@@ -65,7 +65,7 @@ public:
   
 private:
 
-  const Generic &m_owner;
+  Generic *m_owner = nullptr;
 
 }; // class
 
@@ -86,6 +86,7 @@ class Generic
 public:
 
   explicit            Generic(const uint32_t id = 0, Sys::Script::Script_manager *mgr = nullptr);
+                      ~Generic();
   
   void                set_update_callback(const Update_callback &cb);
   void                set_thrown_callback(const Thrown_callback &cb);
@@ -94,7 +95,7 @@ public:
   inline std::string  get_name() const                   { return m_name; }
   inline std::string  get_id() const                     { return std::to_string(Core::entity_as_uint(m_entity)); }
   
-  inline Transform&   get_transform()   { return m_transform;  }
+  inline Transform*   get_transform()   { return &m_transform; }
   inline Physics&     get_physics()     { return m_physics;    }
   inline Material&    get_material()    { return m_mat;        }
   inline Mesh&        get_mesh()        { return m_mesh;       }

@@ -1,3 +1,4 @@
+
 #include <systems/script/detail/meta_objects.hpp>
 #include <systems/script/script_manager.hpp>
 #include <components/transform/transform_controller.hpp>
@@ -77,6 +78,8 @@ Material::set_color(const float r, const float g, const float b)
 void
 Material::set_emissive(const bool em)
 {
+
+
   util::log_error("not yet impl");
 }
 
@@ -89,8 +92,8 @@ Material::is_emissive() const
 }
 
 
-Transform::Transform(const Generic &owner)
-: m_owner(owner)
+Transform::Transform(Generic &owner)
+: m_owner(&owner)
 {
 }
 
@@ -98,7 +101,7 @@ Transform::Transform(const Generic &owner)
 void
 Transform::set_position(const float x, const float y, const float z)
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   math::transform trans;
   
   if(Component::get(e, trans))
@@ -116,7 +119,7 @@ Transform::set_position(const float x, const float y, const float z)
 float
 Transform::get_x() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -134,7 +137,7 @@ Transform::get_x() const
 float
 Transform::get_y() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -152,7 +155,7 @@ Transform::get_y() const
 float
 Transform::get_z() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -201,12 +204,11 @@ Transform::get_roll() const
 void
 Transform::set_scale(const float x, const float y, const float z)
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   math::transform trans;
   Rigidbody::Rigidbody_data rb_data;
   
-  
-  if(Component::get(e, trans) && Component::get(e, rb_data))
+  if(Component::get(e, trans) /*&& Component::get(e, rb_data)*/)
   {
     trans.scale = math::vec3_init(x, y, z);
     assert(Component::set(e, trans));
@@ -223,7 +225,7 @@ Transform::set_scale(const float x, const float y, const float z)
 float
 Transform::get_scale_x() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -241,7 +243,7 @@ Transform::get_scale_x() const
 float
 Transform::get_scale_y() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -259,7 +261,7 @@ Transform::get_scale_y() const
 float
 Transform::get_scale_z() const
 {
-  const Core::Entity e = m_owner.get_entity_id();
+  const Core::Entity e = m_owner->get_entity_id();
   assert(Core::entity_as_uint(e));
   
   math::transform trans;
@@ -285,6 +287,12 @@ Generic::Generic(const uint32_t entity_id, Sys::Script::Script_manager *mgr)
 , m_transform(*this)
 , m_physics(*this)
 {
+}
+
+
+Generic::~Generic()
+{
+
 }
 
 

@@ -50,6 +50,7 @@ initialize()
   mod->add(chai_s::fun(&Meta::Material::set_emissive),            "set_emissive");
   mod->add(chai_s::fun(&Meta::Material::set_color),               "set_color");
   
+  mod->add(chai_s::user_type<Meta::Transform>(),                  "Transform");
   mod->add(chai_s::fun(&Meta::Transform::get_scale_x),            "get_scale_x");
   mod->add(chai_s::fun(&Meta::Transform::get_scale_y),            "get_scale_y");
   mod->add(chai_s::fun(&Meta::Transform::get_scale_z),            "get_scale_z");
