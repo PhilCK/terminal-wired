@@ -1,10 +1,9 @@
-#include <systems/script/script_manager.hpp>
-#include <systems/script/detail/meta_objects.hpp>
-#include <systems/script/detail/chai_binding.hpp>
-#include <systems/script/detail/chai_instances.hpp>
+#include <systems/script_world/script_world_manager.hpp>
+#include <systems/script_world/detail/meta_objects.hpp>
+#include <systems/script_world/detail/chai_binding.hpp>
+#include <systems/script_world/detail/chai_instances.hpp>
 #include <utils/logging.hpp>
 #include <chaiscript/ChaiScript.hpp>
-#include <systems/script/detail/meta_objects.hpp>
 
 
 namespace

@@ -1,5 +1,5 @@
-#include <systems/script/detail/chai_binding.hpp>
-#include <systems/script/detail/meta_objects.hpp>
+#include <systems/script_world/detail/chai_binding.hpp>
+#include <systems/script_world/detail/meta_objects.hpp>
 #include <utils/logging.hpp>
 
 

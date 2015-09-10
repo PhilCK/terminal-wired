@@ -2,7 +2,7 @@
 #define CHAI_INSTANCES_INCLUDED_ACEBD83F_9602_4A3F_A0A8_83EE760251C0
 
 
-#include <systems/script/detail/script_fwd.hpp>
+#include <systems/script_world/detail/script_fwd.hpp>
 #include <chaiscript/ChaiScript.hpp>
 #include <stdint.h>
 

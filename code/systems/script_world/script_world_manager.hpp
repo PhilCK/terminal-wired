@@ -2,7 +2,7 @@
 #define SCRIPT_MANAGER_INCLUDED_76D2AA0E_C60E_4303_B282_7B76EF6B35FE
 
 
-#include <systems/script/detail/meta_objects.hpp>
+#include <systems/script_world/detail/meta_objects.hpp>
 #include <core/entity/entity.hpp>
 #include <stdint.h>
 #include <string>

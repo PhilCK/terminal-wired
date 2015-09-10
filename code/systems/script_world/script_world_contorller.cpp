@@ -1,8 +1,8 @@
 #include <core/event/event.hpp>
-#include <systems/script/script_controller.hpp>
-#include <systems/script/script_manager.hpp>
-#include <systems/script/detail/chai_instances.hpp>
-#include <systems/script/detail/chai_binding.hpp>
+#include <systems/script_world/script_world_controller.hpp>
+#include <systems/script_world/script_world_manager.hpp>
+#include <systems/script_world/detail/chai_instances.hpp>
+#include <systems/script_world/detail/chai_binding.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
 
 

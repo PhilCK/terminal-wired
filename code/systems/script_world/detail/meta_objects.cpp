@@ -1,6 +1,6 @@
 
-#include <systems/script/detail/meta_objects.hpp>
-#include <systems/script/script_manager.hpp>
+#include <systems/script_world/detail/meta_objects.hpp>
+#include <systems/script_world/script_world_manager.hpp>
 #include <components/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <utils/logging.hpp>

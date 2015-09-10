@@ -4,10 +4,8 @@
 
 #include <core/entity/entity.hpp>
 #include <core/entity/component_interface.hpp>
-#include <components/script/script.hpp>
 #include <utils/directory.hpp>
 #include <string>
-#include <functional>
 #include <stdint.h>
 
 
@@ -27,7 +25,7 @@ public:
 private:
   
   std::string m_script_code;
-  
+
 }; // class
 
 
@@ -37,10 +35,6 @@ bool add<Script_component>(const Core::Entity e);
 
 template<>
 bool set<Script_component>(const Core::Entity e, const Script_component &component);
-
-
-template<>
-bool get<Script_component>(const Core::Entity e, Script_component &component);
 
 
 } // namespace

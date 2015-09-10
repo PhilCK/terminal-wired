@@ -13,7 +13,7 @@
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
-#include <systems/script/script_controller.hpp>
+#include <systems/script_world/script_world_controller.hpp>
 #include <utils/directory.hpp>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
@@ -26,9 +26,7 @@
 #include <sdl_wrapper/sdl_lazy_include.hpp>
 #include <assert.h>
 #include <string>
-#include <systems/script/script_manager.hpp>
-
-#include <chaiscript/chaiscript.hpp>
+#include <systems/script_world/script_world_manager.hpp>
 
 
 namespace

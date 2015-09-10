@@ -1,4 +1,4 @@
-#include <systems/script/detail/chai_instances.hpp>
+#include <systems/script_world/detail/chai_instances.hpp>
 #include <utils/directory.hpp>
 #include <utils/logging.hpp>
 #include <vector>

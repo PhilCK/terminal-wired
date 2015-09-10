@@ -3,7 +3,7 @@
 
 
 #include <core/entity/entity.hpp>
-#include <systems/script/detail/script_fwd.hpp>
+#include <systems/script_world/detail/script_fwd.hpp>
 #include <string>
 
 

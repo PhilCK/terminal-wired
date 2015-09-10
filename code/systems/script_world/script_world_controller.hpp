@@ -2,7 +2,7 @@
 #define SCRIPT_CONTROLLER_INCLUDED_68CB9F9E_0FBF_4551_AE23_A34E85C7467C
 
 
-#include <systems/script/detail/script_fwd.hpp>
+#include <systems/script_world/detail/script_fwd.hpp>
 #include <stdint.h>
 
 
