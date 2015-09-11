@@ -37,10 +37,6 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
     return false;
   }
   
-  //auto obj = Meta_object::Generic(Core::entity_as_uint(entity), this
-  //  );
-  //obj.set_name("foofy");
-  
   m_objects.insert(
     std::pair<Core::Entity, std::unique_ptr<Meta_object::Generic> >(
       entity,
@@ -50,10 +46,16 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   namespace chai_s = chaiscript;
   auto ch = ch_instance.get();
   
-  ch->add(Script_detail::Chai_binding::get_binding_module());
-  ch->add_global(chai_s::var(m_objects.at(entity).get()), "seed"); // I think this will barf when ch is resued.
-  //ch->eval("GLOBAL seed = Seed_object(" + std::to_string(Core::entity_as_uint(entity)) + ")");
-  ch->eval(code);
+  try
+  {
+    ch->add(Script_detail::Chai_binding::get_binding_module());
+    ch->add_global(chai_s::var(m_objects.at(entity).get()), "seed"); // I think this will barf when ch is resued.
+    ch->eval(code);
+  }
+  catch(...)
+  {
+    return false;
+  }
   
   return true;
 }
@@ -100,7 +102,10 @@ Script_manager::think()
 void
 Script_manager::schedule_collision_callback(const Core::Entity entity)
 {
-  m_collision_queue.emplace_back(entity);
+  if(m_objects.count(entity))
+  {
+    m_collision_queue.emplace_back(entity);
+  }
 }
 
 
