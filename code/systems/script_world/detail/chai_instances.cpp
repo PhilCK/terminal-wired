@@ -81,6 +81,7 @@ return_instance(Chai_instance &instance)
   }
   #endif
   
+  new((void*)instance.get()) chaiscript::ChaiScript();
   m_available_chai.push_back(instance.get());
   
   // Null the instance.

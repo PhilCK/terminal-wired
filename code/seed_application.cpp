@@ -27,6 +27,7 @@
 #include <assert.h>
 #include <string>
 #include <systems/script_world/script_world_manager.hpp>
+#include <systems/actor/actor.hpp>
 
 
 namespace
@@ -134,6 +135,10 @@ update_frame(const float dt)
     math::transform throw_transform;
     throw_transform.rotation = player_transform.rotation;
     throw_transform.position = math::vec3_add(player_transform.position, player_fwd);
+    
+    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
+    Component::Script_component throw_program(code);
+    Component::set(throw_entity, throw_program);    
     
     Rigidbody::set_transform(throw_entity, throw_transform);
     Rigidbody::apply_world_force(throw_entity, throw_scale);

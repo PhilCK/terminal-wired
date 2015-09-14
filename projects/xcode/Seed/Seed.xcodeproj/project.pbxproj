@@ -63,6 +63,8 @@
 		7EC21F291B7B12680020994C /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F271B7B12680020994C /* timer.cpp */; };
 		7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F2A1B7B2CF80020994C /* logging.cpp */; };
 		7EE146761B8C9116008B4748 /* rigid_body_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE146741B8C9116008B4748 /* rigid_body_data.cpp */; };
+		7EE2F9DC1BA60B5C0033DA10 /* actor_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */; };
+		7EE2F9E01BA6F37D0033DA10 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */; };
 		7EE730271B95D59E005AA837 /* schedular.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE730251B95D59E005AA837 /* schedular.cpp */; };
 		7EE888281BA219F40073A100 /* chai_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8881D1BA219F40073A100 /* chai_binding.cpp */; };
 		7EE888291BA219F40073A100 /* chai_instances.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8881F1BA219F40073A100 /* chai_instances.cpp */; };
@@ -192,6 +194,10 @@
 		7EC21F2B1B7B2CF80020994C /* logging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = logging.hpp; path = ../../../../Users/PhilCK/Developer/utils/logging.hpp; sourceTree = "<group>"; };
 		7EE146741B8C9116008B4748 /* rigid_body_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_data.cpp; sourceTree = "<group>"; };
 		7EE146751B8C9116008B4748 /* rigid_body_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_data.hpp; sourceTree = "<group>"; };
+		7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor_controller.cpp; sourceTree = "<group>"; };
+		7EE2F9DB1BA60B5C0033DA10 /* actor_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor_controller.hpp; sourceTree = "<group>"; };
+		7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor.cpp; sourceTree = "<group>"; };
+		7EE2F9DF1BA6F37D0033DA10 /* actor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor.hpp; sourceTree = "<group>"; };
 		7EE48C551B8EF2C400BEA256 /* world_axis.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world_axis.hpp; sourceTree = "<group>"; };
 		7EE730221B95D1B9005AA837 /* collision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = collision.hpp; path = ../../../../Users/PhilCK/Developer/bullet_wrapper/collision.hpp; sourceTree = "<group>"; };
 		7EE730251B95D59E005AA837 /* schedular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schedular.cpp; sourceTree = "<group>"; };
@@ -434,6 +440,7 @@
 		7E405BC21B7D1A91001DA0F5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				7EE2F9D91BA60B5C0033DA10 /* actor */,
 				7E87C5A11B7E18A4003BE24E /* mesh */,
 				7E405BC31B7D1A91001DA0F5 /* camera */,
 				7E405BC81B7D1A91001DA0F5 /* material */,
@@ -563,6 +570,7 @@
 		7E87C5B11B81360F003BE24E /* systems */ = {
 			isa = PBXGroup;
 			children = (
+				7EE2F9DD1BA6F37D0033DA10 /* actor */,
 				7EE8881B1BA219F40073A100 /* script_world */,
 				7E8E89771B8BADCC007F416E /* physics_world */,
 				7E5B116B1B8997AF00614422 /* mesh_renderer */,
@@ -628,6 +636,24 @@
 			name = bullet_wrapper;
 			path = /usr/local/include/bullet_wrapper;
 			sourceTree = "<absolute>";
+		};
+		7EE2F9D91BA60B5C0033DA10 /* actor */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */,
+				7EE2F9DB1BA60B5C0033DA10 /* actor_controller.hpp */,
+			);
+			path = actor;
+			sourceTree = "<group>";
+		};
+		7EE2F9DD1BA6F37D0033DA10 /* actor */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */,
+				7EE2F9DF1BA6F37D0033DA10 /* actor.hpp */,
+			);
+			path = actor;
+			sourceTree = "<group>";
 		};
 		7EE48C541B8EF2C400BEA256 /* common */ = {
 			isa = PBXGroup;
@@ -754,6 +780,7 @@
 				7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */,
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
 				7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */,
+				7EE2F9E01BA6F37D0033DA10 /* actor.cpp in Sources */,
 				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
 				7E405BE71B7D1A91001DA0F5 /* script_controller.cpp in Sources */,
 				7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */,
@@ -784,6 +811,7 @@
 				7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */,
 				7E405BE01B7D1A91001DA0F5 /* camera_controller.cpp in Sources */,
 				7E0A33FC1B791E8D000C7B22 /* draw_call.cpp in Sources */,
+				7EE2F9DC1BA60B5C0033DA10 /* actor_controller.cpp in Sources */,
 				7E0A34021B791E8D000C7B22 /* texture.cpp in Sources */,
 				7E405BE91B7D1A91001DA0F5 /* transform_controller.cpp in Sources */,
 				7E0A33FA1B791E8D000C7B22 /* window.cpp in Sources */,

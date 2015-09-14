@@ -50,7 +50,6 @@ template<>
 bool set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_data &set);
 
 
-
 } // ns
 
 

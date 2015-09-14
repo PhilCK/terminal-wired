@@ -54,6 +54,7 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   }
   catch(...)
   {
+    util::log_error("There was an error with chai");
     return false;
   }
   
