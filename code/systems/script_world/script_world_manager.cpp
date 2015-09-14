@@ -4,6 +4,7 @@
 #include <systems/script_world/detail/chai_instances.hpp>
 #include <utils/logging.hpp>
 #include <chaiscript/ChaiScript.hpp>
+#include <utils/directory.hpp>
 
 
 namespace
@@ -46,16 +47,33 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   namespace chai_s = chaiscript;
   auto ch = ch_instance.get();
   
-  try
+  //try
   {
+    static Core::Entity e;
+    e = entity;
+  
+    auto get_seed = [this]()
+    {
+      return m_objects.at(e).get();
+    };
+  
+    // chai.add(fun(&MyClass::method2, &obj, 3), "method2");
+  
+    Script_detail::Chai_binding::get_binding_module()->add(chai_s::fun(get_seed), "get_seed");
+  
+    
+    
     ch->add(Script_detail::Chai_binding::get_binding_module());
-    ch->add_global(chai_s::var(m_objects.at(entity).get()), "seed"); // I think this will barf when ch is resued.
+    //ch->add(chai_s::fun(get_seed), "get_seed");
+    ch->add(chai_s::var(m_objects.at(entity).get()), "seed");
+    //ch->add_global(chai_s::var(m_objects.at(entity).get()), "seed"); // I think this will barf when ch is resued.
     ch->eval(code);
   }
-  catch(...)
+  //catch(...)
   {
-    util::log_error("There was an error with chai");
-    return false;
+    //util::log_error("Therewe was an error with chai");
+    //assert(false);
+    //return false;
   }
   
   return true;

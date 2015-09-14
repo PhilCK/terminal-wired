@@ -46,6 +46,7 @@ get_instance()
   }
 
   auto avail_instance = Chai_instance(m_available_chai.back());
+  new((void*)avail_instance.get()) chaiscript::ChaiScript({util::get_resource_path()});
   m_available_chai.erase(m_available_chai.end() - 1);
   
   return avail_instance;
