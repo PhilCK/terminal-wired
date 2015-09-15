@@ -45,7 +45,7 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   ));
   
   namespace chai_s = chaiscript;
-  auto ch = ch_instance.get();
+  auto ch = new chaiscript::ChaiScript({util::get_resource_path()}); //ch_instance.get();
   
   //try
   {

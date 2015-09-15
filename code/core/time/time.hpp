@@ -5,9 +5,12 @@
 namespace Core {
 namespace Time {
 
-
-void        initialize();
-void        think();
+namespace Detail
+{
+  void        initialize();
+  void        think();
+  void        de_initialize();
+}
 
 float       get_delta_time();
 

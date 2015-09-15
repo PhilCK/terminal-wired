@@ -8,7 +8,9 @@
 namespace Core {
 
 
-// todo
+void initialize();
+void think();
+void de_initialize();
 
 
 } // ns

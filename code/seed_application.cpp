@@ -1,3 +1,5 @@
+#include <core/core.hpp>
+#include <core/time/time.hpp>
 #include <core/schedular/schedular.hpp>
 #include <core/event/event.hpp>
 #include <core/entity/entity.hpp>
@@ -75,6 +77,7 @@ namespace test
 int
 main()
 {
+  Core::initialize();
   init_systems();
   init_entities();
   
@@ -83,12 +86,14 @@ main()
   
   while(sys::window::is_open())
   {
-    const float delta_time = dt_timer.split() * 0.001f;
-
-    update_frame(delta_time);
+    Core::think();
+    
+    update_frame(Core::Time::get_delta_time());
     render_frame();
     // Render
   }
+  
+  Core::de_initialize();
 
   return 0;
 }
@@ -104,23 +109,26 @@ update_frame(const float dt)
 
   if(input.is_key_down(SDLK_w))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
+    Actor::move_forward(player_entity, -100 * dt);
+    //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
   }
   if(input.is_key_down(SDLK_s))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
+    Actor::move_forward(player_entity, +100 * dt);
+    //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
   }
   if(input.is_key_down(SDLK_a))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(-1, 0, 0));
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0));
   }
   if(input.is_key_down(SDLK_d))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(1, 0, 0));
+    Rigidbody::apply_local_force(player_entity, math::vec3_init(+100  * dt, 0, 0));
   }
   if(input.get_mouse_delta_x() != 0)
   {
-    Rigidbody::apply_local_torque(player_entity, math::vec3_init(0, input.get_mouse_delta_x() * 0.1f, 0));
+    //Rigidbody::apply_local_torque(player_entity, math::vec3_init(0, input.get_mouse_delta_x() * 0.1f, 0));
+    Actor::turn_right(player_entity, input.get_mouse_delta_x() * dt);
   }
   if(input.is_key_down(SDLK_SPACE))
   {
@@ -160,6 +168,7 @@ update_frame(const float dt)
 
   comp::rigid_body_controller::update_world(dt);
   Sys::Physics_world::update_world(dt);
+  input.think();
   sys::window::think();
   
 //  // ray test
@@ -205,8 +214,8 @@ render_frame()
   math::transform cam_transform;
   Component::get<math::transform>(camera_entity, cam_transform);
   
-  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-  const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
+  const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
   const math::mat4 view_proj = math::mat4_multiply(view, proj);
 
   // Render Scene
@@ -231,8 +240,8 @@ render_frame()
   
     const math::mat4 world = math::mat4_id();
     
-    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
+    const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
     
     const math::mat4 wvp = math::mat4_multiply(world, view, proj);
     auto wvp_data = math::mat4_to_array(wvp);

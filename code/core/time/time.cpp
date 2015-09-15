@@ -12,6 +12,7 @@ namespace
 namespace Core {
 namespace Time {
 
+namespace Detail {
 
 void
 initialize()
@@ -25,6 +26,15 @@ think()
 {
   delta_time = app_timer.split() * 0.001f;
 }
+
+
+void
+de_initialize()
+{
+  app_timer.stop();
+}
+
+} // detail ns
 
 
 float

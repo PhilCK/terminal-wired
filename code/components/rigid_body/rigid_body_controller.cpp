@@ -103,15 +103,26 @@ set_transform(const Core::Entity e, const math::transform &trans)
 {
   assert(rigid_bodies.count(e));
   
+  
+  // Convert rotation to bullet
+  math::quat bt_friendly_rot;
+  {
+    //const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
+    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(trans.rotation);
+    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
+    bt_friendly_rot = math::quat_init_with_mat3(rot_mat_tr);
+  }
+  
+  
   btTransform update_transform;
   update_transform.setOrigin(btVector3(math::vec3_get_x(trans.position),
                                        math::vec3_get_y(trans.position),
                                        math::vec3_get_z(trans.position)));
 
-  update_transform.setRotation(btQuaternion(math::quat_get_x(trans.rotation),
-                                            math::quat_get_y(trans.rotation),
-                                            math::quat_get_z(trans.rotation),
-                                            math::quat_get_w(trans.rotation)));
+  update_transform.setRotation(btQuaternion(math::quat_get_x(bt_friendly_rot),
+                                            math::quat_get_y(bt_friendly_rot),
+                                            math::quat_get_z(bt_friendly_rot),
+                                            math::quat_get_w(bt_friendly_rot)));
   
   auto &rb = rigid_bodies.at(e);
   rb.set_transform(update_transform);
