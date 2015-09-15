@@ -166,8 +166,9 @@ update_frame(const float dt)
     assert(Component::set(fwd_entity, trans));
   }
 
-  comp::rigid_body_controller::update_world(dt);
   Sys::Physics_world::update_world(dt);
+  comp::rigid_body_controller::update_world(dt);
+  //Actor::update_transforms(); // Called after physics stuff.
   input.think();
   sys::window::think();
   

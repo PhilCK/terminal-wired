@@ -12,7 +12,6 @@ namespace Actor {
 void        turn_right(const Core::Entity e, const float turn);
 void        move_forward(const Core::Entity e, const float fwd);
 void        jump(const Core::Entity e, const float jmp);
-bool        get_view_matrix(const Core::Entity e, math::mat4 &out_view_mat);
 
 
 } // ns

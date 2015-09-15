@@ -103,7 +103,6 @@ set_transform(const Core::Entity e, const math::transform &trans)
 {
   assert(rigid_bodies.count(e));
   
-  
   // Convert rotation to bullet
   math::quat bt_friendly_rot;
   {
@@ -112,7 +111,6 @@ set_transform(const Core::Entity e, const math::transform &trans)
     const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
     bt_friendly_rot = math::quat_init_with_mat3(rot_mat_tr);
   }
-  
   
   btTransform update_transform;
   update_transform.setOrigin(btVector3(math::vec3_get_x(trans.position),
