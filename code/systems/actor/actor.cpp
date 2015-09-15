@@ -26,7 +26,19 @@ turn_right(const Core::Entity e, const float turn)
 void
 move_forward(const Core::Entity e, const float fwd)
 {
-  Rigidbody::apply_local_force(e, math::vec3_init(0, 0, fwd));
+  //Rigidbody::apply_local_force(e, math::vec3_init(0, 0, fwd));
+  
+  math::transform actor_trans;
+  Component::get(e, actor_trans);
+  
+  const math::vec3 movement = math::vec3_init(0, 0, fwd);
+  const math::vec3 rotated_movement = math::quat_rotate_point(actor_trans.rotation, movement);
+  
+  const math::vec3 position = math::vec3_add(actor_trans.position, rotated_movement);
+  
+  const math::transform new_transform = math::transform_init(position, actor_trans.scale, actor_trans.rotation);
+  
+  Rigidbody::set_transform(e, new_transform);
 }
 
 

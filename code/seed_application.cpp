@@ -109,12 +109,12 @@ update_frame(const float dt)
 
   if(input.is_key_down(SDLK_w))
   {
-    Actor::move_forward(player_entity, -100 * dt);
+    Actor::move_forward(player_entity, -1 * dt);
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
   }
   if(input.is_key_down(SDLK_s))
   {
-    Actor::move_forward(player_entity, +100 * dt);
+    Actor::move_forward(player_entity, +1 * dt);
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
   }
   if(input.is_key_down(SDLK_a))
