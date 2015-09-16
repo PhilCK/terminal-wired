@@ -4,6 +4,7 @@
 
 #include <systems/script_world/detail/meta_objects.hpp>
 #include <core/entity/entity.hpp>
+#include <chaiscript/ChaiScript.hpp>
 #include <stdint.h>
 #include <string>
 #include <map>
@@ -47,7 +48,13 @@ private:
   
 private:
 
-  std::map<Core::Entity, std::unique_ptr<Meta_object::Generic> >  m_objects;
+  struct Object
+  {
+    std::unique_ptr<Meta_object::Generic> meta;
+    std::unique_ptr<chaiscript::ChaiScript> chai;
+  };
+
+  std::map<Core::Entity, Object>  m_objects;
   std::map<Core::Entity, Meta_object::Collision_callback>                   m_collision_callbacks;
   std::map<Core::Entity, Meta_object::Update_callback>                   m_update_callbacks;
   std::map<Core::Entity, Meta_object::Thrown_callback>

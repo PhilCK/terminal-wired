@@ -94,7 +94,7 @@ return_instance(Chai_instance &instance)
 
 
 Chai_instance::Chai_instance(chaiscript::ChaiScript *chai)
-: m_chai(chai)
+: m_chai(new chaiscript::ChaiScript({util::get_resource_path()}))
 {
 }
 
@@ -104,8 +104,8 @@ Chai_instance::_return()
 {
   if(m_chai)
   {
-    return_instance(*this);
-    m_chai = nullptr;
+    //return_instance(*this);
+    //m_chai = nullptr;
   }
 }
 
@@ -121,8 +121,8 @@ Chai_instance::_move(Chai_instance &other)
 {
   _return();
   
-  m_chai = other.m_chai;
-  other.m_chai = nullptr;
+  //m_chai = other.m_chai;
+  //other.m_chai = nullptr;
 }
 
 

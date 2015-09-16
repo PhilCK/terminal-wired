@@ -3,7 +3,6 @@
 #include <systems/script_world/detail/chai_binding.hpp>
 #include <systems/script_world/detail/chai_instances.hpp>
 #include <utils/logging.hpp>
-#include <chaiscript/ChaiScript.hpp>
 #include <utils/directory.hpp>
 
 
@@ -39,13 +38,16 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   }
   
   m_objects.insert(
-    std::pair<Core::Entity, std::unique_ptr<Meta_object::Generic> >(
+    std::pair<Core::Entity, Object>(
       entity,
-      std::unique_ptr<Meta_object::Generic>(new Meta_object::Generic(Core::entity_as_uint(entity), this))
-  ));
+      Object {
+        std::unique_ptr<Meta_object::Generic>(new Meta_object::Generic(Core::entity_as_uint(entity), this)),
+        std::unique_ptr<chaiscript::ChaiScript>(new chaiscript::ChaiScript({util::get_resource_path()}))
+      })
+  );
   
   namespace chai_s = chaiscript;
-  auto ch = new chaiscript::ChaiScript({util::get_resource_path()}); //ch_instance.get();
+  auto ch = /*new chaiscript::ChaiScript({util::get_resource_path()});*/ ch_instance.get();
   
   //try
   {
@@ -54,20 +56,18 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
   
     auto get_seed = [this]()
     {
-      return m_objects.at(e).get();
+      return m_objects.at(e).meta.get();
     };
   
     // chai.add(fun(&MyClass::method2, &obj, 3), "method2");
   
     Script_detail::Chai_binding::get_binding_module()->add(chai_s::fun(get_seed), "get_seed");
-  
     
-    
-    ch->add(Script_detail::Chai_binding::get_binding_module());
+    m_objects.at(entity).chai->add(Script_detail::Chai_binding::get_binding_module());
     //ch->add(chai_s::fun(get_seed), "get_seed");
-    ch->add(chai_s::var(m_objects.at(entity).get()), "seed");
+    m_objects.at(entity).chai->add(chai_s::var(m_objects.at(entity).meta.get()), "seed");
     //ch->add_global(chai_s::var(m_objects.at(entity).get()), "seed"); // I think this will barf when ch is resued.
-    ch->eval(code);
+    m_objects.at(entity).chai->eval(code);
   }
   //catch(...)
   {

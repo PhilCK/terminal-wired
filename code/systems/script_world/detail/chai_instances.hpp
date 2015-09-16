@@ -4,7 +4,9 @@
 
 #include <systems/script_world/detail/script_fwd.hpp>
 #include <chaiscript/ChaiScript.hpp>
+#include <utils/directory.hpp>
 #include <stdint.h>
+#include <memory>
 
 
 namespace Script_detail {
@@ -24,9 +26,9 @@ public:
                   Chai_instance(Chai_instance&& other);
   Chai_instance&  operator=(Chai_instance&& other);
   
-  inline chaiscript::ChaiScript*  get()       { return m_chai; }
-  inline void                     flush()     { m_chai = nullptr; } //!< This will not attempt to return the instance.
-  inline bool                     is_valid()  { return m_chai != nullptr; }
+  inline chaiscript::ChaiScript*  get()       { return m_chai.get(); }
+  inline void                     flush()     { /*m_chai = nullptr;*/ } //!< This will not attempt to return the instance.
+  inline bool                     is_valid()  { return true; /*return m_chai != nullptr;*/ }
   
 private:
 
@@ -35,7 +37,7 @@ private:
 
 private:
 
-  chaiscript::ChaiScript *m_chai = nullptr;
+  std::unique_ptr<chaiscript::ChaiScript> m_chai;
   
 }; // class
 
