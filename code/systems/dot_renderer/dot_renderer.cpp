@@ -25,6 +25,40 @@ namespace Sys {
 namespace Dot_renderer {
 
 
+void
+initialize()
+{
+  assert(vert_fmt.is_valid());
+  assert(dot_shader.is_valid());
+}
+
+
+void
+render(const Core::Entity entity, const math::mat4 &view_proj)
+{
+  renderer::reset();
+  
+  // Get wvp mat.
+  math::mat4 wvp;
+  {
+    math::transform trans;
+    assert(Component::get(entity, trans));
+    
+    const math::mat4 world = math::transform_get_world_matrix(trans);
+    
+    wvp = math::mat4_multiply(world, view_proj);
+    
+    dot_shader.set_raw_data("wvp", math::mat4_get_data(wvp), sizeof(math::mat4));
+  }
+  
+  // Get Vertex buffer
+  comp::mesh mesh;
+  assert(Component::get(entity, mesh));
+  
+  // Draw
+  renderer::draw(dot_shader, vert_fmt, mesh.vertex_info);
+  
+}
 
 
 

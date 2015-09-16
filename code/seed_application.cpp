@@ -15,6 +15,7 @@
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
+#include <systems/dot_renderer/dot_renderer.hpp>
 #include <systems/script_world/script_world_controller.hpp>
 #include <utils/directory.hpp>
 #include <utils/timer.hpp>
@@ -221,10 +222,10 @@ render_frame()
 
   // Render Scene
   {
-    Sys::Mesh_renderer::render(ground_entity, view_proj);
     Sys::Mesh_renderer::render(player_entity, view_proj);
     Sys::Mesh_renderer::render(throw_entity,  view_proj);
     Sys::Mesh_renderer::render(fwd_entity,    view_proj);
+    Sys::Dot_renderer::render(ground_entity, view_proj);
   }
   
   // Debug lines

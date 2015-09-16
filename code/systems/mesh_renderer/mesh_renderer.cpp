@@ -22,9 +22,9 @@ namespace
     renderer::attr_format_desc{"in_vs_normal",        renderer::attr_type::FLOAT3},
   });
   
-  //renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/basic_fullbright.ogl"));
+  renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/basic_fullbright.ogl"));
   
-  renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/dots.ogl"));
+  //renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/dots.ogl"));
 }
 
 
