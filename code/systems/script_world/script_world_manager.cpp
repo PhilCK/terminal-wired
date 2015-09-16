@@ -37,6 +37,7 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
     return false;
   }
   
+  m_objects.erase(entity);
   m_objects.insert(
     std::pair<Core::Entity, Object>(
       entity,
