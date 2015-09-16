@@ -114,7 +114,7 @@ update_frame(const float dt)
   }
   if(input.is_key_down(SDLK_s))
   {
-    Actor::move_forward(player_entity, +1 * dt);
+    Actor::move_forward(player_entity, +100 * dt);
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
   }
   if(input.is_key_down(SDLK_a))
@@ -272,7 +272,7 @@ init_entities()
   
   // Ground
   {
-    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 0, 10), math::quat());
+    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
     Component::set<math::transform>(ground_entity, ground_transform);
     
     Rigidbody::Rigidbody_data rb_data;

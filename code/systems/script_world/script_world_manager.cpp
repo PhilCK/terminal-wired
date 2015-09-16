@@ -6,11 +6,6 @@
 #include <utils/directory.hpp>
 
 
-namespace
-{
-}
-
-
 namespace Sys {
 namespace Script {
 
