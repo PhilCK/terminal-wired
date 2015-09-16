@@ -3,28 +3,30 @@ class Test_program
   def Test_program()
   { 
     // Set the collision callback 
-    seed.get_physics_api().set_collision_callback(
+    get_seed().get_physics_api().set_collision_callback(
       fun[this](obj) { this.on_collision(obj); }
     );
 
     // Set the update callback.
-    seed.set_update_callback(
+    get_seed().set_update_callback(
       fun[this]() { this.on_update(); }
     );
 
     // Set the on_thrown callback.
-    seed.set_thrown_callback(
+    get_seed().set_thrown_callback(
       fun[this]() { this.on_thrown(); }
     );
 
-    log_info(seed.get_name() + " handler was created.");
+    log_info(get_seed().get_name() + " handler was created.");
   }
 
 
   def on_thrown()
   {
-    log_info(seed.get_name() + " was thrown.");
-    seed.get_transform_api().set_scale(0.2, 0.2, 0.2);
+    log_info(get_seed().get_name() + " was thrown.");
+    get_seed().get_transform_api().set_scale(0.2, 0.2, 0.2);
+    get_seed().get_physics_api().set_mass(10);
+    get_seed().get_physics_api().set_solid(true);
     //seed.get_physics_api().set_solid(false);
     //seed.get_physics_api().set_mass(0);
     //seed.get_physics_api().apply_force(0, 100, 0);    
@@ -46,7 +48,11 @@ class Test_program
   def on_collision(other_object)
   {
     log_info("I collided with something");
+    //get_seed().get_physics_api().set_mass(0);
+    //get_seed().get_physics_api().set_solid(false);
   }
 }
 
 auto test = Test_program();
+
+//log_info(seed.get_name());

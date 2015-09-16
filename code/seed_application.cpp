@@ -215,8 +215,8 @@ render_frame()
   math::transform cam_transform;
   Component::get<math::transform>(camera_entity, cam_transform);
   
-  const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-  //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
+  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
   const math::mat4 view_proj = math::mat4_multiply(view, proj);
 
   // Render Scene
@@ -241,8 +241,8 @@ render_frame()
   
     const math::mat4 world = math::mat4_id();
     
-    const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
+    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
     
     const math::mat4 wvp = math::mat4_multiply(world, view, proj);
     auto wvp_data = math::mat4_to_array(wvp);
@@ -272,7 +272,7 @@ init_entities()
   
   // Ground
   {
-    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(10, 1, 10), math::quat());
+    math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(100, 1, 100), math::quat());
     Component::set<math::transform>(ground_entity, ground_transform);
     
     Rigidbody::Rigidbody_data rb_data;

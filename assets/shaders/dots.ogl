@@ -1,0 +1,59 @@
+
+[VERTEX]
+
+#version 150 core
+
+in vec3 in_vs_position;
+in vec2 in_vs_texture_coord;
+in vec3 in_vs_normal;
+
+uniform mat4 wvp;
+
+out vec2 in_ps_texture_coord;
+
+void
+main()
+{
+  gl_Position = wvp * vec4(in_vs_position, 1.0);
+
+  in_ps_texture_coord = in_vs_texture_coord;
+}
+
+[/VERTEX]
+
+[PIXEL]
+
+#version 150
+
+in vec2 in_ps_texture_coord;
+
+uniform sampler2D diffuse_map;
+
+out vec4 out_frag_color;
+
+void
+main()
+{
+  float u = in_ps_texture_coord.x;
+  float v = in_ps_texture_coord.y;
+
+  float inter = 1.0 / 32.0;
+  float error_01 = 0.002;
+  float error_02 = 2.5 * error_01;
+
+  if((mod(u, inter) < error_01) && (mod(v, inter) < error_02))
+  {
+    out_frag_color = vec4(1,0,1,1);
+    return;
+  }
+
+  if((mod(u, inter) < error_02) && (mod(v, inter) < error_01))
+  {
+    out_frag_color = vec4(1,0,1,1);
+    return;
+  }
+
+  out_frag_color = vec4(0.05, 0.1, 0.05, 1);
+}
+
+[/PIXEL]
