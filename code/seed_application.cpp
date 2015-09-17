@@ -31,6 +31,7 @@
 #include <string>
 #include <systems/script_world/script_world_manager.hpp>
 #include <systems/actor/actor.hpp>
+#include <systems/entity_properties/entity_properties.hpp>
 
 
 namespace
@@ -81,6 +82,10 @@ main()
   Core::initialize();
   init_systems();
   init_entities();
+  
+  Sys::Entity_properties sys_entity_properties;
+  
+  // Core
   
   util::timer dt_timer;
   dt_timer.start();
