@@ -79,6 +79,7 @@ deliver_events()
     mem_offset += evt.second;
   }
   
+  queued_events.clear();
   buffer_ptr = 0; 
 }
 

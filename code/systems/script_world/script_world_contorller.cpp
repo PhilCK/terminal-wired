@@ -42,7 +42,7 @@ event_callback(const uint32_t id, const void *data)
   
     const Physics_world::Collision_event *event = static_cast<const Physics_world::Collision_event*>(data);
     
-    get_current_script_mgr().schedule_collision_callback(event->entity_a);
+    get_current_script_mgr().schedule_collision_callback(event->entity_a, event->entity_b);
   }
   
   return false;

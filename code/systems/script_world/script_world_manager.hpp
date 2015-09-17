@@ -31,7 +31,7 @@ public:
   bool            add_script(const Core::Entity entity, const std::string &code);
   bool            remove_script(const Core::Entity entity);
   
-  void            schedule_collision_callback(const Core::Entity entity);
+  void            schedule_collision_callback(const Core::Entity e, const Core::Entity collided_with);
   void            schedule_message_callback(const Core::Entity entity, const std::string &str);
 
   void            think();
@@ -54,17 +54,20 @@ private:
     std::unique_ptr<chaiscript::ChaiScript> chai;
   };
 
-  std::map<Core::Entity, Object>  m_objects;
-  std::map<Core::Entity, Meta_object::Collision_callback>                   m_collision_callbacks;
-  std::map<Core::Entity, Meta_object::Update_callback>                   m_update_callbacks;
-  std::map<Core::Entity, Meta_object::Thrown_callback>
-    m_thrown_callbacks;
-  std::map<Core::Entity, Meta_object::Message_callback
-  >
-    m_message_callbacks;
+  std::map<Core::Entity, Object>                                  m_objects;
+  std::map<Core::Entity, Meta_object::Collision_callback>         m_collision_callbacks;
+  std::map<Core::Entity, Meta_object::Update_callback>            m_update_callbacks;
+  std::map<Core::Entity, Meta_object::Thrown_callback>            m_thrown_callbacks;
+  std::map<Core::Entity, Meta_object::Message_callback>           m_message_callbacks;
+  std::vector<Core::Entity>                                       m_thrown_queue;
   
-  std::vector<Core::Entity> m_thrown_queue;
-  std::vector<Core::Entity> m_collision_queue;
+  struct Collision_data
+  {
+    Core::Entity e;
+    Core::Entity collided_with;
+  };
+  
+  std::vector<Collision_data> m_collision_queue;
   
 }; // class
 

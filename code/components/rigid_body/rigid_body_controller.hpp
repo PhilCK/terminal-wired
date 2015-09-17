@@ -28,6 +28,7 @@ void        apply_local_force(const Core::Entity e, const math::vec3 dir);
 void        apply_world_force(const Core::Entity e, const math::vec3 dir);
 void        apply_local_torque(const Core::Entity e, const math::vec3 rot);
 void        set_transform(const Core::Entity e, const math::transform &trans);
+void        set_gravity(const Core::Entity e, const math::vec3 dir);
 void        set_mass(const Core::Entity e, const float mass);
 void        set_trigger(const Core::Entity e, const bool set_trigger);
 

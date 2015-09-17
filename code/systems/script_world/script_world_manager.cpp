@@ -97,15 +97,25 @@ Script_manager::think()
   }
   m_thrown_queue.clear();
   
-  for(const auto e : m_collision_queue)
+  for(const auto collision : m_collision_queue)
   {
+    const Core::Entity e = collision.e;
+  
     if(m_objects.count(e) && m_collision_callbacks.count(e))
     {
-      const auto obj = Meta_object::Generic(0, nullptr);
-      m_collision_callbacks[e](obj);
+      if(m_objects.count(collision.collided_with))
+      {
+        auto obj = m_objects.at(collision.collided_with).meta.get();
+        m_collision_callbacks[e](*obj);
+      }
+      else
+      {
+        auto obj = Meta_object::Generic(Core::entity_as_uint(collision.collided_with), this);
+        m_collision_callbacks[e](obj);
+      }
     }
   }
-  m_collision_queue.clear();
+  m_collision_queue.clear(); 
   
   for(const auto &cb : m_update_callbacks)
   {
@@ -115,11 +125,11 @@ Script_manager::think()
 
 
 void
-Script_manager::schedule_collision_callback(const Core::Entity entity)
+Script_manager::schedule_collision_callback(const Core::Entity e, const Core::Entity collided_with)
 {
-  if(m_objects.count(entity))
+  if(m_objects.count(e))
   {
-    m_collision_queue.emplace_back(entity);
+    m_collision_queue.emplace_back(Collision_data{e, collided_with});
   }
 }
 

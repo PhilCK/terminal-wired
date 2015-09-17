@@ -4,7 +4,66 @@
 #include <components/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <utils/logging.hpp>
+#include <common/world_axis.hpp>
 #include <assert.h>
+
+
+namespace
+{
+  inline math::vec3 direction_to_vector(const Meta_object::Direction dir)
+  {
+    switch(dir)
+    {
+      case(Meta_object::Direction::up):
+      {
+        const math::vec3 up_vec = math::vec3_init_with_array(common::world_axis::up);
+        return up_vec;
+        break;
+      }
+      
+      case(Meta_object::Direction::down):
+      {
+        const math::vec3 up_vec = math::vec3_init_with_array(common::world_axis::up);
+        const math::vec3 down_vec = math::vec3_scale(up_vec, -1);
+        return down_vec;
+        break;
+      }
+      
+      case(Meta_object::Direction::left):
+      {
+        const math::vec3 left_vec = math::vec3_init_with_array(common::world_axis::left);
+        return left_vec;
+        break;
+      }
+      
+      case(Meta_object::Direction::right):
+      {
+        const math::vec3 left_vec = math::vec3_init_with_array(common::world_axis::left);
+        const math::vec3 right_vec = math::vec3_scale(left_vec, -1);;
+        return right_vec;
+        break;
+      }
+      
+      case(Meta_object::Direction::forward):
+      {
+        const math::vec3 fwd_vec = math::vec3_init_with_array(common::world_axis::fwd);
+        return fwd_vec;
+        break;
+      }
+      
+      case(Meta_object::Direction::backwards):
+      {
+        const math::vec3 fwd_vec = math::vec3_init_with_array(common::world_axis::fwd);
+        const math::vec3 back_vec = math::vec3_scale(fwd_vec, -1);
+        return back_vec;
+        break;
+      }
+    }
+    
+    assert(false);
+    return math::vec3_zero();
+  }
+}
 
 
 namespace Meta_object {
@@ -13,6 +72,36 @@ namespace Meta_object {
 Physics::Physics(const Generic &owner)
 : m_owner(owner)
 {
+}
+
+
+void
+Physics::apply_force3f(const float x, const float y, const float z)
+{
+  Rigidbody::apply_world_force(m_owner.get_entity_id(), math::vec3_init(x, y, z));
+}
+
+
+void
+Physics::apply_force(const Direction dir)
+{
+  const math::vec3 dir_vec = direction_to_vector(dir);
+  apply_force3f(math::vec3_get_x(dir_vec), math::vec3_get_y(dir_vec), math::vec3_get_z(dir_vec));
+}
+
+
+void
+Physics::set_gravity3f(const float x, const float y, const float z)
+{
+  Rigidbody::set_gravity(m_owner.get_entity_id(), math::vec3_init(x, y, z));
+}
+
+
+void
+Physics::set_gravity(const Meta_object::Direction dir)
+{
+  const math::vec3 dir_vec = direction_to_vector(dir);
+  set_gravity3f(math::vec3_get_x(dir_vec), math::vec3_get_y(dir_vec), math::vec3_get_x(dir_vec));
 }
 
 
@@ -47,14 +136,7 @@ Physics::is_solid() const
 
 
 void
-Physics::apply_force(const float x, const float y, const float z)
-{
-  Rigidbody::apply_world_force(m_owner.get_entity_id(), math::vec3_init(x, y, z));
-}
-
-
-void
-Physics::set_collision_callback(const std::function<void(const Generic &)> &cb)
+Physics::set_collision_callback(const Collision_callback &cb)
 {
   if(m_owner.get_script_mgr())
   {

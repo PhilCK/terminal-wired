@@ -39,11 +39,13 @@ initialize()
   mod->add(chai_s::fun(&Meta::Generic::set_update_callback),      "set_update_callback");
   mod->add(chai_s::fun(&Meta::Generic::set_thrown_callback),      "set_thrown_callback");
   
+  //void (MyClass::*)()>(&MyClass::overloadedmethod)
+  mod->add(chai_s::fun(&Meta::Physics::set_gravity3f),            "set_gravity");
+  mod->add(chai_s::fun(&Meta::Physics::apply_force3f),            "apply_force");
   mod->add(chai_s::fun(&Meta::Physics::get_mass),                 "get_mass");
   mod->add(chai_s::fun(&Meta::Physics::set_mass),                 "set_mass");
   mod->add(chai_s::fun(&Meta::Physics::is_solid),                 "is_solid");
   mod->add(chai_s::fun(&Meta::Physics::set_solid),                "set_solid");
-  mod->add(chai_s::fun(&Meta::Physics::apply_force),              "apply_force");
   mod->add(chai_s::fun(&Meta::Physics::set_collision_callback),   "set_collision_callback");
   
   mod->add(chai_s::fun(&Meta::Material::is_emissive),             "is_emissive");

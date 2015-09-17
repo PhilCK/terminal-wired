@@ -23,7 +23,7 @@ class Material;
 using Update_callback     = std::function<void()>;
 using Thrown_callback     = std::function<void()>;
 using Message_callback    = std::function<void(const std::string &)>;
-using Collision_callback  = std::function<void(const Generic &)>;
+using Collision_callback  = std::function<void(Generic &)>;
 
 } // ns
 

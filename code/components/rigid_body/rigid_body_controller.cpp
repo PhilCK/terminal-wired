@@ -77,7 +77,11 @@ apply_local_force(const Core::Entity e, const math::vec3 dir)
 void
 apply_world_force(const Core::Entity e, const math::vec3 dir)
 {
-  assert(rigid_bodies.count(e));
+  //assert(rigid_bodies.count(e));
+  if(!rigid_bodies.count(e))
+  {
+    return;
+  }
   
   auto rb = rigid_bodies.at(e);
   rb.apply_world_force(btVector3(math::vec3_get_x(dir),
@@ -124,6 +128,16 @@ set_transform(const Core::Entity e, const math::transform &trans)
   
   auto &rb = rigid_bodies.at(e);
   rb.set_transform(update_transform);
+}
+
+
+void
+set_gravity(const Core::Entity e, const math::vec3 dir)
+{
+  assert(rigid_bodies.count(e));
+  
+  auto &rb = rigid_bodies.at(e);
+  rb.set_gravity(btVector3(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir)));
 }
 
 
