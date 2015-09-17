@@ -26,12 +26,16 @@ class Physics
 public:
 
   explicit        Physics(const Generic &owner);
+  
   void            apply_force3f(const float x, const float y, const float z);
   void            apply_force(const Direction dir);
+  
   void            set_gravity3f(const float x, const float y, const float z);
   void            set_gravity(const Direction dir);
+  
   void            set_mass(const float new_mass);
   float           get_mass() const;
+  
   void            set_solid(const bool solid);
   bool            is_solid() const;
   
