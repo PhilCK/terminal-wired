@@ -1,9 +1,4 @@
-#include <core/core.hpp>
-#include <core/world/world.hpp>
-#include <core/time/time.hpp>
-#include <core/schedular/schedular.hpp>
-#include <core/event/event.hpp>
-#include <core/entity/entity.hpp>
+#include <core/lazy_include.hpp>
 #include <common/world_axis.hpp>
 #include <components/script/script_controller.hpp>
 #include <components/camera/camera_controller.hpp>
@@ -37,6 +32,8 @@
 
 namespace
 {
+  const Core::World world {1};
+
   const Core::Entity ground_entity {1,1};
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
