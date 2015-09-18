@@ -9,7 +9,9 @@ namespace Core {
 
 
 void initialize();
+
 void think();
+
 void de_initialize();
 
 

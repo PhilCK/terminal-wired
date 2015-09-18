@@ -1,4 +1,5 @@
 #include <core/core.hpp>
+#include <core/world/world.hpp>
 #include <core/time/time.hpp>
 #include <core/schedular/schedular.hpp>
 #include <core/event/event.hpp>

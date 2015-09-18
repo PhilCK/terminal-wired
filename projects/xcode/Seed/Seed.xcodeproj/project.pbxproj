@@ -200,6 +200,9 @@
 		7EE146751B8C9116008B4748 /* rigid_body_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_data.hpp; sourceTree = "<group>"; };
 		7EE293571BAAEAA600097736 /* entity_properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity_properties.cpp; sourceTree = "<group>"; };
 		7EE293581BAAEAA600097736 /* entity_properties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_properties.hpp; sourceTree = "<group>"; };
+		7EE2935B1BAC7C3500097736 /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
+		7EE2935C1BAC7D2100097736 /* core_fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = core_fwd.hpp; sourceTree = "<group>"; };
+		7EE2935D1BAC7D2100097736 /* lazy_included.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lazy_included.hpp; sourceTree = "<group>"; };
 		7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor_controller.cpp; sourceTree = "<group>"; };
 		7EE2F9DB1BA60B5C0033DA10 /* actor_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor_controller.hpp; sourceTree = "<group>"; };
 		7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor.cpp; sourceTree = "<group>"; };
@@ -424,6 +427,9 @@
 			children = (
 				7E61D0F91B981ADF00AE90BD /* core.cpp */,
 				7E61D0FA1B981ADF00AE90BD /* core.hpp */,
+				7EE2935C1BAC7D2100097736 /* core_fwd.hpp */,
+				7EE2935D1BAC7D2100097736 /* lazy_included.hpp */,
+				7EE2935A1BAC7C3500097736 /* world */,
 				7E61D0F51B9818EB00AE90BD /* time */,
 				7EE730241B95D59E005AA837 /* schedular */,
 				7E87C5C31B8276A9003BE24E /* memory */,
@@ -661,6 +667,14 @@
 				7EE293581BAAEAA600097736 /* entity_properties.hpp */,
 			);
 			path = entity_properties;
+			sourceTree = "<group>";
+		};
+		7EE2935A1BAC7C3500097736 /* world */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2935B1BAC7C3500097736 /* world.hpp */,
+			);
+			path = world;
 			sourceTree = "<group>";
 		};
 		7EE2F9D91BA60B5C0033DA10 /* actor */ = {
