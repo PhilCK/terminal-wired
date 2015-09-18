@@ -295,7 +295,7 @@ Transform::set_scale(const float x, const float y, const float z)
     trans.scale = math::vec3_init(x, y, z);
     assert(Component::set(e, trans));
     
-    // TODO need to set physics stuff as well.
+    Rigidbody::set_scale(e, trans.scale);
   }
   else
   {

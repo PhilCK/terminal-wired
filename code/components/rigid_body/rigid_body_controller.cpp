@@ -91,6 +91,24 @@ apply_world_force(const Core::Entity e, const math::vec3 dir)
 
 
 void
+set_scale(const Core::Entity e, const math::vec3 scale)
+{
+  if(!rigid_bodies.count(e))
+  {
+    return;
+  }
+  
+  auto rb = rigid_bodies.at(e);
+  
+  rb.set_collision_shape(bullet::create_cube_collider(
+    math::vec3_get_x(scale) * 0.5f,
+    math::vec3_get_y(scale) * 0.5f,
+    math::vec3_get_z(scale) * 0.5f
+  ));
+}
+
+
+void
 apply_local_torque(const Core::Entity e, const math::vec3 dir)
 {
   assert(rigid_bodies.count(e));
