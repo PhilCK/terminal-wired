@@ -115,8 +115,8 @@ apply_local_torque(const Core::Entity e, const math::vec3 dir)
   
   auto rb = rigid_bodies.at(e);
   rb.apply_local_torque(btVector3(math::vec3_get_x(dir),
-                                   math::vec3_get_y(dir),
-                                   math::vec3_get_z(dir)));
+                                  math::vec3_get_y(dir),
+                                  math::vec3_get_z(dir)));
 }
 
 

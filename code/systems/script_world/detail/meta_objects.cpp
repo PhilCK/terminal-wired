@@ -3,6 +3,7 @@
 #include <systems/script_world/script_world_manager.hpp>
 #include <components/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
+#include <math/math.hpp>
 #include <utils/logging.hpp>
 #include <common/world_axis.hpp>
 #include <assert.h>
@@ -108,7 +109,8 @@ Physics::set_gravity(const Meta_object::Direction dir)
 void
 Physics::set_mass(const float new_mass)
 {
-  Rigidbody::set_mass(m_owner.get_entity_id(), new_mass);
+  const float set_mass = math::clamp(new_mass, 0, 100);
+  Rigidbody::set_mass(m_owner.get_entity_id(), set_mass);
 }
 
 
@@ -188,6 +190,8 @@ Transform::set_position(const float x, const float y, const float z)
   
   if(Component::get(e, trans))
   {
+    Rigidbody::set_transform(e, trans);
+
     trans.position = math::vec3_init(x, y, z);
     assert(Component::set(e, trans));
   }
@@ -292,7 +296,11 @@ Transform::set_scale(const float x, const float y, const float z)
   
   if(Component::get(e, trans) /*&& Component::get(e, rb_data)*/)
   {
-    trans.scale = math::vec3_init(x, y, z);
+    const float set_scale_x = math::clamp(x, 0, 100);
+    const float set_scale_y = math::clamp(y, 0, 100);
+    const float set_scale_z = math::clamp(z, 0, 100);
+  
+    trans.scale = math::vec3_init(set_scale_x, set_scale_y, set_scale_z);
     assert(Component::set(e, trans));
     
     Rigidbody::set_scale(e, trans.scale);
