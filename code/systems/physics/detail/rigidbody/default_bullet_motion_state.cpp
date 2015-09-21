@@ -1,4 +1,6 @@
 #include <systems/physics/detail/rigidbody/default_bullet_motion_state.hpp>
+#include <systems/transform/transform_controller.hpp>
+#include <systems/physics/detail/rigidbody/bullet_to_gl_tranform.hpp>
 
 
 namespace Bullet {

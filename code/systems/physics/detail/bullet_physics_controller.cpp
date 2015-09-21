@@ -27,7 +27,7 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
 {
   assert(m_physics_worlds.count(w) && m_physics_worlds.at(w));
 
-  std::unique_ptr<btRigidBody> new_rb;
+  //std::unique_ptr<btRigidBody> new_rb(new btRigidBody());
 
   return false;
 }

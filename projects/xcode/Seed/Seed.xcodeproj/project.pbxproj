@@ -129,6 +129,7 @@
 		7E0A342A1B7941A5000C7B22 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		7E135A151BB08369004C0A1F /* collider_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = collider_info.hpp; sourceTree = "<group>"; };
 		7E135A161BB083EC004C0A1F /* common_physics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = common_physics.hpp; sourceTree = "<group>"; };
+		7E135A171BB08A20004C0A1F /* bullet_to_gl_tranform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet_to_gl_tranform.hpp; sourceTree = "<group>"; };
 		7E405B931B7BE134001DA0F5 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = ../../../3rdparty/angelscript/lib/osx/libangelscript.a; sourceTree = "<group>"; };
 		7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		7E405BAA1B7C7C8B001DA0F5 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
@@ -713,6 +714,7 @@
 		7EE293691BAC846300097736 /* rigidbody */ = {
 			isa = PBXGroup;
 			children = (
+				7E135A171BB08A20004C0A1F /* bullet_to_gl_tranform.hpp */,
 				7EE2936A1BAC846300097736 /* actor_bullet_motion_state.cpp */,
 				7EE2936B1BAC846300097736 /* actor_bullet_motion_state.hpp */,
 				7EE2936C1BAC846300097736 /* default_bullet_motion_state.cpp */,
