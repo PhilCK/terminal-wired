@@ -4,12 +4,12 @@
 #include <bullet_wrapper/collider.hpp>
 #include <math/mat/mat4.hpp>
 #include <math/transform/transform.hpp>
-#include <components/transform/transform_controller.hpp>
 #include <LinearMath/btIDebugDraw.h>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <utils/logging.hpp>
 #include <map>
-
+#include <core/world/world.hpp>
+#include <systems/transform/transform_controller.hpp>
 #include <systems/physics_world/physics_world_controller.hpp>
 
 
@@ -222,7 +222,8 @@ update_world(const float dt)
   {
     // Need to preserve scale
     math::transform old_transform;
-    Component::get<math::transform>(ent.first, old_transform);
+    //Component::get<math::transform>(ent.first, old_transform);
+    Transform::get(Core::World{1}, ent.first, old_transform);
     
     //const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
     //const math::mat4 rot_mat  = math::mat4_id();// math::mat4_rotate_around_axis(math::vec3_init(0, 0, 1), math::half_tau());
@@ -245,7 +246,7 @@ update_world(const float dt)
     from_rb.position = rb_pos;
     from_rb.scale    = old_transform.scale;
     
-    Component::set<math::transform>(ent.first, from_rb);
+    Transform::set(Core::World{1}, ent.first, from_rb);
   }
 }
 
@@ -296,7 +297,9 @@ bool
 set<Rigidbody::Rigidbody_data>(const Core::Entity e, const Rigidbody::Rigidbody_data &set)
 {
   math::transform trans;
-  assert(Component::get(e, trans));
+  //assert(Component::get(e, trans));
+  Transform::get(Core::World{1}, e, trans);
+  
 
   auto rb = create_rigid_body(set, trans);
   

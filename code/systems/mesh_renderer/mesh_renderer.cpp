@@ -6,7 +6,7 @@
 
 #include <systems/mesh_renderer/mesh_renderer.hpp>
 #include <simple_renderer/lazy_include.hpp>
-#include <components/transform/transform_controller.hpp>
+#include <systems/transform/transform_controller.hpp>
 #include <components/material/material_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <utils/directory.hpp>
@@ -49,7 +49,7 @@ render(const Core::Entity entity, const math::mat4 &view_proj)
   math::mat4 wvp;
   {
     math::transform trans;
-    assert(Component::get(entity, trans));
+    assert(Transform::get(Core::World{1}, entity, trans));
     
     const math::mat4 world = math::transform_get_world_matrix(trans);
     

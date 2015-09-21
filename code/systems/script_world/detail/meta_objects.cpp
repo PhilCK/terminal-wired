@@ -1,7 +1,6 @@
-
 #include <systems/script_world/detail/meta_objects.hpp>
 #include <systems/script_world/script_world_manager.hpp>
-#include <components/transform/transform_controller.hpp>
+#include <systems/transform/transform_controller.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
 #include <math/math.hpp>
 #include <utils/logging.hpp>
@@ -188,12 +187,12 @@ Transform::set_position(const float x, const float y, const float z)
   const Core::Entity e = m_owner->get_entity_id();
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     Rigidbody::set_transform(e, trans);
 
     trans.position = math::vec3_init(x, y, z);
-    assert(Component::set(e, trans));
+    assert(::Transform::set(Core::World{1}, e, trans));
   }
   else
   {
@@ -210,7 +209,7 @@ Transform::get_x() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_x(trans.position);
   }
@@ -228,7 +227,7 @@ Transform::get_y() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_y(trans.position);
   }
@@ -246,7 +245,7 @@ Transform::get_z() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_z(trans.position);
   }
@@ -294,14 +293,14 @@ Transform::set_scale(const float x, const float y, const float z)
   math::transform trans;
   Rigidbody::Rigidbody_data rb_data;
   
-  if(Component::get(e, trans) /*&& Component::get(e, rb_data)*/)
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     const float set_scale_x = math::clamp(x, 0, 100);
     const float set_scale_y = math::clamp(y, 0, 100);
     const float set_scale_z = math::clamp(z, 0, 100);
   
     trans.scale = math::vec3_init(set_scale_x, set_scale_y, set_scale_z);
-    assert(Component::set(e, trans));
+    assert(::Transform::set(Core::World{1}, e, trans));
     
     Rigidbody::set_scale(e, trans.scale);
   }
@@ -320,7 +319,7 @@ Transform::get_scale_x() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_x(trans.scale);
   }
@@ -338,7 +337,7 @@ Transform::get_scale_y() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_y(trans.scale);
   }
@@ -356,7 +355,7 @@ Transform::get_scale_z() const
   
   math::transform trans;
   
-  if(Component::get(e, trans))
+  if(::Transform::get(Core::World{1}, e, trans))
   {
     return math::vec3_get_z(trans.scale);
   }

@@ -1,4 +1,5 @@
 #include <systems/actor/actor.hpp>
+#include <systems/transform/transform_controller.hpp>
 #include <math/transform/transform.hpp>
 #include <math/vec/vec.hpp>
 #include <components/rigid_body/rigid_body_controller.hpp>
@@ -12,7 +13,7 @@ void
 turn_right(const Core::Entity e, const float turn)
 {
   math::transform actor_trans;
-  Component::get(e, actor_trans);
+  Transform::get(Core::World{1}, e, actor_trans);
 
   const math::quat rotation = math::quat_init_with_axis_angle(0, 1, 0, turn);
   const math::quat new_rot  = math::quat_multiply(rotation, actor_trans.rotation);
@@ -53,7 +54,7 @@ bool
 get_view_matrix(const Core::Entity e, math::mat4 &out_view_mat)
 {
   math::transform view_transform;
-  const bool has_transform = Component::get(e, view_transform);
+  const bool has_transform = Transform::get(Core::World{1}, e, view_transform);//Component::get(e, view_transform);
   assert(has_transform);
   
   

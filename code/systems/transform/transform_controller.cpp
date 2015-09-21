@@ -66,6 +66,30 @@ remove(const Core::World w, const Core::Entity e)
 
 
 bool
+get(const Core::World w, const Core::Entity e, math::transform &t)
+{
+  // Has world?
+  if(!entity_transforms.count(w))
+  {
+    util::log_error("Transform - not found world to get entity.");
+    return false;
+  }
+  
+  if(!entity_transforms.at(w).transforms.count(e))
+  {
+    util::log_error("Transform - not found entity to get transform.");
+    return false;
+  }
+  else
+  {
+    t = entity_transforms.at(w).transforms.at(e);
+  }
+  
+  return true;
+}
+
+
+bool
 set(const Core::World w, const Core::Entity e, const math::transform &t)
 {
   // New world?
@@ -85,7 +109,7 @@ set(const Core::World w, const Core::Entity e, const math::transform &t)
     entity_transforms.at(w).transforms.at(e) = t;
   }
 
-  return false;
+  return true;
 }
 
 

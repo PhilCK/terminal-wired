@@ -15,6 +15,7 @@ bool      add(const Core::World w,
               const Core::Entity e,
               const math::transform &t = math::transform_init(math::vec3_zero(), math::vec3_one(), math::quat_init()));
 bool      remove(const Core::World w, const Core::Entity e);
+bool      get(const Core::World w, const Core::Entity e, math::transform &t);
 bool      set(const Core::World w, const Core::Entity e, const math::transform &t);
 
 
