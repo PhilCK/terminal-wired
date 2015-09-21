@@ -172,6 +172,7 @@ update_frame(const float dt)
   }
 
   Sys::Physics_world::update_world(dt);
+  Physics_world::think(test_world);
   comp::rigid_body_controller::update_world(dt);
   //Actor::update_transforms(); // Called after physics stuff.
   input.think();

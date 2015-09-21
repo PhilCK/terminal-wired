@@ -16,12 +16,15 @@ class World
 {
 public:
 
+  using Collision_pairs = std::vector<std::pair<void*, void*>>;
+
   explicit          World();
                     ~World();
   
   void              add_rigidbody(btRigidBody *rb);
   void              remove_rigidbody(btRigidBody *rb);
   void              think(const float dt);
+  Collision_pairs   get_collisions();
 
 private:
 

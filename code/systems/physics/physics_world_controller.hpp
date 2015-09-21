@@ -3,9 +3,21 @@
 
 
 #include <core/world/world.hpp>
+#include <core/entity/entity.hpp>
+#include <stdint.h>
 
 
 namespace Physics_world {
+
+
+const uint32_t collision_event_id = 123;
+
+
+struct Collision_event_data
+{
+  Core::Entity entity_a = Core::invalid_entity();
+  Core::Entity entity_b = Core::invalid_entity();
+};
 
 
 void        create(const Core::World w);

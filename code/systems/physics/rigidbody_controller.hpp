@@ -1,7 +1,8 @@
 #ifndef RIGID_BODY_CONTROLLER_INCLUDED_863E3FCC_12C0_4F20_B5E9_93824F72622B
 #define RIGID_BODY_CONTROLLER_INCLUDED_863E3FCC_12C0_4F20_B5E9_93824F72622B
 
-
+#include <systems/physics/common_physics.hpp>
+#include <systems/physics/collider_info.hpp>
 #include <core/entity/entity.hpp>
 #include <core/world/world.hpp>
 #include <math/vec/vec3.hpp>
@@ -9,26 +10,6 @@
 
 
 namespace Rigidbody {
-
-
-namespace Axis
-{
-  enum ENUM
-  {
-    x = 1 << 0,
-    y = 1 << 1,
-    z = 1 << 2,
-  };
-}
-
-
-struct Construction_info
-{
-  float mass = 1;
-  uint32_t rotation_axis;
-  uint32_t movement_axis;
-};
-
 
 bool            add(const Core::World w, const Core::Entity e, const Construction_info &info);
 bool            remove(const Core::World w, const Core::Entity e);

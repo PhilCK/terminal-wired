@@ -5,6 +5,8 @@
 #include <systems/physics/physics_world_controller.hpp>
 #include <systems/physics/rigidbody_controller.hpp>
 #include <systems/physics/detail/physics_world/physics_world.hpp>
+#include <core/time/time.hpp>
+#include <core/event/event.hpp>
 #include <vector>
 #include <map>
 #include <assert.h>
@@ -25,7 +27,7 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
 {
   assert(m_physics_worlds.count(w) && m_physics_worlds.at(w));
 
-  
+  std::unique_ptr<btRigidBody> new_rb;
 
   return false;
 }
@@ -189,7 +191,30 @@ destroy(const Core::World w)
 void
 think(const Core::World w)
 {
-  
+  // Todo: These should sub to scheduler.
+  {
+    m_physics_worlds.at(w)->think(Core::Time::get_delta_time());
+    const auto collisions = m_physics_worlds.at(w)->get_collisions();
+    
+    // Send events.
+    for(const auto &coll : collisions)
+    {
+      // Convert user pointers to entities.
+      const std::size_t enta_id = (std::size_t)coll.first;
+      const Core::Entity ent_a = Core::uint_as_entity(static_cast<uint32_t>(enta_id));
+
+      const std::size_t entb_id = (std::size_t)coll.second;
+      const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
+      
+      // Get some data from the event queue.
+      void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
+      assert(data_loc);
+      
+      // Create event data.
+      const Collision_event_data * evt = new(data_loc) Collision_event_data{ent_a, ent_b};
+      assert(evt);
+    }
+  }
 }
 
 

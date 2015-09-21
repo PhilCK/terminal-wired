@@ -127,6 +127,8 @@
 		7E0A340B1B793FA8000C7B22 /* obj_model_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = obj_model_loader.cpp; sourceTree = "<group>"; };
 		7E0A340C1B793FA8000C7B22 /* obj_model_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obj_model_loader.hpp; sourceTree = "<group>"; };
 		7E0A342A1B7941A5000C7B22 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		7E135A151BB08369004C0A1F /* collider_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = collider_info.hpp; sourceTree = "<group>"; };
+		7E135A161BB083EC004C0A1F /* common_physics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = common_physics.hpp; sourceTree = "<group>"; };
 		7E405B931B7BE134001DA0F5 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = ../../../3rdparty/angelscript/lib/osx/libangelscript.a; sourceTree = "<group>"; };
 		7E405BA91B7C7C8B001DA0F5 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		7E405BAA1B7C7C8B001DA0F5 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
@@ -682,6 +684,8 @@
 			children = (
 				7EE293651BAC846300097736 /* detail */,
 				7EE293601BAC801600097736 /* physics_world_controller.hpp */,
+				7E135A161BB083EC004C0A1F /* common_physics.hpp */,
+				7E135A151BB08369004C0A1F /* collider_info.hpp */,
 				7EE293621BAC801600097736 /* rigidbody_controller.hpp */,
 			);
 			path = physics;
