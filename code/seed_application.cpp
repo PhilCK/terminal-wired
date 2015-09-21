@@ -2,7 +2,6 @@
 #include <common/world_axis.hpp>
 #include <components/script/script_controller.hpp>
 #include <components/camera/camera_controller.hpp>
-//#include <components/transform/transform_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
 #include <components/material/material_controller.hpp>
@@ -29,6 +28,7 @@
 #include <systems/actor/actor.hpp>
 #include <systems/entity_properties/entity_properties.hpp>
 #include <systems/transform/transform_controller.hpp>
+#include <systems/physics/physics_world_controller.hpp>
 
 
 namespace
@@ -380,6 +380,8 @@ init_systems()
   Sys::Debug_line_renderer::initialize();
   Sys::Physics_world::initialize();
   Sys::Script::initialize();
+  
+  Physics_world::create(test_world);
 }
 
 

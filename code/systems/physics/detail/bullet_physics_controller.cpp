@@ -186,6 +186,13 @@ destroy(const Core::World w)
 }
 
 
+void
+think(const Core::World w)
+{
+  
+}
+
+
 } // ns
 
 

@@ -10,6 +10,7 @@ namespace Physics_world {
 
 void        create(const Core::World w);
 void        destroy(const Core::World w);
+void        think(const Core::World w);
 
 
 } // ns
