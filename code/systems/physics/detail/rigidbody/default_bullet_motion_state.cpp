@@ -7,22 +7,28 @@ namespace Bullet {
 namespace Detail {
 
 
-Default_motion_state::Default_motion_state()
+Default_motion_state::Default_motion_state(const Core::Entity e, const Core::World w)
+: m_entity(e)
+, m_world(w)
 {
+  
 }
 
 
 void
 Default_motion_state::getWorldTransform(btTransform &world_trans) const
 {
-  // Get world transform.
+  math::transform trans;
+  Transform::get(m_world, m_entity, trans);
+  
+  world_trans = gl_to_bullget(trans);
 }
 
 
 void
 Default_motion_state::setWorldTransform(const btTransform &world_trans)
 {
-  // Set transform.
+  Transform::set(m_world, m_entity, bullet_to_gl(world_trans));
 }
 
 

@@ -3,6 +3,8 @@
 
 
 #include <bullet/btBulletDynamicsCommon.h>
+#include <core/entity/entity.hpp>
+#include <core/world/world.hpp>
 
 
 namespace Bullet {
@@ -13,10 +15,15 @@ class Default_motion_state : public btMotionState
 {
 public:
 
-  explicit      Default_motion_state();
+  explicit      Default_motion_state(const Core::Entity e, const Core::World w);
   
   void          getWorldTransform(btTransform& world_trans) const = 0;
   void          setWorldTransform(const btTransform& world_trans) = 0;
+  
+private:
+
+  const Core::Entity m_entity;
+  const Core::World  m_world;
 
 }; // class
 
