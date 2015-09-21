@@ -139,7 +139,6 @@ update_frame(const float dt)
   {
     // Get player entity fwd vec.
     math::transform player_transform;
-    //assert(Component::get(player_entity, player_transform));
     Transform::get(test_world, player_entity, player_transform);
     
     const auto player_fwd  = math::quat_rotate_point(player_transform.rotation, world_fwd);
@@ -161,13 +160,11 @@ update_frame(const float dt)
   // Move fwd entity
   {
     math::transform player_transform;
-    //assert(Component::get(player_entity, player_transform));
     assert(Transform::get(test_world, player_entity, player_transform));
 
     const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
 
     math::transform trans;
-    //assert(Component::get(fwd_entity, trans));
     Transform::get(test_world, fwd_entity, trans);
 
     trans.position = math::vec3_add(player_transform.position, player_fwd);
@@ -221,7 +218,6 @@ render_frame()
   const auto proj = current_camera.get_proj_matrix();
   
   math::transform cam_transform;
-  //Component::get<math::transform>(camera_entity, cam_transform);
   Transform::get(test_world, camera_entity, cam_transform);
   
   //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
@@ -246,7 +242,6 @@ render_frame()
     const auto proj = current_camera.get_proj_matrix();
     
     math::transform cam_transform;
-    //Component::get<math::transform>(camera_entity, cam_transform);
     Transform::get(test_world, camera_entity, cam_transform);
   
     const math::mat4 world = math::mat4_id();
@@ -275,7 +270,6 @@ init_entities()
   // Camera
   {
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
-    //Component::set(camera_entity, cam_transform);
     Transform::add(test_world, camera_entity, cam_transform);
     
     comp::camera set_camera(sys::window::get_width(), sys::window::get_height(), 0.1f, 1000.f, math::quart_tau() / 2);
@@ -285,7 +279,6 @@ init_entities()
   // Ground
   {
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(100, 1, 100), math::quat());
-    //Component::set<math::transform>(ground_entity, ground_transform);
     Transform::add(test_world, ground_entity, ground_transform);
     
     Rigidbody::Rigidbody_data rb_data;
@@ -308,8 +301,6 @@ init_entities()
   // Player
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
-    
-    //Component::set(player_entity, player_transform);
     Transform::add(test_world, player_entity, player_transform);
   
     Rigidbody::Rigidbody_data rb_data;
@@ -329,7 +320,6 @@ init_entities()
   // Throwable
   {
     math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
-    //Component::set(throw_entity, trans);
     Transform::add(test_world, throw_entity, trans);
 
     const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
@@ -353,7 +343,6 @@ init_entities()
   // Fwd Entity
   {
     math::transform trans = math::transform_init(math::vec3_init(0, 0, 0), math::vec3_init(0.05f, 0.05f, 0.05f), math::quat());
-    //Component::set(fwd_entity, trans);
     Transform::add(test_world, fwd_entity, trans);
     
     comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
