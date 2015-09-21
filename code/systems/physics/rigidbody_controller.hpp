@@ -11,8 +11,22 @@
 namespace Rigidbody {
 
 
+namespace Axis
+{
+  enum ENUM
+  {
+    x = 1 << 0,
+    y = 1 << 1,
+    z = 1 << 2,
+  };
+}
+
+
 struct Construction_info
 {
+  float mass = 1;
+  uint32_t rotation_axis;
+  uint32_t movement_axis;
 };
 
 

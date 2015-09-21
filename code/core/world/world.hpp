@@ -14,6 +14,19 @@ struct World
 }; // struct
 
 
+//! Check to see if two entities are exactly the same, type and instance.
+inline bool operator==(const World left, const World right)
+{
+  return left.id == right.id;
+}
+
+//! For use in containers etc.
+inline bool operator<(const World left, const World right)
+{
+  return left.id < right.id;
+}
+
+
 } // ns
 
 

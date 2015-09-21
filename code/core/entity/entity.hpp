@@ -27,7 +27,7 @@ inline Entity invalid_entity() { return Entity{0,0}; }
 //! Check to see if two entities are exactly the same, type and instance.
 inline bool operator==(const Entity left, const Entity right)
 {
-  return entity_as_uint(left) && entity_as_uint(right);
+  return entity_as_uint(left) == entity_as_uint(right);
 }
 
 //! For use in containers etc.
@@ -37,9 +37,7 @@ inline bool operator<(const Entity left, const Entity right)
 }
 
 
-
 } // namespace
-
 
 
 #endif // include guard
