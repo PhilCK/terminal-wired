@@ -9,6 +9,7 @@ enum Collision_shape_id
 {
   unkown,
   box,
+  capsule,
   static_plane,
 };
 
@@ -24,6 +25,13 @@ struct Static_plane_collider
 {
   const Collision_shape_id id = Collision_shape_id::static_plane;
   float normal_x, normal_y, normal_z, offset;
+};
+
+
+struct Capsule_collider
+{
+  const Collision_shape_id id = Collision_shape_id::capsule;
+  float radius, height;
 };
 
 

@@ -7,9 +7,9 @@ namespace Bullet {
 namespace Detail {
 
 
-Default_motion_state::Default_motion_state(const Core::Entity e, const Core::World w)
-: m_entity(e)
-, m_world(w)
+Default_motion_state::Default_motion_state(const Core::World w, const Core::Entity e)
+: m_world(w)
+, m_entity(e)
 {
   
 }

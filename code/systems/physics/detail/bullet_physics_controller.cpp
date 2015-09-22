@@ -5,8 +5,11 @@
 #include <systems/physics/physics_world_controller.hpp>
 #include <systems/physics/rigidbody_controller.hpp>
 #include <systems/physics/detail/physics_world/physics_world.hpp>
+#include <systems/physics/detail/rigidbody/default_bullet_motion_state.hpp>
+#include <systems/physics/detail/rigidbody/actor_bullet_motion_state.hpp>
 #include <core/time/time.hpp>
 #include <core/event/event.hpp>
+#include <utils/logging.hpp>
 #include <vector>
 #include <map>
 #include <assert.h>
@@ -15,7 +18,18 @@
 namespace
 {
   std::map<Core::World, std::unique_ptr<Bullet::World> >             m_physics_worlds;
-  std::map<Core::World, std::vector<std::unique_ptr<btRigidBody> > > m_rigidbodies;
+  
+  struct Rb_data
+  {
+    Rb_data(Rb_data&&) = default;
+    Rb_data& operator=(Rb_data&&) = default;
+  
+    std::unique_ptr<btRigidBody>      rb;
+    std::unique_ptr<btMotionState>    mt;
+    std::unique_ptr<btCollisionShape> coll;
+  };
+  
+  std::map<Core::World, std::vector<std::unique_ptr<Rb_data>> > m_rigidbodies;
 }
 
 
@@ -26,10 +40,97 @@ bool
 add(const Core::World w, const Core::Entity e, const Construction_info &info)
 {
   assert(m_physics_worlds.count(w) && m_physics_worlds.at(w));
+  
+  std::unique_ptr<Rb_data> data;
+  
+  // Build collider.
+  {
+    switch(info.unkown_collider.id)
+    {
+      case(Collision_shape_id::box):
+        data->coll.reset(new btBoxShape(btVector3(info.box_collider.x_extents, info.box_collider.y_extents, info.box_collider.z_extents)));
+      break;
+      
+      case(Collision_shape_id::capsule):
+        data->coll.reset(new btCapsuleShape(info.capsule_collider.radius, info.capsule_collider.height));
+      break;
+      
+      case(Collision_shape_id::static_plane):
+        data->coll.reset(new btStaticPlaneShape(btVector3(info.static_plane_collider.normal_x, info.static_plane_collider.normal_y, info.static_plane_collider.normal_z), info.static_plane_collider.offset));
+      break;
+      
+      case(Collision_shape_id::unkown):
+        assert(false);
+        util::log_error("Rigidbody::add - need a collision type.");
+        return false;
+      break;
+    }
+  }
+  
+  // Build motion state.
+  {
+    switch(info.transform_hint)
+    {
+      case(Tranform_type::generic):
+        data->mt.reset(new Bullet::Detail::Default_motion_state(w, e));
+      break;
+      
+      case(Tranform_type::actor):
+        data->mt.reset(new Bullet::Detail::Default_motion_state(w, e));
+      break;
+      
+      default:
+        assert(false);
+        util::log_warning("Rigidbody::add unkown transform hint, applying generic.");
+        data->mt.reset(new Bullet::Detail::Default_motion_state(w, e));
+    }
+  }
+  
+  // Create rb
+  {
+    btVector3 inertia(0, 0, 0);
+    
+    if(info.mass)
+    {
+      // TODO: Can I do this with just zero mass anyway?
+      data->coll->calculateLocalInertia(info.mass, inertia);
+    }
 
-  //std::unique_ptr<btRigidBody> new_rb(new btRigidBody());
+    btRigidBody::btRigidBodyConstructionInfo rigidbody_ci(info.mass, data->mt.get(), data->coll.get(), inertia);
+    data->rb.reset(new btRigidBody(rigidbody_ci));
+  }
+  
+  // Set axis
+  {
+    const btVector3 axis_movement((btScalar)(info.movement_axis >> 0 & 1),
+                                  (btScalar)(info.movement_axis >> 1 & 1),
+                                  (btScalar)(info.movement_axis >> 2 & 1));
+    
+    const btVector3 axis_rotation((btScalar)(info.rotation_axis >> 0 & 1),
+                                  (btScalar)(info.rotation_axis >> 1 & 1),
+                                  (btScalar)(info.rotation_axis >> 2 & 1));
 
-  return false;
+    data->rb->setLinearFactor(axis_movement);
+    data->rb->setAngularFactor(axis_rotation);
+  }
+  
+  // Some general settings
+  {
+    data->rb->setDamping(0.9f, 0.9f);
+    data->rb->setFriction(0.7f);
+    data->rb->setRollingFriction(0.4f);
+    data->rb->setRestitution(0.f);
+  }
+  
+  if(!m_rigidbodies.count(w))
+  {
+    m_rigidbodies.insert(std::pair<Core::World, std::vector<std::unique_ptr<Rb_data> > >(w, {}));
+  }
+  
+  // Add rb.
+  m_rigidbodies.at(w).emplace_back(std::move(data));
+
+  return true;
 }
 
 
@@ -40,9 +141,31 @@ remove(const Core::World w, const Core::Entity e)
 }
 
 
+namespace
+{
+  inline Rb_data*
+  get_data(const Core::World w, const Core::Entity e)
+  {
+    if(!m_rigidbodies.count(w))
+    {
+      util::log_error("Rigidbody - World does not exist.");
+      return nullptr;
+    }
+  
+    if(!m_rigidbodies.at(w).)
+    Rb_data* data = nullptr;
+  }
+}
+
+
 void
 apply_world_force(const Core::World w, const Core::Entity e, const math::vec3 force)
 {
+ assert(rb);
+    const btVector3 rel_pos(0, 0, 0);
+    
+    rb->activate(true);
+    rb->applyForce(force, rel_pos);
 }
 
 

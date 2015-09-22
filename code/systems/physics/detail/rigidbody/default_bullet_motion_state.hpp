@@ -15,15 +15,15 @@ class Default_motion_state : public btMotionState
 {
 public:
 
-  explicit      Default_motion_state(const Core::Entity e, const Core::World w);
+  explicit      Default_motion_state(const Core::World w, const Core::Entity e);
   
-  void          getWorldTransform(btTransform& world_trans) const = 0;
-  void          setWorldTransform(const btTransform& world_trans) = 0;
+  void          getWorldTransform(btTransform& world_trans) const override;
+  void          setWorldTransform(const btTransform& world_trans) override;
   
 private:
 
-  const Core::Entity m_entity;
   const Core::World  m_world;
+  const Core::Entity m_entity;
 
 }; // class
 
