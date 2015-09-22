@@ -17,7 +17,7 @@
 
 namespace
 {
-  std::map<Core::World, std::unique_ptr<Bullet::World> >             m_physics_worlds;
+  std::map<Core::World, std::unique_ptr<Bullet::World> > m_physics_worlds;
   
   struct Rb_data
   {
@@ -29,7 +29,8 @@ namespace
     std::unique_ptr<btCollisionShape> coll;
   };
   
-  std::map<Core::World, std::vector<std::unique_ptr<Rb_data>> > m_rigidbodies;
+  using Rb_container = std::map<Core::Entity, std::unique_ptr<Rb_data>>;
+  std::map<Core::World, Rb_container> m_rigidbodies;
 }
 
 
@@ -122,13 +123,15 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
     data->rb->setRestitution(0.f);
   }
   
-  if(!m_rigidbodies.count(w))
+  // Add rb
   {
-    m_rigidbodies.insert(std::pair<Core::World, std::vector<std::unique_ptr<Rb_data> > >(w, {}));
+    if(!m_rigidbodies.count(w))
+    {
+      m_rigidbodies.insert(std::pair<Core::World, Rb_container>(w, Rb_container()));
+    }
+    
+    m_rigidbodies.at(w).insert(std::pair<Core::Entity, std::unique_ptr<Rb_data>>(e, std::move(data)));
   }
-  
-  // Add rb.
-  m_rigidbodies.at(w).emplace_back(std::move(data));
 
   return true;
 }
@@ -152,8 +155,13 @@ namespace
       return nullptr;
     }
   
-    if(!m_rigidbodies.at(w).)
-    Rb_data* data = nullptr;
+    if(!m_rigidbodies.at(w).at(e))
+    {
+      util::log_error("Rigidbody - Entity does not exist.");
+      return nullptr;
+    }
+    
+    return m_rigidbodies.at(w).at(e).get();
   }
 }
 
@@ -161,17 +169,29 @@ namespace
 void
 apply_world_force(const Core::World w, const Core::Entity e, const math::vec3 force)
 {
- assert(rb);
-    const btVector3 rel_pos(0, 0, 0);
-    
-    rb->activate(true);
-    rb->applyForce(force, rel_pos);
+  Rb_data *rb_data = get_data(w, e);
+  assert(rb_data && rb_data->rb);
+  
+  const btVector3 rel_pos(0, 0, 0);
+  const btVector3 bt_force(math::vec3_get_x(force), math::vec3_get_y(force), math::vec3_get_z(force));
+
+  rb_data->rb->activate(true);
+  rb_data->rb->applyForce(bt_force, rel_pos);
 }
 
 
 void
 apply_local_force(const Core::World w, const Core::Entity e, const math::vec3 force)
 {
+  Rb_data *rb_data = get_data(w, e);
+  assert(rb_data && rb_data->rb);
+
+  const btVector3 rel_pos(0, 0, 0);
+  const btVector3 bt_force(math::vec3_get_x(force), math::vec3_get_y(force), math::vec3_get_z(force));
+  const btVector3 w_force = rb_data->rb->getWorldTransform().getBasis() * bt_force;
+  
+  rb_data->rb->activate(true);
+  rb_data->rb->applyForce(w_force, rel_pos);
 }
 
 
