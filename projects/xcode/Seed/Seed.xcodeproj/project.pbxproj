@@ -80,6 +80,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E0760011BB1CC15005BA73F /* bullet_debug_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet_debug_renderer.hpp; sourceTree = "<group>"; };
 		7E0A33991B7919E6000C7B22 /* Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0A339D1B7919E6000C7B22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E0A33BC1B791A30000C7B22 /* seed_application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seed_application.cpp; path = ../../../../code/seed_application.cpp; sourceTree = "<group>"; };
@@ -695,6 +696,7 @@
 		7EE293651BAC846300097736 /* detail */ = {
 			isa = PBXGroup;
 			children = (
+				7E0760011BB1CC15005BA73F /* bullet_debug_renderer.hpp */,
 				7EE293741BAD504A00097736 /* bullet_physics_controller.cpp */,
 				7EE293661BAC846300097736 /* physics_world */,
 				7EE293691BAC846300097736 /* rigidbody */,

@@ -11,8 +11,10 @@ World::World()
 , m_dispatcher(&m_collisionConfiguration)
 , m_solver()
 , m_dynamicsWorld(&m_dispatcher, &m_broadphase, &m_solver, &m_collisionConfiguration)
+, m_debug_draw()
 {
   m_dynamicsWorld.setGravity(btVector3(0, -10, 0));
+  m_dynamicsWorld.setDebugDrawer(&m_debug_draw);
 }
 
 
@@ -42,6 +44,7 @@ void
 World::think(const float dt)
 {
   m_dynamicsWorld.stepSimulation(dt, 10);
+  m_dynamicsWorld.debugDrawWorld();
   
   // Check collisions
 }

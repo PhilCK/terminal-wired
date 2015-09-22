@@ -65,117 +65,117 @@ namespace Rigidbody {
 void
 apply_local_force(const Core::Entity e, const math::vec3 dir)
 {
-  assert(rigid_bodies.count(e));
-  
-  auto rb = rigid_bodies.at(e);
-  rb.apply_local_force(btVector3(math::vec3_get_x(dir),
-                                  math::vec3_get_y(dir),
-                                  math::vec3_get_z(dir)));
+//  assert(rigid_bodies.count(e));
+//  
+//  auto rb = rigid_bodies.at(e);
+//  rb.apply_local_force(btVector3(math::vec3_get_x(dir),
+//                                  math::vec3_get_y(dir),
+//                                  math::vec3_get_z(dir)));
 }
 
 
 void
 apply_world_force(const Core::Entity e, const math::vec3 dir)
 {
-  //assert(rigid_bodies.count(e));
-  if(!rigid_bodies.count(e))
-  {
-    return;
-  }
-  
-  auto rb = rigid_bodies.at(e);
-  rb.apply_world_force(btVector3(math::vec3_get_x(dir),
-                                  math::vec3_get_y(dir),
-                                  math::vec3_get_z(dir)));
+//  //assert(rigid_bodies.count(e));
+//  if(!rigid_bodies.count(e))
+//  {
+//    return;
+//  }
+//  
+//  auto rb = rigid_bodies.at(e);
+//  rb.apply_world_force(btVector3(math::vec3_get_x(dir),
+//                                  math::vec3_get_y(dir),
+//                                  math::vec3_get_z(dir)));
 }
 
 
 void
 set_scale(const Core::Entity e, const math::vec3 scale)
 {
-  if(!rigid_bodies.count(e))
-  {
-    return;
-  }
-  
-  auto rb = rigid_bodies.at(e);
-  
-  rb.set_collision_shape(bullet::create_cube_collider(
-    math::vec3_get_x(scale) * 0.5f,
-    math::vec3_get_y(scale) * 0.5f,
-    math::vec3_get_z(scale) * 0.5f
-  ));
+//  if(!rigid_bodies.count(e))
+//  {
+//    return;
+//  }
+//  
+//  auto rb = rigid_bodies.at(e);
+//  
+//  rb.set_collision_shape(bullet::create_cube_collider(
+//    math::vec3_get_x(scale) * 0.5f,
+//    math::vec3_get_y(scale) * 0.5f,
+//    math::vec3_get_z(scale) * 0.5f
+//  ));
 }
 
 
 void
 apply_local_torque(const Core::Entity e, const math::vec3 dir)
 {
-  assert(rigid_bodies.count(e));
-  
-  auto rb = rigid_bodies.at(e);
-  rb.apply_local_torque(btVector3(math::vec3_get_x(dir),
-                                  math::vec3_get_y(dir),
-                                  math::vec3_get_z(dir)));
+//  assert(rigid_bodies.count(e));
+//  
+//  auto rb = rigid_bodies.at(e);
+//  rb.apply_local_torque(btVector3(math::vec3_get_x(dir),
+//                                  math::vec3_get_y(dir),
+//                                  math::vec3_get_z(dir)));
 }
 
 
 void
 set_transform(const Core::Entity e, const math::transform &trans)
 {
-  assert(rigid_bodies.count(e));
-  
-  // Convert rotation to bullet
-  math::quat bt_friendly_rot;
-  {
-    //const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
-    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(trans.rotation);
-    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
-    bt_friendly_rot = math::quat_init_with_mat3(rot_mat_tr);
-  }
-  
-  btTransform update_transform;
-  update_transform.setOrigin(btVector3(math::vec3_get_x(trans.position),
-                                       math::vec3_get_y(trans.position),
-                                       math::vec3_get_z(trans.position)));
-
-  update_transform.setRotation(btQuaternion(math::quat_get_x(bt_friendly_rot),
-                                            math::quat_get_y(bt_friendly_rot),
-                                            math::quat_get_z(bt_friendly_rot),
-                                            math::quat_get_w(bt_friendly_rot)));
-  
-  auto &rb = rigid_bodies.at(e);
-  rb.set_transform(update_transform);
+//  assert(rigid_bodies.count(e));
+//  
+//  // Convert rotation to bullet
+//  math::quat bt_friendly_rot;
+//  {
+//    //const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
+//    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(trans.rotation);
+//    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
+//    bt_friendly_rot = math::quat_init_with_mat3(rot_mat_tr);
+//  }
+//  
+//  btTransform update_transform;
+//  update_transform.setOrigin(btVector3(math::vec3_get_x(trans.position),
+//                                       math::vec3_get_y(trans.position),
+//                                       math::vec3_get_z(trans.position)));
+//
+//  update_transform.setRotation(btQuaternion(math::quat_get_x(bt_friendly_rot),
+//                                            math::quat_get_y(bt_friendly_rot),
+//                                            math::quat_get_z(bt_friendly_rot),
+//                                            math::quat_get_w(bt_friendly_rot)));
+//  
+//  auto &rb = rigid_bodies.at(e);
+//  rb.set_transform(update_transform);
 }
 
 
 void
 set_gravity(const Core::Entity e, const math::vec3 dir)
 {
-  assert(rigid_bodies.count(e));
-  
-  auto &rb = rigid_bodies.at(e);
-  rb.set_gravity(btVector3(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir)));
+//  assert(rigid_bodies.count(e));
+//  
+//  auto &rb = rigid_bodies.at(e);
+//  rb.set_gravity(btVector3(math::vec3_get_x(dir), math::vec3_get_y(dir), math::vec3_get_z(dir)));
 }
 
 
 void
 set_mass(const Core::Entity e, const float mass)
 {
-  assert(rigid_bodies.count(e));
-  
-  auto &rb = rigid_bodies.at(e);
-  rb.set_mass(mass);
+//  assert(rigid_bodies.count(e));
+//  
+//  auto &rb = rigid_bodies.at(e);
+//  rb.set_mass(mass);
 }
 
 
 void
 set_trigger(const Core::Entity e, const bool set_trigger)
 {
-  assert(rigid_bodies.count(e));
-  
-  auto &rb = rigid_bodies.at(e);
-  rb.set_trigger(set_trigger);
+//  assert(rigid_bodies.count(e));
+//  
+//  auto &rb = rigid_bodies.at(e);
+//  rb.set_trigger(set_trigger);
 }
 
 } // ns
@@ -218,36 +218,36 @@ update_world(const float dt)
 //    Component::set<math::transform>(ent.first, from_rb);
 //  }
 
-  for(const auto &ent : rigid_bodies)
-  {
-    // Need to preserve scale
-    math::transform old_transform;
-    //Component::get<math::transform>(ent.first, old_transform);
-    Transform::get(Core::World{1}, ent.first, old_transform);
-    
-    //const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
-    //const math::mat4 rot_mat  = math::mat4_id();// math::mat4_rotate_around_axis(math::vec3_init(0, 0, 1), math::half_tau());
-    //const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
-    
-    const auto quat_data        = ent.second.get_rotation_quat();
-    const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
-    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(rb_quat);
-    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
-    const math::quat rb_quat2   = math::quat_init_with_mat3(rot_mat_tr);
-    
-    const auto pos_data = ent.second.get_position();
-    const math::vec3 rb_pos = math::vec3_init_with_array(&pos_data[0]);
-    
-    //math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
-    //math::transform from_rb = math::transform_init_from_world_matrix(corrected_mat);
-    
-    math::transform from_rb;
-    from_rb.rotation = rb_quat2;
-    from_rb.position = rb_pos;
-    from_rb.scale    = old_transform.scale;
-    
-    Transform::set(Core::World{1}, ent.first, from_rb);
-  }
+//  for(const auto &ent : rigid_bodies)
+//  {
+//    // Need to preserve scale
+//    math::transform old_transform;
+//    //Component::get<math::transform>(ent.first, old_transform);
+//    Transform::get(Core::World{1}, ent.first, old_transform);
+//    
+//    //const math::mat4 world_rb = math::mat4_init_with_array(ent.second->get_world_matrix());
+//    //const math::mat4 rot_mat  = math::mat4_id();// math::mat4_rotate_around_axis(math::vec3_init(0, 0, 1), math::half_tau());
+//    //const math::mat4 corrected_mat = math::mat4_multiply(world_rb, rot_mat);
+//    
+//    const auto quat_data        = ent.second.get_rotation_quat();
+//    const math::quat rb_quat    = math::quat_init(quat_data.at(0), quat_data.at(1), quat_data.at(2), quat_data.at(3));
+//    const math::mat3 rot_mat    = math::quat_get_rotation_matrix(rb_quat);
+//    const math::mat3 rot_mat_tr = math::mat3_get_transpose(rot_mat);
+//    const math::quat rb_quat2   = math::quat_init_with_mat3(rot_mat_tr);
+//    
+//    const auto pos_data = ent.second.get_position();
+//    const math::vec3 rb_pos = math::vec3_init_with_array(&pos_data[0]);
+//    
+//    //math::transform from_rb       = math::transform_init_from_world_matrix(world_rb);
+//    //math::transform from_rb = math::transform_init_from_world_matrix(corrected_mat);
+//    
+//    math::transform from_rb;
+//    from_rb.rotation = rb_quat2;
+//    from_rb.position = rb_pos;
+//    from_rb.scale    = old_transform.scale;
+//    
+//    Transform::set(Core::World{1}, ent.first, from_rb);
+//  }
 }
 
 

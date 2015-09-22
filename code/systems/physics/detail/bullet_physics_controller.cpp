@@ -21,6 +21,7 @@ namespace
   
   struct Rb_data
   {
+    Rb_data() = default;
     Rb_data(Rb_data&&) = default;
     Rb_data& operator=(Rb_data&&) = default;
   
@@ -42,7 +43,7 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
 {
   assert(m_physics_worlds.count(w) && m_physics_worlds.at(w));
   
-  std::unique_ptr<Rb_data> data;
+  std::unique_ptr<Rb_data> data(new Rb_data());
   
   // Build collider.
   {
@@ -123,7 +124,13 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
     data->rb->setRestitution(0.f);
   }
   
-  // Add rb
+  // Add rb to world
+  {
+    assert(m_physics_worlds.at(w));
+    m_physics_worlds.at(w)->add_rigidbody(data->rb.get());
+  }
+  
+  // Add rb to collection
   {
     if(!m_rigidbodies.count(w))
     {

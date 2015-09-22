@@ -5,6 +5,7 @@
 #include <bullet/btBulletCollisionCommon.h>
 #include <bullet/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h>
 #include <bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
+#include <systems/physics/detail/bullet_debug_renderer.hpp>
 #include <memory>
 #include <vector>
 
@@ -33,6 +34,7 @@ private:
   btCollisionDispatcher                  m_dispatcher;
   btSequentialImpulseConstraintSolver    m_solver;
   btDiscreteDynamicsWorld                m_dynamicsWorld;
+  Bullet::Detail::Debug_draw             m_debug_draw;
 
 }; // class
 

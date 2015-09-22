@@ -115,26 +115,26 @@ update_frame(const float dt)
 
   if(input.is_key_down(SDLK_w))
   {
-    Actor::move_forward(player_entity, -100 * dt);
+    //Actor::move_forward(player_entity, -100 * dt);
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
   }
   if(input.is_key_down(SDLK_s))
   {
-    Actor::move_forward(player_entity, +100 * dt);
+    //Actor::move_forward(player_entity, +100 * dt);
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
   }
   if(input.is_key_down(SDLK_a))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0));
+    //Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0));
   }
   if(input.is_key_down(SDLK_d))
   {
-    Rigidbody::apply_local_force(player_entity, math::vec3_init(+100  * dt, 0, 0));
+    //Rigidbody::apply_local_force(player_entity, math::vec3_init(+100  * dt, 0, 0));
   }
   if(input.get_mouse_delta_x() != 0)
   {
     //Rigidbody::apply_local_torque(player_entity, math::vec3_init(0, input.get_mouse_delta_x() * 0.1f, 0));
-    Actor::turn_right(player_entity, input.get_mouse_delta_x() * dt);
+    //Actor::turn_right(player_entity, input.get_mouse_delta_x() * dt);
   }
   if(input.is_key_down(SDLK_SPACE))
   {
@@ -222,8 +222,8 @@ render_frame()
   math::transform cam_transform;
   Transform::get(test_world, camera_entity, cam_transform);
   
-  //const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-  const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
+  const math::mat4 view = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+  //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), math::quat_rotate_point(trans.rotation, world_up));
   const math::mat4 view_proj = math::mat4_multiply(view, proj);
 
   // Render Scene
@@ -248,8 +248,8 @@ render_frame()
   
     const math::mat4 world = math::mat4_id();
     
-    //const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
-    const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
+    const math::mat4 view  = math::mat4_lookat(cam_transform.position, math::vec3_zero(), math::vec3_init(0, 1, 0));
+    //const math::mat4 view = math::mat4_lookat(trans.position, math::vec3_add(trans.position, fwd), up);
     
     const math::mat4 wvp = math::mat4_multiply(world, view, proj);
     auto wvp_data = math::mat4_to_array(wvp);
@@ -274,7 +274,7 @@ init_entities()
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
     Transform::add(test_world, camera_entity, cam_transform);
     
-    comp::camera set_camera(sys::window::get_width(), sys::window::get_height(), 0.1f, 1000.f, math::quart_tau() / 2);
+    comp::camera set_camera(sys::window::get_width(), sys::window::get_height(), 0.1f, 1000.f, math::quart_tau());
     Component::set(camera_entity, set_camera);
   }
   
@@ -283,15 +283,27 @@ init_entities()
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(100, 1, 100), math::quat());
     Transform::add(test_world, ground_entity, ground_transform);
     
-    Rigidbody::Rigidbody_data rb_data;
-    rb_data.mass = 0;
-    rb_data.collider.type = Rigidbody::Collider_type::static_plane;
-    rb_data.collider.static_plane_collider_args.normal_x = 0;
-    rb_data.collider.static_plane_collider_args.normal_y = 0;
-    rb_data.collider.static_plane_collider_args.normal_z = 0;
-    rb_data.collider.static_plane_collider_args.offset   = 0;
+//    Rigidbody::Rigidbody_data rb_data;
+//    rb_data.mass = 0;
+//    rb_data.collider.type = Rigidbody::Collider_type::static_plane;
+//    rb_data.collider.static_plane_collider_args.normal_x = 0;
+//    rb_data.collider.static_plane_collider_args.normal_y = 0;
+//    rb_data.collider.static_plane_collider_args.normal_z = 0;
+//    rb_data.collider.static_plane_collider_args.offset   = 0;
+//    
+//    Component::set<Rigidbody::Rigidbody_data>(ground_entity, rb_data);
+
+    Rigidbody::Static_plane_collidern coll;
+    coll.normal_x = 0;
+    coll.normal_y = 1;
+    coll.normal_z = 0;
+    coll.offset = 0;
     
-    Component::set<Rigidbody::Rigidbody_data>(ground_entity, rb_data);
+    Rigidbody::Construction_info rb_info;
+    rb_info.mass = 0.f;
+    rb_info.static_plane_collider = coll;
+    
+    Rigidbody::add(test_world, ground_entity, rb_info);
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
     Component::set<comp::mesh>(ground_entity, ground_mesh);
@@ -310,13 +322,13 @@ init_entities()
     //rb_data.collider.type = Rigidbody::Collider_type::capsule;
     //Component::set<Rigidbody::Rigidbody_data>(player_entity, rb_data);
     
-    Rigidbody::Capsule_collidern cap_collider;
-    cap_collider.radius = 0.5f;
-    cap_collider.height = 1.f;
+    Rigidbody::Capsule_collidern coll;
+    coll.radius = 0.5f;
+    coll.height = 1.f;
     
     Rigidbody::Construction_info rb_info;
     rb_info.mass = 0.1f;
-    rb_info.capsule_collider = cap_collider;
+    rb_info.capsule_collider = coll;
     
     Rigidbody::add(test_world, player_entity, rb_info);
     
@@ -337,11 +349,19 @@ init_entities()
     Component::Script_component throw_program(code);
     Component::set(throw_entity, throw_program);
     
-    Rigidbody::Rigidbody_data rb_data;
-    rb_data.mass = 3.f;
-    rb_data.collider.type = Rigidbody::Collider_type::box;
+//    Rigidbody::Rigidbody_data rb_data;
+//    rb_data.mass = 3.f;
+//    rb_data.collider.type = Rigidbody::Collider_type::box;
     
-    Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
+//    Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
+
+    Rigidbody::Box_collidern coll;
+    
+    Rigidbody::Construction_info rb_info;
+    rb_info.mass = 3.f;
+    rb_info.box_collider = coll;
+    
+    Rigidbody::add(test_world, throw_entity, rb_info);
     
     comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(throw_entity, mesh);

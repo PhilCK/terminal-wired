@@ -39,10 +39,10 @@ struct Construction_info
   
   union
   {
-    Uknown_collider         unkown_collider = {Collision_shape_id::unkown, 0.5f, 0.5f, 0.5f};
+    Uknown_collider         unkown_collider = {Collision_shape_id::unkown, 0.5f, 0.5f, 0.5f, 0.5f};
+    Static_plane_collidern   static_plane_collider;    
     Box_collidern            box_collider;
     Capsule_collidern        capsule_collider;
-    Static_plane_collidern   static_plane_collider;
   };
 };
 
