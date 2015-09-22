@@ -118,23 +118,20 @@ update_frame(const float dt)
   }
   if(input.is_key_down(SDLK_s))
   {
-    //Actor::move_forward(player_entity, +100 * dt);
     Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(0, 0, +1));
   }
   if(input.is_key_down(SDLK_a))
   {
-    //Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0))
     Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(-1, 0, 0));;
   }
   if(input.is_key_down(SDLK_d))
   {
-    //Rigidbody::apply_local_force(player_entity, math::vec3_init(+100  * dt, 0, 0));
     Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(+1, 0, 0));
   }
   if(input.get_mouse_delta_x() != 0)
   {
     //Rigidbody::apply_local_torque(player_entity, math::vec3_init(0, input.get_mouse_delta_x() * 0.1f, 0));
-    //Actor::turn_right(player_entity, input.get_mouse_delta_x() * dt);
+    Actor::turn_right(player_entity, input.get_mouse_delta_x() * dt);
   }
   if(input.is_key_down(SDLK_SPACE))
   {
@@ -172,9 +169,7 @@ update_frame(const float dt)
     Transform::set(test_world, fwd_entity, trans);
   }
 
-  //Sys::Physics_world::update_world(dt);
   Physics_world::think(test_world);
-  //comp::rigid_body_controller::update_world(dt);
   //Actor::update_transforms(); // Called after physics stuff.
   input.think();
   sys::window::think();

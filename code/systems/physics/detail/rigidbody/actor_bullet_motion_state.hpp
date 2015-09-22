@@ -12,6 +12,10 @@ namespace Bullet {
 namespace Detail {
 
 
+/*
+  Actor motion state
+  --
+*/
 class Actor_motion_state : public btMotionState
 {
 public:

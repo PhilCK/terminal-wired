@@ -2,7 +2,7 @@
 #include <systems/transform/transform_controller.hpp>
 #include <math/transform/transform.hpp>
 #include <math/vec/vec.hpp>
-//#include <components/rigid_body/rigid_body_controller.hpp>
+#include <systems/physics/rigidbody_controller.hpp>
 #include <utils/logging.hpp>
 
 
@@ -20,7 +20,7 @@ turn_right(const Core::Entity e, const float turn)
   
   const math::transform new_transform = math::transform_init(actor_trans.position, actor_trans.scale, new_rot);
   
-  //Rigidbody::set_transform(e, new_transform);
+  Rigidbody::set_transform(Core::World{1}, e, new_transform);
 }
 
 

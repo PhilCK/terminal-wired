@@ -3,6 +3,7 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/world/world.hpp>
 #include <systems/script_world/detail/script_fwd.hpp>
 #include <string>
 
@@ -122,12 +123,15 @@ public:
   // Internal API do not expose.
   
   inline Core::Entity get_entity_id() const { return m_entity; }
+  inline Core::World  get_world_id() const  { return m_world;  }
+  
   inline Sys::Script::Script_manager* get_script_mgr() const { return m_script_mgr; }
   
 private:
 
   std::string                  m_name        = "Seed";
   Core::Entity                 m_entity      = Core::invalid_entity();
+  Core::World                  m_world       = Core::World{1}; // temp
   Sys::Script::Script_manager *m_script_mgr  = nullptr;
   Transform                    m_transform;
   Physics                      m_physics;
