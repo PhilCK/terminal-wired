@@ -340,7 +340,7 @@ set_transform(const Core::World w, const Core::Entity e, const math::transform &
   const btTransform bt_transform = Bullet::Detail::gl_to_bullget(transform);
   btTransform curr_trans;
   
-    mt->setWorldTransform(bt_transform);
+  mt->setWorldTransform(bt_transform);
   rb->setMotionState(mt);
   
  // rb->getMotionState()->getWorldTransform(curr_trans);
