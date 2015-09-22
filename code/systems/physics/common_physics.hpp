@@ -28,6 +28,8 @@ enum class Tranform_type
 
 struct Construction_info
 {
+  Construction_info() {}
+
   Tranform_type transform_hint = Tranform_type::generic;
 
   float mass = 1;
@@ -38,9 +40,9 @@ struct Construction_info
   union
   {
     Uknown_collider         unkown_collider = {Collision_shape_id::unkown, 0.5f, 0.5f, 0.5f};
-    Box_collider            box_collider;
-    Capsule_collider        capsule_collider;
-    Static_plane_collider   static_plane_collider;
+    Box_collidern            box_collider;
+    Capsule_collidern        capsule_collider;
+    Static_plane_collidern   static_plane_collider;
   };
 };
 

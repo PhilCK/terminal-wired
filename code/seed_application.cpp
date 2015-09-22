@@ -29,6 +29,7 @@
 #include <systems/entity_properties/entity_properties.hpp>
 #include <systems/transform/transform_controller.hpp>
 #include <systems/physics/physics_world_controller.hpp>
+#include <systems/physics/rigidbody_controller.hpp>
 
 
 namespace
@@ -304,11 +305,20 @@ init_entities()
     math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
     Transform::add(test_world, player_entity, player_transform);
   
-    Rigidbody::Rigidbody_data rb_data;
-    rb_data.mass = 0.1f;
-    rb_data.collider.type = Rigidbody::Collider_type::capsule;
+    //Rigidbody::Rigidbody_data rb_data;
+    //rb_data.mass = 0.1f;
+    //rb_data.collider.type = Rigidbody::Collider_type::capsule;
+    //Component::set<Rigidbody::Rigidbody_data>(player_entity, rb_data);
     
-    Component::set<Rigidbody::Rigidbody_data>(player_entity, rb_data);
+    Rigidbody::Capsule_collidern cap_collider;
+    cap_collider.radius = 0.5f;
+    cap_collider.height = 1.f;
+    
+    Rigidbody::Construction_info rb_info;
+    rb_info.mass = 0.1f;
+    rb_info.capsule_collider = cap_collider;
+    
+    Rigidbody::add(test_world, player_entity, rb_info);
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(player_entity, player_mesh);

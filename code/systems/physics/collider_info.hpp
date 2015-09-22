@@ -14,30 +14,30 @@ enum Collision_shape_id
 };
 
 
-struct Box_collider
+struct Box_collidern
 {
-  const Collision_shape_id id = Collision_shape_id::box;
+  Collision_shape_id id = Collision_shape_id::box;
   float x_extents, y_extents, z_extents;
 };
 
 
-struct Static_plane_collider
+struct Static_plane_collidern
 {
-  const Collision_shape_id id = Collision_shape_id::static_plane;
+  Collision_shape_id id = Collision_shape_id::static_plane;
   float normal_x, normal_y, normal_z, offset;
 };
 
 
-struct Capsule_collider
+struct Capsule_collidern
 {
-  const Collision_shape_id id = Collision_shape_id::capsule;
+  Collision_shape_id id = Collision_shape_id::capsule;
   float radius, height;
 };
 
 
 struct Uknown_collider
 {
-  const Collision_shape_id id = Collision_shape_id::unkown;
+  Collision_shape_id id = Collision_shape_id::unkown;
   float arg_1, arg_2, arg_3, arg_4;
 };
 
