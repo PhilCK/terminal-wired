@@ -26,6 +26,9 @@ public:
   void              remove_rigidbody(btRigidBody *rb);
   void              think(const float dt);
   Collision_pairs   get_collisions();
+  
+  // Data
+  inline btDynamicsWorld*  get_world() { return &m_dynamicsWorld; }
 
 private:
 

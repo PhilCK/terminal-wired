@@ -1,7 +1,7 @@
 #include <systems/script_world/detail/meta_objects.hpp>
 #include <systems/script_world/script_world_manager.hpp>
 #include <systems/transform/transform_controller.hpp>
-#include <components/rigid_body/rigid_body_controller.hpp>
+#include <systems/physics/rigidbody_controller.hpp>
 #include <math/math.hpp>
 #include <utils/logging.hpp>
 #include <common/world_axis.hpp>
@@ -78,7 +78,7 @@ Physics::Physics(const Generic &owner)
 void
 Physics::apply_force3f(const float x, const float y, const float z)
 {
-  Rigidbody::apply_world_force(m_owner.get_entity_id(), math::vec3_init(x, y, z));
+  //Rigidbody::apply_world_force(m_owner.get_entity_id(), math::vec3_init(x, y, z));
 }
 
 
@@ -93,7 +93,7 @@ Physics::apply_force(const Direction dir)
 void
 Physics::set_gravity3f(const float x, const float y, const float z)
 {
-  Rigidbody::set_gravity(m_owner.get_entity_id(), math::vec3_init(x, y, z));
+  //Rigidbody::set_gravity(m_owner.get_entity_id(), math::vec3_init(x, y, z));
 }
 
 
@@ -109,7 +109,7 @@ void
 Physics::set_mass(const float new_mass)
 {
   const float set_mass = math::clamp(new_mass, 0, 100);
-  Rigidbody::set_mass(m_owner.get_entity_id(), set_mass);
+  //Rigidbody::set_mass(m_owner.get_entity_id(), set_mass);
 }
 
 
@@ -124,7 +124,7 @@ Physics::get_mass() const
 void
 Physics::set_solid(const bool set_solid)
 {
-  Rigidbody::set_trigger(m_owner.get_entity_id(), !set_solid);
+  //Rigidbody::set_trigger(m_owner.get_entity_id(), !set_solid);
 }
 
 
@@ -189,7 +189,7 @@ Transform::set_position(const float x, const float y, const float z)
   
   if(::Transform::get(Core::World{1}, e, trans))
   {
-    Rigidbody::set_transform(e, trans);
+    //Rigidbody::set_transform(e, trans);
 
     trans.position = math::vec3_init(x, y, z);
     assert(::Transform::set(Core::World{1}, e, trans));
@@ -291,7 +291,7 @@ Transform::set_scale(const float x, const float y, const float z)
 {
   const Core::Entity e = m_owner->get_entity_id();
   math::transform trans;
-  Rigidbody::Rigidbody_data rb_data;
+  //Rigidbody::Rigidbody_data rb_data;
   
   if(::Transform::get(Core::World{1}, e, trans))
   {
@@ -302,7 +302,7 @@ Transform::set_scale(const float x, const float y, const float z)
     trans.scale = math::vec3_init(set_scale_x, set_scale_y, set_scale_z);
     assert(::Transform::set(Core::World{1}, e, trans));
     
-    Rigidbody::set_scale(e, trans.scale);
+    //Rigidbody::set_scale(e, trans.scale);
   }
   else
   {

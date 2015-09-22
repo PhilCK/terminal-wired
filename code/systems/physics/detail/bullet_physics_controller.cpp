@@ -7,6 +7,7 @@
 #include <systems/physics/detail/physics_world/physics_world.hpp>
 #include <systems/physics/detail/rigidbody/default_bullet_motion_state.hpp>
 #include <systems/physics/detail/rigidbody/actor_bullet_motion_state.hpp>
+#include <systems/physics/detail/rigidbody/bullet_to_gl_tranform.hpp>
 #include <core/time/time.hpp>
 #include <core/event/event.hpp>
 #include <utils/logging.hpp>
@@ -170,6 +171,18 @@ namespace
     
     return m_rigidbodies.at(w).at(e).get();
   }
+  
+  inline btDynamicsWorld*
+  get_world(const Core::World w)
+  {
+    if(!m_physics_worlds.count(w))
+    {
+      util::log_error("Rigidbody - World does not exist.");
+      return nullptr;
+    }
+    
+    return m_physics_worlds.at(w)->get_world();
+  }
 }
 
 
@@ -311,6 +324,37 @@ get_gravity(const Core::World w, const Core::Entity e)
 void
 set_transform(const Core::World w, const Core::Entity e, const math::transform &transform)
 {
+  Rb_data *rb_data = get_data(w, e);
+  assert(rb_data && rb_data->rb && rb_data->mt);
+  
+  btDynamicsWorld *world = get_world(w);
+  assert(world);
+  
+  btRigidBody *rb = rb_data->rb.get();
+  btMotionState *mt = rb_data->mt.get();
+  
+  rb->activate(true);
+  //world->removeRigidBody(rb);
+  
+  // Transforms
+  const btTransform bt_transform = Bullet::Detail::gl_to_bullget(transform);
+  btTransform curr_trans;
+  
+    mt->setWorldTransform(bt_transform);
+  rb->setMotionState(mt);
+  
+ // rb->getMotionState()->getWorldTransform(curr_trans);
+  
+  // We want to try and save the force to apply after tranform.
+  //auto old_lin = rb->getLinearVelocity();
+  //auto diff = bt_transform.getRotation() * curr_trans.getRotation().inverse();
+  //auto rot_lin = old_lin.rotate(diff.getAxis(), diff.getAngle());
+  //rb->setLinearVelocity(rot_lin);
+  
+ // mt->setWorldTransform(bt_transform);
+ // rb->setMotionState(mt);
+
+//  world->addRigidBody(rb);
 }
 
 

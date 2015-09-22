@@ -40,7 +40,6 @@
 		7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCB1B7D1A91001DA0F5 /* material_controller.cpp */; };
 		7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCE1B7D1A91001DA0F5 /* mesh_renderer.cpp */; };
 		7E405BE41B7D1A91001DA0F5 /* mesh_renderer_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD01B7D1A91001DA0F5 /* mesh_renderer_controller.cpp */; };
-		7E405BE51B7D1A91001DA0F5 /* rigid_body_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD31B7D1A91001DA0F5 /* rigid_body_controller.cpp */; };
 		7E405BE71B7D1A91001DA0F5 /* script_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD81B7D1A91001DA0F5 /* script_controller.cpp */; };
 		7E5B116E1B8997C200614422 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E5B116C1B8997C200614422 /* mesh_renderer.cpp */; };
 		7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E61D0F61B9818EB00AE90BD /* time.cpp */; };
@@ -53,7 +52,6 @@
 		7E87C5C01B826404003BE24E /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BA1B826404003BE24E /* event.cpp */; };
 		7E87C5C11B826404003BE24E /* event_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BC1B826404003BE24E /* event_data.cpp */; };
 		7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B8276A9003BE24E /* memory_controller.cpp */; };
-		7E8E897A1B8BADCC007F416E /* physics_world_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89781B8BADCC007F416E /* physics_world_controller.cpp */; };
 		7EA289CB1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so in Resources */ = {isa = PBXBuildFile; fileRef = 7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
@@ -61,7 +59,6 @@
 		7EC21F291B7B12680020994C /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F271B7B12680020994C /* timer.cpp */; };
 		7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F2A1B7B2CF80020994C /* logging.cpp */; };
 		7EDC9AA81BA9E3F000804601 /* dot_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC9AA61BA9E3F000804601 /* dot_renderer.cpp */; };
-		7EE146761B8C9116008B4748 /* rigid_body_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE146741B8C9116008B4748 /* rigid_body_data.cpp */; };
 		7EE293591BAAEAA600097736 /* entity_properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE293571BAAEAA600097736 /* entity_properties.cpp */; };
 		7EE293701BAC846300097736 /* physics_world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE293671BAC846300097736 /* physics_world.cpp */; };
 		7EE293711BAC846300097736 /* actor_bullet_motion_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2936A1BAC846300097736 /* actor_bullet_motion_state.cpp */; };
@@ -153,8 +150,6 @@
 		7E405BCF1B7D1A91001DA0F5 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
 		7E405BD01B7D1A91001DA0F5 /* mesh_renderer_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer_controller.cpp; sourceTree = "<group>"; };
 		7E405BD11B7D1A91001DA0F5 /* mesh_renderer_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer_controller.hpp; sourceTree = "<group>"; };
-		7E405BD31B7D1A91001DA0F5 /* rigid_body_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_controller.cpp; sourceTree = "<group>"; };
-		7E405BD41B7D1A91001DA0F5 /* rigid_body_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_controller.hpp; sourceTree = "<group>"; };
 		7E405BD81B7D1A91001DA0F5 /* script_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script_controller.cpp; sourceTree = "<group>"; };
 		7E405BD91B7D1A91001DA0F5 /* script_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = script_controller.hpp; sourceTree = "<group>"; };
 		7E5B116C1B8997C200614422 /* mesh_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer.cpp; sourceTree = "<group>"; };
@@ -182,8 +177,6 @@
 		7E87C5C51B8276A9003BE24E /* memory_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_controller.cpp; sourceTree = "<group>"; };
 		7E87C5C61B8276A9003BE24E /* memory_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_controller.hpp; sourceTree = "<group>"; };
 		7E87C5CC1B8312F7003BE24E /* string_helpers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = string_helpers.hpp; path = ../../../../Users/PhilCK/Developer/utils/string_helpers.hpp; sourceTree = "<group>"; };
-		7E8E89781B8BADCC007F416E /* physics_world_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physics_world_controller.cpp; sourceTree = "<group>"; };
-		7E8E89791B8BADCC007F416E /* physics_world_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = physics_world_controller.hpp; sourceTree = "<group>"; };
 		7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = "libchaiscript_stdlib-5.7.1.so"; path = "../../../3rdparty/chaiscript/lib/osx/libchaiscript_stdlib-5.7.1.so"; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
@@ -199,8 +192,6 @@
 		7EC21F2B1B7B2CF80020994C /* logging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = logging.hpp; path = ../../../../Users/PhilCK/Developer/utils/logging.hpp; sourceTree = "<group>"; };
 		7EDC9AA61BA9E3F000804601 /* dot_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dot_renderer.cpp; sourceTree = "<group>"; };
 		7EDC9AA71BA9E3F000804601 /* dot_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dot_renderer.hpp; sourceTree = "<group>"; };
-		7EE146741B8C9116008B4748 /* rigid_body_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_data.cpp; sourceTree = "<group>"; };
-		7EE146751B8C9116008B4748 /* rigid_body_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rigid_body_data.hpp; sourceTree = "<group>"; };
 		7EE293571BAAEAA600097736 /* entity_properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity_properties.cpp; sourceTree = "<group>"; };
 		7EE293581BAAEAA600097736 /* entity_properties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_properties.hpp; sourceTree = "<group>"; };
 		7EE2935B1BAC7C3500097736 /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
@@ -471,7 +462,6 @@
 				7E405BC31B7D1A91001DA0F5 /* camera */,
 				7E405BC81B7D1A91001DA0F5 /* material */,
 				7E405BCD1B7D1A91001DA0F5 /* mesh_renderer */,
-				7E405BD21B7D1A91001DA0F5 /* rigid_body */,
 				7E405BD51B7D1A91001DA0F5 /* script */,
 			);
 			name = "components [deprecated]";
@@ -509,17 +499,6 @@
 				7E405BD11B7D1A91001DA0F5 /* mesh_renderer_controller.hpp */,
 			);
 			path = mesh_renderer;
-			sourceTree = "<group>";
-		};
-		7E405BD21B7D1A91001DA0F5 /* rigid_body */ = {
-			isa = PBXGroup;
-			children = (
-				7EE146741B8C9116008B4748 /* rigid_body_data.cpp */,
-				7EE146751B8C9116008B4748 /* rigid_body_data.hpp */,
-				7E405BD31B7D1A91001DA0F5 /* rigid_body_controller.cpp */,
-				7E405BD41B7D1A91001DA0F5 /* rigid_body_controller.hpp */,
-			);
-			path = rigid_body;
 			sourceTree = "<group>";
 		};
 		7E405BD51B7D1A91001DA0F5 /* script */ = {
@@ -590,7 +569,6 @@
 				7EDC9AA51BA9E3F000804601 /* dot_renderer */,
 				7EE2F9DD1BA6F37D0033DA10 /* actor */,
 				7EE8881B1BA219F40073A100 /* script_world */,
-				7E8E89771B8BADCC007F416E /* physics_world */,
 				7E5B116B1B8997AF00614422 /* mesh_renderer */,
 				7EEBA0AB1B85B1E50088162A /* debug_line_renderer */,
 				7E87C5B21B81360F003BE24E /* window */,
@@ -627,15 +605,6 @@
 				7E87C5C61B8276A9003BE24E /* memory_controller.hpp */,
 			);
 			path = memory;
-			sourceTree = "<group>";
-		};
-		7E8E89771B8BADCC007F416E /* physics_world */ = {
-			isa = PBXGroup;
-			children = (
-				7E8E89781B8BADCC007F416E /* physics_world_controller.cpp */,
-				7E8E89791B8BADCC007F416E /* physics_world_controller.hpp */,
-			);
-			path = physics_world;
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -890,7 +859,6 @@
 				7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */,
 				7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */,
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
-				7E8E897A1B8BADCC007F416E /* physics_world_controller.cpp in Sources */,
 				7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */,
 				7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */,
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
@@ -901,7 +869,6 @@
 				7EE8882A1BA219F40073A100 /* meta_objects.cpp in Sources */,
 				7E0A340E1B793FA8000C7B22 /* directory_nix.cpp in Sources */,
 				7EE888281BA219F40073A100 /* chai_binding.cpp in Sources */,
-				7E405BE51B7D1A91001DA0F5 /* rigid_body_controller.cpp in Sources */,
 				7E0A34041B791E8D000C7B22 /* vertex_format.cpp in Sources */,
 				7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */,
 				7EE730271B95D59E005AA837 /* schedular.cpp in Sources */,
@@ -937,7 +904,6 @@
 				7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */,
 				7EC21F2C1B7B2CF80020994C /* logging.cpp in Sources */,
 				7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */,
-				7EE146761B8C9116008B4748 /* rigid_body_data.cpp in Sources */,
 				7EE888291BA219F40073A100 /* chai_instances.cpp in Sources */,
 				7EE8882B1BA219F40073A100 /* script_world_contorller.cpp in Sources */,
 			);

@@ -3,7 +3,7 @@
 #include <systems/script_world/script_world_manager.hpp>
 #include <systems/script_world/detail/chai_instances.hpp>
 #include <systems/script_world/detail/chai_binding.hpp>
-#include <systems/physics_world/physics_world_controller.hpp>
+#include <systems/physics/physics_world_controller.hpp>
 
 
 namespace
@@ -36,11 +36,11 @@ get_current_script_mgr()
 bool
 event_callback(const uint32_t id, const void *data)
 {
-  if(id == Sys::Physics_world::collision_event_id)
+  if(id == Physics_world::collision_event_id)
   {
     assert(data);
   
-    const Physics_world::Collision_event *event = static_cast<const Physics_world::Collision_event*>(data);
+    const Physics_world::Collision_event_data *event = static_cast<const Physics_world::Collision_event_data*>(data);
     
     get_current_script_mgr().schedule_collision_callback(event->entity_a, event->entity_b);
   }

@@ -43,7 +43,10 @@ World::remove_rigidbody(btRigidBody *rb)
 void
 World::think(const float dt)
 {
-  m_dynamicsWorld.stepSimulation(dt, 10);
+  //for(int i = 0; i < 10; ++i)
+  {
+    m_dynamicsWorld.stepSimulation(dt, 10);
+  }
   m_dynamicsWorld.debugDrawWorld();
   
   // Check collisions

@@ -5,11 +5,9 @@
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
 #include <components/material/material_controller.hpp>
-#include <components/rigid_body/rigid_body_controller.hpp>
 #include <systems/window/window.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer.hpp>
-#include <systems/physics_world/physics_world_controller.hpp>
 #include <systems/dot_renderer/dot_renderer.hpp>
 #include <systems/script_world/script_world_controller.hpp>
 #include <utils/directory.hpp>
@@ -50,7 +48,7 @@ namespace
   
   bool evt_test(const uint32_t id, const void* data)
   {
-    const auto collision_data = static_cast<const Sys::Physics_world::Collision_event*>(data);
+    const auto collision_data = static_cast<const Physics_world::Collision_event_data*>(data);
     
     if(collision_data->entity_a == throw_entity)
     {
@@ -116,20 +114,22 @@ update_frame(const float dt)
   if(input.is_key_down(SDLK_w))
   {
     //Actor::move_forward(player_entity, -100 * dt);
-    //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, -1));
+    Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(0, 0, -1));
   }
   if(input.is_key_down(SDLK_s))
   {
     //Actor::move_forward(player_entity, +100 * dt);
-    //Rigidbody::apply_local_force(player_entity, math::vec3_init(0, 0, 1));
+    Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(0, 0, +1));
   }
   if(input.is_key_down(SDLK_a))
   {
-    //Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0));
+    //Rigidbody::apply_local_force(player_entity, math::vec3_init(-100 * dt, 0, 0))
+    Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(-1, 0, 0));;
   }
   if(input.is_key_down(SDLK_d))
   {
     //Rigidbody::apply_local_force(player_entity, math::vec3_init(+100  * dt, 0, 0));
+    Rigidbody::apply_local_force(test_world, player_entity, math::vec3_init(+1, 0, 0));
   }
   if(input.get_mouse_delta_x() != 0)
   {
@@ -154,8 +154,8 @@ update_frame(const float dt)
     Component::Script_component throw_program(code);
     Component::set(throw_entity, throw_program);    
     
-    Rigidbody::set_transform(throw_entity, throw_transform);
-    Rigidbody::apply_world_force(throw_entity, throw_scale);
+    Rigidbody::set_transform(test_world, throw_entity, throw_transform);
+    Rigidbody::apply_world_force(test_world, throw_entity, throw_scale);
   }
   
   // Move fwd entity
@@ -172,9 +172,9 @@ update_frame(const float dt)
     Transform::set(test_world, fwd_entity, trans);
   }
 
-  Sys::Physics_world::update_world(dt);
+  //Sys::Physics_world::update_world(dt);
   Physics_world::think(test_world);
-  comp::rigid_body_controller::update_world(dt);
+  //comp::rigid_body_controller::update_world(dt);
   //Actor::update_transforms(); // Called after physics stuff.
   input.think();
   sys::window::think();
@@ -283,27 +283,22 @@ init_entities()
     math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(100, 1, 100), math::quat());
     Transform::add(test_world, ground_entity, ground_transform);
     
-//    Rigidbody::Rigidbody_data rb_data;
-//    rb_data.mass = 0;
-//    rb_data.collider.type = Rigidbody::Collider_type::static_plane;
-//    rb_data.collider.static_plane_collider_args.normal_x = 0;
-//    rb_data.collider.static_plane_collider_args.normal_y = 0;
-//    rb_data.collider.static_plane_collider_args.normal_z = 0;
-//    rb_data.collider.static_plane_collider_args.offset   = 0;
-//    
-//    Component::set<Rigidbody::Rigidbody_data>(ground_entity, rb_data);
-
-    Rigidbody::Static_plane_collidern coll;
-    coll.normal_x = 0;
-    coll.normal_y = 1;
-    coll.normal_z = 0;
-    coll.offset = 0;
-    
-    Rigidbody::Construction_info rb_info;
-    rb_info.mass = 0.f;
-    rb_info.static_plane_collider = coll;
-    
-    Rigidbody::add(test_world, ground_entity, rb_info);
+    // Rigidbody
+    {
+      Rigidbody::Static_plane_collidern coll;
+      coll.normal_x = 0;
+      coll.normal_y = 1;
+      coll.normal_z = 0;
+      coll.offset = 0;
+      
+      Rigidbody::Construction_info rb_info;
+      rb_info.mass = 0.f;
+      rb_info.movement_axis = 0;
+      rb_info.rotation_axis = 0;
+      rb_info.static_plane_collider = coll;
+      
+      Rigidbody::add(test_world, ground_entity, rb_info);
+    }
     
     comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
     Component::set<comp::mesh>(ground_entity, ground_mesh);
@@ -316,21 +311,20 @@ init_entities()
   {
     math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
     Transform::add(test_world, player_entity, player_transform);
-  
-    //Rigidbody::Rigidbody_data rb_data;
-    //rb_data.mass = 0.1f;
-    //rb_data.collider.type = Rigidbody::Collider_type::capsule;
-    //Component::set<Rigidbody::Rigidbody_data>(player_entity, rb_data);
     
-    Rigidbody::Capsule_collidern coll;
-    coll.radius = 0.5f;
-    coll.height = 1.f;
-    
-    Rigidbody::Construction_info rb_info;
-    rb_info.mass = 0.1f;
-    rb_info.capsule_collider = coll;
-    
-    Rigidbody::add(test_world, player_entity, rb_info);
+    // Rigidbody
+    {
+      Rigidbody::Capsule_collidern coll;
+      coll.radius = 0.5f;
+      coll.height = 1.f;
+      
+      Rigidbody::Construction_info rb_info;
+      rb_info.mass = 0.1f;
+      rb_info.rotation_axis = Rigidbody::Axis::y;
+      rb_info.capsule_collider = coll;
+      
+      Rigidbody::add(test_world, player_entity, rb_info);
+    }
     
     comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(player_entity, player_mesh);
@@ -349,19 +343,19 @@ init_entities()
     Component::Script_component throw_program(code);
     Component::set(throw_entity, throw_program);
     
-//    Rigidbody::Rigidbody_data rb_data;
-//    rb_data.mass = 3.f;
-//    rb_data.collider.type = Rigidbody::Collider_type::box;
-    
-//    Component::set<Rigidbody::Rigidbody_data>(throw_entity, rb_data);
-
-    Rigidbody::Box_collidern coll;
-    
-    Rigidbody::Construction_info rb_info;
-    rb_info.mass = 3.f;
-    rb_info.box_collider = coll;
-    
-    Rigidbody::add(test_world, throw_entity, rb_info);
+    // Rigidbody
+    {
+      Rigidbody::Box_collidern coll;
+      coll.x_extents = 0.5f;
+      coll.y_extents = 0.5f;
+      coll.z_extents = 0.5f;
+      
+      Rigidbody::Construction_info rb_info;
+      rb_info.mass = 3.f;
+      rb_info.box_collider = coll;
+      
+      Rigidbody::add(test_world, throw_entity, rb_info);
+    }
     
     comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
     Component::set<comp::mesh>(throw_entity, mesh);
@@ -409,7 +403,6 @@ init_systems()
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
   Sys::Debug_line_renderer::initialize();
-  Sys::Physics_world::initialize();
   Sys::Script::initialize();
   
   Physics_world::create(test_world);
