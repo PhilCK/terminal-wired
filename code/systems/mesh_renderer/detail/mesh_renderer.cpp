@@ -4,7 +4,7 @@
   The shader should be in the material or somewhere else.
 */
 
-#include <systems/mesh_renderer/mesh_renderer.hpp>
+#include <systems/mesh_renderer/detail/mesh_renderer.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <systems/transform/transform_controller.hpp>
 #include <components/material/material_controller.hpp>
@@ -16,25 +16,34 @@
 
 namespace
 {
-  const renderer::vertex_format vert_fmt({
-    renderer::attr_format_desc{"in_vs_position",      renderer::attr_type::FLOAT3},
-    renderer::attr_format_desc{"in_vs_texture_coord", renderer::attr_type::FLOAT2},
-    renderer::attr_format_desc{"in_vs_normal",        renderer::attr_type::FLOAT3},
-  });
+  renderer::vertex_format vert_fmt;
   
-  renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/basic_fullbright.ogl"));
+  renderer::shader fullbright;
   
   //renderer::shader fullbright(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/dots.ogl"));
 }
 
 
-namespace Sys {
 namespace Mesh_renderer {
+namespace Detail {
 
 
 void
 initialize()
 {
+  if(vert_fmt.is_valid())
+  {
+    return;
+  }
+  
+  vert_fmt.load_format({
+    renderer::attr_format_desc{"in_vs_position",      renderer::attr_type::FLOAT3},
+    renderer::attr_format_desc{"in_vs_texture_coord", renderer::attr_type::FLOAT2},
+    renderer::attr_format_desc{"in_vs_normal",        renderer::attr_type::FLOAT3},
+  });
+
+  fullbright.load_shader(renderer::shader_utils::get_shader_code_from_tagged_file(util::get_resource_path() + "assets/shaders/basic_fullbright.ogl"));
+
   assert(vert_fmt.is_valid());
   assert(fullbright.is_valid());
 }

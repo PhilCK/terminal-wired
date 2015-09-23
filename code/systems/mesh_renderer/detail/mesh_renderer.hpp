@@ -6,13 +6,14 @@
 #include <math/mat/mat4.hpp>
 
 
-namespace Sys {
 namespace Mesh_renderer {
+namespace Detail {
 
 
 void initialize();
-void render(const Core::Entity entity, const math::mat4 &view_proj);
 
+// Make this more 'data'
+void render(const Core::Entity entity, const math::mat4 &view_proj);
 
 } // ns
 } // ns

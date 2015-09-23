@@ -40,7 +40,6 @@
 		7E405BE21B7D1A91001DA0F5 /* material_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCB1B7D1A91001DA0F5 /* material_controller.cpp */; };
 		7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BCE1B7D1A91001DA0F5 /* mesh_renderer.cpp */; };
 		7E405BE41B7D1A91001DA0F5 /* mesh_renderer_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E405BD01B7D1A91001DA0F5 /* mesh_renderer_controller.cpp */; };
-		7E5B116E1B8997C200614422 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E5B116C1B8997C200614422 /* mesh_renderer.cpp */; };
 		7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E61D0F61B9818EB00AE90BD /* time.cpp */; };
 		7E61D0FB1B981ADF00AE90BD /* core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E61D0F91B981ADF00AE90BD /* core.cpp */; };
 		7E87C5A61B7E18A4003BE24E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5A21B7E18A4003BE24E /* mesh.cpp */; };
@@ -67,6 +66,8 @@
 		7EE2F9DC1BA60B5C0033DA10 /* actor_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */; };
 		7EE2F9E01BA6F37D0033DA10 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */; };
 		7EE32C581BB294C500F91152 /* object_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE32C561BB294C500F91152 /* object_factory.cpp */; };
+		7EE4EBB81BB32740005D9A31 /* mesh_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE4EBB41BB32740005D9A31 /* mesh_renderer.cpp */; };
+		7EE4EBB91BB32740005D9A31 /* mesh_renderer_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE4EBB61BB32740005D9A31 /* mesh_renderer_controller.cpp */; };
 		7EE730271B95D59E005AA837 /* schedular.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE730251B95D59E005AA837 /* schedular.cpp */; };
 		7EE888281BA219F40073A100 /* chai_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8881D1BA219F40073A100 /* chai_binding.cpp */; };
 		7EE888291BA219F40073A100 /* chai_instances.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8881F1BA219F40073A100 /* chai_instances.cpp */; };
@@ -150,8 +151,6 @@
 		7E405BCF1B7D1A91001DA0F5 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
 		7E405BD01B7D1A91001DA0F5 /* mesh_renderer_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer_controller.cpp; sourceTree = "<group>"; };
 		7E405BD11B7D1A91001DA0F5 /* mesh_renderer_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer_controller.hpp; sourceTree = "<group>"; };
-		7E5B116C1B8997C200614422 /* mesh_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer.cpp; sourceTree = "<group>"; };
-		7E5B116D1B8997C200614422 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
 		7E61D0F61B9818EB00AE90BD /* time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
 		7E61D0F71B9818EB00AE90BD /* time.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 		7E61D0F91B981ADF00AE90BD /* core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = core.cpp; sourceTree = "<group>"; };
@@ -213,6 +212,10 @@
 		7EE32C561BB294C500F91152 /* object_factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object_factory.cpp; sourceTree = "<group>"; };
 		7EE32C571BB294C500F91152 /* object_factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object_factory.hpp; sourceTree = "<group>"; };
 		7EE48C551B8EF2C400BEA256 /* world_axis.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world_axis.hpp; sourceTree = "<group>"; };
+		7EE4EBB41BB32740005D9A31 /* mesh_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer.cpp; sourceTree = "<group>"; };
+		7EE4EBB51BB32740005D9A31 /* mesh_renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer.hpp; sourceTree = "<group>"; };
+		7EE4EBB61BB32740005D9A31 /* mesh_renderer_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_renderer_controller.cpp; sourceTree = "<group>"; };
+		7EE4EBB71BB32740005D9A31 /* mesh_renderer_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh_renderer_controller.hpp; sourceTree = "<group>"; };
 		7EE730221B95D1B9005AA837 /* collision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = collision.hpp; path = ../../../../Users/PhilCK/Developer/bullet_wrapper/collision.hpp; sourceTree = "<group>"; };
 		7EE730251B95D59E005AA837 /* schedular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schedular.cpp; sourceTree = "<group>"; };
 		7EE730261B95D59E005AA837 /* schedular.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = schedular.hpp; sourceTree = "<group>"; };
@@ -503,8 +506,9 @@
 		7E5B116B1B8997AF00614422 /* mesh_renderer */ = {
 			isa = PBXGroup;
 			children = (
-				7E5B116C1B8997C200614422 /* mesh_renderer.cpp */,
-				7E5B116D1B8997C200614422 /* mesh_renderer.hpp */,
+				7EE4EBB31BB32740005D9A31 /* detail */,
+				7EE4EBB61BB32740005D9A31 /* mesh_renderer_controller.cpp */,
+				7EE4EBB71BB32740005D9A31 /* mesh_renderer_controller.hpp */,
 			);
 			path = mesh_renderer;
 			sourceTree = "<group>";
@@ -722,6 +726,15 @@
 			path = ../../../../code/common;
 			sourceTree = "<group>";
 		};
+		7EE4EBB31BB32740005D9A31 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				7EE4EBB41BB32740005D9A31 /* mesh_renderer.cpp */,
+				7EE4EBB51BB32740005D9A31 /* mesh_renderer.hpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
 		7EE730241B95D59E005AA837 /* schedular */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,7 +865,9 @@
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
 				7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */,
 				7E405BB21B7C7C8B001DA0F5 /* scriptstdstring_utils.cpp in Sources */,
+				7EE4EBB81BB32740005D9A31 /* mesh_renderer.cpp in Sources */,
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
+				7EE4EBB91BB32740005D9A31 /* mesh_renderer_controller.cpp in Sources */,
 				7E87C5B81B81BA65003BE24E /* texture_resource.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7EE293591BAAEAA600097736 /* entity_properties.cpp in Sources */,
@@ -878,7 +893,6 @@
 				7E87C5AF1B810B88003BE24E /* vertex_buffer_resource.cpp in Sources */,
 				7E0A33EF1B791E8D000C7B22 /* input.cpp in Sources */,
 				7E87C5B51B81360F003BE24E /* window.cpp in Sources */,
-				7E5B116E1B8997C200614422 /* mesh_renderer.cpp in Sources */,
 				7E0A33FF1B791E8D000C7B22 /* rasterizer.cpp in Sources */,
 				7E0A34031B791E8D000C7B22 /* vertex_buffer.cpp in Sources */,
 				7EE32C581BB294C500F91152 /* object_factory.cpp in Sources */,

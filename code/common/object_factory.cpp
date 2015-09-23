@@ -2,6 +2,7 @@
 #include <systems/physics/rigidbody_controller.hpp>
 #include <systems/transform/transform_controller.hpp>
 #include <systems/script_world/script_world_controller.hpp>
+#include <systems/mesh_renderer/mesh_renderer_controller.hpp>
 #include <systems/window/window.hpp>
 #include <math/transform/transform.hpp>
 #include <utils/directory.hpp>
@@ -27,6 +28,11 @@ Core::Entity
 create_local_input_actor(const Core::World w)
 {
   const Core::Entity player_entity {2,2};
+  
+    // Renderer
+  {
+    Mesh_renderer::add(w, player_entity);
+  }
   
     math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
     Transform::add(w, player_entity, player_transform);
@@ -60,6 +66,11 @@ Core::Entity
 create_program_block(const Core::World w)
 {
   const Core::Entity throw_entity  {4,4};
+ 
+  // Renderer
+  {
+    Mesh_renderer::add(w, throw_entity);
+  }
   
     math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
     Transform::add(w, throw_entity, trans);
@@ -111,6 +122,11 @@ Core::Entity
 create_non_physics_block(const Core::World w)
 {
   const Core::Entity fwd_entity    {5,5};
+
+  // Renderer
+  {
+    Mesh_renderer::add(w, fwd_entity);
+  }
 
   math::transform trans = math::transform_init(math::vec3_init(0, 0, 0), math::vec3_init(0.05f, 0.05f, 0.05f), math::quat());
   Transform::add(w, fwd_entity, trans);
