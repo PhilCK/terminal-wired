@@ -43,9 +43,9 @@ World::remove_rigidbody(btRigidBody *rb)
 void
 World::think(const float dt)
 {
-  //for(int i = 0; i < 10; ++i)
+  //for(int i = 0; i < 1; ++i)
   {
-    m_dynamicsWorld.stepSimulation(dt, 10);
+    m_dynamicsWorld.stepSimulation(dt / 1, 10);
   }
   m_dynamicsWorld.debugDrawWorld();
   

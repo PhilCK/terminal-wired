@@ -1,6 +1,5 @@
 #include <core/lazy_include.hpp>
 #include <common/world_axis.hpp>
-#include <components/script/script_controller.hpp>
 #include <components/camera/camera_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
@@ -28,6 +27,7 @@
 #include <systems/transform/transform_controller.hpp>
 #include <systems/physics/physics_world_controller.hpp>
 #include <systems/physics/rigidbody_controller.hpp>
+#include <systems/script_world/script_world_controller.hpp>
 
 
 namespace
@@ -109,7 +109,7 @@ update_frame(const float dt)
   Core::Event::deliver_events();
   Core::Schedular::think();
   
-  Sys::Script::get_current_script_mgr().think();
+  Script::get_current_script_mgr().think();
 
   if(input.is_key_down(SDLK_w))
   {
@@ -148,8 +148,9 @@ update_frame(const float dt)
     throw_transform.position = math::vec3_add(player_transform.position, player_fwd);
     
     const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
-    Component::Script_component throw_program(code);
-    Component::set(throw_entity, throw_program);    
+    //Component::Script_component throw_program(code);
+    //Component::set(throw_entity, throw_program);
+    Script::add(test_world, throw_entity, code);
     
     Rigidbody::set_transform(test_world, throw_entity, throw_transform);
     Rigidbody::apply_world_force(test_world, throw_entity, throw_scale);
@@ -159,9 +160,9 @@ update_frame(const float dt)
   {
     math::transform player_transform;
     assert(Transform::get(test_world, player_entity, player_transform));
-
+    
     const auto player_fwd = math::quat_rotate_point(player_transform.rotation, world_fwd);
-
+    
     math::transform trans;
     Transform::get(test_world, fwd_entity, trans);
 
@@ -257,9 +258,8 @@ render_frame()
 void
 init_entities()
 {
-//  Component::Script_component foo(util::get_resource_path() + "assets/scripts/test_program.seed");
-
-  // Hook up collision event for test.
+  //Component::Script_component foo(util::get_resource_path() + "assets/scripts/test_program.seed");
+  //Hook up collision event for test.
   //Core::Event::add_callback(123, Script::collision_callback);
 
   const std::string asset_path = util::get_resource_path() + "assets/";
@@ -335,8 +335,7 @@ init_entities()
     Transform::add(test_world, throw_entity, trans);
 
     const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
-    Component::Script_component throw_program(code);
-    Component::set(throw_entity, throw_program);
+    Script::add(test_world, throw_entity, code);
     
     // Rigidbody
     {
@@ -398,7 +397,7 @@ init_systems()
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
   Sys::Debug_line_renderer::initialize();
-  Sys::Script::initialize();
+  Script::initialize();
   
   Physics_world::create(test_world);
 }

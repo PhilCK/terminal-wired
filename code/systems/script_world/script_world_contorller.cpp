@@ -12,7 +12,6 @@ namespace
 }
 
 
-namespace Sys {
 namespace Script {
 
 
@@ -49,5 +48,15 @@ event_callback(const uint32_t id, const void *data)
 }
 
 
-} // ns
+
+bool
+add(const Core::World w, const Core::Entity e, const std::string &code)
+{
+  script_mgr.add_script(e, code);
+  
+  return true;
+}
+
+
+
 } // ns
