@@ -3,12 +3,17 @@
 
 
 #include <core/entity/entity.hpp>
+#include <core/world/world.hpp>
 
 
 namespace Object_factory {
 
 
-Core::Entity    create-
+Core::Entity    create_local_input_actor(const Core::World w);
+Core::Entity    create_program_block(const Core::World w);
+Core::Entity    create_camera(const Core::World w);
+Core::Entity    create_non_physics_block(const Core::World w);
+Core::Entity    create_static_ground(const Core::World w);
 
 
 } // ns

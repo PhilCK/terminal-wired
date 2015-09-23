@@ -1,5 +1,6 @@
 #include <core/lazy_include.hpp>
 #include <common/world_axis.hpp>
+#include <common/object_factory.hpp>
 #include <components/camera/camera_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
@@ -12,7 +13,6 @@
 #include <utils/directory.hpp>
 #include <utils/timer.hpp>
 #include <utils/logging.hpp>
-#include <utils/string_helpers.hpp>
 #include <math/math.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <bullet_wrapper/world.hpp>
@@ -37,7 +37,7 @@ namespace
   const Core::Entity ground_entity {1,1};
   const Core::Entity player_entity {2,2};
   const Core::Entity camera_entity {3,3};
-  const Core::Entity throw_entity  {4,4};
+  Core::Entity throw_entity  {4,4};
   const Core::Entity fwd_entity    {5,5};
   
   const math::vec3 world_up    = math::vec3_init_with_array(common::world_axis::up);
@@ -147,10 +147,10 @@ update_frame(const float dt)
     throw_transform.rotation = player_transform.rotation;
     throw_transform.position = math::vec3_add(player_transform.position, player_fwd);
     
-    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
+    //const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
     //Component::Script_component throw_program(code);
     //Component::set(throw_entity, throw_program);
-    Script::add(test_world, throw_entity, code);
+    //Script::add(test_world, throw_entity, code);
     
     Rigidbody::set_transform(test_world, throw_entity, throw_transform);
     Rigidbody::apply_world_force(test_world, throw_entity, throw_scale);
@@ -331,32 +331,35 @@ init_entities()
   
   // Throwable
   {
-    math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
-    Transform::add(test_world, throw_entity, trans);
+//    math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
+//    Transform::add(test_world, throw_entity, trans);
+//
+//    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
+//    Script::add(test_world, throw_entity, code);
+//    
+//    // Rigidbody
+//    {
+//      Rigidbody::Box_collidern coll;
+//      coll.x_extents = 0.5f;
+//      coll.y_extents = 0.5f;
+//      coll.z_extents = 0.5f;
+//      
+//      Rigidbody::Construction_info rb_info;
+//      rb_info.mass = 3.f;
+//      rb_info.box_collider = coll;
+//      
+//      Rigidbody::add(test_world, throw_entity, rb_info);
+//    }
+//    
+//    comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+//    Component::set<comp::mesh>(throw_entity, mesh);
+//    
+//    comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_orange_512.png");
+//    //comp::material_controller::set(player_entity, std::move(ground_mat));
+//    Component::set(throw_entity, mat);
 
-    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
-    Script::add(test_world, throw_entity, code);
-    
-    // Rigidbody
-    {
-      Rigidbody::Box_collidern coll;
-      coll.x_extents = 0.5f;
-      coll.y_extents = 0.5f;
-      coll.z_extents = 0.5f;
-      
-      Rigidbody::Construction_info rb_info;
-      rb_info.mass = 3.f;
-      rb_info.box_collider = coll;
-      
-      Rigidbody::add(test_world, throw_entity, rb_info);
-    }
-    
-    comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
-    Component::set<comp::mesh>(throw_entity, mesh);
-    
-    comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_orange_512.png");
-    //comp::material_controller::set(player_entity, std::move(ground_mat));
-    Component::set(throw_entity, mat);
+    throw_entity = Object_factory::create_program_block(test_world);
+
   }
   
   // Fwd Entity
