@@ -283,19 +283,18 @@ init_systems()
   sys::window::initialize(1280, 600, false, "Wired");
   input.set_mouse_hold(true);
   
-  // Init
-  Core::Schedular::initialize();
-  Core::Event::initialize();
-  
+  // Init  
   renderer::initialize();
   renderer::clear_color(0.2f, 0.3f, 0.3f);
   
-  Mesh_renderer::create_world(test_world);
-  
-  Sys::Debug_line_renderer::initialize();
+  Transform::initialize();
   Script::initialize();
   
   Physics_world::create(test_world);
+  Mesh_renderer::create_world(test_world);
+  
+  Sys::Debug_line_renderer::initialize();
+  
 }
 
 

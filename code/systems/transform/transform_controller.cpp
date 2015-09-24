@@ -1,4 +1,4 @@
-#include <systems/transform/transform_controller.hpp>
+ #include <systems/transform/transform_controller.hpp>
 #include <utils/logging.hpp>
 #include <core/event/event.hpp>
 #include <core/core_event_ids.hpp>
@@ -26,12 +26,11 @@ namespace
         assert(data);
         
         Transform::remove(Core::World{1}, data->e);
+        break;
       }
-      
       default:
       {
-        assert(false)
-        ;
+        assert(false);
         util::log_error("Tranform got an event it doesn't know how to handle.");
       }
     }
