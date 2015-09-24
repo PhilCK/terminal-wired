@@ -1,5 +1,7 @@
 #include <systems/transform/transform_controller.hpp>
 #include <utils/logging.hpp>
+#include <core/event/event.hpp>
+#include <core/core_event_ids.hpp>
 #include <map>
 #include <vector>
 
@@ -12,10 +14,43 @@ namespace
   }; // class
   
   std::map<Core::World, World_transform> entity_transforms;
+  
+  bool
+  transform_event_handler(const uint32_t id, const void *event_data)
+  {
+    switch(id)
+    {
+      case(Core::Event_id::entity_destroy):
+      {
+        const Core::Destroy_entity_event *data = static_cast<const Core::Destroy_entity_event*>(event_data);
+        assert(data);
+        
+        Transform::remove(Core::World{1}, data->e);
+      }
+      
+      default:
+      {
+        assert(false)
+        ;
+        util::log_error("Tranform got an event it doesn't know how to handle.");
+      }
+    }
+    
+    return false;
+  }
 }
 
 
 namespace Transform {
+
+
+bool
+initialize()
+{
+  Core::Event::add_callback(Core::Event_id::entity_destroy, transform_event_handler);
+
+  return true;
+}
 
 
 bool

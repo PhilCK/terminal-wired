@@ -10,6 +10,8 @@
 
 namespace Transform {
 
+bool      initialize();
+bool      de_initialize();
 
 bool      add(const Core::World w,
               const Core::Entity e,
