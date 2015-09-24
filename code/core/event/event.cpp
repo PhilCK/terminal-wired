@@ -1,6 +1,7 @@
 #include <core/event/event.hpp>
 #include <vector>
 #include <map>
+#include <assert.h>
 
 
 namespace
@@ -21,7 +22,7 @@ namespace Event {
 bool
 initialize()
 {
-  event_buffer.resize(256);
+  event_buffer.resize(2048 * 2);
 
   return true;
 }
@@ -50,15 +51,17 @@ remove_callback()
 void *
 add_event_to_queue(const uint32_t event_id, const uint32_t size_of_data)
 {
-//  queued_events.push_back(std::pair<uint32_t, uint32_t>(event_id, size_of_data));
-//  
-//  if(size_of_data)
-//  {
-//    const uint32_t old_buffer_ptr = buffer_ptr;
-//    buffer_ptr += size_of_data;
-//    
-//    return &event_buffer[old_buffer_ptr];
-//  }
+  assert((buffer_ptr + size_of_data) < event_buffer.size() * sizeof(uint8_t));
+  
+  queued_events.push_back(std::pair<uint32_t, uint32_t>(event_id, size_of_data));
+  
+  if(size_of_data)
+  {
+    const uint32_t old_buffer_ptr = buffer_ptr;
+    buffer_ptr += size_of_data;
+    
+    return &event_buffer[old_buffer_ptr];
+  }
   
   return 0;
 }

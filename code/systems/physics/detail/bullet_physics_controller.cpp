@@ -29,6 +29,7 @@ namespace
     std::unique_ptr<btRigidBody>      rb;
     std::unique_ptr<btMotionState>    mt;
     std::unique_ptr<btCollisionShape> coll;
+    bool collision_event = false;
   };
   
   using Rb_container = std::map<Core::Entity, std::unique_ptr<Rb_data>>;
@@ -45,6 +46,11 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
   assert(m_physics_worlds.count(w) && m_physics_worlds.at(w));
   
   std::unique_ptr<Rb_data> data(new Rb_data());
+  
+  // Misc
+  {
+    data->collision_event = info.collision_event;
+  }
   
   // Build collider.
   {
@@ -396,17 +402,21 @@ think(const Core::World w)
       // Convert user pointers to entities.
       const std::size_t enta_id = (std::size_t)coll.first;
       const Core::Entity ent_a = Core::uint_as_entity(static_cast<uint32_t>(enta_id));
-
-      const std::size_t entb_id = (std::size_t)coll.second;
-      const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
       
-      // Get some data from the event queue.
-      //void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
-      //assert(data_loc);
-      
-      // Create event data.
-      //const Collision_event_data * evt = new(data_loc) Collision_event_data{ent_a, ent_b};
-      //assert(evt);
+      // Not everybody wants a callback :)
+      if(Core::entity_as_uint(Core::invalid_entity()) && m_rigidbodies.at(w).at(ent_a)->collision_event)
+      {
+        const std::size_t entb_id = (std::size_t)coll.second;
+        const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
+        
+        // Get some data from the event queue.
+        void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
+        assert(data_loc);
+        
+        // Create event data.
+        const Collision_event_data * evt = new(data_loc) Collision_event_data{ent_a, ent_b};
+        assert(evt);
+      }
     }
   }
 }

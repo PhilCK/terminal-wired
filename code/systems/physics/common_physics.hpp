@@ -31,6 +31,8 @@ struct Construction_info
   Construction_info() {}
 
   Tranform_type transform_hint = Tranform_type::generic;
+  
+  bool collision_event = false;
 
   float mass = 1;
   

@@ -89,6 +89,8 @@ create_program_block(const Core::World w)
       rb_info.mass = 3.f;
       rb_info.box_collider = coll;
       
+      rb_info.collision_event = true;
+      
       Rigidbody::add(w, throw_entity, rb_info);
     }
     

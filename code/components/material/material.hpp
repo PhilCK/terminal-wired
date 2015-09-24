@@ -13,7 +13,6 @@ class material
 {
 public:
 
-
   renderer::texture map01;
 
 }; // class

@@ -23,13 +23,13 @@ generate_entity(const uint8_t type)
   
   entities.insert(new_ent);
   
-//  void *evt_address = Event::add_event_to_queue(Event_id::entity_new, sizeof(New_entity_event));
-//  assert(evt_address);
-//  
-//  New_entity_event *evt_data = new(evt_address) New_entity_event();
-//  assert(evt_data);
-//  evt_data->e = new_ent;
-//  
+  void *evt_address = Event::add_event_to_queue(Event_id::entity_new, sizeof(New_entity_event));
+  assert(evt_address);
+  
+  New_entity_event *evt_data = new(evt_address) New_entity_event();
+  assert(evt_data);
+  evt_data->e = new_ent;
+
   return new_ent;
 }
 
