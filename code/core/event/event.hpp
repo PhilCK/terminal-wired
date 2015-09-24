@@ -2,6 +2,7 @@
 #define EVENT_CONTROLLER_INCLUDED_2609CB6D_C9FC_453E_AAB6_3F6A4B45AD3A
 
 
+#include <core/world/world.hpp>
 #include <stdint.h>
 #include <cstdlib>
 

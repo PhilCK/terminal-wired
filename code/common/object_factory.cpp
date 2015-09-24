@@ -29,34 +29,34 @@ create_local_input_actor(const Core::World w)
 {
   const Core::Entity player_entity = Core::generate_entity(2);
   
-    // Renderer
+  // Renderer
   {
     Mesh_renderer::add(w, player_entity);
   }
   
-    math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
-    Transform::add(w, player_entity, player_transform);
+  math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
+  Transform::add(w, player_entity, player_transform);
+  
+  // Rigidbody
+  {
+    Rigidbody::Capsule_collidern coll;
+    coll.radius = 0.5f;
+    coll.height = 1.f;
     
-    // Rigidbody
-    {
-      Rigidbody::Capsule_collidern coll;
-      coll.radius = 0.5f;
-      coll.height = 1.f;
-      
-      Rigidbody::Construction_info rb_info;
-      rb_info.mass = 0.1f;
-      rb_info.rotation_axis = Rigidbody::Axis::y;
-      rb_info.capsule_collider = coll;
-      
-      Rigidbody::add(w, player_entity, rb_info);
-    }
+    Rigidbody::Construction_info rb_info;
+    rb_info.mass = 0.1f;
+    rb_info.rotation_axis = Rigidbody::Axis::y;
+    rb_info.capsule_collider = coll;
     
-    comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
-    Component::set<comp::mesh>(player_entity, player_mesh);
-    
-    comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
-    //comp::material_controller::set(player_entity, std::move(ground_mat));
-    Component::set(player_entity, ground_mat);
+    Rigidbody::add(w, player_entity, rb_info);
+  }
+  
+  comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+  Component::set<comp::mesh>(player_entity, player_mesh);
+  
+  comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
+  //comp::material_controller::set(player_entity, std::move(ground_mat));
+  Component::set(player_entity, ground_mat);
   
   return player_entity;
 }
@@ -72,34 +72,34 @@ create_program_block(const Core::World w)
     Mesh_renderer::add(w, throw_entity);
   }
   
-    math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
-    Transform::add(w, throw_entity, trans);
+  math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
+  Transform::add(w, throw_entity, trans);
 
-    const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
-    Script::add(w, throw_entity, code);
+  const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");
+  Script::add(w, throw_entity, code);
+  
+  // Rigidbody
+  {
+    Rigidbody::Box_collidern coll;
+    coll.x_extents = 0.5f;
+    coll.y_extents = 0.5f;
+    coll.z_extents = 0.5f;
     
-    // Rigidbody
-    {
-      Rigidbody::Box_collidern coll;
-      coll.x_extents = 0.5f;
-      coll.y_extents = 0.5f;
-      coll.z_extents = 0.5f;
-      
-      Rigidbody::Construction_info rb_info;
-      rb_info.mass = 3.f;
-      rb_info.box_collider = coll;
-      
-      rb_info.collision_event = true;
-      
-      Rigidbody::add(w, throw_entity, rb_info);
-    }
+    Rigidbody::Construction_info rb_info;
+    rb_info.mass = 3.f;
+    rb_info.box_collider = coll;
     
-    comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
-    Component::set<comp::mesh>(throw_entity, mesh);
+    rb_info.collision_event = true;
     
-    comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_orange_512.png");
-    //comp::material_controller::set(player_entity, std::move(ground_mat));
-    Component::set(throw_entity, mat);
+    Rigidbody::add(w, throw_entity, rb_info);
+  }
+  
+  comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+  Component::set<comp::mesh>(throw_entity, mesh);
+  
+  comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
+  //comp::material_controller::set(player_entity, std::move(ground_mat));
+  Component::set(throw_entity, mat);
   
   return throw_entity;
 }
@@ -110,7 +110,7 @@ create_camera(const Core::World w)
 {
   const Core::Entity camera_entity = Core::generate_entity(3);
   
-    math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
+  math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
   Transform::add(w, camera_entity, cam_transform);
   
   comp::camera set_camera(sys::window::get_width(), sys::window::get_height(), 0.1f, 1000.f, math::quart_tau() / 2);

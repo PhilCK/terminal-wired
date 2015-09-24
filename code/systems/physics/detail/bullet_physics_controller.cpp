@@ -8,6 +8,8 @@
 #include <systems/physics/detail/rigidbody/default_bullet_motion_state.hpp>
 #include <systems/physics/detail/rigidbody/actor_bullet_motion_state.hpp>
 #include <systems/physics/detail/rigidbody/bullet_to_gl_tranform.hpp>
+#include <core/event/event.hpp>
+#include <core/core_event_ids.hpp>
 #include <core/time/time.hpp>
 #include <core/event/event.hpp>
 #include <utils/logging.hpp>
@@ -34,6 +36,21 @@ namespace
   
   using Rb_container = std::map<Core::Entity, std::unique_ptr<Rb_data>>;
   std::map<Core::World, Rb_container> m_rigidbodies;
+  
+  
+  bool
+  phy_event_controller(const uint32_t event_id, const void *event_data)
+  {
+    if(event_id == Core::Event_id::entity_destroy)
+    {
+      const Core::Destroy_entity_event *data = static_cast<const Core::Destroy_entity_event*>(event_data);
+      const Core::Entity remove_e = data->e;
+      
+      Rigidbody::remove(Core::World{1}, remove_e);
+    }
+    
+    return false;
+  }
 }
 
 
@@ -109,6 +126,11 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
     data->rb.reset(new btRigidBody(rigidbody_ci));
   }
   
+  // Set user ptr
+  {
+    data->rb->setUserPointer(nullptr);
+  }
+  
   // Set axis
   {
     const btVector3 axis_movement((btScalar)(info.movement_axis >> 0 & 1),
@@ -154,7 +176,12 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
 bool
 remove(const Core::World w, const Core::Entity e)
 {
-  return false;
+  const auto &rb_data = m_rigidbodies.at(w).at(e);
+  
+  m_physics_worlds.at(w)->get_world()->removeRigidBody(rb_data->rb.get());
+  m_rigidbodies.at(w).erase(e);
+
+  return true;
 }
 
 
@@ -373,6 +400,8 @@ namespace Physics_world {
 void
 create(const Core::World w)
 {
+  Core::Event::add_callback(Core::Event_id::entity_destroy, phy_event_controller);
+
   m_physics_worlds.insert(
     std::pair<Core::World, std::unique_ptr<Bullet::World> > (
       w, std::unique_ptr<Bullet::World>(new Bullet::World)
