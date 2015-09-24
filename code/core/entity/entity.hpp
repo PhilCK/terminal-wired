@@ -15,6 +15,12 @@ struct Entity
 };
 
 
+//! Creates an entity with a valid instance number, spawns an event.
+Entity generate_entity(const uint8_t type_id);
+
+//! Destroys an entity, core will no longer track it, spawn an event.
+void destroy_entity(const Entity e);
+
 //! Converts an entity type into a uint32_t type.
 inline uint32_t entity_as_uint(const Core::Entity e) { return (e.type_id << 24) | e.instance_id; }
 
@@ -35,6 +41,18 @@ inline bool operator<(const Entity left, const Entity right)
 {
   return entity_as_uint(left) < entity_as_uint(right);
 }
+
+
+struct New_entity_event
+{
+  Entity e = invalid_entity();
+};
+
+
+struct Destroy_entity_event
+{
+  Entity e = invalid_entity();
+};
 
 
 } // namespace

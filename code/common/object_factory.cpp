@@ -27,7 +27,7 @@ namespace Object_factory {
 Core::Entity
 create_local_input_actor(const Core::World w)
 {
-  const Core::Entity player_entity {2,2};
+  const Core::Entity player_entity = Core::generate_entity(2);
   
     // Renderer
   {
@@ -65,7 +65,7 @@ create_local_input_actor(const Core::World w)
 Core::Entity
 create_program_block(const Core::World w)
 {
-  const Core::Entity throw_entity  {4,4};
+  const Core::Entity throw_entity = Core::generate_entity(4);
  
   // Renderer
   {
@@ -106,7 +106,7 @@ create_program_block(const Core::World w)
 Core::Entity
 create_camera(const Core::World w)
 {
-  const Core::Entity camera_entity {3,3};
+  const Core::Entity camera_entity = Core::generate_entity(3);
   
     math::transform cam_transform = math::transform_init(math::vec3_init(0, 4, 7), math::vec3_one(), math::quat());
   Transform::add(w, camera_entity, cam_transform);
@@ -121,7 +121,7 @@ create_camera(const Core::World w)
 Core::Entity
 create_non_physics_block(const Core::World w)
 {
-  const Core::Entity fwd_entity    {5,5};
+  const Core::Entity fwd_entity = Core::generate_entity(5);
 
   // Renderer
   {
@@ -145,7 +145,7 @@ create_non_physics_block(const Core::World w)
 Core::Entity
 create_static_ground(const Core::World w)
 {
-  const Core::Entity ground_entity {1,1};
+  const Core::Entity ground_entity = Core::generate_entity(1);
 
   math::transform ground_transform = math::transform_init(math::vec3_zero(), math::vec3_init(100, 1, 100), math::quat());
   Transform::add(w, ground_entity, ground_transform);

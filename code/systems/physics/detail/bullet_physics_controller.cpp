@@ -401,12 +401,12 @@ think(const Core::World w)
       const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
       
       // Get some data from the event queue.
-      void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
-      assert(data_loc);
+      //void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
+      //assert(data_loc);
       
       // Create event data.
-      const Collision_event_data * evt = new(data_loc) Collision_event_data{ent_a, ent_b};
-      assert(evt);
+      //const Collision_event_data * evt = new(data_loc) Collision_event_data{ent_a, ent_b};
+      //assert(evt);
     }
   }
 }

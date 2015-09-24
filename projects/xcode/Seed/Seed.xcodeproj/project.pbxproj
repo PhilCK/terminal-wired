@@ -63,6 +63,7 @@
 		7EE293721BAC846300097736 /* default_bullet_motion_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2936C1BAC846300097736 /* default_bullet_motion_state.cpp */; };
 		7EE293751BAD504A00097736 /* bullet_physics_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE293741BAD504A00097736 /* bullet_physics_controller.cpp */; };
 		7EE293791BADFDEC00097736 /* transform_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE293771BADFDEC00097736 /* transform_controller.cpp */; };
+		7EE2B4351BB3D79B003A20DA /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2B4341BB3D79B003A20DA /* entity.cpp */; };
 		7EE2F9DC1BA60B5C0033DA10 /* actor_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */; };
 		7EE2F9E01BA6F37D0033DA10 /* actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */; };
 		7EE32C581BB294C500F91152 /* object_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE32C561BB294C500F91152 /* object_factory.cpp */; };
@@ -205,6 +206,9 @@
 		7EE293741BAD504A00097736 /* bullet_physics_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bullet_physics_controller.cpp; sourceTree = "<group>"; };
 		7EE293771BADFDEC00097736 /* transform_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform_controller.cpp; sourceTree = "<group>"; };
 		7EE293781BADFDEC00097736 /* transform_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform_controller.hpp; sourceTree = "<group>"; };
+		7EE2B4341BB3D79B003A20DA /* entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
+		7EE2B4361BB3D998003A20DA /* core_event_ids.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = core_event_ids.hpp; sourceTree = "<group>"; };
+		7EE2B4371BB3DE0F003A20DA /* event_ids.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = event_ids.hpp; sourceTree = "<group>"; };
 		7EE2F9DA1BA60B5C0033DA10 /* actor_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor_controller.cpp; sourceTree = "<group>"; };
 		7EE2F9DB1BA60B5C0033DA10 /* actor_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor_controller.hpp; sourceTree = "<group>"; };
 		7EE2F9DE1BA6F37D0033DA10 /* actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actor.cpp; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 		7E405BBF1B7D1801001DA0F5 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				7EE2B4361BB3D998003A20DA /* core_event_ids.hpp */,
 				7E61D0F91B981ADF00AE90BD /* core.cpp */,
 				7E61D0FA1B981ADF00AE90BD /* core.hpp */,
 				7EE2935C1BAC7D2100097736 /* core_fwd.hpp */,
@@ -452,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				7E87C5AB1B80FD3D003BE24E /* component_interface.hpp */,
+				7EE2B4341BB3D79B003A20DA /* entity.cpp */,
 				7E405BC11B7D1801001DA0F5 /* entity.hpp */,
 			);
 			path = entity;
@@ -718,6 +724,7 @@
 		7EE48C541B8EF2C400BEA256 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				7EE2B4371BB3DE0F003A20DA /* event_ids.hpp */,
 				7EE32C561BB294C500F91152 /* object_factory.cpp */,
 				7EE32C571BB294C500F91152 /* object_factory.hpp */,
 				7EE48C551B8EF2C400BEA256 /* world_axis.hpp */,
@@ -883,6 +890,7 @@
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,
 				7E405BE41B7D1A91001DA0F5 /* mesh_renderer_controller.cpp in Sources */,
 				7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */,
+				7EE2B4351BB3D79B003A20DA /* entity.cpp in Sources */,
 				7E405BE01B7D1A91001DA0F5 /* camera_controller.cpp in Sources */,
 				7E0A33FC1B791E8D000C7B22 /* draw_call.cpp in Sources */,
 				7EE2F9DC1BA60B5C0033DA10 /* actor_controller.cpp in Sources */,

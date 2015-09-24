@@ -143,6 +143,8 @@ update_frame(const float dt)
     const auto throw_dir   = math::vec3_add(player_fwd, math::vec3_init(0, 0.7, 0));
     const auto throw_scale = math::vec3_scale(throw_dir, 30000.f * dt);
     
+    Core::Entity new_throw = Object_factory::create_program_block(test_world);
+    
     math::transform throw_transform;
     throw_transform.rotation = player_transform.rotation;
     throw_transform.position = math::vec3_add(player_transform.position, player_fwd);
@@ -152,8 +154,8 @@ update_frame(const float dt)
     //Component::set(throw_entity, throw_program);
     //Script::add(test_world, throw_entity, code);
     
-    Rigidbody::set_transform(test_world, throw_entity, throw_transform);
-    Rigidbody::apply_world_force(test_world, throw_entity, throw_scale);
+    Rigidbody::set_transform(test_world, new_throw, throw_transform);
+    Rigidbody::apply_world_force(test_world, new_throw, throw_scale);
   }
   
   // Move fwd entity
