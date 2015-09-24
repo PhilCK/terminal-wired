@@ -227,7 +227,7 @@ render_frame()
 
   // Render Scene
   {
-    Mesh_renderer::think(test_world, view_proj);
+    Mesh_renderer::think(test_world, view, proj);
     
     Sys::Dot_renderer::render(ground_entity, view_proj); // This needs to be a material or something.
   }

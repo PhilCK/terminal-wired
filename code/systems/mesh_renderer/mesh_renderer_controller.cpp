@@ -69,11 +69,11 @@ remove(const Core::World w, const Core::Entity e)
 
 
 void
-think(const Core::World w, const math::mat4 &view_proj)
+think(const Core::World w, const math::mat4 &view, const math::mat4 &proj)
 {
   for(auto &e : entities.at(w))
   {
-    Detail::render(e, view_proj);
+    Detail::render(e, view, proj);
   }
 }
 

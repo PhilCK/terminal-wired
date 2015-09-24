@@ -16,7 +16,7 @@ void        destroy_world(const Core::World w);
 void        add(const Core::World w, const Core::Entity e);
 void        remove(const Core::World w, const Core::Entity e);
 
-void        think(const Core::World w, const math::mat4 &view_proj); // Move mat out.
+void        think(const Core::World w, const math::mat4 &view, const math::mat4 &proj); // Move mat out.
 
 
 } // ns

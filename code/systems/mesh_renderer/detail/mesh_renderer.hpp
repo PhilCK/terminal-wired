@@ -13,7 +13,7 @@ namespace Detail {
 void initialize();
 
 // Make this more 'data'
-void render(const Core::Entity entity, const math::mat4 &view_proj);
+void render(const Core::Entity entity, const math::mat4 &view, const math::mat4 &proj);
 
 } // ns
 } // ns

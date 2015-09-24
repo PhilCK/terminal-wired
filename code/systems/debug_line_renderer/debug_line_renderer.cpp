@@ -103,18 +103,18 @@ add_line(std::array<float, 3> from, std::array<float,3> to, std::array<float,3> 
 void
 render(std::array<float, 16> &wvp_mat)
 {
-  for(auto &line : lines_to_render)
-  {
-    line_shader.set_raw_data("start_position",  &line.from[0],  sizeof(line.from));
-    line_shader.set_raw_data("end_position",    &line.to[0],    sizeof(line.to));
-    line_shader.set_raw_data("color",           &line.color[0], sizeof(line.color));
-    line_shader.set_raw_data("wvp",             &wvp_mat[0],    sizeof(wvp_mat));
-
-    line_shader.bind();
-    line_vertex_buffer.bind(line_vertex_format, line_shader);
-
-    glDrawArrays(GL_LINES, 0, 2);
-  }
+//  for(auto &line : lines_to_render)
+//  {
+//    line_shader.set_raw_data("start_position",  &line.from[0],  sizeof(line.from));
+//    line_shader.set_raw_data("end_position",    &line.to[0],    sizeof(line.to));
+//    line_shader.set_raw_data("color",           &line.color[0], sizeof(line.color));
+//    line_shader.set_raw_data("wvp",             &wvp_mat[0],    sizeof(wvp_mat));
+//
+//    line_shader.bind();
+//    line_vertex_buffer.bind(line_vertex_format, line_shader);
+//
+//    glDrawArrays(GL_LINES, 0, 2);
+//  }
   
   lines_to_render.clear();
 }
