@@ -46,6 +46,7 @@ event_callback(const uint32_t id, const void *data)
       const Physics_world::Collision_event_data *event = static_cast<const Physics_world::Collision_event_data*>(data);
       
       get_current_script_mgr().schedule_collision_callback(event->entity_a, event->entity_b);
+      break;
     }
     
     case(Core::Event_id::entity_destroy):
@@ -55,6 +56,7 @@ event_callback(const uint32_t id, const void *data)
       const Core::Destroy_entity_event *event = static_cast<const Core::Destroy_entity_event*>(data);
       
       get_current_script_mgr().remove_script(event->e);
+      break;
     }
   }
   

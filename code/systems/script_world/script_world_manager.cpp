@@ -1,4 +1,4 @@
-#include <systems/script_world/script_world_manager.hpp>
+ #include <systems/script_world/script_world_manager.hpp>
 #include <systems/script_world/detail/meta_objects.hpp>
 #include <systems/script_world/detail/chai_binding.hpp>
 #include <systems/script_world/detail/chai_instances.hpp>
@@ -123,6 +123,7 @@ Script_manager::think()
       else
       {
         auto obj = Meta_object::Generic(Core::entity_as_uint(collision.collided_with), this);
+        obj.set_name("Temp");
         m_collision_callbacks[e](obj);
       }
     }

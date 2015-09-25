@@ -202,7 +202,7 @@ namespace
       return nullptr;
     }
   
-    if(!m_rigidbodies.at(w).at(e))
+    if(!m_rigidbodies.at(w).count(e))
     {
       util::log_error("Rigidbody - Entity does not exist.");
       return nullptr;
