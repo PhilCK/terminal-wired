@@ -47,6 +47,7 @@ create_local_input_actor(const Core::World w)
     rb_info.mass = 0.1f;
     rb_info.rotation_axis = Rigidbody::Axis::y;
     rb_info.capsule_collider = coll;
+    rb_info.collision_event = true;
     
     Rigidbody::add(w, player_entity, rb_info);
   }
@@ -72,7 +73,7 @@ create_program_block(const Core::World w)
     Mesh_renderer::add(w, throw_entity);
   }
   
-  math::transform trans = math::transform_init(math::vec3_init(2, 1, 0), math::vec3_one(), math::quat());
+  math::transform trans = math::transform_init(math::vec3_init(14, 3, 0), math::vec3_one(), math::quat());
   Transform::add(w, throw_entity, trans);
 
   const std::string code = util::get_contents_from_file(util::get_resource_path() + "assets/scripts/test_seed.seed");

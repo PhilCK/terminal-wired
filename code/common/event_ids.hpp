@@ -11,7 +11,7 @@ namespace Event_ids {
 
 enum ENUM
 {
-  void_msg = Core::Event_ids::size_of_ids;
+  void_msg = Core::Event_id::size_of_ids,
   
   // * Physics *//
   physics_collision,

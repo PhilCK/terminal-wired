@@ -10,8 +10,6 @@
 namespace Physics_world {
 
 
-const uint32_t collision_event_id = 123;
-
 
 struct Collision_event_data
 {

@@ -1,4 +1,5 @@
 #include <core/event/event.hpp>
+#include <common/event_ids.hpp>
 #include <systems/script_world/script_world_controller.hpp>
 #include <systems/script_world/script_world_manager.hpp>
 #include <systems/script_world/detail/chai_instances.hpp>
@@ -21,7 +22,7 @@ initialize()
   Script_detail::Chai_instances::initialize(/* instances */128);
   Script_detail::Chai_binding::initialize();
   
-  Core::Event::add_callback(Physics_world::collision_event_id, event_callback);
+  Core::Event::add_callback(Common::Event_ids::physics_collision, event_callback);
 }
 
 
@@ -35,7 +36,7 @@ get_current_script_mgr()
 bool
 event_callback(const uint32_t id, const void *data)
 {
-  if(id == Physics_world::collision_event_id)
+  if(id == Common::Event_ids::physics_collision)
   {
     assert(data);
   

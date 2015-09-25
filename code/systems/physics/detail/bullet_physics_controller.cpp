@@ -8,6 +8,7 @@
 #include <systems/physics/detail/rigidbody/default_bullet_motion_state.hpp>
 #include <systems/physics/detail/rigidbody/actor_bullet_motion_state.hpp>
 #include <systems/physics/detail/rigidbody/bullet_to_gl_tranform.hpp>
+#include <common/event_ids.hpp>
 #include <core/event/event.hpp>
 #include <core/core_event_ids.hpp>
 #include <core/time/time.hpp>
@@ -128,7 +129,12 @@ add(const Core::World w, const Core::Entity e, const Construction_info &info)
   
   // Set user ptr
   {
-    data->rb->setUserPointer(nullptr);
+    const uint32_t id = (Core::entity_as_uint(e));
+  
+    std::size_t* ptr = nullptr;
+    ptr = (std::size_t*)id;
+  
+    data->rb->setUserPointer(ptr);
   }
   
   // Set axis
@@ -433,13 +439,13 @@ think(const Core::World w)
       const Core::Entity ent_a = Core::uint_as_entity(static_cast<uint32_t>(enta_id));
       
       // Not everybody wants a callback :)
-      if(Core::entity_as_uint(Core::invalid_entity()) && m_rigidbodies.at(w).at(ent_a)->collision_event)
+      if(!Core::entity_as_uint(Core::invalid_entity()) && m_rigidbodies.at(w).at(ent_a)->collision_event)
       {
         const std::size_t entb_id = (std::size_t)coll.second;
         const Core::Entity ent_b = Core::uint_as_entity(static_cast<uint32_t>(entb_id));
         
         // Get some data from the event queue.
-        void* data_loc = Core::Event::add_event_to_queue(collision_event_id, sizeof(Collision_event_data));
+        void* data_loc = Core::Event::add_event_to_queue(Common::Event_ids::physics_collision, sizeof(Collision_event_data));
         assert(data_loc);
         
         // Create event data.
