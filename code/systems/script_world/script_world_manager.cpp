@@ -79,8 +79,20 @@ Script_manager::add_script(const Core::Entity entity, const std::string &code)
 bool
 Script_manager::remove_script(const Core::Entity entity)
 {
-  // Remove from all containers.
-  return false;
+  m_objects.erase(entity);
+  m_collision_callbacks.erase(entity);
+  m_update_callbacks.erase(entity);
+  m_thrown_callbacks.erase(entity);
+  m_message_callbacks.erase(entity);
+  
+  auto it = std::find_if(m_thrown_queue.begin(), m_thrown_queue.end(), [entity](Core::Entity e){ return e == entity; });
+  
+  if(it != m_thrown_queue.end())
+  {
+    m_thrown_queue.erase(it);
+  }
+
+  return true;
 }
 
 

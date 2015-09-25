@@ -23,6 +23,7 @@ initialize()
   Script_detail::Chai_binding::initialize();
   
   Core::Event::add_callback(Common::Event_ids::physics_collision, event_callback);
+  Core::Event::add_callback(Core::Event_id::entity_destroy, event_callback);
 }
 
 
@@ -36,13 +37,25 @@ get_current_script_mgr()
 bool
 event_callback(const uint32_t id, const void *data)
 {
-  if(id == Common::Event_ids::physics_collision)
+  switch(id)
   {
-    assert(data);
-  
-    const Physics_world::Collision_event_data *event = static_cast<const Physics_world::Collision_event_data*>(data);
+    case(Common::Event_ids::physics_collision):
+    {
+      assert(data);
     
-    get_current_script_mgr().schedule_collision_callback(event->entity_a, event->entity_b);
+      const Physics_world::Collision_event_data *event = static_cast<const Physics_world::Collision_event_data*>(data);
+      
+      get_current_script_mgr().schedule_collision_callback(event->entity_a, event->entity_b);
+    }
+    
+    case(Core::Event_id::entity_destroy):
+    {
+      assert(data);
+      
+      const Core::Destroy_entity_event *event = static_cast<const Core::Destroy_entity_event*>(data);
+      
+      get_current_script_mgr().remove_script(event->e);
+    }
   }
   
   return false;
@@ -58,6 +71,14 @@ add(const Core::World w, const Core::Entity e, const std::string &code)
   return true;
 }
 
+
+bool
+remove(const Core::World w, const Core::Entity e)
+{
+  script_mgr.remove_script(e);
+  
+  return true;
+}
 
 
 } // ns

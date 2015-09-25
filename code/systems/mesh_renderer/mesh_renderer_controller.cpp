@@ -21,10 +21,12 @@ namespace
       {
         const Core::Destroy_entity_event *data = static_cast<const Core::Destroy_entity_event*>(event_data);
         Mesh_renderer::remove(Core::World{1}, data->e);
+        break;
       }
       
       default:
       {
+        assert(false);
         util::log_warning("Mesh renderer recived an event it doesn't know how to deal with.");
       }
     }
