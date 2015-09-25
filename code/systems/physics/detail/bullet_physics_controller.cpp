@@ -248,7 +248,12 @@ void
 apply_local_force(const Core::World w, const Core::Entity e, const math::vec3 force)
 {
   Rb_data *rb_data = get_data(w, e);
-  assert(rb_data && rb_data->rb);
+  
+  if(!rb_data)
+  {
+    util::log_warning("Can't apply force no entity.");
+    return;
+  }
 
   const btVector3 rel_pos(0, 0, 0);
   const btVector3 bt_force(math::vec3_get_x(force), math::vec3_get_y(force), math::vec3_get_z(force));
@@ -262,6 +267,22 @@ apply_local_force(const Core::World w, const Core::Entity e, const math::vec3 fo
 void
 set_mass(const Core::World w, const Core::Entity e, const float set_mass)
 {
+  Rb_data *rb_data = get_data(w, e);
+  btDynamicsWorld *world = get_world(w);
+  
+  if(!rb_data || !world)
+  {
+    util::log_warning("Can't set mass no entity or world.");
+    return;
+  }
+  
+  world->removeRigidBody(rb_data->rb.get());
+  
+  btVector3 inertia;
+  rb_data->rb->getCollisionShape()->calculateLocalInertia(set_mass, inertia);
+  rb_data->rb->setMassProps(set_mass, inertia);
+  
+  world->addRigidBody(rb_data->rb.get());
 }
 
 

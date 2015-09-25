@@ -307,17 +307,17 @@ generate_test_level()
 
   // 10 x 10 x 5 cubes
   for(int32_t x = -3; x < +3; ++x) {
-    for(int32_t y = +0; y < +2; ++y) {
+    for(int32_t y = +0; y < +3; ++y) {
       for(int32_t z = -3; z < +3; ++z)
       {
         Core::Entity level_cube = Core::generate_entity(123);
         
-          const uint32_t x_size = rand() % 4 + 1;
-          const uint32_t y_size = rand() % 4 + 1;
-          const uint32_t z_size = rand() % 4 + 1;
+        const uint32_t x_size = rand() % 5 + 1;
+        const uint32_t y_size = rand() % 5 + 1;
+        const uint32_t z_size = rand() % 5 + 1;
         
-          math::transform trans = math::transform_init(math::vec3_init(x * 3, y * 3, z * 3), math::vec3_init(x_size, y_size, z_size), math::quat());
-          Transform::add(test_world, level_cube, trans);
+        math::transform trans = math::transform_init(math::vec3_init(x * 3, y * 3, z * 3), math::vec3_init(x_size, y_size, z_size), math::quat());
+        Transform::add(test_world, level_cube, trans);
         
         // Rb
         {
