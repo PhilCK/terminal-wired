@@ -34,7 +34,7 @@ create_local_input_actor(const Core::World w)
     Mesh_renderer::add(w, player_entity);
   }
   
-  math::transform player_transform = math::transform_init(math::vec3_init(0, 3, 0), math::vec3_one(), math::quat());
+  math::transform player_transform = math::transform_init(math::vec3_init(10, 3, 0), math::vec3_one(), math::quat());
   Transform::add(w, player_entity, player_transform);
   
   // Rigidbody

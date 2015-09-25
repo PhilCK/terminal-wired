@@ -32,7 +32,7 @@ bullet_to_gl(const btTransform &transform)
 
 
 inline btTransform
-gl_to_bullget(const math::transform &transform)
+gl_to_bullet(const math::transform &transform)
 {
   math::quat bt_friendly_rot;
   {

@@ -21,7 +21,7 @@ Default_motion_state::getWorldTransform(btTransform &world_trans) const
   math::transform trans;
   Transform::get(m_world, m_entity, trans);
   
-  world_trans = gl_to_bullget(trans);
+  world_trans = gl_to_bullet(trans);
 }
 
 

@@ -22,7 +22,7 @@ namespace Event {
 bool
 initialize()
 {
-  event_buffer.resize(1048);
+  event_buffer.resize(1048 * 10);
 
   return true;
 }

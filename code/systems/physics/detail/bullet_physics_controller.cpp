@@ -370,7 +370,7 @@ set_transform(const Core::World w, const Core::Entity e, const math::transform &
   //world->removeRigidBody(rb);
   
   // Transforms
-  const btTransform bt_transform = Bullet::Detail::gl_to_bullget(transform);
+  const btTransform bt_transform = Bullet::Detail::gl_to_bullet(transform);
   btTransform curr_trans;
   
   mt->setWorldTransform(bt_transform);

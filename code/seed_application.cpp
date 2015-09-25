@@ -65,7 +65,7 @@ void de_init_systems();
 void init_entities();
 void update_frame(const float dt);
 void render_frame();
-
+void generate_test_level();
 
 
 namespace test
@@ -293,8 +293,61 @@ init_systems()
   Physics_world::create(test_world);
   Mesh_renderer::create_world(test_world);
   
-  Sys::Debug_line_renderer::initialize();
+  generate_test_level();
   
+  Sys::Debug_line_renderer::initialize();
+}
+
+
+
+void
+generate_test_level()
+{
+  const std::string asset_path = util::get_resource_path() + "assets/";
+
+  // 10 x 10 x 5 cubes
+  for(int32_t x = -3; x < +3; ++x) {
+    for(int32_t y = +0; y < +2; ++y) {
+      for(int32_t z = -3; z < +3; ++z)
+      {
+        Core::Entity level_cube = Core::generate_entity(123);
+        
+          const uint32_t x_size = rand() % 3 + 1;
+          const uint32_t y_size = rand() % 3 + 1;
+          const uint32_t z_size = rand() % 3 + 1;
+        
+          math::transform trans = math::transform_init(math::vec3_init(x * 2, y * 2, z * 2), math::vec3_init(x_size, y_size, z_size), math::quat());
+          Transform::add(test_world, level_cube, trans);
+        
+        // Rb
+        {
+          Rigidbody::Box_collidern box;
+          box.x_extents = static_cast<float>(x_size) * 0.5f;
+          box.y_extents = static_cast<float>(y_size) * 0.5f;
+          box.z_extents = static_cast<float>(z_size) * 0.5f;
+          
+          Rigidbody::Construction_info info;
+          info.mass = 0;
+          info.box_collider = box;
+          info.collision_event = false;
+          
+          Rigidbody::add(test_world, level_cube, info);
+        }
+        
+        // Mesh + mat
+        {
+          Mesh_renderer::add(test_world, level_cube);
+        
+          comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
+          Component::set<comp::mesh>(level_cube, mesh);
+          
+          comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
+          //comp::material_controller::set(player_entity, std::move(ground_mat));
+          Component::set(level_cube, mat);
+        }
+      }
+    }
+  }
 }
 
 
