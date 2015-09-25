@@ -50,6 +50,11 @@
 		7E87C5C01B826404003BE24E /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BA1B826404003BE24E /* event.cpp */; };
 		7E87C5C11B826404003BE24E /* event_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5BC1B826404003BE24E /* event_data.cpp */; };
 		7E87C5C71B8276A9003BE24E /* memory_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B8276A9003BE24E /* memory_controller.cpp */; };
+		7E9C238D1BB5C0FC00100F59 /* models.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23881BB5C0FC00100F59 /* models.cpp */; };
+		7E9C238E1BB5C0FC00100F59 /* textures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C238B1BB5C0FC00100F59 /* textures.cpp */; };
+		7E9C23901BB5C49300100F59 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9C238F1BB5C49300100F59 /* ForceFeedback.framework */; };
+		7E9C23941BB5C8BA00100F59 /* texture_asset_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23921BB5C8BA00100F59 /* texture_asset_manager.cpp */; };
+		7E9C23971BB5C99C00100F59 /* texture_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23951BB5C99C00100F59 /* texture_resource.cpp */; };
 		7EA289CB1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so in Resources */ = {isa = PBXBuildFile; fileRef = 7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
@@ -175,6 +180,15 @@
 		7E87C5C51B8276A9003BE24E /* memory_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_controller.cpp; sourceTree = "<group>"; };
 		7E87C5C61B8276A9003BE24E /* memory_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory_controller.hpp; sourceTree = "<group>"; };
 		7E87C5CC1B8312F7003BE24E /* string_helpers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = string_helpers.hpp; path = ../../../../Users/PhilCK/Developer/utils/string_helpers.hpp; sourceTree = "<group>"; };
+		7E9C23881BB5C0FC00100F59 /* models.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = models.cpp; sourceTree = "<group>"; };
+		7E9C23891BB5C0FC00100F59 /* models.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = models.hpp; sourceTree = "<group>"; };
+		7E9C238B1BB5C0FC00100F59 /* textures.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = textures.cpp; sourceTree = "<group>"; };
+		7E9C238C1BB5C0FC00100F59 /* textures.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = textures.hpp; sourceTree = "<group>"; };
+		7E9C238F1BB5C49300100F59 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = System/Library/Frameworks/ForceFeedback.framework; sourceTree = SDKROOT; };
+		7E9C23921BB5C8BA00100F59 /* texture_asset_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_asset_manager.cpp; sourceTree = "<group>"; };
+		7E9C23931BB5C8BA00100F59 /* texture_asset_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture_asset_manager.hpp; sourceTree = "<group>"; };
+		7E9C23951BB5C99C00100F59 /* texture_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_resource.cpp; sourceTree = "<group>"; };
+		7E9C23961BB5C99C00100F59 /* texture_resource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture_resource.hpp; sourceTree = "<group>"; };
 		7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = "libchaiscript_stdlib-5.7.1.so"; path = "../../../3rdparty/chaiscript/lib/osx/libchaiscript_stdlib-5.7.1.so"; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
@@ -243,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9C23901BB5C49300100F59 /* ForceFeedback.framework in Frameworks */,
 				7E405B941B7BE134001DA0F5 /* libangelscript.a in Frameworks */,
 				7E0A34061B791EFC000C7B22 /* OpenGL.framework in Frameworks */,
 			);
@@ -273,6 +288,7 @@
 		7E0A339B1B7919E6000C7B22 /* Seed Code */ = {
 			isa = PBXGroup;
 			children = (
+				7E9C23861BB5C0FC00100F59 /* resources */,
 				7EE48C541B8EF2C400BEA256 /* common */,
 				7E87C5B11B81360F003BE24E /* systems */,
 				7E405BC21B7D1A91001DA0F5 /* components [deprecated] */,
@@ -554,6 +570,7 @@
 		7E87C5B01B812FC5003BE24E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E9C238F1BB5C49300100F59 /* ForceFeedback.framework */,
 				7E0A34051B791EFC000C7B22 /* OpenGL.framework */,
 				7E405B931B7BE134001DA0F5 /* libangelscript.a */,
 			);
@@ -605,6 +622,46 @@
 				7E87C5C61B8276A9003BE24E /* memory_controller.hpp */,
 			);
 			path = memory;
+			sourceTree = "<group>";
+		};
+		7E9C23861BB5C0FC00100F59 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C23871BB5C0FC00100F59 /* models */,
+				7E9C238A1BB5C0FC00100F59 /* textures */,
+			);
+			name = resources;
+			path = ../../../../code/resources;
+			sourceTree = "<group>";
+		};
+		7E9C23871BB5C0FC00100F59 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C23881BB5C0FC00100F59 /* models.cpp */,
+				7E9C23891BB5C0FC00100F59 /* models.hpp */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		7E9C238A1BB5C0FC00100F59 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C23911BB5C8BA00100F59 /* detail */,
+				7E9C238B1BB5C0FC00100F59 /* textures.cpp */,
+				7E9C238C1BB5C0FC00100F59 /* textures.hpp */,
+				7E9C23951BB5C99C00100F59 /* texture_resource.cpp */,
+				7E9C23961BB5C99C00100F59 /* texture_resource.hpp */,
+			);
+			path = textures;
+			sourceTree = "<group>";
+		};
+		7E9C23911BB5C8BA00100F59 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C23921BB5C8BA00100F59 /* texture_asset_manager.cpp */,
+				7E9C23931BB5C8BA00100F59 /* texture_asset_manager.hpp */,
+			);
+			path = detail;
 			sourceTree = "<group>";
 		};
 		7EC21F1B1B7A6E4C0020994C /* bullet_wrapper */ = {
@@ -855,6 +912,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9C238E1BB5C0FC00100F59 /* textures.cpp in Sources */,
 				7E87C5A71B7E18A4003BE24E /* mesh_controller.cpp in Sources */,
 				7EE293751BAD504A00097736 /* bullet_physics_controller.cpp in Sources */,
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
@@ -868,6 +926,7 @@
 				7E405BDF1B7D1A91001DA0F5 /* camera.cpp in Sources */,
 				7EE293701BAC846300097736 /* physics_world.cpp in Sources */,
 				7E0A33F31B791E8D000C7B22 /* ogl_context.cpp in Sources */,
+				7E9C238D1BB5C0FC00100F59 /* models.cpp in Sources */,
 				7E405BB71B7C827F001DA0F5 /* as_helper.cpp in Sources */,
 				7E0A33F11B791E8D000C7B22 /* message_pump.cpp in Sources */,
 				7E405BB01B7C7C8B001DA0F5 /* scriptarray.cpp in Sources */,
@@ -875,6 +934,7 @@
 				7EE4EBB81BB32740005D9A31 /* mesh_renderer.cpp in Sources */,
 				7E405BB11B7C7C8B001DA0F5 /* scriptstdstring.cpp in Sources */,
 				7EE4EBB91BB32740005D9A31 /* mesh_renderer_controller.cpp in Sources */,
+				7E9C23971BB5C99C00100F59 /* texture_resource.cpp in Sources */,
 				7E87C5B81B81BA65003BE24E /* texture_resource.cpp in Sources */,
 				7EC21F291B7B12680020994C /* timer.cpp in Sources */,
 				7EE293591BAAEAA600097736 /* entity_properties.cpp in Sources */,
@@ -889,6 +949,7 @@
 				7E0A33FB1B791E8D000C7B22 /* common.cpp in Sources */,
 				7EC21F261B7A74FD0020994C /* collider.cpp in Sources */,
 				7E405BE41B7D1A91001DA0F5 /* mesh_renderer_controller.cpp in Sources */,
+				7E9C23941BB5C8BA00100F59 /* texture_asset_manager.cpp in Sources */,
 				7E405BE31B7D1A91001DA0F5 /* mesh_renderer.cpp in Sources */,
 				7EE2B4351BB3D79B003A20DA /* entity.cpp in Sources */,
 				7E405BE01B7D1A91001DA0F5 /* camera_controller.cpp in Sources */,

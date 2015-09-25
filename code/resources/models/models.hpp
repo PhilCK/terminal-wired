@@ -1,0 +1,14 @@
+#ifndef MODEL_RESOURCE_CONTROLLER_INCLUDED_47717BE6_D1C7_427E_8221_0D4D8AE12CA9
+#define MODEL_RESOURCE_CONTROLLER_INCLUDED_47717BE6_D1C7_427E_8221_0D4D8AE12CA9
+
+
+namespace Model_resource_controller {
+
+
+
+
+
+} // ns
+
+
+#endif // inc guard

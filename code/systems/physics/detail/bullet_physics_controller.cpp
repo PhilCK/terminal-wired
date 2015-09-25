@@ -229,7 +229,12 @@ void
 apply_world_force(const Core::World w, const Core::Entity e, const math::vec3 force)
 {
   Rb_data *rb_data = get_data(w, e);
-  assert(rb_data && rb_data->rb);
+  
+  if(!rb_data)
+  {
+    util::log_warning("Rigidbody controller can't find that entity. Maybe its already gone out of scope.");
+    return;
+  }
   
   const btVector3 rel_pos(0, 0, 0);
   const btVector3 bt_force(math::vec3_get_x(force), math::vec3_get_y(force), math::vec3_get_z(force));
