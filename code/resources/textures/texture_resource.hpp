@@ -3,18 +3,29 @@
 
 
 #include <memory>
+#include <simple_renderer/texture.hpp>
 
 
 namespace Resource {
+
+
+struct Texture_detail
+{
+  renderer::texture map;
+};
 
 
 class Texture_asset
 {
 public:
 
+  explicit          Texture_asset() {}
+                    ~Texture_asset() {}
   
+  
+  std::shared_ptr<const Texture_detail> details;
 
-}; //
+};
 
 
 } // ns

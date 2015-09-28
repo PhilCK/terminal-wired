@@ -55,6 +55,8 @@
 		7E9C23901BB5C49300100F59 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9C238F1BB5C49300100F59 /* ForceFeedback.framework */; };
 		7E9C23941BB5C8BA00100F59 /* texture_asset_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23921BB5C8BA00100F59 /* texture_asset_manager.cpp */; };
 		7E9C23971BB5C99C00100F59 /* texture_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23951BB5C99C00100F59 /* texture_resource.cpp */; };
+		7E9C239B1BB9107B00100F59 /* material_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C23991BB9107B00100F59 /* material_controller.cpp */; };
+		7E9C239F1BB9181F00100F59 /* material_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C239D1BB9181F00100F59 /* material_manager.cpp */; };
 		7EA289CB1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so in Resources */ = {isa = PBXBuildFile; fileRef = 7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */; };
 		7EC21F221B7A6E4C0020994C /* rigidbody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F1E1B7A6E4C0020994C /* rigidbody.cpp */; };
 		7EC21F231B7A6E4C0020994C /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC21F201B7A6E4C0020994C /* world.cpp */; };
@@ -189,6 +191,10 @@
 		7E9C23931BB5C8BA00100F59 /* texture_asset_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture_asset_manager.hpp; sourceTree = "<group>"; };
 		7E9C23951BB5C99C00100F59 /* texture_resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_resource.cpp; sourceTree = "<group>"; };
 		7E9C23961BB5C99C00100F59 /* texture_resource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture_resource.hpp; sourceTree = "<group>"; };
+		7E9C23991BB9107B00100F59 /* material_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material_controller.cpp; sourceTree = "<group>"; };
+		7E9C239A1BB9107B00100F59 /* material_controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = material_controller.hpp; sourceTree = "<group>"; };
+		7E9C239D1BB9181F00100F59 /* material_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material_manager.cpp; sourceTree = "<group>"; };
+		7E9C239E1BB9181F00100F59 /* material_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = material_manager.hpp; sourceTree = "<group>"; };
 		7EA289CA1B98957600C70810 /* libchaiscript_stdlib-5.7.1.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = "libchaiscript_stdlib-5.7.1.so"; path = "../../../3rdparty/chaiscript/lib/osx/libchaiscript_stdlib-5.7.1.so"; sourceTree = "<group>"; };
 		7EC21F1C1B7A6E4C0020994C /* bullet_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_common.hpp; sourceTree = "<group>"; };
 		7EC21F1D1B7A6E4C0020994C /* bullet_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bullet_wrapper_fwd.hpp; sourceTree = "<group>"; };
@@ -580,6 +586,7 @@
 		7E87C5B11B81360F003BE24E /* systems */ = {
 			isa = PBXGroup;
 			children = (
+				7E9C23981BB9107B00100F59 /* material */,
 				7EE293761BADFDEC00097736 /* transform */,
 				7EE2935E1BAC801600097736 /* physics */,
 				7EE293561BAAEAA600097736 /* entity_properties */,
@@ -660,6 +667,25 @@
 			children = (
 				7E9C23921BB5C8BA00100F59 /* texture_asset_manager.cpp */,
 				7E9C23931BB5C8BA00100F59 /* texture_asset_manager.hpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		7E9C23981BB9107B00100F59 /* material */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C239C1BB9181F00100F59 /* detail */,
+				7E9C23991BB9107B00100F59 /* material_controller.cpp */,
+				7E9C239A1BB9107B00100F59 /* material_controller.hpp */,
+			);
+			path = material;
+			sourceTree = "<group>";
+		};
+		7E9C239C1BB9181F00100F59 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				7E9C239D1BB9181F00100F59 /* material_manager.cpp */,
+				7E9C239E1BB9181F00100F59 /* material_manager.hpp */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -918,6 +944,7 @@
 				7E0A33FD1B791E8D000C7B22 /* frame_buffer.cpp in Sources */,
 				7E61D0F81B9818EB00AE90BD /* time.cpp in Sources */,
 				7EE293711BAC846300097736 /* actor_bullet_motion_state.cpp in Sources */,
+				7E9C239F1BB9181F00100F59 /* material_manager.cpp in Sources */,
 				7EE2F9E01BA6F37D0033DA10 /* actor.cpp in Sources */,
 				7E0A340D1B793FA8000C7B22 /* directory_mac.mm in Sources */,
 				7E0A33F51B791E8D000C7B22 /* sdl_common.cpp in Sources */,
@@ -968,6 +995,7 @@
 				7E87C5C11B826404003BE24E /* event_data.cpp in Sources */,
 				7E0A34011B791E8D000C7B22 /* shader.cpp in Sources */,
 				7EE293791BADFDEC00097736 /* transform_controller.cpp in Sources */,
+				7E9C239B1BB9107B00100F59 /* material_controller.cpp in Sources */,
 				7E0A33BD1B791A30000C7B22 /* seed_application.cpp in Sources */,
 				7E0A33F21B791E8D000C7B22 /* mixer.cpp in Sources */,
 				7E0A33FE1B791E8D000C7B22 /* index_buffer.cpp in Sources */,
