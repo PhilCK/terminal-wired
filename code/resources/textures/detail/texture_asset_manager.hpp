@@ -3,7 +3,7 @@
 
 
 #include <resources/textures/texture_resource.hpp>
-#include <vector>
+#include <map>
 #include <string>
 
 
@@ -24,7 +24,7 @@ public:
   
 private:
 
-  std::vector<Resource::Texture_asset> m_texture_assets;
+  std::map<std::string, Resource::Texture_asset> m_texture_assets;
 
 }; // class
 

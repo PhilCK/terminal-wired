@@ -3,6 +3,7 @@
 #include <systems/transform/transform_controller.hpp>
 #include <systems/script_world/script_world_controller.hpp>
 #include <systems/mesh_renderer/mesh_renderer_controller.hpp>
+#include <systems/material/material_controller.hpp>
 #include <systems/window/window.hpp>
 #include <math/transform/transform.hpp>
 #include <utils/directory.hpp>
@@ -12,7 +13,6 @@
 #include <components/camera/camera_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
-#include <components/material/material_controller.hpp>
 
 
 namespace
@@ -55,9 +55,12 @@ create_local_input_actor(const Core::World w)
   comp::mesh player_mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
   Component::set<comp::mesh>(player_entity, player_mesh);
   
-  comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
+  //comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_red_512.png");
   //comp::material_controller::set(player_entity, std::move(ground_mat));
-  Component::set(player_entity, ground_mat);
+  //Component::set(player_entity, ground_mat);
+  
+  const std::string &mat_filename = asset_path + "/textures/dev_grid_red_512.png";
+  Material_controller::add_material(player_entity, mat_filename);
   
   return player_entity;
 }
@@ -98,9 +101,11 @@ create_program_block(const Core::World w)
   comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
   Component::set<comp::mesh>(throw_entity, mesh);
   
-  comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
+  //comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
   //comp::material_controller::set(player_entity, std::move(ground_mat));
-  Component::set(throw_entity, mat);
+  //Component::set(throw_entity, mat);
+  const std::string &mat_filename = asset_path + "/textures/dev_grid_orange_512.png";
+  Material_controller::add_material(throw_entity, mat_filename);
   
   return throw_entity;
 }
@@ -137,9 +142,11 @@ create_non_physics_block(const Core::World w)
   comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
   Component::set<comp::mesh>(fwd_entity, mesh);
   
-  comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_blue_512.png");
+  //comp::material mat = comp::create_new(asset_path + "/textures/dev_grid_blue_512.png");
   //comp::material_controller::set(player_entity, std::move(ground_mat));
-  Component::set(fwd_entity, mat);
+  //Component::set(fwd_entity, mat);
+  const std::string &mat_filename = asset_path + "/textures/dev_grid_blue_512.png";
+  Material_controller::add_material(fwd_entity, mat_filename);
   
   return fwd_entity;
 }
@@ -173,8 +180,10 @@ create_static_ground(const Core::World w)
   comp::mesh ground_mesh = comp::load_from_file(asset_path + "models/unit_plane.obj");
   Component::set<comp::mesh>(ground_entity, ground_mesh);
   
-  comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
-  Component::set(ground_entity, ground_mat);
+//  comp::material ground_mat = comp::create_new(asset_path + "/textures/dev_grid_green_512.png");
+//  Component::set(ground_entity, ground_mat);
+  const std::string &mat_filename = asset_path + "/textures/dev_grid_green_512.png";
+  Material_controller::add_material(ground_entity, mat_filename);
   
   return ground_entity;
 }

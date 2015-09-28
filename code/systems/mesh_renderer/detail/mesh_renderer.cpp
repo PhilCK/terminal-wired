@@ -7,7 +7,7 @@
 #include <systems/mesh_renderer/detail/mesh_renderer.hpp>
 #include <simple_renderer/lazy_include.hpp>
 #include <systems/transform/transform_controller.hpp>
-#include <components/material/material_controller.hpp>
+#include <systems/material/material_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <utils/directory.hpp>
 #include <assert.h>
@@ -104,10 +104,13 @@ render(const Core::Entity entity, const math::mat4 &view, const math::mat4 &proj
   
   // Get material
   {
-    comp::material mat;
-    assert(Component::get(entity, mat));
+   
+    auto material = Material_controller::get_material(entity);
     
-    dir_light.set_texture("diffuseTex", mat.map01);
+    if(material.details && material.details->map.is_valid())
+    {
+      dir_light.set_texture("diffuseTex", material.details->map);
+    }
   }
   
   // Lighting info

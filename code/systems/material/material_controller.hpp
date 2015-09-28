@@ -4,17 +4,19 @@
 
 #include <core/entity/entity.hpp>
 #include <core/world/world.hpp>
+#include <resources/textures/texture_resource.hpp>
 #include <string>
 
 
 namespace Material_controller {
 
 
-void          add_material(const Core::Entity e, const std::string &filename);
-void          remove_material(const Core::Entity e);
+void                    add_material(const Core::Entity e, const std::string &filename);
+void                    remove_material(const Core::Entity e);
+Resource::Texture_asset get_material(const Core::Entity e);
 
 
-}
+} // ns
 
 
 #endif // inc guard

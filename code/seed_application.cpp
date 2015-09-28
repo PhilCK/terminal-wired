@@ -4,7 +4,7 @@
 #include <components/camera/camera_controller.hpp>
 #include <components/mesh/mesh_controller.hpp>
 #include <components/mesh_renderer/mesh_renderer_controller.hpp>
-#include <components/material/material_controller.hpp>
+#include <systems/material/material_controller.hpp>
 #include <systems/window/window.hpp>
 #include <systems/debug_line_renderer/debug_line_renderer.hpp>
 #include <systems/mesh_renderer/mesh_renderer_controller.hpp>
@@ -337,13 +337,18 @@ generate_test_level()
         // Mesh + mat
         {
           Mesh_renderer::add(test_world, level_cube);
-        
+          
+          const std::string &mat_filename = asset_path + "/textures/dev_grid_red_512.png";
+          Material_controller::add_material(level_cube, mat_filename);
+
           comp::mesh mesh = comp::load_from_file(asset_path + "models/unit_cube.obj");
           Component::set<comp::mesh>(level_cube, mesh);
           
-          comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
+          //comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
           //comp::material_controller::set(player_entity, std::move(ground_mat));
-          Component::set(level_cube, mat);
+          //Component::set(level_cube, mat);
+          
+          
         }
       }
     }
