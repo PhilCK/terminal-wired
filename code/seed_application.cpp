@@ -347,8 +347,6 @@ generate_test_level()
           //comp::material mat = comp::create_new(asset_path + "textures/dev_grid_orange_512.png");
           //comp::material_controller::set(player_entity, std::move(ground_mat));
           //Component::set(level_cube, mat);
-          
-          
         }
       }
     }
